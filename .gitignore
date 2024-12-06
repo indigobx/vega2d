@@ -2,5 +2,5 @@
 .godot/
 /android/
 
-.kra
-_src/
+*.kra
+**/_src/
