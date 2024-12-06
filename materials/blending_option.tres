@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bs45t8j2acwyh"]
+
+[ext_resource type="Shader" path="res://blending.gdshader" id="1_mmbou"]
+
+[resource]
+shader = ExtResource("1_mmbou")
+shader_parameter/blend_mode_option = 1

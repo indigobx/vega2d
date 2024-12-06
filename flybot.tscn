@@ -1,0 +1,201 @@
+[gd_scene load_steps=31 format=3 uid="uid://b8wgvot3j2jmr"]
+
+[ext_resource type="Script" path="res://flybot.gd" id="1_2hi4m"]
+[ext_resource type="Texture2D" uid="uid://d25eltff5psqx" path="res://assets/sprites/flybot/dead.png" id="1_fiymo"]
+[ext_resource type="PackedScene" uid="uid://i2cytwa4ogox" path="res://damage_text.tscn" id="2_cvjim"]
+[ext_resource type="Texture2D" uid="uid://7jcymq0777vv" path="res://assets/sprites/flybot/still.png" id="2_v4db5"]
+[ext_resource type="Texture2D" uid="uid://ikn4vmbpht18" path="res://assets/sprites/flybot/fly-left0000.png" id="3_ilo1s"]
+[ext_resource type="Texture2D" uid="uid://bfinljquk0gfk" path="res://assets/sprites/flybot/fly-left0001.png" id="4_2w1jg"]
+[ext_resource type="Texture2D" uid="uid://cobekg7sod5mn" path="res://assets/sprites/flybot/fly-left0002.png" id="5_stnra"]
+[ext_resource type="Texture2D" uid="uid://5hptjh4qw54u" path="res://assets/sprites/flybot/fly-left0003.png" id="6_sy2ke"]
+[ext_resource type="Texture2D" uid="uid://gjxxyh85arjk" path="res://assets/sprites/flybot/fly-left0004.png" id="7_bs5dy"]
+[ext_resource type="Texture2D" uid="uid://b7sy8lq0375md" path="res://assets/sprites/flybot/fly-right0000.png" id="8_3skh6"]
+[ext_resource type="Texture2D" uid="uid://be4f73drwb5kh" path="res://assets/sprites/flybot/fly-right0001.png" id="9_mhyiv"]
+[ext_resource type="Texture2D" uid="uid://s0gcdgt7ibm6" path="res://assets/sprites/flybot/fly-right0002.png" id="10_ypcbj"]
+[ext_resource type="Texture2D" uid="uid://bg7v8aapunxhp" path="res://assets/sprites/flybot/fly-right0003.png" id="11_rpobv"]
+[ext_resource type="Texture2D" uid="uid://qspyrfxwnrww" path="res://assets/sprites/flybot/fly-right0004.png" id="12_wj71f"]
+[ext_resource type="Texture2D" uid="uid://cbw1qspcfpu7" path="res://assets/sprites/flybot/hover0000.png" id="13_oxnuf"]
+[ext_resource type="Texture2D" uid="uid://bxbg4ytst75ku" path="res://assets/sprites/flybot/hover0001.png" id="14_r0wpy"]
+[ext_resource type="Texture2D" uid="uid://bfrkox2flts0f" path="res://assets/sprites/flybot/hover0002.png" id="15_1fuyp"]
+[ext_resource type="Texture2D" uid="uid://dtxhu53prpl8r" path="res://assets/sprites/flybot/hover0003.png" id="16_fvxdn"]
+[ext_resource type="Texture2D" uid="uid://bikwrc5q087cv" path="res://assets/sprites/flybot/hover0004.png" id="17_wpr2m"]
+[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="19_h8jyd"]
+[ext_resource type="PackedScene" uid="uid://sr6i4oo1q3wt" path="res://healthbar.tscn" id="20_8t4jt"]
+[ext_resource type="AudioStream" uid="uid://cs8mtfdr1y7ih" path="res://sounds/flybot/engine_1.wav" id="22_o3utd"]
+[ext_resource type="AudioStream" uid="uid://cxg1s0wexxu8s" path="res://sounds/flybot/engine_2.wav" id="23_u43uk"]
+[ext_resource type="AudioStream" uid="uid://p0iavi8wb72a" path="res://sounds/flybot/engine_3.wav" id="24_tq5lc"]
+[ext_resource type="AudioStream" uid="uid://pvjdywaap1kg" path="res://sounds/flybot/engine_4.wav" id="25_5q7wa"]
+[ext_resource type="AudioStream" uid="uid://b17y5n7g6075p" path="res://sounds/flybot/engine_5.wav" id="26_7xrp8"]
+[ext_resource type="AudioStream" uid="uid://boudlhg5712hs" path="res://sounds/flybot/engine_6.wav" id="27_ucl4s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jumcs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fiymo")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v4db5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ilo1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2w1jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_stnra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sy2ke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bs5dy")
+}],
+"loop": true,
+"name": &"fly-left",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_3skh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mhyiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ypcbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rpobv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wj71f")
+}],
+"loop": true,
+"name": &"fly-right",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_oxnuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_r0wpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1fuyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fvxdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_wpr2m")
+}],
+"loop": true,
+"name": &"fly-up",
+"speed": 16.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gefoa"]
+font = ExtResource("19_h8jyd")
+font_size = 21
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_377e2"]
+shuffle = true
+fade_time = 0.0
+stream_count = 6
+stream_0 = ExtResource("22_o3utd")
+stream_1 = ExtResource("23_u43uk")
+stream_2 = ExtResource("24_tq5lc")
+stream_3 = ExtResource("25_5q7wa")
+stream_4 = ExtResource("26_7xrp8")
+stream_5 = ExtResource("27_ucl4s")
+
+[node name="Bot" type="RigidBody2D"]
+collision_layer = 3
+mass = 0.5
+gravity_scale = 0.1
+lock_rotation = true
+script = ExtResource("1_2hi4m")
+thruster_power = 15.0
+patrol_altitude = 170.0
+damage_text_scene = ExtResource("2_cvjim")
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, -45, 14, -45, 23, -39, 28, -30, 28, -27, 12, -8, 8, 0, 0, 5, -7, 0, -12, -8, -29, -27, -29, -30, -23, -39)
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jumcs")
+autoplay = "default"
+
+[node name="TargetSeeker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 500)
+collision_mask = 3
+
+[node name="Line2D" type="Line2D" parent="TargetSeeker"]
+points = PackedVector2Array(0, 0, 0, 500)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Altimeter" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(0, 500)
+hit_from_inside = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 4096
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -65.0
+offset_right = -6.0
+offset_bottom = -42.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Height is NNNN px"
+label_settings = SubResource("LabelSettings_gefoa")
+horizontal_alignment = 2
+
+[node name="PatrolTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="SensorLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-200, 0)
+
+[node name="SensorRight" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+
+[node name="Healthbar" parent="." instance=ExtResource("20_8t4jt")]
+position = Vector2(0, -72)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_377e2")
+volume_db = 5.0
+max_distance = 1000.0
+attenuation = 1.51572
+max_polyphony = 4
+panning_strength = 1.5
+
+[node name="EngineTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_patrol_timer_timeout"]
+[connection signal="timeout" from="EngineTimer" to="." method="_on_engine_timer_timeout"]

@@ -1,0 +1,117 @@
+[gd_scene load_steps=20 format=3 uid="uid://b3lyu8ffp3kxl"]
+
+[ext_resource type="Script" path="res://flybot.gd" id="1_2hi4m"]
+[ext_resource type="Texture2D" uid="uid://d25eltff5psqx" path="res://assets/sprites/flybot/dead.png" id="1_fiymo"]
+[ext_resource type="Texture2D" uid="uid://7jcymq0777vv" path="res://assets/sprites/flybot/still.png" id="2_v4db5"]
+[ext_resource type="Texture2D" uid="uid://ikn4vmbpht18" path="res://assets/sprites/flybot/fly-left0000.png" id="3_ilo1s"]
+[ext_resource type="Texture2D" uid="uid://bfinljquk0gfk" path="res://assets/sprites/flybot/fly-left0001.png" id="4_2w1jg"]
+[ext_resource type="Texture2D" uid="uid://cobekg7sod5mn" path="res://assets/sprites/flybot/fly-left0002.png" id="5_stnra"]
+[ext_resource type="Texture2D" uid="uid://5hptjh4qw54u" path="res://assets/sprites/flybot/fly-left0003.png" id="6_sy2ke"]
+[ext_resource type="Texture2D" uid="uid://gjxxyh85arjk" path="res://assets/sprites/flybot/fly-left0004.png" id="7_bs5dy"]
+[ext_resource type="Texture2D" uid="uid://b7sy8lq0375md" path="res://assets/sprites/flybot/fly-right0000.png" id="8_3skh6"]
+[ext_resource type="Texture2D" uid="uid://be4f73drwb5kh" path="res://assets/sprites/flybot/fly-right0001.png" id="9_mhyiv"]
+[ext_resource type="Texture2D" uid="uid://s0gcdgt7ibm6" path="res://assets/sprites/flybot/fly-right0002.png" id="10_ypcbj"]
+[ext_resource type="Texture2D" uid="uid://bg7v8aapunxhp" path="res://assets/sprites/flybot/fly-right0003.png" id="11_rpobv"]
+[ext_resource type="Texture2D" uid="uid://qspyrfxwnrww" path="res://assets/sprites/flybot/fly-right0004.png" id="12_wj71f"]
+[ext_resource type="Texture2D" uid="uid://cbw1qspcfpu7" path="res://assets/sprites/flybot/hover0000.png" id="13_oxnuf"]
+[ext_resource type="Texture2D" uid="uid://bxbg4ytst75ku" path="res://assets/sprites/flybot/hover0001.png" id="14_r0wpy"]
+[ext_resource type="Texture2D" uid="uid://bfrkox2flts0f" path="res://assets/sprites/flybot/hover0002.png" id="15_1fuyp"]
+[ext_resource type="Texture2D" uid="uid://dtxhu53prpl8r" path="res://assets/sprites/flybot/hover0003.png" id="16_fvxdn"]
+[ext_resource type="Texture2D" uid="uid://bikwrc5q087cv" path="res://assets/sprites/flybot/hover0004.png" id="17_wpr2m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66g4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fiymo")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v4db5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ilo1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2w1jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_stnra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sy2ke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bs5dy")
+}],
+"loop": true,
+"name": &"fly-left",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_3skh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mhyiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ypcbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rpobv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wj71f")
+}],
+"loop": true,
+"name": &"fly-right",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_oxnuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_r0wpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1fuyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fvxdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_wpr2m")
+}],
+"loop": true,
+"name": &"fly-up",
+"speed": 16.0
+}]
+
+[node name="Flybot" type="RigidBody2D"]
+script = ExtResource("1_2hi4m")
+patrol_height = 200.0
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_66g4v")
+autoplay = "default"
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-13, -45, 14, -45, 23, -39, 28, -30, 28, -27, 12, -8, 8, 0, 0, 5, -7, 0, -12, -8, -29, -27, -29, -30, -23, -39)
+
+[node name="TargetSeeker" type="RayCast2D" parent="."]
+collision_mask = 2
+
+[node name="Alitmeter" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(0, 500)
