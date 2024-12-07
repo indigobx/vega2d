@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Установим Godot экспортёр (один из доступных action), 
       # который позволит нам собрать проект под нужную платформу.
@@ -30,7 +30,7 @@ jobs:
       # Например:
       # godot --headless --export "Windows Desktop" "build/MyGame.exe"
       - name: Export Windows build
-        uses: firebelley/godot-export@v6
+        uses: firebelley/godot-export@v6.0.0
         with:
           project: './project.godot'
           export_path: './build/Vega2d.exe'
