@@ -1,0 +1,76 @@
+name: Build and Release Windows App
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'   # Любой тег вида x.y.z, где x,y,z - числа.
+
+jobs:
+  build-windows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Установим Godot экспортёр (один из доступных action), 
+      # который позволит нам собрать проект под нужную платформу.
+      # Обратите внимание: возможно, вам потребуется настроить 
+      # экспортный шаблон (export_presets.cfg) в корне проекта.
+      - name: Set up Godot Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/templates/4.3.stable
+          cd ~/.local/share/godot/templates/4.3.stable
+          # Скачиваем официальный экспортный шаблон для Godot 4.3 Windows
+          curl -L https://downloads.tuxfamily.org/godotengine/4.3/mono/Godot_v4.3-stable_export_templates.tpz -o templates.tpz
+          tar -xvf templates.tpz
+          rm templates.tpz
+
+      # Используем сторонний Action для экспорта. Если у вас нет такого, 
+      # можно заменить командой запуска Godot Headless через CLI.
+      # Например:
+      # godot --headless --export "Windows Desktop" "build/MyGame.exe"
+      - name: Export Windows build
+        uses: firebelley/godot-export@v1
+        with:
+          project: './project.godot'
+          export_path: './build/Vega2d.exe'
+          preset: 'Windows Desktop'
+          godot_executable_download_url: 'https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_linux_headless.64.zip'
+          # Если у вас настроен экспорт по имени, совпадающему с "Windows Desktop" в export_presets.cfg
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: build/
+
+  release:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: windows-build
+          path: build
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: "Release ${{ github.ref_name }}"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset (Windows .exe)
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/Vega2d.exe
+          asset_name: Vega2d-Windows-${{ github.ref_name }}.exe
+          asset_content_type: application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
