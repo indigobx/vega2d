@@ -30,7 +30,7 @@ jobs:
       # Например:
       # godot --headless --export "Windows Desktop" "build/MyGame.exe"
       - name: Export Windows build
-        uses: firebelley/godot-export@v1
+        uses: firebelley/godot-export@v6
         with:
           project: './project.godot'
           export_path: './build/Vega2d.exe'
