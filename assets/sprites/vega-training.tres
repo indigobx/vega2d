@@ -1,29 +1,50 @@
-[gd_resource type="SpriteFrames" load_steps=107 format=3 uid="uid://ss8o6wg8ratk"]
+[gd_resource type="SpriteFrames" load_steps=161 format=3 uid="uid://ss8o6wg8ratk"]
 
 [ext_resource type="Texture2D" uid="uid://egavaa6w6vn7" path="res://assets/sprites/vega-training/arm-far-pistol.png" id="1_7ac01"]
 [ext_resource type="Texture2D" uid="uid://dwx6aljrsr8me" path="res://assets/sprites/vega-training/arm-far-rifle.png" id="2_hu3po"]
 [ext_resource type="Texture2D" uid="uid://dqmeyug4cmwh7" path="res://assets/sprites/vega-training/arm-near-pistol.png" id="3_pj337"]
 [ext_resource type="Texture2D" uid="uid://cov88x3c53w2d" path="res://assets/sprites/vega-training/arm-near-rifle.png" id="4_hcv2e"]
 [ext_resource type="Texture2D" uid="uid://c7mwt31mnv48y" path="res://assets/sprites/vega-training/dash/0001.png" id="5_n8lhp"]
+[ext_resource type="Texture2D" uid="uid://27tw8kdwjwjr" path="res://assets/sprites/vega-training/crouch-walk-fwd/0001.png" id="5_vmhy1"]
+[ext_resource type="Texture2D" uid="uid://dq44affia7aaw" path="res://assets/sprites/vega-training/crouch-walk-fwd/0006.png" id="6_g8alb"]
 [ext_resource type="Texture2D" uid="uid://hrekkj0b3kq8" path="res://assets/sprites/vega-training/dash/0006.png" id="6_jtffo"]
+[ext_resource type="Texture2D" uid="uid://buc1nphk5y36s" path="res://assets/sprites/vega-training/crouch-walk-fwd/0011.png" id="7_isfei"]
 [ext_resource type="Texture2D" uid="uid://cnpdvgc7m43m2" path="res://assets/sprites/vega-training/dash/0011.png" id="7_vbp8q"]
+[ext_resource type="Texture2D" uid="uid://dl3u1t62rc281" path="res://assets/sprites/vega-training/crouch-walk-fwd/0016.png" id="8_grtaj"]
 [ext_resource type="Texture2D" uid="uid://rardgnlpu1gt" path="res://assets/sprites/vega-training/dash/0016.png" id="8_rjdhw"]
+[ext_resource type="Texture2D" uid="uid://dyolgtxrhke6r" path="res://assets/sprites/vega-training/crouch-walk-fwd/0021.png" id="9_pwff7"]
 [ext_resource type="Texture2D" uid="uid://ba2c64txhe4d3" path="res://assets/sprites/vega-training/dash/0021.png" id="9_sdstl"]
+[ext_resource type="Texture2D" uid="uid://b1trdjkt211w1" path="res://assets/sprites/vega-training/crouch-walk-fwd/0026.png" id="10_2nh3r"]
 [ext_resource type="Texture2D" uid="uid://cc51w58odoime" path="res://assets/sprites/vega-training/dash/0026.png" id="10_pajrf"]
 [ext_resource type="Texture2D" uid="uid://c3p2pkarg6ope" path="res://assets/sprites/vega-training/dash/0031.png" id="11_15ujx"]
+[ext_resource type="Texture2D" uid="uid://bj3vnxqgu8kbt" path="res://assets/sprites/vega-training/crouch-walk-fwd/0031.png" id="11_b71qd"]
 [ext_resource type="Texture2D" uid="uid://dburn7cie2jde" path="res://assets/sprites/vega-training/dash/0036.png" id="12_qp1ey"]
+[ext_resource type="Texture2D" uid="uid://cnv87xk1yh8at" path="res://assets/sprites/vega-training/crouch-walk-fwd/0036.png" id="12_v78u4"]
 [ext_resource type="Texture2D" uid="uid://ca346fvhg8bkq" path="res://assets/sprites/vega-training/dash/0041.png" id="13_h3y6l"]
+[ext_resource type="Texture2D" uid="uid://bv1w2xqfju1vn" path="res://assets/sprites/vega-training/crouch-walk-fwd/0041.png" id="13_u85r0"]
+[ext_resource type="Texture2D" uid="uid://m42cdxy3du5h" path="res://assets/sprites/vega-training/crouch-walk-fwd/0046.png" id="14_u71wg"]
 [ext_resource type="Texture2D" uid="uid://0ueeru5xyoya" path="res://assets/sprites/vega-training/dash/0046.png" id="14_vuuse"]
 [ext_resource type="Texture2D" uid="uid://batvix134dv1l" path="res://assets/sprites/vega-training/dash/0051.png" id="15_6s4lm"]
+[ext_resource type="Texture2D" uid="uid://cwi6xc361ucp2" path="res://assets/sprites/vega-training/crouch-walk-fwd/0051.png" id="15_olxoe"]
 [ext_resource type="Texture2D" uid="uid://bye1oyw77h86p" path="res://assets/sprites/vega-training/dash/0056.png" id="16_swp6a"]
+[ext_resource type="Texture2D" uid="uid://cnko7lyes7lj3" path="res://assets/sprites/vega-training/crouch-walk-fwd/0056.png" id="16_xhvth"]
 [ext_resource type="Texture2D" uid="uid://obw657uhr1ul" path="res://assets/sprites/vega-training/dash/0061.png" id="17_eokou"]
+[ext_resource type="Texture2D" uid="uid://hro56mwf6idt" path="res://assets/sprites/vega-training/crouch-walk-fwd/0061.png" id="17_j66im"]
 [ext_resource type="Texture2D" uid="uid://cvpsjcbyyetwv" path="res://assets/sprites/vega-training/dash/0066.png" id="18_2a0ip"]
+[ext_resource type="Texture2D" uid="uid://cm2rbbyio3j0r" path="res://assets/sprites/vega-training/crouch-walk-fwd/0066.png" id="18_530hx"]
 [ext_resource type="Texture2D" uid="uid://bmj1kijehj7lf" path="res://assets/sprites/vega-training/dash/0071.png" id="19_2fims"]
+[ext_resource type="Texture2D" uid="uid://g7pjnwxe24ld" path="res://assets/sprites/vega-training/crouch-walk-fwd/0071.png" id="19_74aoa"]
 [ext_resource type="Texture2D" uid="uid://cu2180c8xvw8f" path="res://assets/sprites/vega-training/dash/0076.png" id="20_1d080"]
+[ext_resource type="Texture2D" uid="uid://dhi1bg5uxvn6w" path="res://assets/sprites/vega-training/crouch-walk-fwd/0076.png" id="20_qclj8"]
 [ext_resource type="Texture2D" uid="uid://kiiqrkyo4r4v" path="res://assets/sprites/vega-training/dash/0081.png" id="21_m4yji"]
+[ext_resource type="Texture2D" uid="uid://d07yypw4bfvab" path="res://assets/sprites/vega-training/crouch-walk-fwd/0081.png" id="21_tyr0f"]
 [ext_resource type="Texture2D" uid="uid://cve3gdnh62rkv" path="res://assets/sprites/vega-training/dash/0086.png" id="22_gijj2"]
+[ext_resource type="Texture2D" uid="uid://2evo8xunqc31" path="res://assets/sprites/vega-training/crouch-walk-fwd/0086.png" id="22_mb0s5"]
+[ext_resource type="Texture2D" uid="uid://dck0unjdb4785" path="res://assets/sprites/vega-training/crouch-walk-fwd/0091.png" id="23_ktpa4"]
 [ext_resource type="Texture2D" uid="uid://cr1hm2cjf8omc" path="res://assets/sprites/vega-training/dash/0091.png" id="23_u7sjp"]
+[ext_resource type="Texture2D" uid="uid://bua1i2x8y274b" path="res://assets/sprites/vega-training/crouch-walk-fwd/0096.png" id="24_8vcqm"]
 [ext_resource type="Texture2D" uid="uid://c3qe5rfh147rw" path="res://assets/sprites/vega-training/dash/0096.png" id="24_p45i0"]
+[ext_resource type="Texture2D" uid="uid://tfjn4j4hgrlc" path="res://assets/sprites/vega-training/crouch-walk-fwd/0101.png" id="25_i0dgj"]
 [ext_resource type="Texture2D" uid="uid://q8yf1bb0knhy" path="res://assets/sprites/vega-training/dash/0101.png" id="25_j33gq"]
 [ext_resource type="Texture2D" uid="uid://ck2k5qnolftj2" path="res://assets/sprites/vega-training/stand/0001.png" id="26_pg8cg"]
 [ext_resource type="Texture2D" uid="uid://df0ku6cg8ra2d" path="res://assets/sprites/vega-training/jump/0001.png" id="27_r0op6"]
@@ -48,26 +69,38 @@
 [ext_resource type="Texture2D" uid="uid://1yt2h2uv50x3" path="res://assets/sprites/vega-training/jump/0096.png" id="46_s8l4q"]
 [ext_resource type="Texture2D" uid="uid://ccnpklo2kkpsw" path="res://assets/sprites/vega-training/jump/0101.png" id="47_2msh2"]
 [ext_resource type="Texture2D" uid="uid://cwda5ckivb80o" path="res://assets/sprites/vega-training/recoil/recoil0000.png" id="48_0bw7p"]
+[ext_resource type="Texture2D" uid="uid://xuty0lww6nxm" path="res://assets/sprites/vega-training/hit01/0001.png" id="48_nhs5p"]
 [ext_resource type="Texture2D" uid="uid://dvcejxgmtds5r" path="res://assets/sprites/vega-training/stand/0006.png" id="48_tnofo"]
+[ext_resource type="Texture2D" uid="uid://dp7lgud2wc01a" path="res://assets/sprites/vega-training/hit01/0006.png" id="49_3xadn"]
 [ext_resource type="Texture2D" uid="uid://dwmgtswi06vr6" path="res://assets/sprites/vega-training/recoil/recoil0001.png" id="49_4am3u"]
 [ext_resource type="Texture2D" uid="uid://blmedhmc5dprg" path="res://assets/sprites/vega-training/stand/0011.png" id="49_mxc14"]
 [ext_resource type="Texture2D" uid="uid://bbmrk7t45esc8" path="res://assets/sprites/vega-training/recoil/recoil0002.png" id="50_8t8ae"]
 [ext_resource type="Texture2D" uid="uid://blf2nxwomvfvp" path="res://assets/sprites/vega-training/stand/0016.png" id="50_hmtt4"]
+[ext_resource type="Texture2D" uid="uid://babopw5tvw83e" path="res://assets/sprites/vega-training/hit01/0011.png" id="50_tsvbp"]
+[ext_resource type="Texture2D" uid="uid://g6e6awhnldo6" path="res://assets/sprites/vega-training/hit01/0016.png" id="51_4bpug"]
 [ext_resource type="Texture2D" uid="uid://cahp1nqbbecml" path="res://assets/sprites/vega-training/recoil/recoil0003.png" id="51_4rj6m"]
 [ext_resource type="Texture2D" uid="uid://bjokoc2c7nwav" path="res://assets/sprites/vega-training/stand/0021.png" id="51_besq0"]
+[ext_resource type="Texture2D" uid="uid://corancw0jomsd" path="res://assets/sprites/vega-training/hit01/0021.png" id="52_hwp05"]
 [ext_resource type="Texture2D" uid="uid://tdcuesgid6ux" path="res://assets/sprites/vega-training/stand/0026.png" id="52_lru2c"]
 [ext_resource type="Texture2D" uid="uid://c0imgcoewgiw2" path="res://assets/sprites/vega-training/recoil/recoil0004.png" id="52_m2kil"]
 [ext_resource type="Texture2D" uid="uid://c7blkvh0lgwup" path="res://assets/sprites/vega-training/stand/0031.png" id="53_mvdax"]
 [ext_resource type="Texture2D" uid="uid://dqkrjlubfkcek" path="res://assets/sprites/vega-training/recoil/recoil0005.png" id="53_t5iyy"]
+[ext_resource type="Texture2D" uid="uid://beemi0enorgem" path="res://assets/sprites/vega-training/hit01/0026.png" id="53_wg6yb"]
 [ext_resource type="Texture2D" uid="uid://o1xx428lkbja" path="res://assets/sprites/vega-training/stand/0036.png" id="54_a11vm"]
+[ext_resource type="Texture2D" uid="uid://bhtdcu7g3bllv" path="res://assets/sprites/vega-training/hit01/0031.png" id="54_domds"]
 [ext_resource type="Texture2D" uid="uid://x4ky57hk5tno" path="res://assets/sprites/vega-training/recoil/recoil0006.png" id="54_ehbv0"]
 [ext_resource type="Texture2D" uid="uid://bg3pwq4id7qm2" path="res://assets/sprites/vega-training/stand/0041.png" id="55_7wrv3"]
+[ext_resource type="Texture2D" uid="uid://iynxmbgc0m87" path="res://assets/sprites/vega-training/hit01/0036.png" id="55_wxl21"]
 [ext_resource type="Texture2D" uid="uid://bl8cci4mx8h0h" path="res://assets/sprites/vega-training/recoil/recoil0007.png" id="55_y5wv0"]
 [ext_resource type="Texture2D" uid="uid://c0bngyypkqhfc" path="res://assets/sprites/vega-training/stand/0046.png" id="56_c4d4i"]
 [ext_resource type="Texture2D" uid="uid://chbwwup0j2dew" path="res://assets/sprites/vega-training/recoil/recoil0008.png" id="56_g8jiy"]
+[ext_resource type="Texture2D" uid="uid://bu3m48m5mmmet" path="res://assets/sprites/vega-training/hit01/0041.png" id="56_webnp"]
+[ext_resource type="Texture2D" uid="uid://1jlvgq3kaeqw" path="res://assets/sprites/vega-training/hit01/0046.png" id="57_jfmqa"]
 [ext_resource type="Texture2D" uid="uid://c5ru656qtkifi" path="res://assets/sprites/vega-training/stand/0051.png" id="57_rk7ly"]
+[ext_resource type="Texture2D" uid="uid://xhg1c0lontpf" path="res://assets/sprites/vega-training/hit01/0051.png" id="58_85lpm"]
 [ext_resource type="Texture2D" uid="uid://bxu66os4hkcns" path="res://assets/sprites/vega-training/stand/0056.png" id="58_bbqpm"]
 [ext_resource type="Texture2D" uid="uid://bxpp46xr2ue65" path="res://assets/sprites/vega-training/stand/0061.png" id="59_81re3"]
+[ext_resource type="Texture2D" uid="uid://bqbp7ekwe4f0n" path="res://assets/sprites/vega-training/hit01/0056.png" id="59_ohq6a"]
 [ext_resource type="Texture2D" uid="uid://bn8kbnf8yvs6a" path="res://assets/sprites/vega-training/stand/0066.png" id="60_jty4t"]
 [ext_resource type="Texture2D" uid="uid://cqrrqgvp7mao6" path="res://assets/sprites/vega-training/stand/0071.png" id="61_7hy7v"]
 [ext_resource type="Texture2D" uid="uid://bcrwr344qkmy6" path="res://assets/sprites/vega-training/stand/0076.png" id="62_grhkg"]
@@ -106,6 +139,27 @@
 [ext_resource type="Texture2D" uid="uid://dw6a1kuyurmw6" path="res://assets/sprites/vega-training/walk-forward/0091.png" id="95_i3q5r"]
 [ext_resource type="Texture2D" uid="uid://dbaoffbo4fenv" path="res://assets/sprites/vega-training/walk-forward/0096.png" id="96_02ts2"]
 [ext_resource type="Texture2D" uid="uid://dqalmu301pqnx" path="res://assets/sprites/vega-training/walk-forward/0101.png" id="97_ntmq1"]
+[ext_resource type="Texture2D" uid="uid://blbj088es376l" path="res://assets/sprites/vega-training/wait-02/0001.png" id="110_kueb7"]
+[ext_resource type="Texture2D" uid="uid://d2dmka8t8j60e" path="res://assets/sprites/vega-training/wait-02/0006.png" id="111_v504a"]
+[ext_resource type="Texture2D" uid="uid://dx4ntm5k836y8" path="res://assets/sprites/vega-training/wait-02/0011.png" id="112_hu1aj"]
+[ext_resource type="Texture2D" uid="uid://bigcv8dktafpg" path="res://assets/sprites/vega-training/wait-02/0016.png" id="113_juqw8"]
+[ext_resource type="Texture2D" uid="uid://qh0s5hprjmca" path="res://assets/sprites/vega-training/wait-02/0021.png" id="114_rfuxu"]
+[ext_resource type="Texture2D" uid="uid://bghtgogqlu46k" path="res://assets/sprites/vega-training/wait-02/0026.png" id="115_rsn3h"]
+[ext_resource type="Texture2D" uid="uid://evynkbbdoqk0" path="res://assets/sprites/vega-training/wait-02/0031.png" id="116_e1ixx"]
+[ext_resource type="Texture2D" uid="uid://bn4hp1qfwl0oh" path="res://assets/sprites/vega-training/wait-02/0036.png" id="117_hrwab"]
+[ext_resource type="Texture2D" uid="uid://y7l8p0881uq4" path="res://assets/sprites/vega-training/wait-02/0041.png" id="118_f8jqv"]
+[ext_resource type="Texture2D" uid="uid://bibbkagm7ppmh" path="res://assets/sprites/vega-training/wait-02/0046.png" id="119_jp56n"]
+[ext_resource type="Texture2D" uid="uid://dh36cmv2iv1ug" path="res://assets/sprites/vega-training/wait-02/0051.png" id="120_hsfqe"]
+[ext_resource type="Texture2D" uid="uid://4ns0xwdqbaxm" path="res://assets/sprites/vega-training/wait-02/0056.png" id="121_w6gat"]
+[ext_resource type="Texture2D" uid="uid://cpesbsw1sqajt" path="res://assets/sprites/vega-training/wait-02/0061.png" id="122_vdk33"]
+[ext_resource type="Texture2D" uid="uid://71im37o1fp1b" path="res://assets/sprites/vega-training/wait-02/0066.png" id="123_ejinb"]
+[ext_resource type="Texture2D" uid="uid://dkbefvf3l8ba8" path="res://assets/sprites/vega-training/wait-02/0071.png" id="124_pstcw"]
+[ext_resource type="Texture2D" uid="uid://djjoqo882gqbf" path="res://assets/sprites/vega-training/wait-02/0076.png" id="125_qpy87"]
+[ext_resource type="Texture2D" uid="uid://b005cel5rpjmj" path="res://assets/sprites/vega-training/wait-02/0081.png" id="126_qtw16"]
+[ext_resource type="Texture2D" uid="uid://olx05r2c2lh5" path="res://assets/sprites/vega-training/wait-02/0086.png" id="127_36q0r"]
+[ext_resource type="Texture2D" uid="uid://d4drskdnqdrps" path="res://assets/sprites/vega-training/wait-02/0091.png" id="128_2xyw5"]
+[ext_resource type="Texture2D" uid="uid://bwxr0qh1l0mwe" path="res://assets/sprites/vega-training/wait-02/0096.png" id="129_uobam"]
+[ext_resource type="Texture2D" uid="uid://br2alrympqvg4" path="res://assets/sprites/vega-training/wait-02/0101.png" id="130_r8cw3"]
 
 [resource]
 animations = [{
@@ -139,6 +193,108 @@ animations = [{
 }],
 "loop": true,
 "name": &"arm-near-rifle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_i0dgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ktpa4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qclj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xhvth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_v78u4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_grtaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vmhy1")
+}],
+"loop": true,
+"name": &"crouch-back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vmhy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g8alb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_isfei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_grtaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pwff7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2nh3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b71qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_v78u4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_u85r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u71wg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_olxoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xhvth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_j66im")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_530hx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_74aoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qclj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_tyr0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mb0s5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ktpa4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_8vcqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_i0dgj")
+}],
+"loop": true,
+"name": &"crouch-forward",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vmhy1")
+}],
+"loop": true,
+"name": &"crouch-static",
 "speed": 5.0
 }, {
 "frames": [{
@@ -216,6 +372,52 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_nhs5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_3xadn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_tsvbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_4bpug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_hwp05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_wg6yb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_domds")
+}],
+"loop": false,
+"name": &"hit-1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_wxl21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_webnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_jfmqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_85lpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_ohq6a")
+}],
+"loop": false,
+"name": &"hit-2",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -319,6 +521,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_isfei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g8alb")
+}],
+"loop": true,
+"name": &"recoil-crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("26_pg8cg")
 }, {
 "duration": 1.0,
@@ -384,6 +597,74 @@ animations = [{
 "loop": true,
 "name": &"stand",
 "speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("110_kueb7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_v504a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_hu1aj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_juqw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_rfuxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_rsn3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_e1ixx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_hrwab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_f8jqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_jp56n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_hsfqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_w6gat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_vdk33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_ejinb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_pstcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_qpy87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_qtw16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_36q0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_2xyw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_uobam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_r8cw3")
+}],
+"loop": false,
+"name": &"wait-1",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,

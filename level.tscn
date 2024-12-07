@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://cpf5lpg05267g"]
+[gd_scene load_steps=55 format=4 uid="uid://cpf5lpg05267g"]
 
 [ext_resource type="Texture2D" uid="uid://bfd0we5tedq5m" path="res://assets/textures/bg-01.png" id="1_63uk1"]
 [ext_resource type="Texture2D" uid="uid://b6ku7xsid22b" path="res://assets/textures/floor-atlas-03.png" id="2_dx046"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://light.gd" id="8_3ntll"]
 [ext_resource type="PackedScene" uid="uid://dn1bg5gsdm83t" path="res://door.tscn" id="9_6kb1r"]
 [ext_resource type="Texture2D" uid="uid://dwpy6ktubllao" path="res://assets/fx/glow2.png" id="10_8g1fm"]
-[ext_resource type="Texture2D" uid="uid://be53jlo35myb3" path="res://assets/fx/glow.png" id="11_xfk8y"]
 [ext_resource type="Material" uid="uid://b7m1y2ss52rc1" path="res://materials/fog1.tres" id="14_e1v70"]
 [ext_resource type="Texture2D" uid="uid://d2pb2g00buu7u" path="res://assets/sprites/fog-1/fog_01.png" id="15_y2gbt"]
 [ext_resource type="Texture2D" uid="uid://dythd3pvpbdb6" path="res://assets/sprites/fog-1/fog_02.png" id="16_8ljoa"]
@@ -30,6 +29,9 @@
 [ext_resource type="Texture2D" uid="uid://cpuv8ax6erwj4" path="res://assets/sprites/fog-1/fog_14.png" id="28_1qo2c"]
 [ext_resource type="Texture2D" uid="uid://odpqbtfikt4a" path="res://assets/sprites/fog-1/fog_15.png" id="29_aavcu"]
 [ext_resource type="Texture2D" uid="uid://bk6c68wfmmgk2" path="res://assets/sprites/fog-1/fog_16.png" id="30_i8p8i"]
+[ext_resource type="PackedScene" uid="uid://wapjublkg10g" path="res://electic_sparks.tscn" id="31_0etq4"]
+[ext_resource type="PackedScene" uid="uid://hxviu325nl8w" path="res://roller.tscn" id="31_x1dbi"]
+[ext_resource type="PackedScene" uid="uid://bj5aso3frpfje" path="res://roller-mg.tscn" id="32_b7kqj"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvfqu"]
 tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1)
@@ -390,27 +392,6 @@ blink_off_time = 4.0
 max_energy = 0.5
 min_energy = 0.25
 
-[node name="PointLight2D8" type="PointLight2D" parent="Lights"]
-position = Vector2(-911, -159)
-rotation = 3.48368
-scale = Vector2(1, 0.5)
-color = Color(0.51, 0.853, 1, 1)
-energy = 1.5
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.627451)
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture = ExtResource("11_xfk8y")
-offset = Vector2(0, 24)
-texture_scale = 2.0
-script = ExtResource("8_3ntll")
-kind = "flicker"
-blink_on_time = 4.0
-blink_off_time = 4.0
-flicker_duty_rate = 0.05
-flicker_duty_duration = 0.1
-max_energy = 2.0
-
 [node name="PointLight2D4" type="PointLight2D" parent="Lights"]
 position = Vector2(-1847, 86)
 rotation = -0.147932
@@ -489,6 +470,7 @@ position = Vector2(-705, -256)
 has_access = "noone"
 
 [node name="Fog" type="Node2D" parent="."]
+z_index = 100
 material = ExtResource("14_e1v70")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Fog"]
@@ -526,3 +508,16 @@ autoplay = "default"
 frame = 3
 frame_progress = 0.167736
 speed_scale = 1.1
+
+[node name="ElecticSparks" parent="." instance=ExtResource("31_0etq4")]
+z_index = 5
+position = Vector2(-907, -174)
+
+[node name="Roller" parent="." instance=ExtResource("31_x1dbi")]
+position = Vector2(-1091, -240)
+
+[node name="Roller-MG" parent="." instance=ExtResource("32_b7kqj")]
+position = Vector2(83, 132)
+
+[node name="Roller-MG2" parent="." instance=ExtResource("32_b7kqj")]
+position = Vector2(-1897, -255)

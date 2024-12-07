@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var tracked_frames: Array = [11, 2]  # Кадры, на которых создаются следы
 var speed : float = 240.0
 var jump_velocity : float = -400.0
+var state : String = "stand"
+var prev_state = state
 var gravity : float = 981.0
 var gun_angle : float = deg_to_rad(45)
 var direction
@@ -33,26 +35,44 @@ var bullet_scene = preload("res://bullet.tscn")
 var casing_scene = preload("res://casing.tscn")
 var smartshell_scene = preload("res://smart_shell.tscn")
 var marker_scene = preload("res://marker.tscn")
+var damage_text_scene = preload("res://damage_text.tscn")
 @onready var body_sprite = %CharacterSprites/Body
 @onready var arm_near_sprite = %ArmSprites/ArmNear
 @onready var arm_far_sprite = %ArmSprites/ArmFar
 var footprint_frame: int
 var zoom_level = 1.0
+@export var max_hp: int = 100
+var hp: int = max_hp
+var is_dead: bool = false
 
 const D90 = deg_to_rad(90)
 const D180 = deg_to_rad(180)
 
-#func frames_duration(sprite: AnimatedSprite2D, animation_name: String) -> float:
-  #var frames = sprite.sprite_frames
-  #var frames_num = frames.get_frame_count(animation_name)
-  #var duration = 0.0
-  #for i in range(frames_num):
-    #duration += frames.get_frame_duration(animation_name, i)
-  #return duration / frames.get_animation_speed(animation_name)
+
 func frames_duration(sprite: AnimatedSprite2D, animation_name: String) -> float:
     var frame_count = sprite.sprite_frames.get_frame_count(animation_name)
     var fps = sprite.sprite_frames.get_animation_speed(animation_name)
     return frame_count / fps
+
+func arms_point(state:String, direction:Variant) -> Vector2:
+  var point = Vector2.ZERO
+  if is_instance_of(direction, TYPE_VECTOR2) or is_instance_of(direction, TYPE_VECTOR2I):
+    direction = sign(direction.x)
+  else:
+    direction = sign(direction)
+  match state:
+    "stand":
+      point = Vector2(4, -12)
+    "crouch":
+      point = Vector2(6, 7)
+    "jump":
+      point = Vector2(4, -16)
+    "hit":
+      point = Vector2(4, -12)
+    _:
+      point = Vector2.ZERO
+  point.x = point.x * direction
+  return point
 
 func _ready() -> void:
   #Input.set_custom_mouse_cursor(null)
@@ -60,6 +80,10 @@ func _ready() -> void:
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   set_process_input(true)
   select_weapon("dummy")
+  state = "stand"
+  $ArmsPivot.position = arms_point(state, 1)
+  %UI/UIHealthBar.hp = hp
+  %UI/UIHealthBar.max_hp = max_hp
 
 
 func _process(delta: float) -> void:
@@ -94,7 +118,6 @@ func _process(delta: float) -> void:
   if target_position.x < global_position.x:
     body_sprite.flip_h = true
     $ArmsPivot.scale.x = -1  # Разворачиваем ArmsPivot по оси X
-    $ArmsPivot.position = Vector2i(-4, -12)
     $CollisionShape2D.transform.x *= -1
     if rad_to_deg(direction.angle()) > 0:
       arms.rotation = max(max_angle+D90, direction.angle()) + D180
@@ -103,8 +126,8 @@ func _process(delta: float) -> void:
   else:
     body_sprite.flip_h = false
     $ArmsPivot.scale.x = 1
-    $ArmsPivot.position = Vector2i(4, -12)
     arms.rotation = clamp(direction.angle(), min_angle, max_angle)
+  $ArmsPivot.position = arms_point(state, direction)
   arms.rotation -= deg_to_rad(current_recoil_deg)*sign(direction.x)
   if Input.is_action_just_pressed("Super1"):
     change_dress("nude")
@@ -188,18 +211,7 @@ func _physics_process(delta: float) -> void:
       %LaserSightPL.enabled = false
   if selected_weapon not in ["mg"]:
     %LaserSightPL.enabled = false
-    #if %LaserSight.visible == false:
-      #%LaserSight.points[1] = Vector2(200, 0)
-      #%LaserSight.visible = true
-    #else:
-      #%LaserSight.visible = false
-  #if selected_weapon not in ["mg"]:
-    #%LaserSight.visible = false
-  #if $ArmsPivot/RayCast2D.is_colliding():
-    #%LaserSight.points[1] = Vector2(
-      #clampf($ArmsPivot/RayCast2D.get_collision_point().x * sign($ArmsPivot.scale.x), 50, 1000),
-      #0
-    #)
+
     
   # Гравитация
   if not is_on_floor():
@@ -214,22 +226,38 @@ func _physics_process(delta: float) -> void:
     if sign(direction.x) > 0:
       velocity.x = -speed * 0.25
       if is_on_floor():
-        body_sprite.play("walk-back")
+        if state == "crouch":
+          velocity.x = -speed * 0.15
+          body_sprite.play("crouch-back")
+        else:
+          body_sprite.play("walk-back")
     else:
       velocity.x = -speed
       if is_on_floor():
-        body_sprite.play("walk-forward")
+        if state == "crouch":
+          velocity.x = -speed * 0.3
+          body_sprite.play("crouch-forward")
+        else:
+          body_sprite.play("walk-forward")
     
   elif Input.is_action_pressed("Right") and \
     not Input.is_action_pressed("Sprint"):
     if sign(direction.x) > 0:
       velocity.x = speed
       if is_on_floor():
-        body_sprite.play("walk-forward")
+        if state == "crouch":
+          velocity.x = speed * 0.3
+          body_sprite.play("crouch-forward")
+        else:
+          body_sprite.play("walk-forward")
     else:
-      velocity.x = speed * 0.25
       if is_on_floor():
-        body_sprite.play("walk-back")
+        if state == "crouch":
+          velocity.x = speed * 0.15
+          body_sprite.play("crouch-back")
+        else:
+          velocity.x = speed * 0.25
+          body_sprite.play("walk-back")
 
   # Спринт, если зажата кнопка спринта
   if Input.is_action_pressed("Sprint") and is_on_floor():
@@ -242,12 +270,30 @@ func _physics_process(delta: float) -> void:
     else:
       body_sprite.play("dash")
   
+  if Input.is_action_just_pressed("CrouchToggle"):
+    if state == "crouch":
+      state = "stand"
+      body_sprite.play("stand")
+    else:
+      state = "crouch"
+      body_sprite.play("crouch-static")
+  
   if not Input.is_anything_pressed() and is_on_floor():
-    body_sprite.play("stand")
+    match state:
+      "crouch":
+        body_sprite.play("crouch-static")
+      "stand":
+        body_sprite.play("stand")
+      "hit":
+        pass
+      _:
+        state = "stand"
+
   
   if not is_on_floor():
     body_sprite.play("jump")
-  
+    state = "jump"
+  %UI/Debug.text = "previous state %s\ncurrent state %s" % [prev_state, state]
   # Прыжок
   if is_on_floor() and Input.is_action_just_pressed("Jump"):
     velocity.y = jump_velocity
@@ -263,6 +309,9 @@ func _physics_process(delta: float) -> void:
   
   if Input.is_action_just_pressed("Weapon4"):
     select_weapon("mg")
+  
+  if Input.is_action_just_pressed("Item1"):
+    take_damage(randi_range(1, 10))
   # Применение движения
   move_and_slide()
 
@@ -392,6 +441,8 @@ func select_weapon(weapon: String) -> Array:
   return animations
 
 func fire_weapon():
+  if state == "hit":
+    return
   # Play firing animation
   $ArmsPivot/WeaponSprite.play(weapon_animations[1])
   # Weapon logic called here
@@ -420,14 +471,28 @@ func fire_weapon():
       fire_smartgun()
     _:
       print("Nothing to pew")
-  current_recoil_deg = lerpf(current_recoil_deg, current_recoil_deg+weapon_recoil_deg, 1.0)
-  #position -= direction * weapon_recoil_linear
+  var recoil_modifier = 1.0
+  match state:
+    "stand":
+      recoil_modifier = 1.0
+    "jump":
+      recoil_modifier = 2.0
+    "crouch":
+      recoil_modifier = 0.33
+  current_recoil_deg = lerpf(
+      current_recoil_deg,
+      current_recoil_deg+weapon_recoil_deg*recoil_modifier,
+      1.0
+    )
   position = lerp(
     position,
     position - Vector2(weapon_recoil_linear * sign(direction.x), 0),
-    1)
+    0.9)
   if weapon_recoil_linear > 3 and current_recoil_deg > 4 and is_on_floor():
-    $CharacterSprites/Body.play("recoil")
+    if state == "crouch":
+      $CharacterSprites/Body.play("recoil-crouch")
+    else:
+      $CharacterSprites/Body.play("recoil")
   # Firing delay
   %UI/LabelMag.text = str(weapon_mag)
   weapon_ready = false
@@ -518,6 +583,11 @@ func fire_mg() -> void:
   bullet_instance.direction = direction
   bullet_instance.position = p0
   bullet_instance.rotation = $ArmsPivot.rotation
+  bullet_instance.damage = weapon_damage
+  if state == "crouch":
+    bullet_instance.spread = 50
+  else:
+    bullet_instance.spread = 75
   GlobalFx.add_fx(bullet_instance)
   $ArmsPivot/FlashLight.light_once("blink", weapon_cooldown)
   var casing_instance = casing_scene.instantiate()
@@ -617,6 +687,32 @@ func _on_frame_changed():
     footprint_frame = body_sprite.frame
     spawn_footprint()
 
+func take_damage(amount: int) -> int:
+  if state == "crouch":
+    amount = int(ceil(amount * 0.75))
+  if is_dead:
+    return 0
+  else:
+    var damage_text = damage_text_scene.instantiate()
+    damage_text.theme.default_font_size = 28
+    damage_text.float_distance = 100
+    damage_text.text = "-%d" % amount
+    damage_text.global_position = global_position + Vector2(0, -20)
+    get_tree().current_scene.add_child(damage_text)
+  prev_state = state
+  state = "hit"
+  hp -= amount
+  %UI/UIHealthBar.hp = hp
+  velocity.x = lerpf(velocity.x, 0.0, 0.5)
+  var hit_animation = [
+    "hit-1", "hit-2"
+  ].pick_random()
+  $CharacterSprites/Body.play(hit_animation)
+  if hp <= 0:
+    is_dead = true
+  return min(hp, 0)
+
+
 
 func reparent_object(object: Node2D, new_parent: Node2D) -> void:
   # Сохраняем глобальную позицию объекта
@@ -630,3 +726,10 @@ func reparent_object(object: Node2D, new_parent: Node2D) -> void:
   
   # Восстанавливаем глобальную позицию
   object.global_position = global_pos
+
+
+func _on_body_animation_finished() -> void:
+  if $CharacterSprites/Body.animation in [
+    "hit-1", "hit-2"
+  ]:
+    state = prev_state

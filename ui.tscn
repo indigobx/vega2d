@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjmo6grls723y"]
+[gd_scene load_steps=8 format=3 uid="uid://bjmo6grls723y"]
 
 [ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_4my3l"]
+[ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://ui_health_bar.tscn" id="2_cnx4p"]
 
 [sub_resource type="Theme" id="Theme_bvb6f"]
 default_font = ExtResource("1_4my3l")
@@ -60,7 +61,6 @@ offset_bottom = -202.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_bvb6f")
-text = "-"
 horizontal_alignment = 1
 
 [node name="System" type="Label" parent="."]
@@ -73,6 +73,16 @@ text = "line
 line"
 label_settings = SubResource("LabelSettings_4wuqg")
 horizontal_alignment = 2
+
+[node name="Debug" type="Label" parent="."]
+layout_mode = 0
+offset_left = 238.0
+offset_right = 836.0
+offset_bottom = 41.0
+theme = SubResource("Theme_bvb6f")
+text = "line
+line"
+label_settings = SubResource("LabelSettings_4wuqg")
 
 [node name="LabelWeapon" type="Label" parent="."]
 layout_mode = 0
@@ -102,3 +112,6 @@ theme = SubResource("Theme_bvb6f")
 text = "WEAP"
 label_settings = SubResource("LabelSettings_iqrqh")
 horizontal_alignment = 2
+
+[node name="UIHealthBar" parent="." instance=ExtResource("2_cnx4p")]
+position = Vector2(137, 73)

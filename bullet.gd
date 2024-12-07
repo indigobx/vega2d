@@ -6,9 +6,11 @@ extends RigidBody2D
 @export var impulse = 3500
 @export var damage = 2
 @export var spread = 50
+@export var animation_name = "default"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  $BulletSprite.play(animation_name)
   if sign(direction.x) < 0:
     $BulletSprite.flip_h = true
     $BulletSprite.offset = Vector2(0, 0)
@@ -28,6 +30,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
   if body.has_method("take_damage"):  # Проверяем наличие метода take_damage
       body.take_damage(damage)
+      print(body)
   var hit_decal = $BulletHit.duplicate()
   hit_decal.visible = true
   hit_decal.position = position

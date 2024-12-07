@@ -32,7 +32,6 @@ func take_damage(amount: int) -> int:
     damage_text.global_position = global_position + Vector2(0, -20)
     get_tree().current_scene.add_child(damage_text)
   hp -= amount
-  print(hp)
   velocity.x = 0
   $BodySprite.play("hit")
   $WheelsSprite.play("default")
