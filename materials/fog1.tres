@@ -7,5 +7,3 @@ shader = ExtResource("1_wujf6")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_intensity = 1.5
 shader_parameter/shadow_dimming = 1.0
-shader_parameter/opacity = 0.0
-shader_parameter/blur_amount = 8.0
