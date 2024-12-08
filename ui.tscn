@@ -1,17 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjmo6grls723y"]
+[gd_scene load_steps=9 format=3 uid="uid://bjmo6grls723y"]
 
 [ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_4my3l"]
 [ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://ui_health_bar.tscn" id="2_cnx4p"]
+[ext_resource type="PackedScene" uid="uid://chli8dh7i2dh8" path="res://ui_ammo.tscn" id="3_26jtg"]
+[ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://ui_heat.tscn" id="3_77xf1"]
+[ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://ui_say.tscn" id="5_mretj"]
 
 [sub_resource type="Theme" id="Theme_bvb6f"]
 default_font = ExtResource("1_4my3l")
 default_font_size = 21
-
-[sub_resource type="LabelSettings" id="LabelSettings_iqrqh"]
-font_size = 21
-font_color = Color(0.866667, 0.533333, 0.333333, 1)
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4wuqg"]
 line_spacing = 1.0
@@ -25,11 +22,6 @@ font_size = 21
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_3508o"]
-font_size = 28
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
-
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -38,16 +30,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelHeaders" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme = SubResource("Theme_bvb6f")
-text = "WEAP"
-label_settings = SubResource("LabelSettings_iqrqh")
-horizontal_alignment = 2
-
 [node name="Status" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,6 +48,7 @@ theme = SubResource("Theme_bvb6f")
 horizontal_alignment = 1
 
 [node name="System" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 599.0
 offset_right = 1151.0
@@ -75,6 +60,7 @@ label_settings = SubResource("LabelSettings_4wuqg")
 horizontal_alignment = 2
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 238.0
 offset_right = 836.0
@@ -86,32 +72,33 @@ label_settings = SubResource("LabelSettings_4wuqg")
 
 [node name="LabelWeapon" type="Label" parent="."]
 layout_mode = 0
-offset_left = 49.0
-offset_right = 89.0
-offset_bottom = 23.0
+offset_left = 75.0
+offset_top = 40.0
+offset_right = 115.0
+offset_bottom = 63.0
 theme = SubResource("Theme_bvb6f")
 text = "LASER"
 label_settings = SubResource("LabelSettings_jlq5q")
 
-[node name="LabelMag" type="Label" parent="."]
-layout_mode = 0
-offset_left = 49.0
-offset_top = 28.0
-offset_right = 98.0
-offset_bottom = 56.0
-theme = SubResource("Theme_bvb6f")
-text = "LASER"
-label_settings = SubResource("LabelSettings_3508o")
-
-[node name="LabelMagMax" type="Label" parent="."]
-layout_mode = 0
-offset_top = 32.0
-offset_right = 40.0
-offset_bottom = 54.0
-theme = SubResource("Theme_bvb6f")
-text = "WEAP"
-label_settings = SubResource("LabelSettings_iqrqh")
-horizontal_alignment = 2
-
 [node name="UIHealthBar" parent="." instance=ExtResource("2_cnx4p")]
-position = Vector2(137, 73)
+position = Vector2(141, 23)
+
+[node name="UIAmmo" parent="." instance=ExtResource("3_26jtg")]
+position = Vector2(56, 86)
+scale = Vector2(1.5, 1.5)
+
+[node name="UIHeat" parent="." instance=ExtResource("3_77xf1")]
+position = Vector2(32, 86)
+scale = Vector2(1.5, 1.5)
+
+[node name="UISay" parent="." instance=ExtResource("5_mretj")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 358.0
+offset_top = 7.0
+offset_right = 1018.0
+offset_bottom = 291.0
+grow_horizontal = 1
+grow_vertical = 1

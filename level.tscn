@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://cpf5lpg05267g"]
+[gd_scene load_steps=56 format=4 uid="uid://cpf5lpg05267g"]
 
 [ext_resource type="Texture2D" uid="uid://bfd0we5tedq5m" path="res://assets/textures/bg-01.png" id="1_63uk1"]
 [ext_resource type="Texture2D" uid="uid://b6ku7xsid22b" path="res://assets/textures/floor-atlas-03.png" id="2_dx046"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://wapjublkg10g" path="res://electic_sparks.tscn" id="31_0etq4"]
 [ext_resource type="PackedScene" uid="uid://hxviu325nl8w" path="res://roller.tscn" id="31_x1dbi"]
 [ext_resource type="PackedScene" uid="uid://bj5aso3frpfje" path="res://roller-mg.tscn" id="32_b7kqj"]
+[ext_resource type="PackedScene" uid="uid://kbug7dnseb2a" path="res://say_trigger.tscn" id="33_v3dqm"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_uvfqu"]
 tile_data = PackedInt32Array(0, 2, 0, 65536, 2, 1)
@@ -509,15 +510,37 @@ frame = 3
 frame_progress = 0.167736
 speed_scale = 1.1
 
-[node name="ElecticSparks" parent="." instance=ExtResource("31_0etq4")]
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="ElecticSparks" parent="Enemies" instance=ExtResource("31_0etq4")]
 z_index = 5
 position = Vector2(-907, -174)
 
-[node name="Roller" parent="." instance=ExtResource("31_x1dbi")]
+[node name="Roller" parent="Enemies" instance=ExtResource("31_x1dbi")]
 position = Vector2(-1091, -240)
 
-[node name="Roller-MG" parent="." instance=ExtResource("32_b7kqj")]
+[node name="Roller-MG" parent="Enemies" instance=ExtResource("32_b7kqj")]
 position = Vector2(83, 132)
 
-[node name="Roller-MG2" parent="." instance=ExtResource("32_b7kqj")]
+[node name="Roller-MG2" parent="Enemies" instance=ExtResource("32_b7kqj")]
 position = Vector2(-1897, -255)
+
+[node name="SayTriggers" type="Node2D" parent="."]
+
+[node name="SayTrigger" parent="SayTriggers" instance=ExtResource("33_v3dqm")]
+position = Vector2(556, 112)
+size = Vector2i(128, 160)
+speaker = "Vega"
+animation_name = "vega-angry"
+speech = "Damn it, they’ve made it this far... Rogue drones. Armored little freaks on wheels. No one even hacked them—they just went haywire on their own. I can already hear the hum of their motors and the screech of rubber outside the door."
+steps = 100
+display_time = 10
+
+[node name="SayTrigger2" parent="SayTriggers" instance=ExtResource("33_v3dqm")]
+position = Vector2(-2162, 112)
+size = Vector2i(128, 160)
+speaker = "Vega"
+animation_name = "vega-angry"
+speech = "I have to get out. Staying here isn’t an option. This lock won’t hold for long, and I’m not about to let them box me in. Alright, you little rolling nightmares, let’s see who makes it out in one piece."
+steps = 100
+display_time = 10

@@ -1,4 +1,4 @@
-[gd_scene load_steps=214 format=3 uid="uid://c00rb2xjdt3se"]
+[gd_scene load_steps=217 format=3 uid="uid://c00rb2xjdt3se"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5yyud"]
 [ext_resource type="SpriteFrames" uid="uid://ss8o6wg8ratk" path="res://assets/sprites/vega-training.tres" id="2_g1dq1"]
@@ -168,8 +168,10 @@
 [ext_resource type="Texture2D" uid="uid://dp6xqjbmft2ob" path="res://assets/fx/glow3.png" id="103_lul3q"]
 [ext_resource type="Texture2D" uid="uid://bc5wp1xbc2fk8" path="res://assets/sprites/fx/laser-hit/hit-armor0016.png" id="104_0lnab"]
 [ext_resource type="Texture2D" uid="uid://bu63jvy0sfop6" path="res://assets/sprites/fx/laser-hit/hitv20013.png" id="104_4byrt"]
+[ext_resource type="Material" uid="uid://b7m1y2ss52rc1" path="res://materials/fog1.tres" id="104_ys0ve"]
 [ext_resource type="AudioStream" uid="uid://cf6553og858xl" path="res://sounds/hmg-shot.ogg" id="105_8xvnf"]
 [ext_resource type="Texture2D" uid="uid://ccgsejjhagbqo" path="res://assets/sprites/fx/laser-hit/hitv20014.png" id="105_khaa1"]
+[ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="105_s1qiv"]
 [ext_resource type="AudioStream" uid="uid://b0jcwcmaohcfp" path="res://sounds/laser-full.ogg" id="106_8rn05"]
 [ext_resource type="Texture2D" uid="uid://bm4nts0to4r8m" path="res://assets/sprites/fx/laser-hit/hitv20015.png" id="106_r0udn"]
 [ext_resource type="AudioStream" uid="uid://bebkhysfpxlam" path="res://sounds/laser-single.ogg" id="107_35yv6"]
@@ -594,6 +596,25 @@ colors = PackedColorArray(1, 1, 1, 1, 0.831373, 0, 0, 0.784314, 0.745669, 0.0884
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7wa8e"]
 polygon = PackedVector2Array(38, -10, 20, -10, 20, -4, 38, -7)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0iyi"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0.5, -1, 0)
+spread = 30.0
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 9.8, 0)
+scale_min = 0.02
+scale_max = 0.1
+scale_over_velocity_max = 0.1
+color = Color(1, 1, 1, 0.0627451)
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_v646v"]
 clip_count = 4
@@ -1035,6 +1056,15 @@ collide_with_areas = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="ArmsPivot/RayCast2D"]
 position = Vector2(-46, 8)
 occluder = SubResource("OccluderPolygon2D_7wa8e")
+
+[node name="HeatSmoke" type="GPUParticles2D" parent="ArmsPivot/RayCast2D"]
+material = ExtResource("104_ys0ve")
+position = Vector2(-5, 0)
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_m0iyi")
+texture = ExtResource("105_s1qiv")
+lifetime = 2.0
+randomness = 0.25
 
 [node name="FlashLight" type="PointLight2D" parent="ArmsPivot"]
 position = Vector2(47, -5)

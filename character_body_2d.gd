@@ -22,6 +22,10 @@ var weapon_recoil_deg = 0.0
 var weapon_recoil_linear = 0.0
 var current_recoil_deg = 0.0
 var weapon_lock_time = 0.0
+var weapon_heat = 0.0
+var weapon_heat_by_shot = 5.0
+var weapon_cooldown_per_pf = 0.1
+var weapon_heat_max = 100.0
 var locking_timer = 0.0
 var target_locked = false
 var target_lock_marker
@@ -312,6 +316,42 @@ func _physics_process(delta: float) -> void:
   
   if Input.is_action_just_pressed("Item1"):
     take_damage(randi_range(1, 10))
+    
+  if Input.is_action_just_pressed("Item2"):
+    %UI/UISay.portrait = "default"
+    %UI/UISay.who = "Unknown Contact"
+    %UI/UISay.what = "Для Siemens S10, который был одним из первых телефонов с цветным экраном:
+
+Экран имел разрешение 97×54 пикселя.
+Пропорции были близки к 16:9, но фактическая форма экрана была чуть менее вытянутой."
+    %UI/UISay.steps = 60
+    %UI/UISay.display_time = 5
+    %UI/UISay.say()
+  
+  if Input.is_action_just_pressed("Item3"):
+    %UI/UISay.portrait = "vega-angry"
+    %UI/UISay.who = "Vega"
+    %UI/UISay.what = "What do you want?!"
+    %UI/UISay.steps = 5
+    %UI/UISay.display_time = 2
+    %UI/UISay.say()
+  
+  # Weapon heating and cooling
+  weapon_heat = clampf(weapon_heat - weapon_cooldown_per_pf, 0, weapon_heat_max*2)
+  %UI/UIHeat.heat = weapon_heat
+  #if weapon_heat > weapon_heat_max:
+    #if randi_range(0, 10) == 0:
+      #take_damage(1)
+  if weapon_heat > weapon_heat_max / 2:
+    $ArmsPivot/RayCast2D/HeatSmoke.emitting = true
+    $ArmsPivot/RayCast2D/HeatSmoke.process_material.initial_velocity_max = weapon_heat
+    $ArmsPivot/RayCast2D/HeatSmoke.process_material.initial_velocity_min = weapon_heat / 4
+    $ArmsPivot/RayCast2D/HeatSmoke.process_material.scale_max = (2 - (weapon_heat_max / (weapon_heat + 1))) * 0.25
+    $ArmsPivot/RayCast2D/HeatSmoke.amount_ratio = weapon_heat_max / (weapon_heat + 1)
+    
+  else:
+    $ArmsPivot/RayCast2D/HeatSmoke.emitting = false
+  
   # Применение движения
   move_and_slide()
 
@@ -346,7 +386,7 @@ func select_weapon(weapon: String) -> Array:
       current_recoil_deg = 0
     "smartgun":
       animations = ["smartgun_still", "smartgun_fire", "smartgun_reload"]
-      %UI/LabelWeapon.text = "SMRT PISTL"
+      %UI/LabelWeapon.text = "光星12型燕 Smart Pistol"
       $Cursor.play("aim_smartgun")
       arm_far_sprite.play("arm-far-pistol")
       arm_near_sprite.play("arm-near-pistol")
@@ -357,8 +397,8 @@ func select_weapon(weapon: String) -> Array:
       weapon_cooldown = 0.4
       weapon_reload = 1.5
       weapon_damage = 15
-      weapon_mag_size = 9
-      weapon_mag = 9
+      weapon_mag_size = 10
+      weapon_mag = 10
       weapon_auto = false
       weapon_recoil_deg = 5
       weapon_recoil_linear = 0
@@ -371,7 +411,7 @@ func select_weapon(weapon: String) -> Array:
       $ArmsPivot/FlashLight.scale = Vector2(1.5, 3)
     "laser_rifle":
       animations = ["laser_rifle_still", "laser_rifle_fire", "laser_rifle_reload"]
-      %UI/LabelWeapon.text = "LSR RIFL"
+      %UI/LabelWeapon.text = "Laser Rifle Prototype"
       $Cursor.play("aim_dummy")
       arm_far_sprite.play("arm-far-rifle")
       arm_near_sprite.play("arm-near-rifle")
@@ -392,7 +432,7 @@ func select_weapon(weapon: String) -> Array:
       $ArmsPivot/FlashLight.scale = Vector2(16, 8)
     "handstarter":
       animations = ["handstarter_still", "handstarter_still", "handstarter_reload"]
-      %UI/LabelWeapon.text = "MRL RAPIER II"
+      %UI/LabelWeapon.text = "Handstarter Rapier II"
       $Cursor.play("aim_handstarter")
       arm_far_sprite.play("arm-far-pistol")
       arm_near_sprite.play("arm-near-pistol")
@@ -409,7 +449,7 @@ func select_weapon(weapon: String) -> Array:
       current_recoil_deg = 0
     "mg":
       animations = ["mg_still", "mg_fire", "mg_reload"]
-      %UI/LabelWeapon.text = "ASSLT HMG"
+      %UI/LabelWeapon.text = "Assault HMG"
       $Cursor.play("default")
       arm_far_sprite.play("arm-far-rifle")
       arm_near_sprite.play("arm-near-rifle")
@@ -436,8 +476,9 @@ func select_weapon(weapon: String) -> Array:
   selected_weapon = weapon
   weapon_animations = animations
   $ArmsPivot/WeaponSprite.play(animations[0])
-  %UI/LabelMag.text = str(weapon_mag)
-  %UI/LabelMagMax.text = str(weapon_mag_size)
+  %UI/UIAmmo.ammo = weapon_mag
+  %UI/UIAmmo.ammo_max = weapon_mag_size
+  %UI/UIAmmo.weapon = selected_weapon
   return animations
 
 func fire_weapon():
@@ -471,6 +512,7 @@ func fire_weapon():
       fire_smartgun()
     _:
       print("Nothing to pew")
+  weapon_heat += weapon_heat_by_shot
   var recoil_modifier = 1.0
   match state:
     "stand":
@@ -494,7 +536,8 @@ func fire_weapon():
     else:
       $CharacterSprites/Body.play("recoil")
   # Firing delay
-  %UI/LabelMag.text = str(weapon_mag)
+  #%UI/LabelMag.text = str(weapon_mag)
+  %UI/UIAmmo.ammo = weapon_mag
   weapon_ready = false
   if weapon_mag > 0:
     %UI/Status.text = "COOLDOWN"
@@ -533,7 +576,7 @@ func fire_weapon():
     $Cursor.play(previous_cursor)
     $Cursor.speed_scale = 1.0
     weapon_mag = weapon_mag_size
-    %UI/LabelMag.text = str(weapon_mag)
+    %UI/UIAmmo.ammo = weapon_mag
   %UI/Status.text = ""
   $ArmsPivot/WeaponSprite.play(weapon_animations[0])
   weapon_ready = true
