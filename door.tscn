@@ -1,0 +1,212 @@
+[gd_scene load_steps=25 format=3 uid="uid://dn1bg5gsdm83t"]
+
+[ext_resource type="Texture2D" uid="uid://csdd3r56dpemi" path="res://assets/textures/door-01-back-atlas.png" id="1_8u42j"]
+[ext_resource type="Script" path="res://door.gd" id="1_bpycx"]
+[ext_resource type="Texture2D" uid="uid://dren5ytsy27t3" path="res://assets/textures/door-01-atlas.png" id="2_y244q"]
+[ext_resource type="LabelSettings" uid="uid://dfq26rgqcmd3y" path="res://std_label.tres" id="4_qlaa8"]
+[ext_resource type="Texture2D" uid="uid://wmh625om7183" path="res://assets/fx/glow4.png" id="5_7jatm"]
+[ext_resource type="Script" path="res://light.gd" id="5_dc21i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eivq5"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbi8y"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nc1r"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(128, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yaoc"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(256, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxede"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(384, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ai75"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg1dh"]
+atlas = ExtResource("1_8u42j")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luflj"]
+atlas = ExtResource("2_y244q")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojqy8"]
+atlas = ExtResource("2_y244q")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upf2k"]
+atlas = ExtResource("2_y244q")
+region = Rect2(128, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35ik4"]
+atlas = ExtResource("2_y244q")
+region = Rect2(256, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcwvy"]
+atlas = ExtResource("2_y244q")
+region = Rect2(384, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7oky3"]
+atlas = ExtResource("2_y244q")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok51t"]
+atlas = ExtResource("2_y244q")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pm3qj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eivq5")
+}],
+"loop": true,
+"name": &"back-closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbi8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nc1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yaoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxede")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ai75")
+}],
+"loop": false,
+"name": &"back-moving",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg1dh")
+}],
+"loop": true,
+"name": &"back-open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luflj")
+}],
+"loop": true,
+"name": &"front-closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojqy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upf2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35ik4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcwvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7oky3")
+}],
+"loop": false,
+"name": &"front-moving",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok51t")
+}],
+"loop": true,
+"name": &"front-open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ds7u"]
+size = Vector2(128, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mts4e"]
+size = Vector2(24, 256)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_syvi4"]
+cull_mode = 1
+polygon = PackedVector2Array(-19, -127, -4, -127, 20, -37, 20, 124, 3, 124, -20, 31, -19, -126)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_bpycx")
+
+[node name="Back" type="AnimatedSprite2D" parent="."]
+z_index = -3
+sprite_frames = SubResource("SpriteFrames_pm3qj")
+animation = &"front-moving"
+autoplay = "front-closed"
+
+[node name="Front" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_pm3qj")
+animation = &"back-moving"
+autoplay = "front-closed"
+
+[node name="ControlArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlArea"]
+shape = SubResource("RectangleShape2D_4ds7u")
+
+[node name="Collision" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_mts4e")
+debug_color = Color(0.879265, 0.243697, 0.598984, 0.42)
+
+[node name="Occluder" type="LightOccluder2D" parent="Collision"]
+occluder = SubResource("OccluderPolygon2D_syvi4")
+occluder_light_mask = 3
+
+[node name="Label" type="Label" parent="."]
+visible = false
+top_level = true
+z_index = 1024
+offset_left = -56.0
+offset_top = -24.0
+offset_right = 50.0
+offset_bottom = -1.0
+text = "Press E to open"
+label_settings = ExtResource("4_qlaa8")
+
+[node name="SignalLight" type="PointLight2D" parent="."]
+position = Vector2(-2, -96)
+enabled = false
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("5_7jatm")
+offset = Vector2(0, 96)
+script = ExtResource("5_dc21i")
+kind = "blink"
+blink_on_time = 0.2
+blink_off_time = 0.1
+
+[connection signal="body_entered" from="ControlArea" to="." method="_on_control_area_body_entered"]
+[connection signal="body_exited" from="ControlArea" to="." method="_on_control_area_body_exited"]
