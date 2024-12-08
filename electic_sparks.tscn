@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://wapjublkg10g"]
+
+[ext_resource type="Texture2D" uid="uid://dp6xqjbmft2ob" path="res://assets/fx/glow3.png" id="1_ihmmn"]
+[ext_resource type="Script" path="res://electic_sparks.gd" id="1_vwbs6"]
+[ext_resource type="Script" path="res://light.gd" id="2_cfi2j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bu2gf"]
+radius = 64.0
+height = 256.0
+
+[node name="ElecticSparks" type="Node2D"]
+z_index = 1
+script = ExtResource("1_vwbs6")
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(0, -59)
+enabled = false
+color = Color(0.53, 0.843333, 1, 1)
+energy = 3.0
+shadow_enabled = true
+texture = ExtResource("1_ihmmn")
+script = ExtResource("2_cfi2j")
+kind = "flicker"
+flicker_duty_duration = 0.05
+max_energy = 1.1
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+spread = 60.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -66)
+shape = SubResource("CapsuleShape2D_bu2gf")

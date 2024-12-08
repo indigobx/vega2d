@@ -1,0 +1,134 @@
+[gd_scene load_steps=27 format=3 uid="uid://c30vhufis6cf3"]
+
+[ext_resource type="Texture2D" uid="uid://6eq07wg572q" path="res://assets/sprites/scrappy/wait/wait0000.webp" id="1_5x4i4"]
+[ext_resource type="Script" path="res://scrappy.gd" id="1_pggor"]
+[ext_resource type="Texture2D" uid="uid://bnbsied216htq" path="res://assets/sprites/scrappy/wait/wait0001.webp" id="2_rbjcb"]
+[ext_resource type="Texture2D" uid="uid://bnaaxgcjmmtyf" path="res://assets/sprites/scrappy/wait/wait0002.webp" id="3_bcjot"]
+[ext_resource type="Texture2D" uid="uid://c2s56wx4nfjvc" path="res://assets/sprites/scrappy/wait/wait0003.webp" id="4_cjcbt"]
+[ext_resource type="Texture2D" uid="uid://cn5257x5xw34o" path="res://assets/sprites/scrappy/wait/wait0004.webp" id="5_q5hp0"]
+[ext_resource type="Texture2D" uid="uid://dq7gec1ra7wa0" path="res://assets/sprites/scrappy/wait/wait0005.webp" id="6_c7qef"]
+[ext_resource type="Texture2D" uid="uid://div6fyfuytony" path="res://assets/sprites/scrappy/wait/wait0006.webp" id="7_stwka"]
+[ext_resource type="Texture2D" uid="uid://cqwvjqciy253" path="res://assets/sprites/scrappy/wait/wait0007.webp" id="8_vmj1s"]
+[ext_resource type="Texture2D" uid="uid://yipohd6mwo64" path="res://assets/sprites/scrappy/hit/hit0001.webp" id="9_hceh1"]
+[ext_resource type="Texture2D" uid="uid://cv8kcwgqmym6b" path="res://assets/sprites/scrappy/hit/hit0002.webp" id="10_5syl0"]
+[ext_resource type="Texture2D" uid="uid://dw4m45esy5hde" path="res://assets/sprites/scrappy/hit/hit0003.webp" id="11_rmlyf"]
+[ext_resource type="Texture2D" uid="uid://clafxgise2tt7" path="res://assets/sprites/scrappy/hit/hit0004.webp" id="12_cq0j0"]
+[ext_resource type="Texture2D" uid="uid://dwatlm7oni3f4" path="res://assets/sprites/scrappy/hit/hit0006.webp" id="13_etfi8"]
+[ext_resource type="Texture2D" uid="uid://cxuxeuetexcjt" path="res://assets/sprites/scrappy/hit/hit0007.webp" id="14_q2uod"]
+[ext_resource type="Texture2D" uid="uid://hmidxcd3y7qm" path="res://assets/sprites/scrappy/move/move0000.webp" id="15_staf3"]
+[ext_resource type="Texture2D" uid="uid://cl44h0dtnxvrw" path="res://assets/sprites/scrappy/move/move0001.webp" id="16_pdtgs"]
+[ext_resource type="Texture2D" uid="uid://c56bwb1dttjc5" path="res://assets/sprites/scrappy/move/move0002.webp" id="17_ucsjr"]
+[ext_resource type="Texture2D" uid="uid://dhignpeut2rgv" path="res://assets/sprites/scrappy/move/move0003.webp" id="18_24pvf"]
+[ext_resource type="Texture2D" uid="uid://dsoepbjhdmeae" path="res://assets/sprites/scrappy/move/move0004.webp" id="19_oqfef"]
+[ext_resource type="Texture2D" uid="uid://bu5bdfaee7uu3" path="res://assets/sprites/scrappy/move/move0005.webp" id="20_icv84"]
+[ext_resource type="Texture2D" uid="uid://dhlnxc5suoidu" path="res://assets/sprites/scrappy/move/move0006.webp" id="21_823rk"]
+[ext_resource type="Texture2D" uid="uid://djempmqoasaba" path="res://assets/sprites/scrappy/move/move0007.webp" id="22_1u8v1"]
+[ext_resource type="PackedScene" uid="uid://sr6i4oo1q3wt" path="res://healthbar.tscn" id="24_845pk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ce3km"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5x4i4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rbjcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bcjot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cjcbt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q5hp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c7qef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_stwka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vmj1s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hceh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5syl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rmlyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cq0j0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_etfi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_q2uod")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_staf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pdtgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ucsjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_24pvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_oqfef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_icv84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_823rk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_1u8v1")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rm01"]
+radius = 30.18
+height = 103.87
+
+[node name="Scrappy" type="CharacterBody2D"]
+z_index = 100
+collision_layer = 3
+script = ExtResource("1_pggor")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ce3km")
+animation = &"hit"
+autoplay = "default"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 16)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_5rm01")
+
+[node name="Healthbar" parent="." instance=ExtResource("24_845pk")]
+position = Vector2(0, -66)
+
+[connection signal="animation_finished" from="BodySprite" to="." method="_on_body_sprite_animation_finished"]

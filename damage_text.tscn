@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://i2cytwa4ogox"]
+
+[ext_resource type="Script" path="res://damage_text.gd" id="1_4sdtw"]
+[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_j7x1d"]
+
+[sub_resource type="Theme" id="Theme_khclh"]
+default_font = ExtResource("1_j7x1d")
+default_font_size = 21
+
+[node name="DamageText" type="Label"]
+z_index = 10
+offset_right = 40.0
+offset_bottom = 23.0
+theme = SubResource("Theme_khclh")
+script = ExtResource("1_4sdtw")

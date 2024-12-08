@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://bro8rtllaobwe"
+path="res://.godot/imported/gothic-bit-1x.png-17ea1f6ef06ef1aa9ae90628192f356e.image"
+
+[deps]
+
+source_file="res://palettes/1x/gothic-bit-1x.png"
+dest_files=["res://.godot/imported/gothic-bit-1x.png-17ea1f6ef06ef1aa9ae90628192f356e.image"]
+
+[params]
+

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b7m1y2ss52rc1"]
+
+[ext_resource type="Shader" path="res://fog.gdshader" id="1_wujf6"]
+
+[resource]
+shader = ExtResource("1_wujf6")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_intensity = 1.5
+shader_parameter/shadow_dimming = 1.0
+shader_parameter/opacity = 0.0
+shader_parameter/blur_amount = 8.0

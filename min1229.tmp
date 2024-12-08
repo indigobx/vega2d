@@ -1,0 +1,144 @@
+[gd_scene load_steps=28 format=3 uid="uid://3hifwv63rpxb"]
+
+[ext_resource type="Script" path="res://mini_rocket.gd" id="1_k3si1"]
+[ext_resource type="Texture2D" uid="uid://ce5h46wmts5x" path="res://assets/sprites/weapons/slammer/rocket.png" id="2_gkunj"]
+[ext_resource type="Texture2D" uid="uid://bnx5lou11xplp" path="res://assets/sprites/weapons/slammer/rocket-fly0001.png" id="3_rixca"]
+[ext_resource type="Texture2D" uid="uid://bs8pg4ef2xaji" path="res://assets/sprites/fx/mrl-explode/defuse0000.png" id="3_x1k2p"]
+[ext_resource type="Texture2D" uid="uid://n7l8nshaw4oc" path="res://assets/sprites/fx/mrl-explode/defuse0001.png" id="4_kh6um"]
+[ext_resource type="Texture2D" uid="uid://cqyswlrlkj2xu" path="res://assets/sprites/weapons/slammer/rocket-fly0002.png" id="4_osbkh"]
+[ext_resource type="Texture2D" uid="uid://r775h53f4eov" path="res://assets/sprites/weapons/slammer/rocket-fly0003.png" id="5_6vqro"]
+[ext_resource type="Texture2D" uid="uid://chvxh1lluta6o" path="res://assets/sprites/fx/mrl-explode/defuse0002.png" id="5_826bf"]
+[ext_resource type="Texture2D" uid="uid://bcmn5ejcyygjv" path="res://assets/sprites/weapons/slammer/rocket-fly0004.png" id="6_6wg21"]
+[ext_resource type="Texture2D" uid="uid://drex8ut4tfvoe" path="res://assets/sprites/fx/mrl-explode/defuse0003.png" id="6_s4ftv"]
+[ext_resource type="Texture2D" uid="uid://dyjsdq7v187g4" path="res://assets/sprites/weapons/slammer/rocket-fly0005.png" id="7_001k2"]
+[ext_resource type="Texture2D" uid="uid://c1tedmpk8nb3o" path="res://assets/sprites/fx/mrl-explode/defuse0004.png" id="7_2gkld"]
+[ext_resource type="Texture2D" uid="uid://vucb5xgycph8" path="res://assets/sprites/weapons/slammer/rocket-fly0006.png" id="8_7a2jj"]
+[ext_resource type="Texture2D" uid="uid://chy5g576nxfo5" path="res://assets/sprites/fx/mrl-explode/defuse0005.png" id="8_lochx"]
+[ext_resource type="Texture2D" uid="uid://djk4hxbcnccfp" path="res://assets/sprites/weapons/slammer/rocket-fly0007.png" id="9_jiryi"]
+[ext_resource type="Texture2D" uid="uid://bmj3s5b5orfcy" path="res://assets/sprites/fx/mrl-explode/explode0000.png" id="9_wmi3d"]
+[ext_resource type="Texture2D" uid="uid://coxu8m3pjupvv" path="res://assets/sprites/fx/mrl-explode/explode0001.png" id="10_01obk"]
+[ext_resource type="Texture2D" uid="uid://buhh5t7hbj8l" path="res://assets/sprites/weapons/slammer/rocket-fly0008.png" id="10_2maf5"]
+[ext_resource type="Texture2D" uid="uid://bq0cwxx0c58nv" path="res://assets/sprites/fx/mrl-explode/explode0002.png" id="11_7uot6"]
+[ext_resource type="Texture2D" uid="uid://cp2txb1f6hcbx" path="res://assets/sprites/weapons/slammer/rocket-fly0009.png" id="11_yubvu"]
+[ext_resource type="Texture2D" uid="uid://dak2rwq7lgqwu" path="res://assets/sprites/fx/mrl-explode/explode0003.png" id="12_bpdg5"]
+[ext_resource type="Texture2D" uid="uid://bb12vjwh215nl" path="res://assets/sprites/weapons/slammer/rocket-fly0010.png" id="12_hk1oh"]
+[ext_resource type="Texture2D" uid="uid://ck7ab002vtg2e" path="res://assets/sprites/weapons/slammer/rocket-fly0000.png" id="13_io35g"]
+[ext_resource type="Texture2D" uid="uid://c0sfjlsh41pxs" path="res://assets/sprites/fx/mrl-explode/explode0004.png" id="13_tavni"]
+[ext_resource type="Texture2D" uid="uid://ce4y1m6m3yi3q" path="res://assets/sprites/fx/mrl-explode/explode0005.png" id="14_p4ein"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5cp5n"]
+rough = true
+bounce = 0.1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4dyak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gkunj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x1k2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kh6um")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_826bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s4ftv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2gkld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lochx")
+}],
+"loop": false,
+"name": &"defuse",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wmi3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_01obk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7uot6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bpdg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tavni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_p4ein")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("3_rixca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_osbkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6vqro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6wg21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_001k2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7a2jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jiryi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2maf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_yubvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hk1oh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_io35g")
+}],
+"loop": false,
+"name": &"fly",
+"speed": 16.0
+}]
+
+[node name="MiniRocket" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 3
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_5cp5n")
+script = ExtResource("1_k3si1")
+
+[node name="MiniRocketSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4dyak")
+animation = &"fly"
+autoplay = "fly"
+offset = Vector2(-24, 0)
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(8, 0, -2, -4, -2, 4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

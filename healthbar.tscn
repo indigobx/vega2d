@@ -1,0 +1,82 @@
+[gd_scene load_steps=16 format=3 uid="uid://sr6i4oo1q3wt"]
+
+[ext_resource type="Texture2D" uid="uid://bhgnfu24vtdqo" path="res://assets/sprites/bars/hp53-0000.png" id="1_r0vv4"]
+[ext_resource type="Texture2D" uid="uid://wslpw3brkxsi" path="res://assets/sprites/bars/hp53-0001.png" id="2_ujlrg"]
+[ext_resource type="Texture2D" uid="uid://dpe57w1wj45qx" path="res://assets/sprites/bars/hp53-0002.png" id="3_1gqkw"]
+[ext_resource type="Texture2D" uid="uid://ctaiu0wuxfjrw" path="res://assets/sprites/bars/hp53-0003.png" id="4_ec8ce"]
+[ext_resource type="Texture2D" uid="uid://b8lhqdniljmx3" path="res://assets/sprites/bars/hp53-0004.png" id="5_8vw5k"]
+[ext_resource type="Texture2D" uid="uid://5xmgr2ks3gru" path="res://assets/sprites/bars/hp53-0005.png" id="6_kkm7y"]
+[ext_resource type="Texture2D" uid="uid://cybf7c6037dbh" path="res://assets/sprites/bars/hp53-0006.png" id="7_m5pox"]
+[ext_resource type="Texture2D" uid="uid://doqw0sj14i4h3" path="res://assets/sprites/bars/hp53-0007.png" id="8_f3mi7"]
+[ext_resource type="Texture2D" uid="uid://gldje1pgwpa3" path="res://assets/sprites/bars/hp53-0008.png" id="9_ty18d"]
+[ext_resource type="Texture2D" uid="uid://cnernv51djy5f" path="res://assets/sprites/bars/hp53-0009.png" id="10_ogemm"]
+[ext_resource type="Texture2D" uid="uid://c6bjm4gcfelda" path="res://assets/sprites/bars/hp53-0010.png" id="11_6srhd"]
+[ext_resource type="Script" path="res://healthbar.gd" id="12_ujoc7"]
+[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="13_gtw07"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnqw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r0vv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ujlrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1gqkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ec8ce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8vw5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kkm7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m5pox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f3mi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ty18d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ogemm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6srhd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_xy8gv"]
+default_font = ExtResource("13_gtw07")
+default_font_size = 14
+
+[node name="Healthbar" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_vnqw6")
+autoplay = "default"
+script = ExtResource("12_ujoc7")
+
+[node name="Health" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -33.0
+offset_right = -6.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_xy8gv")
+text = "800"
+horizontal_alignment = 1
+vertical_alignment = 2
