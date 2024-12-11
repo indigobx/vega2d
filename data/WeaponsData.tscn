@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5rxijn3w2jg"]
+
+[ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
+[ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
+[ext_resource type="PackedScene" uid="uid://bw7lu7ncf7qdx" path="res://smart_shell.tscn" id="3_ewo75"]
+
+[node name="WeaponsData" type="Node" node_paths=PackedStringArray("weapons")]
+script = ExtResource("1_qa4qa")
+weapons = [null]
+
+[node name="SmartPistol" type="Node" parent="."]
+script = ExtResource("2_pptmm")
+projectile_scene = ExtResource("3_ewo75")

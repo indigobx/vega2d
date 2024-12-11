@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://crrdtv01vw2vj"]
+
+[ext_resource type="Script" path="res://ui_say.gd" id="1_5itv3"]
+[ext_resource type="Texture2D" uid="uid://8qqf3mnotb70" path="res://assets/ui/ui-portrait.png" id="1_h1spp"]
+[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_r7fah"]
+[ext_resource type="Texture2D" uid="uid://cwwwuhsom5f2e" path="res://assets/ui/portraits/vega-4c.png" id="2_usq5v"]
+[ext_resource type="Texture2D" uid="uid://cscuvshse8k3t" path="res://assets/ui/portraits/default.png" id="3_xn7cy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pdefs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h1spp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hi08t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xn7cy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_usq5v")
+}],
+"loop": true,
+"name": &"vega-angry",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcuva"]
+font = ExtResource("1_r7fah")
+font_size = 24
+font_color = Color(0.48, 0.878667, 1, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_77ese"]
+default_font = ExtResource("1_r7fah")
+default_font_size = 21
+
+[node name="UISay" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5itv3")
+
+[node name="Frame" type="AnimatedSprite2D" parent="."]
+position = Vector2(96, 96)
+sprite_frames = SubResource("SpriteFrames_pdefs")
+autoplay = "default"
+
+[node name="Portrait" type="AnimatedSprite2D" parent="."]
+position = Vector2(84, 84)
+sprite_frames = SubResource("SpriteFrames_hi08t")
+autoplay = "default"
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 166.0
+offset_right = 86.0
+offset_bottom = 190.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Name Name"
+label_settings = SubResource("LabelSettings_tcuva")
+
+[node name="Text" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(600, 160)
+layout_mode = 0
+offset_left = 172.0
+offset_top = 4.0
+offset_right = 572.0
+offset_bottom = 164.0
+theme = SubResource("Theme_77ese")
+text = "Для Siemens S10, который был одним из первых телефонов с цветным экраном:
+
+Экран имел разрешение 97×54 пикселя.
+Пропорции были близки к 16:9, но фактическая форма экрана была чуть менее вытянутой."
+tab_size = 2
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
