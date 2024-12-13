@@ -1,29 +1,29 @@
 [gd_scene load_steps=28 format=3 uid="uid://bvjnybc10bs7i"]
 
-[ext_resource type="Texture2D" uid="uid://c6ue0khft7out" path="res://assets/sprites/bars/big-healthbar-0000.png" id="1_r5tcx"]
-[ext_resource type="Texture2D" uid="uid://dn2kkvhcc61kn" path="res://assets/sprites/bars/big-healthbar-0001.png" id="2_6ns8j"]
-[ext_resource type="Texture2D" uid="uid://boectgywvw0i5" path="res://assets/sprites/bars/big-healthbar-0002.png" id="3_jxk02"]
-[ext_resource type="Texture2D" uid="uid://bomes6mqtgkfk" path="res://assets/sprites/bars/big-healthbar-0003.png" id="4_51usv"]
-[ext_resource type="Texture2D" uid="uid://dpe7tgkuupue7" path="res://assets/sprites/bars/big-healthbar-0004.png" id="5_va2xs"]
-[ext_resource type="Texture2D" uid="uid://dffq5e0kk0sf3" path="res://assets/sprites/bars/big-healthbar-0005.png" id="6_qgu80"]
-[ext_resource type="Texture2D" uid="uid://c5bd1qy3auchk" path="res://assets/sprites/bars/big-healthbar-0006.png" id="7_6ris4"]
-[ext_resource type="Texture2D" uid="uid://2phrw5i3l8la" path="res://assets/sprites/bars/big-healthbar-0007.png" id="8_cqgtm"]
-[ext_resource type="Texture2D" uid="uid://dwsl5t0jbep3i" path="res://assets/sprites/bars/big-healthbar-0008.png" id="9_g0dxe"]
-[ext_resource type="Texture2D" uid="uid://vmq4354un3hn" path="res://assets/sprites/bars/big-healthbar-0009.png" id="10_qwdgs"]
-[ext_resource type="Texture2D" uid="uid://dmpj4wmpdbis1" path="res://assets/sprites/bars/big-healthbar-0010.png" id="11_5f2f4"]
-[ext_resource type="Texture2D" uid="uid://c13uubjyjesg0" path="res://assets/sprites/bars/big-healthbar-0011.png" id="12_i1hhm"]
-[ext_resource type="Texture2D" uid="uid://ccq2d3oerflc2" path="res://assets/sprites/bars/big-healthbar-0012.png" id="13_dlk4l"]
-[ext_resource type="Texture2D" uid="uid://fea6wh3kw5qj" path="res://assets/sprites/bars/big-healthbar-0013.png" id="14_yrf7p"]
-[ext_resource type="Texture2D" uid="uid://dkuopaa8tqgff" path="res://assets/sprites/bars/big-healthbar-0014.png" id="15_ia6rm"]
-[ext_resource type="Texture2D" uid="uid://dxc6yu53uivms" path="res://assets/sprites/bars/big-healthbar-0015.png" id="16_icvpg"]
-[ext_resource type="Texture2D" uid="uid://bcmhsjnjejj25" path="res://assets/sprites/bars/big-healthbar-0016.png" id="17_tco1m"]
-[ext_resource type="Texture2D" uid="uid://dcv3kl4vyedsd" path="res://assets/sprites/bars/big-healthbar-0017.png" id="18_5v4gm"]
-[ext_resource type="Texture2D" uid="uid://jgkkm5cp2lyf" path="res://assets/sprites/bars/big-healthbar-0018.png" id="19_tarxb"]
-[ext_resource type="Texture2D" uid="uid://bxvgrwokwsqnl" path="res://assets/sprites/bars/big-healthbar-0019.png" id="20_yyxs8"]
-[ext_resource type="Texture2D" uid="uid://btuydjju138vp" path="res://assets/sprites/bars/big-healthbar-0020.png" id="21_i27nl"]
-[ext_resource type="Texture2D" uid="uid://bs3c42ill4u3l" path="res://assets/sprites/bars/big-healthbar-0021.png" id="22_a8p3c"]
-[ext_resource type="Script" path="res://ui_health_bar.gd" id="23_54voy"]
-[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="23_mkjjn"]
+[ext_resource type="Texture2D" uid="uid://53wwf7slh0ud" path="res://sprites/bars/big-healthbar-0000.png" id="1_r5tcx"]
+[ext_resource type="Texture2D" uid="uid://bmim8jwc2rwfo" path="res://sprites/bars/big-healthbar-0001.png" id="2_6ns8j"]
+[ext_resource type="Texture2D" uid="uid://bttxw6pjeo2yy" path="res://sprites/bars/big-healthbar-0002.png" id="3_jxk02"]
+[ext_resource type="Texture2D" uid="uid://7giw0p37ca82" path="res://sprites/bars/big-healthbar-0003.png" id="4_51usv"]
+[ext_resource type="Texture2D" uid="uid://jldisvojvg3v" path="res://sprites/bars/big-healthbar-0004.png" id="5_va2xs"]
+[ext_resource type="Texture2D" uid="uid://bukfn4aqvms3x" path="res://sprites/bars/big-healthbar-0005.png" id="6_qgu80"]
+[ext_resource type="Texture2D" uid="uid://bgho3mtj27c42" path="res://sprites/bars/big-healthbar-0006.png" id="7_6ris4"]
+[ext_resource type="Texture2D" uid="uid://2tysj027fnyt" path="res://sprites/bars/big-healthbar-0007.png" id="8_cqgtm"]
+[ext_resource type="Texture2D" uid="uid://dsjukq1xkas0x" path="res://sprites/bars/big-healthbar-0008.png" id="9_g0dxe"]
+[ext_resource type="Texture2D" uid="uid://bfx64atdgtjip" path="res://sprites/bars/big-healthbar-0009.png" id="10_qwdgs"]
+[ext_resource type="Texture2D" uid="uid://dosybwwkbx4u2" path="res://sprites/bars/big-healthbar-0010.png" id="11_5f2f4"]
+[ext_resource type="Texture2D" uid="uid://b8cs2bfaarkim" path="res://sprites/bars/big-healthbar-0011.png" id="12_i1hhm"]
+[ext_resource type="Texture2D" uid="uid://b387xt77168mb" path="res://sprites/bars/big-healthbar-0012.png" id="13_dlk4l"]
+[ext_resource type="Texture2D" uid="uid://ccfi4dckva5jt" path="res://sprites/bars/big-healthbar-0013.png" id="14_yrf7p"]
+[ext_resource type="Texture2D" uid="uid://ctxtrft5xmuv6" path="res://sprites/bars/big-healthbar-0014.png" id="15_ia6rm"]
+[ext_resource type="Texture2D" uid="uid://efhyjpsxwbqw" path="res://sprites/bars/big-healthbar-0015.png" id="16_icvpg"]
+[ext_resource type="Texture2D" uid="uid://w0eye07qcms7" path="res://sprites/bars/big-healthbar-0016.png" id="17_tco1m"]
+[ext_resource type="Texture2D" uid="uid://dkv8s43gokawm" path="res://sprites/bars/big-healthbar-0017.png" id="18_5v4gm"]
+[ext_resource type="Texture2D" uid="uid://cjfcidwwimjxp" path="res://sprites/bars/big-healthbar-0018.png" id="19_tarxb"]
+[ext_resource type="Texture2D" uid="uid://c3vtsrk4vr2dr" path="res://sprites/bars/big-healthbar-0019.png" id="20_yyxs8"]
+[ext_resource type="Texture2D" uid="uid://cdoyittv2egyo" path="res://sprites/bars/big-healthbar-0020.png" id="21_i27nl"]
+[ext_resource type="Texture2D" uid="uid://dgxtpu875216j" path="res://sprites/bars/big-healthbar-0021.png" id="22_a8p3c"]
+[ext_resource type="Script" path="res://scripts/ui/ui_health_bar.gd" id="23_54voy"]
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="23_mkjjn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_unhcw"]
 animations = [{
@@ -112,32 +112,37 @@ font_color = Color(1, 0.419, 0.17, 1)
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="UIHealthBar" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_unhcw")
+[node name="UIHealthBar" type="MarginContainer"]
+custom_minimum_size = Vector2(344, 24)
 script = ExtResource("23_54voy")
 
-[node name="HP" type="Label" parent="."]
+[node name="HealthBarSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_unhcw")
+centered = false
+
+[node name="HP" type="Label" parent="HealthBarSprite"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 124.0
-offset_top = -22.0
-offset_right = 166.0
-offset_bottom = 6.0
+offset_left = 251.0
+offset_top = -14.0
+offset_right = 293.0
+offset_bottom = 14.0
 grow_vertical = 2
 text = "9999"
 label_settings = SubResource("LabelSettings_kisqw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MaxHP" type="Label" parent="."]
+[node name="MaxHP" type="Label" parent="HealthBarSprite"]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 169.0
-offset_top = -22.0
-offset_right = 209.0
-offset_bottom = 6.0
+offset_left = 296.0
+offset_top = -14.0
+offset_right = 336.0
+offset_bottom = 14.0
 grow_vertical = 2
 text = "9999"
 label_settings = SubResource("LabelSettings_t8ew6")

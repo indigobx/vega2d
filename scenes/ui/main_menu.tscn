@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://dts2rie1nvbam"]
+
+[ext_resource type="Theme" uid="uid://dn1mktgaehqb5" path="res://themes/menu_theme.tres" id="1_1cnrv"]
+[ext_resource type="Texture2D" uid="uid://b7kudbculenrh" path="res://palettes/1x/slso-plus-dim.png" id="2_k2jeo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tn4ra"]
+bg_color = Color(0.22, 0.22, 0.22, 1)
+border_width_bottom = 4
+border_color = Color(0.615686, 0.247059, 0.258824, 1)
+corner_detail = 2
+shadow_size = 2
+anti_aliasing = false
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1cnrv")
+
+[node name="HC1" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 46.0
+
+[node name="Sep1" type="VSeparator" parent="HC1"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NewGame" type="Button" parent="HC1"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="HC1"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+disabled = true
+text = "Load..."
+
+[node name="Options" type="Button" parent="HC1"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+disabled = true
+text = "Options"
+
+[node name="Stats" type="Button" parent="HC1"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+disabled = true
+text = "Stats"
+
+[node name="Sep2" type="VSeparator" parent="HC1"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Quit" type="Button" parent="HC1"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.615686, 0.247059, 0.258824, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tn4ra")
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 753.0
+offset_top = 16.0
+offset_right = 765.0
+offset_bottom = 17.0
+scale = Vector2(32, 32)
+texture = ExtResource("2_k2jeo")

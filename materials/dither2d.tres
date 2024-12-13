@@ -1,13 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://mbixubfn3kte"]
 
-[ext_resource type="Shader" path="res://shaders/color_dither_2d.gdshader" id="1_1wn30"]
-[ext_resource type="Texture2D" uid="uid://dkh45i6o4cpd8" path="res://palettes/dither/slso82.png" id="2_iv1da"]
+[ext_resource type="Shader" path="res://shaders/color_dither_post_2d.gdshader" id="1_887cx"]
+[ext_resource type="Texture2D" uid="uid://0tbpi1bcrcnr" path="res://palettes/dither/testvega2.png" id="2_xq433"]
 
 [resource]
-shader = ExtResource("1_1wn30")
-shader_parameter/dither_pixel_size = 2.0
+shader = ExtResource("1_887cx")
+shader_parameter/dither_pixel_size = 1.0
 shader_parameter/dither_pixel_offset = Vector2(0, 0)
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/albedo_strength = 1.0
-shader_parameter/alpha_dither_pixel_offset = Vector2(0, 0)
-shader_parameter/dither_palette = ExtResource("2_iv1da")
+shader_parameter/dither_palette = ExtResource("2_xq433")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://1073tygqxsxy"]
+
+[ext_resource type="Texture2D" uid="uid://cbob8y8ar0qa0" path="res://sprites/cursors/angles.png" id="1_6t3fn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hliv4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6t3fn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cursor" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_hliv4")
+autoplay = "default"
+frame_progress = 0.32251

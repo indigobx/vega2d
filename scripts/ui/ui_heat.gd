@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends MarginContainer
 
 @export var heat:float = 0
 @export var heat_min:float = 0
@@ -7,7 +7,7 @@ var frames: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  frames = sprite_frames.get_frame_count("default")
+  frames = $HeatSprite.sprite_frames.get_frame_count("default")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
       0,
       frames - 1
     )
-    play("default")
-    frame = sprite_idx
+    $HeatSprite.play("default")
+    $HeatSprite.frame = sprite_idx
   if heat > heat_max:
-    play("overheat")
+    $HeatSprite.play("overheat")

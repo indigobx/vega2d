@@ -1,26 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjmo6grls723y"]
+[gd_scene load_steps=6 format=3 uid="uid://dte87rpq16e83"]
 
-[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_4my3l"]
-[ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://ui_health_bar.tscn" id="2_cnx4p"]
-[ext_resource type="PackedScene" uid="uid://chli8dh7i2dh8" path="res://ui_ammo.tscn" id="3_26jtg"]
-[ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://ui_heat.tscn" id="3_77xf1"]
-[ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://ui_say.tscn" id="5_mretj"]
-
-[sub_resource type="Theme" id="Theme_bvb6f"]
-default_font = ExtResource("1_4my3l")
-default_font_size = 21
-
-[sub_resource type="LabelSettings" id="LabelSettings_4wuqg"]
-line_spacing = 1.0
-font = ExtResource("1_4my3l")
-font_size = 20
-font_color = Color(0, 0, 0, 1)
-outline_size = 6
-
-[sub_resource type="LabelSettings" id="LabelSettings_jlq5q"]
-font_size = 21
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
+[ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://scenes/ui/ui_health_bar.tscn" id="1_k2i4x"]
+[ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://scenes/ui/ui_heat.tscn" id="2_ryfst"]
+[ext_resource type="PackedScene" uid="uid://chli8dh7i2dh8" path="res://scenes/ui/ui_ammo.tscn" id="3_1fxb8"]
+[ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://scenes/ui/ui_say.tscn" id="4_1pwlx"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -29,76 +13,37 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gc44a")
 
-[node name="Status" type="Label" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Row1" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="UIHealthBar" parent="MarginContainer/Rows/Row1" instance=ExtResource("1_k2i4x")]
+layout_mode = 2
+
+[node name="UISay" parent="MarginContainer/Rows/Row1" instance=ExtResource("4_1pwlx")]
 visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -3.5
-offset_top = -224.0
-offset_right = 3.5
-offset_bottom = -202.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_bvb6f")
-horizontal_alignment = 1
+layout_mode = 2
+script = null
 
-[node name="System" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 599.0
-offset_right = 1151.0
-offset_bottom = 23.0
-theme = SubResource("Theme_bvb6f")
-text = "line
-line"
-label_settings = SubResource("LabelSettings_4wuqg")
-horizontal_alignment = 2
+[node name="Row2" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="Debug" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 238.0
-offset_right = 836.0
-offset_bottom = 41.0
-theme = SubResource("Theme_bvb6f")
-text = "line
-line"
-label_settings = SubResource("LabelSettings_4wuqg")
+[node name="UIHeat" parent="MarginContainer/Rows/Row2" instance=ExtResource("2_ryfst")]
+layout_mode = 2
 
-[node name="LabelWeapon" type="Label" parent="."]
-layout_mode = 0
-offset_left = 75.0
-offset_top = 40.0
-offset_right = 115.0
-offset_bottom = 63.0
-theme = SubResource("Theme_bvb6f")
-text = "LASER"
-label_settings = SubResource("LabelSettings_jlq5q")
-
-[node name="UIHealthBar" parent="." instance=ExtResource("2_cnx4p")]
-position = Vector2(141, 23)
-
-[node name="UIAmmo" parent="." instance=ExtResource("3_26jtg")]
-position = Vector2(56, 86)
-scale = Vector2(1.5, 1.5)
-
-[node name="UIHeat" parent="." instance=ExtResource("3_77xf1")]
-position = Vector2(32, 86)
-scale = Vector2(1.5, 1.5)
-
-[node name="UISay" parent="." instance=ExtResource("5_mretj")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 358.0
-offset_top = 7.0
-offset_right = 1018.0
-offset_bottom = 291.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="UIAmmo" parent="MarginContainer/Rows/Row2" instance=ExtResource("3_1fxb8")]
+layout_mode = 2

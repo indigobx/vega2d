@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk0xtmrmsyw8c"]
+
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_oms8u"]
+[ext_resource type="Script" path="res://scripts/ui_manager.gd" id="2_inquc"]
+[ext_resource type="PackedScene" uid="uid://dts2rie1nvbam" path="res://scenes/ui/main_menu.tscn" id="3_rjt0a"]
+[ext_resource type="PackedScene" uid="uid://dte87rpq16e83" path="res://scenes/ui/ui.tscn" id="4_0k1vi"]
+[ext_resource type="Script" path="res://scripts/player_manager.gd" id="4_ng4yn"]
+
+[node name="Game" type="Node"]
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("1_oms8u")
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_inquc")
+
+[node name="MainMenu" parent="UIManager" instance=ExtResource("3_rjt0a")]
+z_index = 2048
+z_as_relative = false
+layout_mode = 1
+
+[node name="UI" parent="UIManager" instance=ExtResource("4_0k1vi")]
+visible = false
+layout_mode = 1
+
+[node name="PlayerManager" type="Node" parent="."]
+script = ExtResource("4_ng4yn")

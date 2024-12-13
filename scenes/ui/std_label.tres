@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dfq26rgqcmd3y"]
-
-[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_s1upy"]
-
-[resource]
-font = ExtResource("1_s1upy")
-font_size = 21
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
