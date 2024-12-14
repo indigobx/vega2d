@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://dnb646qk2kdwa"]
+[gd_scene load_steps=17 format=4 uid="uid://dnb646qk2kdwa"]
 
 [ext_resource type="Texture2D" uid="uid://hi10ee50shpr" path="res://textures/vr/atlas_01.png" id="1_2ndhv"]
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
@@ -67,6 +67,9 @@ shader_parameter/rainbow_intensity = 0.15
 shader_parameter/time_scale = 5.01
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_e7hll")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfrru"]
+size = Vector2(60, 200)
+
 [node name="VRLevel" type="Node2D"]
 script = ExtResource("1_ia8aj")
 
@@ -88,11 +91,13 @@ tile_set = SubResource("TileSet_01lsh")
 position = Vector2(164, -49)
 gizmo_extents = 64.0
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="Lights" type="CanvasGroup" parent="."]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
 energy = 0.15
 blend_mode = 1
 
-[node name="Lamp01" type="PointLight2D" parent="."]
+[node name="Lamp01" type="PointLight2D" parent="Lights"]
 position = Vector2(-623, -103)
 energy = 0.5
 shadow_color = Color(0, 0, 0, 0.576471)
@@ -101,15 +106,16 @@ shadow_filter_smooth = 4.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp01"]
+[node name="Label" type="Label" parent="Lights/Lamp01"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "No shadow"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lamp02" type="PointLight2D" parent="."]
+[node name="Lamp02" type="PointLight2D" parent="Lights"]
 position = Vector2(-323, -103)
 energy = 0.5
 shadow_enabled = true
@@ -118,15 +124,16 @@ shadow_filter_smooth = 4.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp02"]
+[node name="Label" type="Label" parent="Lights/Lamp02"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "Fast, alpha 160"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lamp03" type="PointLight2D" parent="."]
+[node name="Lamp03" type="PointLight2D" parent="Lights"]
 position = Vector2(-55, -103)
 energy = 0.5
 shadow_enabled = true
@@ -135,15 +142,16 @@ shadow_filter_smooth = 4.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp03"]
+[node name="Label" type="Label" parent="Lights/Lamp03"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "Fast, alpha 255"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lamp04" type="PointLight2D" parent="."]
+[node name="Lamp04" type="PointLight2D" parent="Lights"]
 position = Vector2(202, -103)
 energy = 0.5
 shadow_enabled = true
@@ -153,15 +161,16 @@ shadow_filter_smooth = 2.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp04"]
+[node name="Label" type="Label" parent="Lights/Lamp04"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "Average 2, alpha 160"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lamp05" type="PointLight2D" parent="."]
+[node name="Lamp05" type="PointLight2D" parent="Lights"]
 position = Vector2(469, -103)
 energy = 0.5
 shadow_enabled = true
@@ -171,15 +180,16 @@ shadow_filter_smooth = 4.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp05"]
+[node name="Label" type="Label" parent="Lights/Lamp05"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "Average 4, alpha 160"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="Lamp06" type="PointLight2D" parent="."]
+[node name="Lamp06" type="PointLight2D" parent="Lights"]
 position = Vector2(738, -103)
 energy = 0.5
 shadow_enabled = true
@@ -189,15 +199,16 @@ shadow_filter_smooth = 4.0
 texture = ExtResource("4_5ihkk")
 offset = Vector2(0, 80)
 
-[node name="Label" type="Label" parent="Lamp06"]
+[node name="Label" type="Label" parent="Lights/Lamp06"]
 offset_left = -83.0
 offset_top = -51.0
 offset_right = -16.0
 offset_bottom = -28.0
 text = "Average 4, alpha 255"
 label_settings = ExtResource("5_80mo8")
+metadata/_edit_use_anchors_ = true
 
-[node name="PointLight2D2" type="PointLight2D" parent="."]
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
 position = Vector2(953, 12)
 scale = Vector2(1, 3)
 color = Color(1, 0.23, 0.23, 1)
@@ -210,7 +221,7 @@ script = ExtResource("5_djf1f")
 kind = "sine"
 min_energy = 0.7
 
-[node name="PointLight2D3" type="PointLight2D" parent="."]
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
 position = Vector2(-955, 12)
 scale = Vector2(1, 3)
 color = Color(1, 0.23, 0.23, 1)
@@ -225,3 +236,24 @@ blink_on_time = 1.3
 blink_off_time = 1.7
 max_energy = 1.1
 min_energy = 0.8
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+position = Vector2(930, 0)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource("RectangleShape2D_rfrru")
+
+[node name="Area2D2" type="Area2D" parent="Node2D"]
+position = Vector2(-933, 0)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D2"]
+shape = SubResource("RectangleShape2D_rfrru")
+
+[connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Node2D/Area2D2" to="." method="_on_area_2d_2_body_entered"]

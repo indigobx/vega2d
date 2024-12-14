@@ -1,17 +1,30 @@
 extends Control
 
-@export var display_time: int = 5
-@export var steps: int = 50
-@export var auto_hide: bool = false
-@export var hide_on_action: String = "Use"
-@export var who: String = "Name"
-@export var portrait: String = "default"
-@export var what: String = "Some text\nSome text"
+@export var dialog_properties: DialogProperties
 var speaking = false
-
+var display_time: int
+var steps: int
+var auto_hide: bool
+var hide_on_action: String
+var who: String
+var portrait: String
+var what: String
 
 func _ready() -> void:
-  pass
+  if dialog_properties:
+    apply_properties(dialog_properties)
+  else:
+    print("DialogProperties not assigned.")
+
+func apply_properties(props: DialogProperties) -> void:
+  # Применяем свойства из ресурса
+  display_time = props.display_time
+  steps = props.steps
+  auto_hide = props.auto_hide
+  hide_on_action = props.hide_on_action
+  who = props.who
+  portrait = props.portrait
+  what = props.what
 
 func _process(delta: float) -> void:
   pass
@@ -23,7 +36,7 @@ func say():
   visible = true
   var step_value = 1 / float(steps)
   print(steps, "  ", step_value)
-  for i in range(0, steps+1):
+  for i in range(0, steps + 1):
     $Text.visible_ratio = i * step_value
     $Timer.start(step_value)
     await $Timer.timeout

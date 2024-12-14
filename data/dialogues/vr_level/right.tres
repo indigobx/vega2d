@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://bsv8rmlh66h8m"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_e2b8f"]
+
+[resource]
+script = ExtResource("1_e2b8f")
+display_time = 2
+steps = 15
+auto_hide = false
+hide_on_action = "Use"
+who = "Vega"
+portrait = "vega-angry"
+what = "Damn, I can't get there. Have to find another way out."

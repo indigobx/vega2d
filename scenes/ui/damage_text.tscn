@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://i2cytwa4ogox"]
 
-[ext_resource type="Script" path="res://damage_text.gd" id="1_4sdtw"]
-[ext_resource type="FontFile" uid="uid://dv7i63l70b2as" path="res://assets/fonts/mini_pixel-7.ttf" id="1_j7x1d"]
+[ext_resource type="Script" path="res://scripts/ui/damage_text.gd" id="1_4sdtw"]
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="1_j7x1d"]
 
 [sub_resource type="Theme" id="Theme_khclh"]
 default_font = ExtResource("1_j7x1d")

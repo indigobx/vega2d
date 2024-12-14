@@ -50,33 +50,43 @@ func _physics_process(delta: float) -> void:
   
   if Input.is_action_pressed(action_forward):
     velocity.x = lerpf(velocity.x, base_speed * view_direction, 0.3)
-    $Character/Body.play("walk-forward-3-unarmed")
+    #$Character/Body.play("walk-forward-3-unarmed")
   
   if Input.is_action_pressed(action_back):
     velocity.x = lerpf(velocity.x, base_speed_back * view_direction, 0.3)
-    $Character/Body.play("walk-back-3-unarmed")
+    #$Character/Body.play("walk-back-3-unarmed")
   
-  if Input.is_action_just_pressed("Jump"):
+  if is_on_floor() and Input.is_action_just_pressed("Jump"):
     velocity.y = jump_velocity
   
   if not is_on_floor():
     velocity.y += gravity
+    #$Character/Body.play("jump-3-unarmed")
   
   if not Input.is_anything_pressed():
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
-  if abs(velocity) <= Vector2(0.1, 0.1):
-    $Character/Body.play("wait1-3-unarmed")
+  $Label.text = "%.2d %.2d" % [velocity.x, velocity.y]
   
   # Fake Shadow
   if $ShadowRay.is_colliding():
     var shadow_distance = ($ShadowRay.get_collision_point() - global_position).y
     var shadow_factor = clamp((200 - (shadow_distance - 52)) / 200, 0.0, 1.0)
-    $Label.text = "%s" % shadow_factor
     $ShadowRay.force_raycast_update()
     $ShadowSprite.global_position = $ShadowRay.get_collision_point()
     $ShadowSprite.scale = Vector2(shadow_factor, shadow_factor)
     $ShadowSprite.modulate = Color(0, 0, 0, clamp(shadow_factor-0.5, 0.0, 1.0))
+
+  # AnimationManager
+  if is_on_floor() and velocity.x * view_direction > 0.1 * view_direction:
+    $Character/Body.play("walk-forward-3-unarmed")
+  if is_on_floor() and velocity.x * view_direction < 0.1 * -view_direction:
+    $Character/Body.play("walk-back-3-unarmed")
+  if is_on_floor() and abs(velocity) <= Vector2(0.1, 0.1):
+    $Character/Body.play("wait1-3-unarmed")
+  if not is_on_floor() and abs(velocity.y) > 0.1:
+    $Character/Body.play("jump-3-unarmed")
+
   move_and_slide()
 
 

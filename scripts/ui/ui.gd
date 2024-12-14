@@ -11,5 +11,7 @@ func _process(delta: float) -> void:
   pass
 
 
-func say(what, params:Dictionary) -> void:
-  $MarginContainer/Rows/Row1/UISay.say(what)
+func say(props:DialogProperties) -> void:
+  var ui_say = $MarginContainer/Rows/Row1/UISay
+  ui_say.apply_properties(props)
+  ui_say.say()

@@ -36,7 +36,6 @@ layout_mode = 2
 [node name="UISay" parent="MarginContainer/Rows/Row1" instance=ExtResource("4_1pwlx")]
 visible = false
 layout_mode = 2
-script = null
 
 [node name="Row2" type="HBoxContainer" parent="MarginContainer/Rows"]
 layout_mode = 2

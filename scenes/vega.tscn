@@ -1919,8 +1919,10 @@ script = ExtResource("1_8ustq")
 
 [node name="Body" type="AnimatedSprite2D" parent="Character"]
 sprite_frames = SubResource("SpriteFrames_hf73k")
-animation = &"walk-forward-3-unarmed"
+animation = &"jump-3-unarmed"
 autoplay = "walk-forward-0-unarmed"
+frame = 9
+frame_progress = 0.466825
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(9, 7)

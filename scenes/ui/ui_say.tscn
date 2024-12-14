@@ -64,6 +64,7 @@ autoplay = "default"
 [node name="Portrait" type="AnimatedSprite2D" parent="."]
 position = Vector2(84, 84)
 sprite_frames = SubResource("SpriteFrames_hi08t")
+animation = &"vega-angry"
 autoplay = "default"
 
 [node name="Name" type="Label" parent="."]
