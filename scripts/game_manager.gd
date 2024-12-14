@@ -3,6 +3,7 @@ extends Node
 var level: Node = null
 var player: Node = null
 var ui: Node = null
+var camera: Node = null
 var cursor: Vector2
 
 # Called when the node enters the scene tree for the first time.

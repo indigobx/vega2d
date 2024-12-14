@@ -19,4 +19,5 @@ func spawn(Vector2=Vector2.ZERO) -> void:
   add_child(vega)
   vega.global_position = Vector2
   var camera = load("res://scenes/player_camera.tscn").instantiate()
+  GameManager.camera = camera.get_node("Camera")
   vega.add_child(camera)

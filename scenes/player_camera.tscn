@@ -7,11 +7,12 @@
 [node name="Camera" type="Camera2D" parent="."]
 limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 50.0
+position_smoothing_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
 
 [node name="PostShader" type="ColorRect" parent="Camera/CanvasLayer"]
+visible = false
 z_index = 2048
 material = ExtResource("1_ph87h")
 anchors_preset = 15
