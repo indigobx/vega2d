@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://c84b2k0g8hdmr"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_sme45"]
+
+[resource]
+script = ExtResource("1_sme45")
+display_time = 2
+steps = 2
+auto_hide = false
+hide_on_action = "Use"
+who = "System Voice"
+portrait = "default"
+what = "Access Denied."

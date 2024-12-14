@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dte87rpq16e83"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
+[ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://scenes/ui/ui_health_bar.tscn" id="1_k2i4x"]
+[ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://scenes/ui/ui_heat.tscn" id="2_ryfst"]
+[ext_resource type="PackedScene" uid="uid://chli8dh7i2dh8" path="res://scenes/ui/ui_ammo.tscn" id="3_1fxb8"]
+[ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://scenes/ui/ui_say.tscn" id="4_1pwlx"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gc44a")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Row1" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="UIHealthBar" parent="MarginContainer/Rows/Row1" instance=ExtResource("1_k2i4x")]
+layout_mode = 2
+
+[node name="UISay" parent="MarginContainer/Rows/Row1" instance=ExtResource("4_1pwlx")]
+visible = false
+layout_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="UIHeat" parent="MarginContainer/Rows/Row2" instance=ExtResource("2_ryfst")]
+layout_mode = 2
+
+[node name="UIAmmo" parent="MarginContainer/Rows/Row2" instance=ExtResource("3_1fxb8")]
+layout_mode = 2

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6xsf37xl36qj"]
+
+[ext_resource type="Material" uid="uid://mbixubfn3kte" path="res://materials/dither2d.tres" id="1_ph87h"]
+
+[node name="PlayerCamera" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+
+[node name="PostShader" type="ColorRect" parent="Camera/CanvasLayer"]
+visible = false
+z_index = 2048
+material = ExtResource("1_ph87h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

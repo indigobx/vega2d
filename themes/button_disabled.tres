@@ -1,0 +1,9 @@
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://dasa8503jexn0"]
+
+[resource]
+bg_color = Color(0.22, 0.22, 0.22, 1)
+border_width_bottom = 4
+border_color = Color(0.15, 0.129, 0.1367, 1)
+corner_detail = 2
+shadow_size = 2
+anti_aliasing = false

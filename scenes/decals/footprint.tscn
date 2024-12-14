@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7v2uplchwkoe"]
+
+[ext_resource type="Texture2D" uid="uid://c2a4fnbvlwrjb" path="res://sprites/fx/footprint.png" id="1_hcig7"]
+[ext_resource type="Texture2D" uid="uid://bccedww4ku78c" path="res://sprites/fx/footprint-test.png" id="2_oosfa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ti7s8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hcig7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_oosfa")
+}],
+"loop": true,
+"name": &"test",
+"speed": 5.0
+}]
+
+[node name="Footprint" type="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0.195)
+sprite_frames = SubResource("SpriteFrames_ti7s8")
+autoplay = "default"
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(25, -25, 0, 0, 0, 50)
+width = 1.0
+default_color = Color(0.659707, 0.307212, 0.989805, 1)
