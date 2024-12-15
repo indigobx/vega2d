@@ -37,6 +37,7 @@ func toggle_ui(ui:String) -> void:
     "main_menu", "mainmenu":
       hide_ui()
       show_main_menu()
+  GameManager.ui = get_ui()
 
 func show_main_menu() -> void:
   $MainMenu.visible = true

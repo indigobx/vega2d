@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 var footprint_scene = preload("res://scenes/decals/footprint.tscn")
-var speed : float = 240.0
+var speed_mod: float = 1.0
+var speed_mod_max: float = 20.0
 var base_speed: float = 240.0
 var base_speed_back: float = -60.0
 var jump_velocity : float = -400.0
@@ -49,11 +50,11 @@ func _physics_process(delta: float) -> void:
     $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, 0.2)  # Replace weight with weapon weight here!
   
   if Input.is_action_pressed(action_forward):
-    velocity.x = lerpf(velocity.x, base_speed * view_direction, 0.3)
+    velocity.x = lerpf(velocity.x, (speed_mod + base_speed) * view_direction, 0.3)
     #$Character/Body.play("walk-forward-3-unarmed")
   
   if Input.is_action_pressed(action_back):
-    velocity.x = lerpf(velocity.x, base_speed_back * view_direction, 0.3)
+    velocity.x = lerpf(velocity.x, (speed_mod + base_speed_back) * view_direction, 0.3)
     #$Character/Body.play("walk-back-3-unarmed")
   
   if is_on_floor() and Input.is_action_just_pressed("Jump"):
@@ -66,7 +67,8 @@ func _physics_process(delta: float) -> void:
   if not Input.is_anything_pressed():
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
-  $Label.text = "%.2d %.2d" % [velocity.x, velocity.y]
+  $Label.text = "%.2d : %.2d" % [velocity.x, velocity.y]
+  
   
   # Fake Shadow
   if $ShadowRay.is_colliding():
@@ -112,6 +114,9 @@ func unflip() -> void:
 
 
 func _on_body_frame_changed() -> void:
+  var max_frames = $Character/Body.sprite_frames.get_frame_count($Character/Body.animation)
+  speed_mod = speed_mod_max * sin((float($Character/Body.frame) / float(max_frames)) * 2*PI)
+  # footprints
   if $Character/Body.frame in [3, 7] \
   and abs(velocity.x) > 1.0 \
   and is_on_floor():

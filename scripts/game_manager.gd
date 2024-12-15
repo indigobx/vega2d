@@ -2,6 +2,7 @@ extends Node
 
 var level: Node = null
 var player: Node = null
+var ui_manager: Node = null
 var ui: Node = null
 var camera: Node = null
 var cursor: Vector2
@@ -10,8 +11,9 @@ var cursor: Vector2
 func _ready() -> void:
   level = get_tree().root.get_node("Game/LevelManager")
   player = get_tree().root.get_node("Game/PlayerManager")
-  ui = get_tree().root.get_node("Game/UIManager")
-  ui.toggle_ui("main_menu")
+  ui_manager = get_tree().root.get_node("Game/UIManager")
+  ui_manager.toggle_ui("main_menu")
+  ui = get_ui()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,7 +21,7 @@ func _process(delta: float) -> void:
 
 
 func new_game() -> void:
-  ui.hide_main_menu()
+  ui_manager.hide_main_menu()
   level.load_level("vr_level")
   var spawn_point = level.get_child(0).get_node_or_null("SpawnPoint")
   if spawn_point:
@@ -28,8 +30,11 @@ func new_game() -> void:
     spawn_point = Vector2.ZERO
   player.load_instance()
   player.spawn(spawn_point)
-  ui.toggle_ui("ui")
-
+  ui_manager.toggle_ui("ui")
+  
+  ui.set_weapon(1, "melee-claw")
+  ui.set_weapon(2, "mantis-arms")
+  ui.set_weapon(3, "smart-pistol")
 
 
 func reparent_node(node: Node, new_parent: Variant) -> void:
@@ -60,3 +65,11 @@ func reparent_node(node: Node, new_parent: Variant) -> void:
   # Восстановить глобальную позицию (если узел поддерживает позиции)
   if node is Node2D:
     node.global_position = global_pos
+
+
+func get_ui():
+  var ui_group = get_tree().get_nodes_in_group("ui")
+  if ui_group:
+    return ui_group[0]
+  else:
+    return get_tree().root.find_child("UI", true, false)
