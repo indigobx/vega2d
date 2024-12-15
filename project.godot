@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/game_manager.gd"
 GlobalFx="*res://scenes/global_fx.tscn"
+GM="*res://scripts/game_manager.gd"
+WDB="*res://data/WeaponsData.tscn"
 
 [input]
 

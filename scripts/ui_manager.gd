@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func _on_newgame_pressed() -> void:
-  GameManager.new_game()
+  GM.new_game()
 
 
 func _on_quit_pressed() -> void:
@@ -37,7 +37,7 @@ func toggle_ui(ui:String) -> void:
     "main_menu", "mainmenu":
       hide_ui()
       show_main_menu()
-  GameManager.ui = get_ui()
+  GM.ui = get_ui()
 
 func show_main_menu() -> void:
   $MainMenu.visible = true
@@ -50,7 +50,7 @@ func show_ui() -> void:
   print(get_tree().get_nodes_in_group("ui"))
   var ui = get_ui()
   ui.visible = true
-  GameManager.reparent_node(ui, "Game/PlayerManager/Vega/PlayerCamera/Camera/CanvasLayer")
+  GM.reparent_node(ui, "Game/PlayerManager/Vega/PlayerCamera/Camera/CanvasLayer")
 
 func hide_ui() -> void:
   #var ui = get_tree().root.find_child("UI", true, false)

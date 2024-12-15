@@ -5,6 +5,7 @@ var player: Node = null
 var ui_manager: Node = null
 var ui: Node = null
 var camera: Node = null
+var weapons: Node = null
 var cursor: Vector2
 
 # Called when the node enters the scene tree for the first time.

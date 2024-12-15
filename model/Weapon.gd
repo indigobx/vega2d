@@ -9,6 +9,8 @@ class_name Weapon
 @export var casing_scene: PackedScene
 @export var empty_clip_scene: PackedScene
 @export var logic_script: Script
+@export var icon_small: Sprite2D
+@export var icon_big: Sprite2D
 
 @export_category("Animation")
 @export var sprite_frames: SpriteFrames
@@ -62,3 +64,6 @@ class_name Weapon
 @export var failure_threshold: float = 100.0
 @export_flags("Misfire", "Damage User", "Explode", "Force Reload", "Cooking Off") var failure_flags = 0
 @export_range(0, 100, 1, "suffix:% per tick") var failure_chance: int = 0
+
+@export_category("Mods")
+@export var mods: PackedStringArray

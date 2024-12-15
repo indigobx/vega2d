@@ -9,13 +9,21 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   if Input.is_action_just_pressed("Weapon1"):
-      select_weapon(1)
+    select_slot(1)
   if Input.is_action_just_pressed("Weapon2"):
-      select_weapon(2)
+    select_slot(2)
   if Input.is_action_just_pressed("Weapon3"):
-      select_weapon(3)
+    select_slot(3)
   if Input.is_action_just_pressed("Weapon4"):
-      select_weapon(4)
+    select_slot(4)
+  if Input.is_action_just_pressed("Action1"):
+    print(GM.player.slots)
+  if Input.is_action_just_pressed("Action2"):
+    GM.player.put_to_slot(WDB.get_weapon("SmartPistol"), 1)
+  if Input.is_action_just_pressed("Action3"):
+    GM.player.clear_slots()
+  if Input.is_action_just_pressed("Action4"):
+    say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
 
 func say(props:DialogProperties) -> void:
   var ui_say = $MarginContainer/Rows/Row1/UISay
@@ -28,7 +36,7 @@ func set_weapon(slot:int, weapon:String) -> void:
   if icon_node:
     icon_node.get_node("IconSprite").play(weapon)
 
-func select_weapon(slot:int) -> void:
+func select_slot(slot:int) -> void:
   for i in range(1, 5):
     var icon_node = get_node_or_null("MarginContainer/Rows/Row2/Weapon%s" % i)
     if icon_node:

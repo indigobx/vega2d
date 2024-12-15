@@ -24,7 +24,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   cursor = get_local_mouse_position()
-  GameManager.camera.offset = lerp(GameManager.camera.offset, cursor/3, 0.05)
+  GM.camera.offset = lerp(GM.camera.offset, cursor/3, 0.05)
 
 func _physics_process(delta: float) -> void:
   
