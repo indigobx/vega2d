@@ -1,15 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=11 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
 [ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
+[ext_resource type="Script" path="res://scripts/projectiles/smart_shell_v2.gd" id="3_cx7r6"]
 [ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
+[ext_resource type="Texture2D" uid="uid://bdk4l871uidg3" path="res://sprites/ui/weapon-ar-8.png" id="6_rq1mq"]
+[ext_resource type="Texture2D" uid="uid://t0u5fn17b0f2" path="res://sprites/weapons/ar-8/still.png" id="7_btsq8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyay5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_hb8t3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_xapfm"]
+script/source = "func fire() -> String:
+  print(\"PEW!\")
+  return \"PEW PEW\"
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebjir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_btsq8")
 }],
 "loop": true,
 "name": &"default",
@@ -25,6 +45,7 @@ script = ExtResource("2_pptmm")
 display_name = "光星12型燕"
 short_name = "Kosei-12"
 weight = 1.4
+logic_script = ExtResource("3_cx7r6")
 icon_small = ExtResource("3_6xtlh")
 sprite_frames = SubResource("SpriteFrames_qyay5")
 damage = 10.0
@@ -33,3 +54,13 @@ fire_modes = 1
 recoil_directions = 3
 angular_recoil = 5.0
 linear_recoil = Vector2(3, 0)
+
+[node name="AR-8" type="Node" parent="."]
+script = ExtResource("2_pptmm")
+display_name = "AR-8"
+short_name = "AR-8"
+weight = 3.0
+logic_script = SubResource("GDScript_xapfm")
+icon_small = ExtResource("6_rq1mq")
+sprite_frames = SubResource("SpriteFrames_ebjir")
+sprite_offest = Vector2i(0, 4)

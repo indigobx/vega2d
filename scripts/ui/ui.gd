@@ -12,13 +12,18 @@ var selected_slot: int:
     if GM.player.selected_weapon != value:  # Избегаем лишней работы, если слот не меняется
       GM.player.selected_weapon = value
       _on_slot_select(value)
+var healthbar: Node
+var heatbar: Node
+var ammobar: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   for i in range(0, 5):
     weapon_icons[i] = get_node_or_null("MarginContainer/Rows/Row2/Weapon%s" % i)
   selected_slot = 0
-  #weapon_icons[3].get_node("Sprite").texture = GM.player.slots[3].icon_small
+  healthbar = $MarginContainer/Rows/Row1/UIHealthBar
+  heatbar = $MarginContainer/Rows/Row2/UIHeat
+  ammobar = $MarginContainer/Rows/Row2/UIAmmo
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

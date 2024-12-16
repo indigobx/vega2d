@@ -11,14 +11,24 @@ var direction: Vector2
 var direction_angle_threshold_deg: float = 15.0
 var cursor: Vector2
 var arms_angle: float
-var view_direction: int = 1
+var _view_direction: int = 1
+var view_direction: int:
+  get:
+    return _view_direction
+  set(value):
+    if value != _view_direction:
+      _view_direction = value
+      _on_view_direction_changed(value)
 var action_forward: String = "Left"
 var action_back: String = "Right"
+var body_animation: String = "unarmed"
+var arms_pivot_x: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   set_process_input(true)
+  _on_view_direction_changed(1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,8 +37,10 @@ func _process(delta: float) -> void:
   GM.camera.offset = lerp(GM.camera.offset, cursor/3, 0.05)
   if GM.player.selected_weapon != 0:
     $ArmsPivot/Arms.visible = true
+    body_animation = "armed"
   else:
     $ArmsPivot/Arms.visible = false
+    body_animation = "unarmed"
 
 func _physics_process(delta: float) -> void:
   
@@ -41,11 +53,7 @@ func _physics_process(delta: float) -> void:
     view_direction = -1
   elif cursor_angle < 90 - direction_angle_threshold_deg:
     view_direction = 1
-  
-  if view_direction == -1:
-    flip()
-  else:
-    unflip()
+
   
   var angle_limit = deg_to_rad(45)
   arms_angle = abs(direction.rotated(deg_to_rad(90)).angle()) - deg_to_rad(90)
@@ -73,6 +81,9 @@ func _physics_process(delta: float) -> void:
   
   $Label.text = "%.2d : %.2d" % [velocity.x, velocity.y]
   
+  if Input.is_action_just_pressed("Fire"):
+    print(GM.player.slots[4].logic_script)
+    GM.player.slots[4].logic_script.fire()
   
   # Fake Shadow
   if $ShadowRay.is_colliding():
@@ -85,36 +96,46 @@ func _physics_process(delta: float) -> void:
 
   # AnimationManager
   if is_on_floor() and velocity.x * view_direction > 0.1 * view_direction:
-    $Character/Body.play("walk-forward-3-unarmed")
+    $Character/Body.play("walk-forward-3-%s" % body_animation)
   if is_on_floor() and velocity.x * view_direction < 0.1 * -view_direction:
-    $Character/Body.play("walk-back-3-unarmed")
+    $Character/Body.play("walk-back-3-%s" % body_animation)
   if is_on_floor() and abs(velocity) <= Vector2(0.1, 0.1):
-    $Character/Body.play("wait1-3-unarmed")
+    $Character/Body.play("wait1-3-%s" % body_animation)
   if not is_on_floor() and abs(velocity.y) > 0.1:
-    $Character/Body.play("jump-3-unarmed")
+    $Character/Body.play("jump-3-%s" % body_animation)
 
   move_and_slide()
 
 
-func flip() -> void:
-  $Character/Body.flip_h = true
-  $Collision.scale.x = -1
-  $Collision.position.x = -9
-  $ArmsPivot.scale.x = -1
-  $ArmsPivot.position.x = -4
-  $ShadowSprite.position.x = -4
-  action_back = "Right"
-  action_forward = "Left"
 
-func unflip() -> void:
-  $Character/Body.flip_h = false
-  $Collision.scale.x = 1
-  $Collision.position.x = 9
-  $ArmsPivot.scale.x = 1
-  $ArmsPivot.position.x = 4
-  $ShadowSprite.position.x = 4
-  action_back = "Left"
-  action_forward = "Right"
+func sine_move(frame: int, total_frames: int, max_vector: Vector2) -> Vector2:
+  frame = frame % total_frames
+  var angle = float(frame) / float(total_frames) * PI
+  var scale = sin(angle)
+  return Vector2(scale * max_vector.x, scale * max_vector.y)
+
+
+func _on_view_direction_changed(vd) -> void:
+  if vd == -1:
+    $Character/Body.flip_h = true
+    $Collision.scale.x = -1
+    $Collision.position.x = -9
+    $ArmsPivot.scale.x = -1
+    #$ArmsPivot.position.x = -4
+    $Line2D3.position.x = -4
+    $ShadowSprite.position.x = -4
+    action_back = "Right"
+    action_forward = "Left"
+  else:
+    $Character/Body.flip_h = false
+    $Collision.scale.x = 1
+    $Collision.position.x = 9
+    $ArmsPivot.scale.x = 1
+    #$ArmsPivot.position.x = 4
+    $Line2D3.position.x = 4
+    $ShadowSprite.position.x = 4
+    action_back = "Left"
+    action_forward = "Right"
 
 
 func _on_body_frame_changed() -> void:
@@ -127,3 +148,16 @@ func _on_body_frame_changed() -> void:
     var footprint = footprint_scene.instantiate()
     footprint.global_position = global_position + Vector2(13*view_direction, 52)
     GlobalFx.add_decal(footprint)
+  
+  # arms pivot movement
+  if $Character/Body.animation.ends_with("-armed") and \
+    $Character/Body.animation.begins_with("walk"):
+    $ArmsPivot.position = Vector2(4*view_direction, -14) +\
+      sine_move($Character/Body.frame, 10, Vector2(4*view_direction, 4))
+    $ArmsPivot.rotation_degrees = lerpf(
+      $ArmsPivot.rotation_degrees,
+      $ArmsPivot.rotation_degrees + randf_range(0.0, 15.0),
+      0.2
+    )
+  else:
+    $ArmsPivot.position = Vector2(4*view_direction, -14)

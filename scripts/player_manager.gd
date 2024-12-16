@@ -16,8 +16,6 @@ var slots: Dictionary = {
   8: null
 }
 var _selected_weapon: int = 0  # Приватная переменная для хранения текущего выбранного оружия
-
-# Экспортируемое свойство с геттером и сеттером
 var selected_weapon: int:
   get:
     return _selected_weapon
@@ -25,6 +23,9 @@ var selected_weapon: int:
     if _selected_weapon != value:  # Проверяем, изменилось ли значение
       _selected_weapon = value
       _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
+var hp: int
+var max_hp: int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,9 +49,14 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   far_arm = vega.get_node("ArmsPivot/Arms/Far")
   # should move this to sep function
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
+  put_to_slot(WDB.get_weapon("AR-8"), 4)
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
+  hp = 100
+  max_hp = hp
+  GM.ui.healthbar.max_hp = max_hp
+  GM.ui.healthbar.hp = hp
 
 func put_to_slot(item, slot):
   slots[slot] = item
@@ -61,10 +67,10 @@ func clear_slots() -> void:
 
 # Функция, вызываемая при изменении selected_weapon
 func _on_selected_weapon_changed(value: int) -> void:
-  if value == 3:
-    weapon_sprite.sprite_frames = slots[3].sprite_frames
-    near_arm.play("near_%s" % slots[3].size)
-    far_arm.play("far_%s" % slots[3].size)
+  if is_instance_valid(slots[value]):
+    weapon_sprite.sprite_frames = slots[value].sprite_frames
+    near_arm.play("near_%s" % slots[value].size)
+    far_arm.play("far_%s" % slots[value].size)
   else:
     weapon_sprite.sprite_frames = SpriteFrames.new()
     near_arm.play("near_unarmed")
