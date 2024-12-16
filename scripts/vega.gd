@@ -25,6 +25,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
   cursor = get_local_mouse_position()
   GM.camera.offset = lerp(GM.camera.offset, cursor/3, 0.05)
+  if GM.player.selected_weapon != 0:
+    $ArmsPivot/Arms.visible = true
+  else:
+    $ArmsPivot/Arms.visible = false
 
 func _physics_process(delta: float) -> void:
   

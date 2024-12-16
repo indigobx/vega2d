@@ -4,13 +4,17 @@ class_name Weapon
 @export_category("General")
 @export var display_name: String = "Prototype Weapon"
 @export var short_name: String = "PW-001"
+## It's arms animation suffix.
+## "near_pistol" or "far_rifle" etc,
+## so here should be only "pistol" or "rifle" or "unarmed" or "melee"
+@export var size: String = "pistol"
 @export var weight: float = 1.0
 @export var projectile_scene: PackedScene
 @export var casing_scene: PackedScene
 @export var empty_clip_scene: PackedScene
 @export var logic_script: Script
-@export var icon_small: Sprite2D
-@export var icon_big: Sprite2D
+@export var icon_small: Texture2D
+@export var icon_big: Texture2D
 
 @export_category("Animation")
 @export var sprite_frames: SpriteFrames

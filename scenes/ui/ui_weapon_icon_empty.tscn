@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://sn7nyl5e7l2f"]
+
+[ext_resource type="Texture2D" uid="uid://g70h5b4m8qhs" path="res://sprites/ui/empty.png" id="1_5lf3b"]
+[ext_resource type="Script" path="res://scripts/ui/ui_weapon_icon.gd" id="1_pje54"]
+[ext_resource type="LabelSettings" uid="uid://b43nww3s07fvu" path="res://themes/weapon_icon_label_settings.tres" id="3_jp5sw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxui1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5lf3b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5lf3b")
+}],
+"loop": true,
+"name": &"selected",
+"speed": 5.0
+}]
+
+[node name="WeaponIcon" type="Control"]
+custom_minimum_size = Vector2(24, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 24.0
+offset_bottom = 64.0
+script = ExtResource("1_pje54")
+
+[node name="IconFrame" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gxui1")
+autoplay = "default"
+centered = false
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -3.0
+offset_top = 26.0
+offset_right = 27.0
+offset_bottom = 56.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "ABCDEF"
+label_settings = ExtResource("3_jp5sw")
+horizontal_alignment = 1
+vertical_alignment = 1

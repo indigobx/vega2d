@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=6 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
+[ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
 [ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyay5"]
@@ -24,6 +25,7 @@ script = ExtResource("2_pptmm")
 display_name = "光星12型燕"
 short_name = "Kosei-12"
 weight = 1.4
+icon_small = ExtResource("3_6xtlh")
 sprite_frames = SubResource("SpriteFrames_qyay5")
 damage = 10.0
 damage_random_delta = 2.0

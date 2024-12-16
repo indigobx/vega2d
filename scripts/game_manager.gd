@@ -32,10 +32,7 @@ func new_game() -> void:
   player.load_instance()
   player.spawn(spawn_point)
   ui_manager.toggle_ui("ui")
-  
-  ui.set_weapon(1, "melee-claw")
-  ui.set_weapon(2, "mantis-arms")
-  ui.set_weapon(3, "smart-pistol")
+
 
 
 func reparent_node(node: Node, new_parent: Variant) -> void:

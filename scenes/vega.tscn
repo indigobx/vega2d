@@ -1,4 +1,4 @@
-[gd_scene load_steps=282 format=3 uid="uid://hbslthwa82an"]
+[gd_scene load_steps=283 format=3 uid="uid://hbslthwa82an"]
 
 [ext_resource type="Script" path="res://scripts/vega.gd" id="1_8ustq"]
 [ext_resource type="Texture2D" uid="uid://cemuvkop0oly" path="res://sprites/vega/solo/jump/jump_0_unarmed.png" id="2_6aqsf"]
@@ -1901,6 +1901,17 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_o88tb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="Gradient" id="Gradient_e2lny"]
 colors = PackedColorArray(0, 0, 0, 0.713726, 0.35, 0.35, 0.35, 0)
 
@@ -1913,6 +1924,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Vega" type="CharacterBody2D"]
+z_index = 10
 script = ExtResource("1_8ustq")
 
 [node name="Character" type="CanvasGroup" parent="."]
@@ -1954,14 +1966,19 @@ visible = false
 z_index = -2
 position = Vector2(-6, 16)
 sprite_frames = SubResource("SpriteFrames_op8ms")
-animation = &"far_unarmed"
+animation = &"near_pistol"
 autoplay = "near_rifle"
+
+[node name="Weapon" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
+position = Vector2(30, -5)
+sprite_frames = SubResource("SpriteFrames_o88tb")
+autoplay = "default"
 
 [node name="Near" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
 z_index = 1
 position = Vector2(-6, 16)
 sprite_frames = SubResource("SpriteFrames_op8ms")
-animation = &"near_unarmed"
+animation = &"far_pistol"
 autoplay = "near_rifle"
 
 [node name="Line2D2" type="Line2D" parent="ArmsPivot"]

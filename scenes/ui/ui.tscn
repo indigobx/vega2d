@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=8 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
 [ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://scenes/ui/ui_health_bar.tscn" id="1_k2i4x"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chli8dh7i2dh8" path="res://scenes/ui/ui_ammo.tscn" id="3_1fxb8"]
 [ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://scenes/ui/ui_say.tscn" id="4_1pwlx"]
 [ext_resource type="PackedScene" uid="uid://clvfpvgta6ueb" path="res://scenes/ui/ui_weapon_icon.tscn" id="6_kiuos"]
+[ext_resource type="PackedScene" uid="uid://sn7nyl5e7l2f" path="res://scenes/ui/ui_weapon_icon_empty.tscn" id="6_mjjle"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -50,24 +51,24 @@ layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Rows/Row2"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
+
+[node name="Weapon0" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_mjjle")]
+layout_mode = 2
+selected = true
 
 [node name="Weapon1" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_kiuos")]
 layout_mode = 2
 weapon_short_name = "Claws"
-animation_name = "melee-claw"
 
 [node name="Weapon2" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_kiuos")]
 layout_mode = 2
 weapon_short_name = "MA-2"
-animation_name = "mantis-arms"
 
 [node name="Weapon3" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_kiuos")]
 layout_mode = 2
-weapon_short_name = "K-12"
-animation_name = "smart-pistol"
+weapon_short_name = "Kosei-12"
 
 [node name="Weapon4" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_kiuos")]
 layout_mode = 2
-weapon_short_name = "--"
