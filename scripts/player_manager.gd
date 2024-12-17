@@ -29,7 +29,8 @@ var ammo: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  pass
+  GM.ui.ammobar.update()
+  GM.ui.firemode.update()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,6 +52,7 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   put_to_slot(WDB.get_weapon("AR-8"), 4)
   add_ammo("armsco_25", 120)
+  add_ammo("hinomaru_4", 32)
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small

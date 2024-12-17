@@ -7,6 +7,7 @@ var ui: Node = null
 var camera: Node = null
 var weapon: Node = null
 var cursor: Vector2
+var in_safe_area: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=9 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
 [ext_resource type="PackedScene" uid="uid://bvjnybc10bs7i" path="res://scenes/ui/ui_health_bar.tscn" id="1_k2i4x"]
 [ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://scenes/ui/ui_heat.tscn" id="2_ryfst"]
 [ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://scenes/ui/ui_say.tscn" id="4_1pwlx"]
+[ext_resource type="PackedScene" uid="uid://cl15ofbyr8062" path="res://scenes/ui/ui_fire_mode.tscn" id="6_6ed00"]
 [ext_resource type="PackedScene" uid="uid://clvfpvgta6ueb" path="res://scenes/ui/ui_weapon_icon.tscn" id="6_kiuos"]
 [ext_resource type="PackedScene" uid="uid://sn7nyl5e7l2f" path="res://scenes/ui/ui_weapon_icon_empty.tscn" id="6_mjjle"]
 [ext_resource type="PackedScene" uid="uid://c27cxf7arloth" path="res://scenes/ui/ui_ammo_v2.tscn" id="8_n5b8q"]
@@ -33,11 +34,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="UIHealthBar" parent="MarginContainer/Rows/Row1" instance=ExtResource("1_k2i4x")]
+custom_minimum_size = Vector2(384, 24)
 layout_mode = 2
 
 [node name="UISay" parent="MarginContainer/Rows/Row1" instance=ExtResource("4_1pwlx")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Row2" type="HBoxContainer" parent="MarginContainer/Rows"]
 layout_mode = 2
@@ -47,6 +50,9 @@ theme_override_constants/separation = 4
 layout_mode = 2
 
 [node name="UIAmmo" parent="MarginContainer/Rows/Row2" instance=ExtResource("8_n5b8q")]
+layout_mode = 2
+
+[node name="UIFireMode" parent="MarginContainer/Rows/Row2" instance=ExtResource("6_6ed00")]
 layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Rows/Row2"]

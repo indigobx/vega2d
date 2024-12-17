@@ -2,11 +2,13 @@ extends Node2D
 
 @export var follow_vega: bool = false
 var vega: Node = null
+@export var safe_by_default: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   vega = get_tree().root.get_node_or_null("Game/PlayerManager/Vega")
   GM.player.clear_slots()
+  GM.in_safe_area = safe_by_default
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

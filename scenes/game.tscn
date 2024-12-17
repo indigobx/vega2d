@@ -33,3 +33,6 @@ script = ExtResource("4_ng4yn")
 
 [node name="WeaponManager" type="Node" parent="."]
 script = ExtResource("6_irfv0")
+
+[node name="WeaponTimer" type="Timer" parent="WeaponManager"]
+one_shot = true

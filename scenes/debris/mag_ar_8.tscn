@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://50u1l4crjdyu"]
+
+[ext_resource type="Texture2D" uid="uid://bnab3p0rximbs" path="res://sprites/weapons/ar-8/mag.png" id="1_qbr82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx7si"]
+size = Vector2(6.56218, 14.8301)
+
+[node name="AR-8Mag" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qbr82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.450962, -0.218911)
+rotation = -0.523599
+shape = SubResource("RectangleShape2D_vx7si")

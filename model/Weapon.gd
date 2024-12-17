@@ -27,7 +27,7 @@ class_name Weapon
 @export var full_auto_animation: String = ""
 @export var burst_fire_animation: String = ""
 @export var reload_animation: String = "default"
-@export var reload_empty_animation: String = ""
+@export var empty_animation: String = ""
 @export var overheat_animation: String = ""
 @export var recoil_animation: String = ""
 @export var unjam_animation: String = ""
@@ -48,9 +48,11 @@ class_name Weapon
 @export_range(0.0, 10.0, 0.1, "or_greater", "suffix:s") var reload_time: float = 1.0
 @export var reload_by_cartridge: bool = false
 @export var cartridge_weight: float = 0.5
+@export var is_chambered: bool = false
+@export var can_be_chambered: bool = true
 
 @export_category("Rate Of Fire")
-@export_flags("Single", "Full Auto", "Burst") var fire_modes = 0
+@export_flags("Safe", "Single", "Full Auto", "Burst") var fire_modes = 0
 @export_custom(PROPERTY_HINT_NONE, "suffix:shots/s") var rate_single: float = 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:shots/s") var rate_full_auto: float = 2.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:shots/s") var rate_burst_fire: float = 5.0
@@ -87,3 +89,16 @@ func set_mag(cs):
   else:
     mag = 0
   GM.ui.ammobar.update()
+
+
+func get_fire_modes() -> Array:
+  var modes = []
+  if (fire_modes & (1 << 0)) != 0:
+    modes.append("safe")
+  if (fire_modes & (1 << 1)) != 0:
+    modes.append("single")
+  if (fire_modes & (1 << 2)) != 0:
+    modes.append("full_auto")
+  if (fire_modes & (1 << 3)) != 0:
+    modes.append("burst")
+  return modes

@@ -84,11 +84,25 @@ func _physics_process(delta: float) -> void:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   
-  if Input.is_action_just_pressed("Fire"):
+  if Input.is_action_pressed("Fire"):
     if GM.player.selected_weapon != 0:
-      GM.weapon.fire()
-  if GM.weapon.weapon:
-    $Label.text = "%s" % GM.weapon.weapon.mag
+      if not GM.weapon.single_fire_lock:
+        GM.weapon.fire()
+  if Input.is_action_just_released("Fire"):
+    GM.weapon.single_fire_lock = false
+  if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and GM.player.ammo[GM.weapon.weapon.ammo_type] > 0:
+    $Label.text = "I have to reload!"
+  else:
+    $Label.text = ""
+  
+  if Input.is_action_just_pressed("FireMode"):
+    GM.weapon.toggle_fire_mode()
+  
+  if Input.is_action_just_pressed("Reload"):
+    GM.weapon.reload()
+  
+  if Input.is_action_just_pressed("Unjam"):
+    GM.weapon.unjam()
   
   # Fake Shadow
   if $ShadowRay.is_colliding():

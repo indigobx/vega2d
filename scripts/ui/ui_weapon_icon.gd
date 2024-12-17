@@ -7,6 +7,17 @@ var _weapon_short_name: String
   set(value):
     _weapon_short_name = value
     $Label.text = value
+var _ammo: int
+@export var ammo: int:
+  get:
+    return _ammo
+  set(value):
+    _ammo = value
+    if value >= 0:
+      $Ammo.text = "%s" % value
+    else:
+      $Ammo.text = ""
+
 
 # Приватная переменная для хранения состояния
 var _selected: bool = false
@@ -33,4 +44,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-  pass
+  if weapon_short_name:
+    var ammo_type = WDB.get_weapon(weapon_short_name).ammo_type
+    if ammo_type in GM.player.ammo:
+      ammo = GM.player.ammo[ammo_type]
+    else:
+      ammo = -1

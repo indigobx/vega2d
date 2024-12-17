@@ -15,6 +15,7 @@ var selected_slot: int:
 var healthbar: Node
 var heatbar: Node
 var ammobar: Node
+var firemode: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
   healthbar = $MarginContainer/Rows/Row1/UIHealthBar
   heatbar = $MarginContainer/Rows/Row2/UIHeat
   ammobar = $MarginContainer/Rows/Row2/UIAmmo
+  firemode = $MarginContainer/Rows/Row2/UIFireMode
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,9 +42,10 @@ func _process(delta: float) -> void:
     print(GM.player.slots)
     print(GM.player.selected_weapon)
   if Input.is_action_just_pressed("Action2"):
-    GM.player.put_to_slot(WDB.get_weapon("SmartPistol"), 3)
+    GM.player.add_ammo("armsco_25", 30)
+    GM.player.add_ammo("hinomaru_4", 8)
   if Input.is_action_just_pressed("Action3"):
-    GM.player.clear_slots()
+    pass
   if Input.is_action_just_pressed("Action4"):
     say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
 
