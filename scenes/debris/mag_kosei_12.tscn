@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://wkmehxwhcnvo"]
+
+[ext_resource type="Texture2D" uid="uid://cgrcn1vkuvva4" path="res://sprites/weapons/smart-pistol/mag.png" id="1_iyuvp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umg44"]
+size = Vector2(16, 4.40523)
+
+[node name="MagKosei12" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.1
+gravity_scale = 0.5
+angular_velocity = 0.261799
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iyuvp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.0259186, -0.296252)
+rotation = -0.0872665
+shape = SubResource("RectangleShape2D_umg44")

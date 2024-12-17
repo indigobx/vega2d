@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bf1jyljemqp8g"]
+
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="1_sukxb"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_sukxb")
+font_color = Color(0, 0, 0, 1)
+outline_size = 4

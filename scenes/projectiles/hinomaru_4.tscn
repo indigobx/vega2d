@@ -1,0 +1,122 @@
+[gd_scene load_steps=23 format=3 uid="uid://coneyb8xleyod"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/hinomaru_4.gd" id="1_pp044"]
+[ext_resource type="Texture2D" uid="uid://daiiuyuyy2kk3" path="res://sprites/projectiles/smartshell/aim0000.png" id="2_iuau1"]
+[ext_resource type="Texture2D" uid="uid://imkvhjxm2j2q" path="res://sprites/projectiles/smartshell/aim0001.png" id="3_6b2x7"]
+[ext_resource type="Texture2D" uid="uid://boow2espw8k1g" path="res://sprites/projectiles/smartshell/aim0002.png" id="4_bjrjg"]
+[ext_resource type="Texture2D" uid="uid://cuq4tgbmhe6j8" path="res://sprites/projectiles/smartshell/aim0003.png" id="5_ohfof"]
+[ext_resource type="Texture2D" uid="uid://44pqhkl3od55" path="res://sprites/projectiles/smartshell/aim0004.png" id="6_xi8pt"]
+[ext_resource type="Texture2D" uid="uid://7qyiomlo380n" path="res://sprites/projectiles/smartshell/aim0005.png" id="7_yxma1"]
+[ext_resource type="Texture2D" uid="uid://bggn7uwr13xqs" path="res://sprites/projectiles/smartshell/aim0006.png" id="8_pj36p"]
+[ext_resource type="Texture2D" uid="uid://dodcodgqfg3da" path="res://sprites/projectiles/smartshell/aim0007.png" id="9_o2nc2"]
+[ext_resource type="Texture2D" uid="uid://bktksdncei03w" path="res://sprites/projectiles/smartshell/aim0008.png" id="10_huctq"]
+[ext_resource type="Texture2D" uid="uid://bemnosovjn4f1" path="res://sprites/projectiles/smartshell/still.png" id="11_tivil"]
+[ext_resource type="Texture2D" uid="uid://b1ipdff07jjre" path="res://sprites/projectiles/smartshell/fly0000.png" id="12_m4w8g"]
+[ext_resource type="Texture2D" uid="uid://8acd6gjhvbwa" path="res://sprites/projectiles/smartshell/fly0001.png" id="13_ewaf0"]
+[ext_resource type="Texture2D" uid="uid://dpb8ctg4rjsof" path="res://sprites/projectiles/smartshell/fly0002.png" id="14_j5lgx"]
+[ext_resource type="Texture2D" uid="uid://3y41oy386w6r" path="res://sprites/projectiles/smartshell/fly0003.png" id="15_xybx8"]
+[ext_resource type="Texture2D" uid="uid://dl4kg5co6e7gr" path="res://sprites/projectiles/smartshell/fly0004.png" id="16_rlter"]
+[ext_resource type="Texture2D" uid="uid://dipmdovat8e68" path="res://sprites/projectiles/smartshell/fly0005.png" id="17_v2yx0"]
+[ext_resource type="Texture2D" uid="uid://16ctv0fgloff" path="res://sprites/projectiles/smartshell/fly0006.png" id="18_u6i56"]
+[ext_resource type="Texture2D" uid="uid://dxubioso7y5wb" path="res://sprites/projectiles/smartshell/fly0007.png" id="19_gsdiy"]
+[ext_resource type="Texture2D" uid="uid://c8vneyw3qw8er" path="res://sprites/projectiles/smartshell/fly0008.png" id="20_p5gdw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8jc7v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iuau1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6b2x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bjrjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ohfof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xi8pt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yxma1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pj36p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_o2nc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_huctq")
+}],
+"loop": true,
+"name": &"aim",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_tivil")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_m4w8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ewaf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j5lgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xybx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rlter")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v2yx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_u6i56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gsdiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_p5gdw")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gh24"]
+size = Vector2(6, 2)
+
+[node name="Hinomaru4" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 3
+mass = 0.15
+gravity_scale = 0.5
+script = ExtResource("1_pp044")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8jc7v")
+animation = &"fly"
+autoplay = "default"
+frame_progress = 0.0336611
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_6gh24")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

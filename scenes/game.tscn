@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk0xtmrmsyw8c"]
+[gd_scene load_steps=7 format=3 uid="uid://dk0xtmrmsyw8c"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_oms8u"]
 [ext_resource type="Script" path="res://scripts/ui_manager.gd" id="2_inquc"]
 [ext_resource type="PackedScene" uid="uid://dts2rie1nvbam" path="res://scenes/ui/main_menu.tscn" id="3_rjt0a"]
 [ext_resource type="PackedScene" uid="uid://dte87rpq16e83" path="res://scenes/ui/ui.tscn" id="4_0k1vi"]
 [ext_resource type="Script" path="res://scripts/player_manager.gd" id="4_ng4yn"]
+[ext_resource type="Script" path="res://scripts/weapon_manager.gd" id="6_irfv0"]
 
 [node name="Game" type="Node"]
 
@@ -29,3 +30,9 @@ layout_mode = 1
 
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("4_ng4yn")
+
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("6_irfv0")
+
+[node name="WeaponTimer" type="Timer" parent="WeaponManager"]
+one_shot = true

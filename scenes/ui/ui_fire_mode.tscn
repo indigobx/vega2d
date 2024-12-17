@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl15ofbyr8062"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_fire_mode.gd" id="1_158ab"]
+[ext_resource type="LabelSettings" uid="uid://bf1jyljemqp8g" path="res://themes/fire_mode_label_settings.tres" id="2_3i073"]
+
+[node name="UIFireMode" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 74.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = -3
+script = ExtResource("1_158ab")
+
+[node name="Safe" type="Label" parent="."]
+layout_mode = 2
+text = "SAFE"
+label_settings = ExtResource("2_3i073")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Single" type="Label" parent="."]
+layout_mode = 2
+text = "SEMI"
+label_settings = ExtResource("2_3i073")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Full_Auto" type="Label" parent="."]
+layout_mode = 2
+text = "AUTO"
+label_settings = ExtResource("2_3i073")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Burst" type="Label" parent="."]
+layout_mode = 2
+text = "BRST"
+label_settings = ExtResource("2_3i073")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://beweyompe32kg"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_ni3cv"]
+
+[resource]
+script = ExtResource("1_ni3cv")
+display_time = 1
+steps = 15
+auto_hide = false
+hide_on_action = "Use"
+who = "Vega"
+portrait = "vega-angry"
+what = "Out of ammo! Time to tear ‘em up with claws!"

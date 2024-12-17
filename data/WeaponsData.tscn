@@ -1,8 +1,234 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=40 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
-[ext_resource type="PackedScene" uid="uid://bw7lu7ncf7qdx" path="res://smart_shell.tscn" id="3_ewo75"]
+[ext_resource type="PackedScene" uid="uid://coneyb8xleyod" path="res://scenes/projectiles/hinomaru_4.tscn" id="3_4vmhs"]
+[ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
+[ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
+[ext_resource type="PackedScene" uid="uid://wkmehxwhcnvo" path="res://scenes/debris/mag_kosei_12.tscn" id="4_e3m4c"]
+[ext_resource type="PackedScene" uid="uid://drlhojh81crgp" path="res://scenes/weapons/hitscan_bullet.tscn" id="5_i8wfq"]
+[ext_resource type="PackedScene" uid="uid://cvknp4nmilu0x" path="res://scenes/debris/casing_carbine.tscn" id="6_dc0eq"]
+[ext_resource type="Texture2D" uid="uid://bdk4l871uidg3" path="res://sprites/ui/weapon-ar-8.png" id="6_rq1mq"]
+[ext_resource type="Texture2D" uid="uid://ce5tmgxthn4d8" path="res://sprites/weapons/smart-pistol/reload0000.png" id="7_0pcra"]
+[ext_resource type="Texture2D" uid="uid://t0u5fn17b0f2" path="res://sprites/weapons/ar-8/still.png" id="7_btsq8"]
+[ext_resource type="PackedScene" uid="uid://50u1l4crjdyu" path="res://scenes/debris/mag_ar_8.tscn" id="7_xpoaa"]
+[ext_resource type="Texture2D" uid="uid://6b8mw5tqobt6" path="res://sprites/weapons/smart-pistol/fire0000.png" id="8_875em"]
+[ext_resource type="PackedScene" uid="uid://bsm6goy615dka" path="res://scenes/decals/hit_mark.tscn" id="8_23448"]
+[ext_resource type="Texture2D" uid="uid://brws370m8hro2" path="res://sprites/weapons/ar-8/reload.png" id="8_unje3"]
+[ext_resource type="Texture2D" uid="uid://cjfyxy881hi8" path="res://sprites/weapons/smart-pistol/fire0001.png" id="9_myfqk"]
+[ext_resource type="Texture2D" uid="uid://mpk8hxy85sfw" path="res://sprites/weapons/smart-pistol/fire0002.png" id="10_d6mvc"]
+[ext_resource type="Texture2D" uid="uid://cjvqgwc3ipid6" path="res://sprites/weapons/smart-pistol/fire0003.png" id="11_ut3wh"]
+[ext_resource type="Texture2D" uid="uid://cuxuo7doxkqg8" path="res://sprites/weapons/smart-pistol/fire0004.png" id="12_68c1h"]
+[ext_resource type="Texture2D" uid="uid://diaknuswd4kjc" path="res://sprites/weapons/smart-pistol/reload0001.png" id="13_uadll"]
+[ext_resource type="Texture2D" uid="uid://cwj8db84xu5bp" path="res://sprites/weapons/smart-pistol/reload0002.png" id="14_5nsva"]
+[ext_resource type="Texture2D" uid="uid://c28tx0xjfip04" path="res://sprites/weapons/smart-pistol/reload0003.png" id="15_4jqs7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qyay5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hb8t3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0pcra")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_875em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_myfqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d6mvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ut3wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_68c1h")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0pcra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_uadll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5nsva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4jqs7")
+}],
+"loop": true,
+"name": &"reload",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hb8t3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5nsva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ut3wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d6mvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4jqs7")
+}],
+"loop": true,
+"name": &"unjam",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhu8a"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0u3t"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1ba1"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elnf8"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3qm0"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fesc"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52mr8"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e5km"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6t3y"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvyw7"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie3fx"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjji6"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvmbc"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekrcr"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qral0"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebjir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_btsq8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhu8a")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0u3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1ba1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elnf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3qm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fesc")
+}],
+"loop": false,
+"name": &"reload",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52mr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e5km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6t3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvyw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie3fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjji6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvmbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekrcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qral0")
+}],
+"loop": false,
+"name": &"unjam",
+"speed": 10.0
+}]
 
 [node name="WeaponsData" type="Node" node_paths=PackedStringArray("weapons")]
 script = ExtResource("1_qa4qa")
@@ -10,4 +236,53 @@ weapons = [null]
 
 [node name="SmartPistol" type="Node" parent="."]
 script = ExtResource("2_pptmm")
-projectile_scene = ExtResource("3_ewo75")
+display_name = "光星12型燕"
+short_name = "Kosei-12"
+weight = 1.4
+hit_type = "projectile"
+projectile_scene = ExtResource("3_4vmhs")
+empty_clip_scene = ExtResource("4_e3m4c")
+icon_small = ExtResource("3_6xtlh")
+sprite_frames = SubResource("SpriteFrames_qyay5")
+burst_fire_animation = "default"
+reload_animation = "reload"
+empty_animation = "empty"
+unjam_animation = "unjam"
+damage_random_delta = 2.0
+mag_size = 8
+mag = 8
+ammo_type = "hinomaru_4"
+reload_time = 0.8
+can_be_chambered = false
+fire_modes = 11
+rate_single = 4.0
+rate_burst_fire = 30.0
+burst_length = 4
+recoil_directions = 3
+angular_recoil = 5.0
+linear_recoil = Vector2(3, 0)
+
+[node name="AR-8" type="Node" parent="."]
+script = ExtResource("2_pptmm")
+display_name = "AR-8"
+short_name = "AR-8"
+weight = 3.0
+hit_type = "hitscan"
+hitscan_scene = ExtResource("5_i8wfq")
+casing_scene = ExtResource("6_dc0eq")
+empty_clip_scene = ExtResource("7_xpoaa")
+icon_small = ExtResource("6_rq1mq")
+sprite_frames = SubResource("SpriteFrames_ebjir")
+sprite_offest = Vector2i(0, 4)
+reload_animation = "reload"
+empty_animation = "empty"
+unjam_animation = "unjam"
+hit_mark_scene = ExtResource("8_23448")
+mag_size = 30
+mag = 30
+ammo_type = "armsco_25"
+cartridge_weight = 0.05
+fire_modes = 15
+rate_single = 8.0
+rate_full_auto = 10.0
+rate_burst_fire = 30.0

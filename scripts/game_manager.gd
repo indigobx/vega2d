@@ -5,7 +5,9 @@ var player: Node = null
 var ui_manager: Node = null
 var ui: Node = null
 var camera: Node = null
+var weapon: Node = null
 var cursor: Vector2
+var in_safe_area: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +16,7 @@ func _ready() -> void:
   ui_manager = get_tree().root.get_node("Game/UIManager")
   ui_manager.toggle_ui("main_menu")
   ui = get_ui()
+  weapon = get_tree().root.get_node("Game/WeaponManager")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,10 +34,7 @@ func new_game() -> void:
   player.load_instance()
   player.spawn(spawn_point)
   ui_manager.toggle_ui("ui")
-  
-  ui.set_weapon(1, "melee-claw")
-  ui.set_weapon(2, "mantis-arms")
-  ui.set_weapon(3, "smart-pistol")
+
 
 
 func reparent_node(node: Node, new_parent: Variant) -> void:

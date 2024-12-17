@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://l6wx8xhhe5hf"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_yx3yx"]
+
+[resource]
+script = ExtResource("1_yx3yx")
+display_time = 3
+steps = 50
+auto_hide = false
+hide_on_action = "Use"
+who = "Vega"
+portrait = "vega-angry"
+what = "What am I even doing here? Why is everything so freaking weird? I was supposed to wake up in my apartment, not… this empty-ass void."
