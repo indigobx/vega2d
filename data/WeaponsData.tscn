@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=30 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
 [ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
-[ext_resource type="Script" path="res://scripts/projectiles/smart_shell_v2.gd" id="3_cx7r6"]
 [ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
+[ext_resource type="PackedScene" uid="uid://drlhojh81crgp" path="res://scenes/weapons/hitscan_bullet.tscn" id="5_i8wfq"]
 [ext_resource type="Texture2D" uid="uid://bdk4l871uidg3" path="res://sprites/ui/weapon-ar-8.png" id="6_rq1mq"]
 [ext_resource type="Texture2D" uid="uid://t0u5fn17b0f2" path="res://sprites/weapons/ar-8/still.png" id="7_btsq8"]
+[ext_resource type="PackedScene" uid="uid://bsm6goy615dka" path="res://scenes/decals/hit_mark.tscn" id="8_23448"]
+[ext_resource type="Texture2D" uid="uid://brws370m8hro2" path="res://sprites/weapons/ar-8/reload.png" id="8_unje3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyay5"]
 animations = [{
@@ -19,11 +21,77 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_xapfm"]
-script/source = "func fire() -> String:
-  print(\"PEW!\")
-  return \"PEW PEW\"
-"
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0u3t"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1ba1"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elnf8"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3qm0"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fesc"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3hqj"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otyqi"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2rtt"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcrs2"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52mr8"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e5km"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6t3y"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvyw7"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie3fx"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjji6"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvmbc"]
+atlas = ExtResource("8_unje3")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekrcr"]
+atlas = ExtResource("8_unje3")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qral0"]
+atlas = ExtResource("8_unje3")
+region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ebjir"]
 animations = [{
@@ -34,6 +102,70 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0u3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1ba1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elnf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3qm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fesc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3hqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otyqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2rtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcrs2")
+}],
+"loop": false,
+"name": &"reload",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52mr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e5km")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6t3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvyw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie3fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjji6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvmbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekrcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qral0")
+}],
+"loop": false,
+"name": &"unjam",
+"speed": 10.0
 }]
 
 [node name="WeaponsData" type="Node" node_paths=PackedStringArray("weapons")]
@@ -45,11 +177,11 @@ script = ExtResource("2_pptmm")
 display_name = "光星12型燕"
 short_name = "Kosei-12"
 weight = 1.4
-logic_script = ExtResource("3_cx7r6")
 icon_small = ExtResource("3_6xtlh")
 sprite_frames = SubResource("SpriteFrames_qyay5")
-damage = 10.0
 damage_random_delta = 2.0
+mag_size = 2
+mag = 2
 fire_modes = 1
 recoil_directions = 3
 angular_recoil = 5.0
@@ -60,7 +192,16 @@ script = ExtResource("2_pptmm")
 display_name = "AR-8"
 short_name = "AR-8"
 weight = 3.0
-logic_script = SubResource("GDScript_xapfm")
+hit_type = "hitscan"
+hitscan_scene = ExtResource("5_i8wfq")
 icon_small = ExtResource("6_rq1mq")
 sprite_frames = SubResource("SpriteFrames_ebjir")
 sprite_offest = Vector2i(0, 4)
+reload_animation = "reload"
+unjam_animation = "unjam"
+hit_mark_scene = ExtResource("8_23448")
+mag_size = 30
+mag = 30
+ammo_type = "armsco_25"
+cartridge_weight = 0.05
+fire_modes = 1

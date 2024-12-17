@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c27cxf7arloth"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_ammo_v2.gd" id="1_kipti"]
+[ext_resource type="LabelSettings" uid="uid://dd88eotnpfti" path="res://themes/new_label_settings.tres" id="2_yubp5"]
+
+[node name="UIAmmo" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 96)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kipti")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+label_settings = ExtResource("2_yubp5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cartridges" type="Node2D" parent="."]

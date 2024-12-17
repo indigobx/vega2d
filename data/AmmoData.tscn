@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b80rj04y8n5bv"]
+
+[ext_resource type="Script" path="res://model/Ammo.gd" id="1_yqu21"]
+
+[node name="AmmoData" type="Node"]
+
+[node name="Armsco_25" type="Node" parent="."]
+script = ExtResource("1_yqu21")
+display_name = "1/4\"-20 Armsco"
+short_name = ".25 Armsco"
+type_name = "armsco_25"
+caliber = "6.3"
+damage_base = "10"

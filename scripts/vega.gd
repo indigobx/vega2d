@@ -22,12 +22,15 @@ var view_direction: int:
 var action_forward: String = "Left"
 var action_back: String = "Right"
 var body_animation: String = "unarmed"
-var arms_pivot_x: int
+var arms_pivot: Node
+var ray: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
   set_process_input(true)
+  ray = $ArmsPivot/Arms/RayCast2D
+  arms_pivot = $ArmsPivot
   _on_view_direction_changed(1)
 
 
@@ -47,7 +50,8 @@ func _physics_process(delta: float) -> void:
   $Line2D.points[1] = cursor
   $Cursor.position = cursor
   
-  direction = (to_global(cursor) - global_position).normalized()
+  #direction = (to_global(cursor) - global_position).normalized()
+  direction = global_position.direction_to(to_global(cursor)).normalized()
   var cursor_angle = rad_to_deg(abs(direction.angle()))
   if cursor_angle > 90 + direction_angle_threshold_deg:
     view_direction = -1
@@ -79,11 +83,12 @@ func _physics_process(delta: float) -> void:
   if not Input.is_anything_pressed():
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
-  $Label.text = "%.2d : %.2d" % [velocity.x, velocity.y]
   
   if Input.is_action_just_pressed("Fire"):
-    print(GM.player.slots[4].logic_script)
-    GM.player.slots[4].logic_script.fire()
+    if GM.player.selected_weapon != 0:
+      GM.weapon.fire()
+  if GM.weapon.weapon:
+    $Label.text = "%s" % GM.weapon.weapon.mag
   
   # Fake Shadow
   if $ShadowRay.is_colliding():
@@ -121,8 +126,8 @@ func _on_view_direction_changed(vd) -> void:
     $Collision.scale.x = -1
     $Collision.position.x = -9
     $ArmsPivot.scale.x = -1
+    #$ArmsPivot/Arms/RayCast2D.position.x = -30
     #$ArmsPivot.position.x = -4
-    $Line2D3.position.x = -4
     $ShadowSprite.position.x = -4
     action_back = "Right"
     action_forward = "Left"
@@ -131,8 +136,8 @@ func _on_view_direction_changed(vd) -> void:
     $Collision.scale.x = 1
     $Collision.position.x = 9
     $ArmsPivot.scale.x = 1
+    #$ArmsPivot/Arms/RayCast2D.position.x = 30
     #$ArmsPivot.position.x = 4
-    $Line2D3.position.x = 4
     $ShadowSprite.position.x = 4
     action_back = "Left"
     action_forward = "Right"

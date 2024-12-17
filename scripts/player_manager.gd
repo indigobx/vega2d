@@ -25,7 +25,7 @@ var selected_weapon: int:
       _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
 var hp: int
 var max_hp: int
-
+var ammo: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +50,7 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   # should move this to sep function
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   put_to_slot(WDB.get_weapon("AR-8"), 4)
+  add_ammo("armsco_25", 120)
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
@@ -58,12 +59,20 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   GM.ui.healthbar.max_hp = max_hp
   GM.ui.healthbar.hp = hp
 
-func put_to_slot(item, slot):
+func put_to_slot(item, slot) -> void:
   slots[slot] = item
+  GM.ui.weapon_icons[slot].weapon_short_name = item.short_name
 
 func clear_slots() -> void:
   for i in range(1, 9):
     slots[i] = null
+
+func add_ammo(type, amount) -> int:
+  if type in ammo:
+    ammo[type] += amount
+  else:
+    ammo[type] = amount
+  return ammo[type]
 
 # Функция, вызываемая при изменении selected_weapon
 func _on_selected_weapon_changed(value: int) -> void:
@@ -71,10 +80,9 @@ func _on_selected_weapon_changed(value: int) -> void:
     weapon_sprite.sprite_frames = slots[value].sprite_frames
     near_arm.play("near_%s" % slots[value].size)
     far_arm.play("far_%s" % slots[value].size)
+    GM.weapon.weapon = slots[value]
   else:
     weapon_sprite.sprite_frames = SpriteFrames.new()
     near_arm.play("near_unarmed")
     far_arm.play("far_unarmed")
-    print(slots[3])
-    if slots[3]:
-      print(slots[3].sprite_frames)
+    GM.weapon.weapon = null

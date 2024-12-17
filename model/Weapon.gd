@@ -9,10 +9,13 @@ class_name Weapon
 ## so here should be only "pistol" or "rifle" or "unarmed" or "melee"
 @export var size: String = "pistol"
 @export var weight: float = 1.0
+@export_enum("hitscan", "projectile") var hit_type: String
+@export var hitscan_scene: PackedScene
 @export var projectile_scene: PackedScene
 @export var casing_scene: PackedScene
 @export var empty_clip_scene: PackedScene
-@export var logic_script: Script
+@export var muzzle_flash_scene: PackedScene
+@export var raycast_offset: Vector2i
 @export var icon_small: Texture2D
 @export var icon_big: Texture2D
 
@@ -27,20 +30,24 @@ class_name Weapon
 @export var reload_empty_animation: String = ""
 @export var overheat_animation: String = ""
 @export var recoil_animation: String = ""
+@export var unjam_animation: String = ""
 
 @export_category("Damage")
-@export var damage: float = 0.0
+@export var damage_mod: float = 0.0
 ## damage + randf_range(-damage_random_delta, damage_random_delta)
 @export var damage_random_delta: float = 0.0
 @export_range(0.0, 100.0, 0.1, "suffix:% per cartridge") var crit_chance: float = 10.0
 @export var crit_multiplier: float = 2.0
+@export var hit_mark_scene: PackedScene
 
 @export_category("Ammo")
 @export var mag_size: int = 1
+@export var mag: int = 1
+@export var ammo_type: String = ""
 @export_range(0, 50, 1, "or_greater") var cartridge_by_shot: int = 1
 @export_range(0.0, 10.0, 0.1, "or_greater", "suffix:s") var reload_time: float = 1.0
 @export var reload_by_cartridge: bool = false
-@export var mag_weight: float = 0.5
+@export var cartridge_weight: float = 0.5
 
 @export_category("Rate Of Fire")
 @export_flags("Single", "Full Auto", "Burst") var fire_modes = 0
@@ -61,6 +68,7 @@ class_name Weapon
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var recoil_recover_delay: float = 0.0
 
 @export_category("Heat")
+@export var heat: float = 0.0
 @export_range(0.0, 10.0, 0.01, "or_greater") var heat_by_cartridge: float = 1.0
 @export var cooling_delay: float = 0.5
 @export var cool_per_second: float = 1.0
@@ -71,3 +79,11 @@ class_name Weapon
 
 @export_category("Mods")
 @export var mods: PackedStringArray
+
+
+func set_mag(cs):
+  if cs > 0:
+    mag = cs
+  else:
+    mag = 0
+  GM.ui.ammobar.update()

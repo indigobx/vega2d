@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsm6goy615dka"]
+
+[ext_resource type="Texture2D" uid="uid://s6eywb2tf4n1" path="res://sprites/decals/bullet-hit.png" id="1_g2tgv"]
+[ext_resource type="Script" path="res://scripts/weapons/hit_mark.gd" id="2_jm3ya"]
+
+[node name="HitMark" type="Sprite2D"]
+texture = ExtResource("1_g2tgv")
+script = ExtResource("2_jm3ya")

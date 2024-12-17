@@ -1,9 +1,11 @@
 extends Control
 
+var _weapon_short_name: String
 @export var weapon_short_name: String:
   get:
-    return weapon_short_name
+    return _weapon_short_name
   set(value):
+    _weapon_short_name = value
     $Label.text = value
 
 # Приватная переменная для хранения состояния

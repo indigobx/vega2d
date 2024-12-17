@@ -109,7 +109,6 @@ animation = &"walk-forward-3-armed"
 autoplay = "walk-forward-0-unarmed"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(9, 7)
 shape = SubResource("CapsuleShape2D_0ld80")
 debug_color = Color(0, 0.595, 0.7, 0.117647)
@@ -128,19 +127,11 @@ position = Vector2(-10, -5)
 occluder = SubResource("OccluderPolygon2D_sl5ey")
 occluder_light_mask = 2
 
-[node name="Line2D3" type="Line2D" parent="."]
-z_index = 999
-position = Vector2(4, -14)
-points = PackedVector2Array(15, 15, -15, -15, 0, 0, 15, -15, -15, 15)
-width = 1.0
-default_color = Color(3.03224e-06, 0.679298, 0.172165, 1)
-
 [node name="ArmsPivot" type="Marker2D" parent="."]
 position = Vector2(4, -14)
 gizmo_extents = 24.0
 
 [node name="Arms" type="CanvasGroup" parent="ArmsPivot"]
-visible = false
 
 [node name="Far" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
 z_index = -2
@@ -161,7 +152,21 @@ sprite_frames = SubResource("SpriteFrames_op8ms")
 animation = &"far_pistol"
 autoplay = "near_rifle"
 
+[node name="RayCast2D" type="RayCast2D" parent="ArmsPivot/Arms"]
+position = Vector2(50, -8)
+target_position = Vector2(4096, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="Line2D3" type="Line2D" parent="ArmsPivot/Arms/RayCast2D"]
+visible = false
+z_index = 999
+points = PackedVector2Array(15, 15, -15, -15, 0, 0, 15, -15, -15, 15)
+width = 1.0
+default_color = Color(3.03224e-06, 0.679298, 0.172165, 1)
+
 [node name="Line2D2" type="Line2D" parent="ArmsPivot"]
+visible = false
 z_index = 1000
 position = Vector2(10, 0)
 points = PackedVector2Array(-10, 0, 50, 0, 40, -3, 40, 3, 50, 0)
@@ -169,6 +174,7 @@ width = 1.0
 default_color = Color(0.915564, 0.352624, 0.214235, 1)
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 z_index = 800
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
