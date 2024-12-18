@@ -18,7 +18,6 @@ func load_level(name: String) -> void:
       child.queue_free()
   # Путь к файлу уровня
   var path = "res://scenes/levels/%s.tscn" % name
-  # Загружаем уровень
   var level_scene = load(path)
   if level_scene == null:
     print("Failed to load level:", path)
