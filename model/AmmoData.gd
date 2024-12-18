@@ -11,3 +11,10 @@ func get_ammo(query):
         return at
   else:
     return get_node_or_null(query)
+
+func weight_all() -> float:
+  var ammo_weight: float = 0.0
+  var ats = get_children()
+  for at in ats:
+    ammo_weight += at.amount * at.cartridge_weight
+  return ammo_weight

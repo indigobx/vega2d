@@ -7,6 +7,9 @@ class_name Ammo
 @export var type_name: String
 @export var caliber: String
 @export_range(0.0, 5.0, 0.001, "or_greater") var cartridge_weight: float
+@export_category("Amount")
+@export var amount_max: int
+@export var amount: int
 @export_category("Damage")
 @export var damage_base: String
 @export_category("Visual")
@@ -14,3 +17,12 @@ class_name Ammo
 @export var icon_small: Sprite2D
 @export var icon_big: Sprite2D
 @export var item_scene: PackedScene
+
+func use_ammo(value) -> void:
+  amount -= value
+
+func add_ammo(value) -> void:
+  amount += value
+
+func set_ammo(value) -> void:
+  amount = value
