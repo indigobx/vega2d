@@ -11,6 +11,8 @@ var direction: Vector2
 var direction_angle_threshold_deg: float = 15.0
 var cursor: Vector2
 var arms_angle: float
+var recoil_angle: float = 0.0
+var mod_angle: float = 0.0
 var _view_direction: int = 1
 var view_direction: int:
   get:
@@ -60,8 +62,9 @@ func _physics_process(delta: float) -> void:
 
   
   var angle_limit = deg_to_rad(45)
+  mod_angle = lerp(mod_angle, recoil_angle, 0.25)
   arms_angle = abs(direction.rotated(deg_to_rad(90)).angle()) - deg_to_rad(90)
-  arms_angle = clamp(arms_angle, -angle_limit, angle_limit) * view_direction
+  arms_angle = clamp(arms_angle+mod_angle, -angle_limit, angle_limit) * view_direction
   if sign(view_direction) == sign(direction.x):  # This should not lower arms when cursor is behind
     $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, 0.2)  # Replace weight with weapon weight here!
   
@@ -93,7 +96,7 @@ func _physics_process(delta: float) -> void:
   if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and GM.player.ammo[GM.weapon.weapon.ammo_type] > 0:
     $Label.text = "I have to reload!"
   else:
-    $Label.text = ""
+    $Label.text = "%s" % rad_to_deg(recoil_angle)
   
   if Input.is_action_just_pressed("FireMode"):
     GM.weapon.toggle_fire_mode()

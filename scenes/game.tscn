@@ -36,3 +36,8 @@ script = ExtResource("6_irfv0")
 
 [node name="WeaponTimer" type="Timer" parent="WeaponManager"]
 one_shot = true
+
+[node name="RecoilTimer" type="Timer" parent="WeaponManager"]
+one_shot = true
+
+[connection signal="timeout" from="WeaponManager/RecoilTimer" to="WeaponManager" method="_on_recoil_timer_timeout"]
