@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://hi10ee50shpr" path="res://textures/vr/atlas_01.png" id="1_2ndhv"]
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
-[ext_resource type="Shader" path="res://hologram.gdshader" id="2_l8hd8"]
 [ext_resource type="Texture2D" uid="uid://bqu6wcfdoomgx" path="res://sprites/fx/glow/glow.png" id="3_02hpr"]
+[ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="3_brqj7"]
 [ext_resource type="Texture2D" uid="uid://cd1m60qxsxcai" path="res://textures/lights/delta.png" id="4_5ihkk"]
 [ext_resource type="LabelSettings" uid="uid://dd88eotnpfti" path="res://themes/new_label_settings.tres" id="5_80mo8"]
 [ext_resource type="Script" path="res://scripts/light.gd" id="5_djf1f"]
@@ -59,7 +59,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_0kd7a")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0cg1"]
-shader = ExtResource("2_l8hd8")
+shader = ExtResource("3_brqj7")
 shader_parameter/noise_scale = 1.0
 shader_parameter/distortion_scale_x = 0.1
 shader_parameter/distortion_scale_y = 0.1
