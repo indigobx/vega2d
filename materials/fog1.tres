@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b7m1y2ss52rc1"]
 
-[ext_resource type="Shader" path="res://fog.gdshader" id="1_wujf6"]
+[ext_resource type="Shader" path="res://shaders/fog.gdshader" id="1_wujf6"]
 
 [resource]
 shader = ExtResource("1_wujf6")
