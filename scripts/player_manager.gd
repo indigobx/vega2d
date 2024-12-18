@@ -76,6 +76,17 @@ func add_ammo(type, amount) -> int:
     ammo[type] = amount
   return ammo[type]
 
+
+func weight() -> float:
+  var total_weight
+  total_weight += vega.base_weight
+  total_weight += vega.pregnancy_weight_mod[vega.pregnancy_stage]
+  for item in slots:
+    if item and item.weight:
+      total_weight += item.weight
+  return total_weight
+
+
 # Функция, вызываемая при изменении selected_weapon
 func _on_selected_weapon_changed(value: int) -> void:
   if is_instance_valid(slots[value]):

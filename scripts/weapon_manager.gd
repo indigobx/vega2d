@@ -35,7 +35,9 @@ func _on_mode_change(value) -> void:
 
 var can_fire: bool
 var single_fire_lock: bool
-
+var linear_recoil_counter: int = 0
+var angular_recoil_counter: int = 0
+var spread: float = 0.0
 
 func fire() -> void:
   if not $WeaponTimer.is_stopped():
@@ -61,21 +63,24 @@ func fire() -> void:
 func fire_auto() -> void:
   if not $WeaponTimer.is_stopped():
     return
+  spread = deg_to_rad(weapon.spread_full_auto)
   perform_shot()
   $WeaponTimer.start(1.0 / weapon.rate_full_auto)
 
 func fire_single() -> void:
   if not $WeaponTimer.is_stopped():
     return
+  spread = deg_to_rad(weapon.spread_single)
   perform_shot()
   $WeaponTimer.start(1.0 / weapon.rate_single)
 
 func fire_burst() -> void:
   if not $WeaponTimer.is_stopped():
     return
+  spread = deg_to_rad(weapon.spread_burst)
   for i in range(weapon.burst_length):
     perform_shot()
-    $WeaponTimer.start(1.0 / weapon.rate_burst_fire)
+    $WeaponTimer.start(1.0 / weapon.rate_burst)
     await $WeaponTimer.timeout
 
 
@@ -90,7 +95,8 @@ func perform_shot() -> void:
       projectile()
     _:
       return
-    
+  if weapon.get_recoil_types():
+    recoil()
   if weapon.casing_scene:
     eject_shell()
   if weapon.mag <= 0:
@@ -100,6 +106,17 @@ func perform_shot() -> void:
     #GM.ui.say(load("res://data/dialogues/vr_level/ammos_out.tres"))
   GM.ui.ammobar.update()
 
+func recoil() -> void:
+  linear_recoil_counter += 1
+  angular_recoil_counter += 1
+  var recoil_types = weapon.get_recoil_types()
+  var vega = GM.player.vega
+  if "linear" in recoil_types and linear_recoil_counter > weapon.shots_before_linear_recoil:
+    vega.recoil_position = weapon.linear_recoil
+  if "angular" in recoil_types and angular_recoil_counter > weapon.shots_before_angular_recoil:
+    vega.recoil_angle -= deg_to_rad(weapon.angular_recoil)
+  $RecoilTimer.start(weapon.recoil_recover_delay)
+  
 
 func projectile() -> void:
   var ray = GM.player.vega.ray
@@ -107,7 +124,7 @@ func projectile() -> void:
   var projectile_instance = weapon.projectile_scene.instantiate()
   var p0 = ray.global_position
   projectile_instance.global_position = p0
-  projectile_instance.global_rotation = arms_pivot.global_rotation
+  projectile_instance.global_rotation = arms_pivot.global_rotation + randf_range(-spread, spread)
   GlobalFx.add_fx(projectile_instance)
 
 
@@ -118,10 +135,13 @@ func hitscan() -> void:
   var hit_mark = weapon.hit_mark_scene.instantiate()
   var p0 = ray.global_position
   var p1 = p0 + Vector2(1024, 0).rotated(arms_pivot.global_rotation)
+  var ray_r0 = ray.global_rotation
+  ray.global_rotation += randf_range(-spread, spread)
   ray.force_raycast_update()
   if ray.is_colliding():
     var target = ray.get_collider()
     p1 = ray.get_collision_point()
+  ray.global_rotation = ray_r0
   hitscan_instance.hit_point = p1
   hitscan_instance.points[0] = p0
   hitscan_instance.points[1] = p1
@@ -200,3 +220,14 @@ func toggle_fire_mode() -> void:
       fire_mode = modes[next_index]
     else:
       fire_mode = modes[0]
+
+
+func start_recoil_timer() -> void:
+  $RecoilTimer.start(weapon.recoil_recover_delay)
+
+
+func _on_recoil_timer_timeout() -> void:
+  linear_recoil_counter = 0
+  angular_recoil_counter = 0
+  GM.player.vega.recoil_angle = 0.0
+  GM.player.vega.recoil_position = Vector2.ZERO
