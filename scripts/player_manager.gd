@@ -25,7 +25,9 @@ var selected_weapon: int:
       _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
 var hp: int
 var max_hp: int
-var ammo: Dictionary
+var energy: float = 5000.0
+var max_energy: float = 2.0e4
+var jump_power: float = 0.85
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,8 +53,10 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   # should move this to sep function
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   put_to_slot(WDB.get_weapon("AR-8"), 4)
+  print(ADB)
   add_ammo("armsco_25", 120)
   add_ammo("hinomaru_4", 32)
+  print(ADB)
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
@@ -69,21 +73,20 @@ func clear_slots() -> void:
   for i in range(1, 9):
     slots[i] = null
 
-func add_ammo(type, amount) -> int:
-  if type in ammo:
-    ammo[type] += amount
-  else:
-    ammo[type] = amount
-  return ammo[type]
+func add_ammo(type, amount) -> void:
+  var ammo = ADB.get_ammo(type)
+  ammo.add_ammo(amount)
+
 
 
 func weight() -> float:
-  var total_weight
-  total_weight += vega.base_weight
+  var total_weight = 0.0
+  total_weight += vega.weight_base
   total_weight += vega.pregnancy_weight_mod[vega.pregnancy_stage]
-  for item in slots:
-    if item and item.weight:
-      total_weight += item.weight
+  for k in slots:
+    if slots[k] and slots[k].weight:
+      total_weight += slots[k].weight
+  total_weight += ADB.weight_all()
   return total_weight
 
 

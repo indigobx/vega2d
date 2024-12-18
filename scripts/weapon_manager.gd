@@ -153,8 +153,8 @@ func hitscan() -> void:
 func reload() -> void:
   if not $WeaponTimer.is_stopped():
     return
-  if weapon and weapon.ammo_type in GM.player.ammo:
-    if GM.player.ammo[weapon.ammo_type] > 0:
+  if weapon and ADB.get_ammo(weapon.ammo_type):
+    if ADB.get_ammo(weapon.ammo_type).amount > 0:
       GM.player.weapon_sprite.play(weapon.reload_animation)
       if weapon.empty_clip_scene:
         var clip_instance = weapon.empty_clip_scene.instantiate()
@@ -165,17 +165,17 @@ func reload() -> void:
         GlobalFx.add_debris(clip_instance)
       $WeaponTimer.start(weapon.reload_time)
       await $WeaponTimer.timeout
-      var ammo_to_reload = min(weapon.mag_size, GM.player.ammo[weapon.ammo_type])
+      var ammo_to_reload = min(weapon.mag_size, ADB.get_ammo(weapon.ammo_type).amount)
       if weapon.is_chambered:
         ammo_to_reload += 1
       weapon.set_mag(ammo_to_reload)
-      GM.player.ammo[weapon.ammo_type] -= ammo_to_reload
+      ADB.get_ammo(weapon.ammo_type).use_ammo(ammo_to_reload)
       if weapon.is_chambered or not weapon.can_be_chambered:
         GM.player.weapon_sprite.play(weapon.static_animation)
         can_fire = true
       else:
         rack_bolt()
-    elif GM.player.ammo[weapon.ammo_type] <= 0 and weapon.mag <= 0:
+    elif ADB.get_ammo(weapon.ammo_type).amount <= 0 and weapon.mag <= 0:
       if weapon.empty_clip_scene and GM.player.weapon_sprite.animation != weapon.empty_animation:
         GM.player.weapon_sprite.play(weapon.empty_animation)
         var clip_instance = weapon.empty_clip_scene.instantiate()

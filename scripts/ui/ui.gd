@@ -39,13 +39,12 @@ func _process(delta: float) -> void:
   if Input.is_action_just_pressed("Weapon4"):
     selected_slot = 4
   if Input.is_action_just_pressed("Action1"):
-    print(GM.player.slots)
-    print(GM.player.selected_weapon)
-  if Input.is_action_just_pressed("Action2"):
     GM.player.add_ammo("armsco_25", 30)
     GM.player.add_ammo("hinomaru_4", 8)
+  if Input.is_action_just_pressed("Action2"):
+    GM.player.vega.pregnancy_stage = max(0, GM.player.vega.pregnancy_stage - 1)
   if Input.is_action_just_pressed("Action3"):
-    pass
+    GM.player.vega.pregnancy_stage = min(5, GM.player.vega.pregnancy_stage + 1)
   if Input.is_action_just_pressed("Action4"):
     say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
 

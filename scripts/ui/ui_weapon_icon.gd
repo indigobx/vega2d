@@ -46,7 +46,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
   if weapon_short_name:
     var ammo_type = WDB.get_weapon(weapon_short_name).ammo_type
-    if ammo_type in GM.player.ammo:
-      ammo = GM.player.ammo[ammo_type]
+    if ADB.get_ammo(ammo_type):
+      ammo = ADB.get_ammo(ammo_type).amount
     else:
       ammo = -1
+    #if ammo_type in GM.player.ammo:
+      #ammo = GM.player.ammo[ammo_type]
+    #else:
+      #ammo = -1

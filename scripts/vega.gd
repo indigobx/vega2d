@@ -22,9 +22,16 @@ var pregnancy_weight_mod: Dictionary = {
   4: 20.0,
   5: 35.0
 }
-var pregnancy_stage: int = 0
+var _pregnancy_stage: int = 0
+var pregnancy_stage: int:
+  get:
+    return _pregnancy_stage
+  set(value):
+    _pregnancy_stage = value
+    _on_pregnancy_stage_changed(value)
 var weight_base: float = 65.0
 var weight_total: float
+var weapon_weight_mod: float = 0.7
 var _view_direction: int = 1
 var view_direction: int:
   get:
@@ -73,26 +80,29 @@ func _physics_process(delta: float) -> void:
   elif cursor_angle < 90 - direction_angle_threshold_deg:
     view_direction = 1
 
-  
+  weapon_weight_mod = heavy_weapon()
   var angle_limit = deg_to_rad(45)
   mod_angle = lerpf(mod_angle, recoil_angle, 0.25)
   arms_angle = abs(direction.rotated(deg_to_rad(90)).angle()) - deg_to_rad(90)
   arms_angle = clamp(arms_angle+mod_angle, -angle_limit, angle_limit) * view_direction
   if sign(view_direction) == sign(direction.x):  # This should not lower arms when cursor is behind
-    $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, 0.25)  # Replace weight with weapon weight here!
+    $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, weapon_weight_mod)  # Replace weight with weapon weight here!
 
-  
+  var adjusted_speed = adjust_speed(base_speed)
+  var adjusted_speed_back = adjust_speed(base_speed_back)
   if Input.is_action_pressed(action_forward):
-    velocity.x = lerpf(velocity.x, (speed_mod + base_speed) * view_direction, 0.3)
+    velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed) * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-forward-3-unarmed")
   elif Input.is_action_pressed(action_back):
-    velocity.x = lerpf(velocity.x, (speed_mod + base_speed_back) * view_direction, 0.3)
+    velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed_back) * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-back-3-unarmed")
   else:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   if is_on_floor() and Input.is_action_just_pressed("Jump"):
-    velocity.y = jump_velocity
+    #velocity.y = jump_velocity
+    var v0 = - (GM.player.jump_power * sqrt((1.0e7) / (GM.player.weight()-35)))
+    velocity.y = v0
   
   if not is_on_floor():
     velocity.y += gravity
@@ -108,10 +118,12 @@ func _physics_process(delta: float) -> void:
         GM.weapon.fire()
   if Input.is_action_just_released("Fire"):
     GM.weapon.single_fire_lock = false
-  if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and GM.player.ammo[GM.weapon.weapon.ammo_type] > 0:
+  if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount > 0:
     $Label.text = "I have to reload!"
+  elif GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount == 0:
+    $Label.text = "Time to tear'em with claws! *BARK*"
   else:
-    $Label.text = "%s" % rad_to_deg(recoil_angle)
+    $Label.text = "%.3d kg %s" % [GM.player.weight(), weapon_weight_mod]
   
   if Input.is_action_just_pressed("FireMode"):
     GM.weapon.toggle_fire_mode()
@@ -133,13 +145,13 @@ func _physics_process(delta: float) -> void:
 
   # AnimationManager
   if is_on_floor() and velocity.x * view_direction > 0.1 * view_direction:
-    $Character/Body.play("walk-forward-3-%s" % body_animation)
+    $Character/Body.play("walk-forward-%s-%s" % [pregnancy_stage, body_animation])
   if is_on_floor() and velocity.x * view_direction < 0.1 * -view_direction:
-    $Character/Body.play("walk-back-3-%s" % body_animation)
+    $Character/Body.play("walk-back-%s-%s" % [pregnancy_stage, body_animation])
   if is_on_floor() and abs(velocity) <= Vector2(0.1, 0.1):
-    $Character/Body.play("wait1-3-%s" % body_animation)
+    $Character/Body.play("wait1-%s-%s" % [pregnancy_stage, body_animation])
   if not is_on_floor() and abs(velocity.y) > 0.1:
-    $Character/Body.play("jump-3-%s" % body_animation)
+    $Character/Body.play("jump-%s-%s" % [pregnancy_stage, body_animation])
   
   recoil_position.x = recoil_position.x * view_direction
   if abs(recoil_position.x) < 0.1:
@@ -147,13 +159,26 @@ func _physics_process(delta: float) -> void:
   if abs(recoil_position.y) < 0.1:
     recoil_position.y = 0.0
   if abs(recoil_position) > Vector2(0.1, 0.1):
-    global_position = global_position + lerp(Vector2.ZERO, recoil_position, 0.5)
+    global_position = global_position + lerp(Vector2.ZERO, recoil_position, weapon_weight_mod)
   
   move_and_slide()
 
 
-func lerp_weight() -> float:
-  return 0.5
+func adjust_speed(speed) -> float:
+  var a_speed: float
+  a_speed = (speed / (0.5 + pow(GM.player.weight() / (weight_base), 2))) + 100
+  # Убедимся, что скорость не уходит совсем
+  return max(a_speed, base_speed / 10)
+
+
+func heavy_weapon() -> float:
+  var weapon = GM.weapon.weapon
+  if not weapon:
+    return 0.7
+  else:
+    var weapon_weight = weapon.weight + ADB.get_ammo(weapon.ammo_type).cartridge_weight * weapon.mag
+    var mf = (1 / (weapon_weight + 2.0)) + 0.05
+    return mf
 
 
 func sine_move(frame: int, total_frames: int, max_vector: Vector2) -> Vector2:
@@ -209,3 +234,9 @@ func _on_body_frame_changed() -> void:
     )
   else:
     $ArmsPivot.position = Vector2(4*view_direction, -14)
+
+
+func _on_pregnancy_stage_changed(value) -> int:
+  if value == 5:
+    GM.ui.say(load("res://data/dialogues/im_too_heavy.tres"))
+  return clampi(value, 0, 5)

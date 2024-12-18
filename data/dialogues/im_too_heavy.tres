@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://bhs01ly23w271"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_oyvdk"]
+
+[resource]
+script = ExtResource("1_oyvdk")
+display_time = 3
+steps = 50
+auto_hide = false
+hide_on_action = "Use"
+who = "vega"
+portrait = "vega-angry"
+what = "Hell, I'm too heavy...
+Maybe it's time to go to hospital?
+But I'm trapped here in this VR prison.,,"
