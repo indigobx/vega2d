@@ -13,6 +13,18 @@ var cursor: Vector2
 var arms_angle: float
 var recoil_angle: float = 0.0
 var mod_angle: float = 0.0
+var recoil_position: Vector2 = Vector2.ZERO
+var pregnancy_weight_mod: Dictionary = {
+  0: 0.0,
+  1: 2.0,
+  2: 5.0,
+  3: 10.0,
+  4: 20.0,
+  5: 35.0
+}
+var pregnancy_stage: int = 0
+var weight_base: float = 65.0
+var weight_total: float
 var _view_direction: int = 1
 var view_direction: int:
   get:
@@ -34,6 +46,7 @@ func _ready() -> void:
   ray = $ArmsPivot/Arms/RayCast2D
   arms_pivot = $ArmsPivot
   _on_view_direction_changed(1)
+  pregnancy_stage = 3
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,19 +75,21 @@ func _physics_process(delta: float) -> void:
 
   
   var angle_limit = deg_to_rad(45)
-  mod_angle = lerp(mod_angle, recoil_angle, 0.25)
+  mod_angle = lerpf(mod_angle, recoil_angle, 0.25)
   arms_angle = abs(direction.rotated(deg_to_rad(90)).angle()) - deg_to_rad(90)
   arms_angle = clamp(arms_angle+mod_angle, -angle_limit, angle_limit) * view_direction
   if sign(view_direction) == sign(direction.x):  # This should not lower arms when cursor is behind
-    $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, 0.2)  # Replace weight with weapon weight here!
+    $ArmsPivot.rotation = lerpf($ArmsPivot.rotation, arms_angle, 0.25)  # Replace weight with weapon weight here!
+
   
   if Input.is_action_pressed(action_forward):
     velocity.x = lerpf(velocity.x, (speed_mod + base_speed) * view_direction, 0.3)
     #$Character/Body.play("walk-forward-3-unarmed")
-  
-  if Input.is_action_pressed(action_back):
+  elif Input.is_action_pressed(action_back):
     velocity.x = lerpf(velocity.x, (speed_mod + base_speed_back) * view_direction, 0.3)
     #$Character/Body.play("walk-back-3-unarmed")
+  else:
+    velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   if is_on_floor() and Input.is_action_just_pressed("Jump"):
     velocity.y = jump_velocity
@@ -83,9 +98,9 @@ func _physics_process(delta: float) -> void:
     velocity.y += gravity
     #$Character/Body.play("jump-3-unarmed")
   
-  if not Input.is_anything_pressed():
-    velocity.x = lerpf(velocity.x, 0.0, 0.5)
-  
+  # look to action forward / back
+  #if not Input.is_anything_pressed():
+    #velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   if Input.is_action_pressed("Fire"):
     if GM.player.selected_weapon != 0:
@@ -125,9 +140,20 @@ func _physics_process(delta: float) -> void:
     $Character/Body.play("wait1-3-%s" % body_animation)
   if not is_on_floor() and abs(velocity.y) > 0.1:
     $Character/Body.play("jump-3-%s" % body_animation)
-
+  
+  recoil_position.x = recoil_position.x * view_direction
+  if abs(recoil_position.x) < 0.1:
+    recoil_position.x = 0.0
+  if abs(recoil_position.y) < 0.1:
+    recoil_position.y = 0.0
+  if abs(recoil_position) > Vector2(0.1, 0.1):
+    global_position = global_position + lerp(Vector2.ZERO, recoil_position, 0.5)
+  
   move_and_slide()
 
+
+func lerp_weight() -> float:
+  return 0.5
 
 
 func sine_move(frame: int, total_frames: int, max_vector: Vector2) -> Vector2:

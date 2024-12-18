@@ -47,7 +47,6 @@ class_name Weapon
 @export_range(0, 50, 1, "or_greater") var cartridge_by_shot: int = 1
 @export_range(0.0, 10.0, 0.1, "or_greater", "suffix:s") var reload_time: float = 1.0
 @export var reload_by_cartridge: bool = false
-@export var cartridge_weight: float = 0.5
 @export var is_chambered: bool = false
 @export var can_be_chambered: bool = true
 

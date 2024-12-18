@@ -112,11 +112,7 @@ func recoil() -> void:
   var recoil_types = weapon.get_recoil_types()
   var vega = GM.player.vega
   if "linear" in recoil_types and linear_recoil_counter > weapon.shots_before_linear_recoil:
-    vega.position = lerp(
-      vega.position,
-      vega.position + Vector2(weapon.linear_recoil.x * vega.view_direction, weapon.linear_recoil.y),
-      0.5
-    )
+    vega.recoil_position = weapon.linear_recoil
   if "angular" in recoil_types and angular_recoil_counter > weapon.shots_before_angular_recoil:
     vega.recoil_angle -= deg_to_rad(weapon.angular_recoil)
   $RecoilTimer.start(weapon.recoil_recover_delay)
@@ -234,3 +230,4 @@ func _on_recoil_timer_timeout() -> void:
   linear_recoil_counter = 0
   angular_recoil_counter = 0
   GM.player.vega.recoil_angle = 0.0
+  GM.player.vega.recoil_position = Vector2.ZERO

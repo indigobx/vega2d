@@ -18,10 +18,6 @@ func load_level(name: String) -> void:
       child.queue_free()
   # Путь к файлу уровня
   var path = "res://scenes/levels/%s.tscn" % name
-  # Проверяем, существует ли файл
-  if not FileAccess.file_exists(path):
-    print("Level file does not exist:", path)
-    return
   # Загружаем уровень
   var level_scene = load(path)
   if level_scene == null:
