@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnwhr3m7lsdgw"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_bigbar.gd" id="1_mv4dm"]
+[ext_resource type="Texture2D" uid="uid://vbq1w11ntwfd" path="res://sprites/bars/bigbar/under.png" id="1_yeomf"]
+[ext_resource type="Texture2D" uid="uid://c73i46xhs8jrv" path="res://sprites/bars/bigbar/over.png" id="2_kj10e"]
+[ext_resource type="Texture2D" uid="uid://4kk8r3bp4qhm" path="res://sprites/bars/bigbar/icon-hp2.png" id="2_yhgk3"]
+[ext_resource type="Texture2D" uid="uid://bplq84wa8gvan" path="res://sprites/bars/bigbar/progress.png" id="4_d6jy0"]
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="6_tcmkf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7txi"]
+line_spacing = 0.0
+font = ExtResource("6_tcmkf")
+font_color = Color(0.956863, 0.960784, 0.937255, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_poluf"]
+line_spacing = 0.0
+font = ExtResource("6_tcmkf")
+font_size = 13
+font_color = Color(0.843137, 0.85098, 0.807843, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.788235)
+
+[node name="BigBar" type="MarginContainer"]
+offset_right = 240.0
+offset_bottom = 16.0
+theme_override_constants/margin_left = 4
+script = ExtResource("1_mv4dm")
+
+[node name="HC" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HC"]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+texture = ExtResource("2_yhgk3")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Bar" type="TextureProgressBar" parent="HC"]
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("1_yeomf")
+texture_over = ExtResource("2_kj10e")
+texture_progress = ExtResource("4_d6jy0")
+
+[node name="Current" type="Label" parent="HC"]
+custom_minimum_size = Vector2(36, 16)
+layout_mode = 2
+text = "8000"
+label_settings = SubResource("LabelSettings_c7txi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Max" type="Label" parent="HC"]
+custom_minimum_size = Vector2(24, 16)
+layout_mode = 2
+text = "8000"
+label_settings = SubResource("LabelSettings_poluf")
+horizontal_alignment = 1
+vertical_alignment = 1

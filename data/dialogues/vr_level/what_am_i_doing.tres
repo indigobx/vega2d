@@ -9,5 +9,6 @@ steps = 50
 auto_hide = false
 hide_on_action = "Use"
 who = "Vega"
+who_color = Color(1, 1, 1, 1)
 portrait = "vega-angry"
-what = "What am I even doing here? Why is everything so freaking weird? I was supposed to wake up in my apartment, not… this empty-ass void."
+what = "What am I even doing here? Why is everything so [wave]freaking weird[/wave]? I was supposed to wake up in my apartment, not… this empty-ass void."

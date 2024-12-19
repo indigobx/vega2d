@@ -9,6 +9,7 @@ var hide_on_action: String
 var who: String
 var portrait: String
 var what: String
+var who_color: Color
 
 func _ready() -> void:
   if dialog_properties:
@@ -23,6 +24,7 @@ func apply_properties(props: DialogProperties) -> void:
   auto_hide = props.auto_hide
   hide_on_action = props.hide_on_action
   who = props.who
+  who_color = props.who_color
   portrait = props.portrait
   what = props.what
 
@@ -32,10 +34,10 @@ func _process(delta: float) -> void:
 func say():
   $Text.text = what
   $Name.text = who
+  $Name.modulate = who_color
   $Portrait.play(portrait)
   visible = true
   var step_value = 1 / float(steps)
-  print(steps, "  ", step_value)
   for i in range(0, steps + 1):
     $Text.visible_ratio = i * step_value
     $Timer.start(step_value)

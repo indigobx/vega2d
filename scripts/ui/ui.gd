@@ -13,6 +13,8 @@ var selected_slot: int:
       GM.player.selected_weapon = value
       _on_slot_select(value)
 var healthbar: Node
+var staminabar: Node
+var energybar: Node
 var heatbar: Node
 var ammobar: Node
 var firemode: Node
@@ -20,12 +22,14 @@ var firemode: Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   for i in range(0, 5):
-    weapon_icons[i] = get_node_or_null("MarginContainer/Rows/Row2/Weapon%s" % i)
+    weapon_icons[i] = get_node_or_null("%Weapon" + str(i))
   selected_slot = 0
-  healthbar = $MarginContainer/Rows/Row1/UIHealthBar
-  heatbar = $MarginContainer/Rows/Row2/UIHeat
-  ammobar = $MarginContainer/Rows/Row2/UIAmmo
-  firemode = $MarginContainer/Rows/Row2/UIFireMode
+  healthbar = %UIHealthBar
+  staminabar = %UIStaminaBar
+  energybar = %UIEnergyBar
+  heatbar = %UIHeat
+  ammobar = %UIAmmo
+  firemode = %UIFireMode
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,14 +47,26 @@ func _process(delta: float) -> void:
     GM.player.add_ammo("hinomaru_4", 8)
   if Input.is_action_just_pressed("Action2"):
     GM.player.vega.pregnancy_stage = max(0, GM.player.vega.pregnancy_stage - 1)
+    #GM.player.hp = max(0, GM.player.hp + 10)
   if Input.is_action_just_pressed("Action3"):
     GM.player.vega.pregnancy_stage = min(5, GM.player.vega.pregnancy_stage + 1)
+    #GM.player.hp = min(100, GM.player.hp - 10)
   if Input.is_action_just_pressed("Action4"):
-    say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
+    GM.player.hp = 0.0
+    GM.player.stamina = 0.0
+    GM.player.energy = 0.0
+    #say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
+  
+  healthbar.value = GM.player.hp
+  healthbar.value_max = GM.player.max_hp
+  staminabar.value = GM.player.stamina
+  staminabar.value_max = GM.player.max_stamina
+  energybar.value = GM.player.energy
+  energybar.value_max = GM.player.max_energy
 
 
 func say(props:DialogProperties) -> void:
-  var ui_say = $MarginContainer/Rows/Row1/UISay
+  var ui_say = %UISay
   ui_say.apply_properties(props)
   ui_say.say()
 

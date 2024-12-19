@@ -94,15 +94,15 @@ func _physics_process(delta: float) -> void:
     velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed) * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-forward-3-unarmed")
   elif Input.is_action_pressed(action_back):
-    velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed_back) * view_direction, weapon_weight_mod)
+    velocity.x = lerpf(velocity.x, -(speed_mod + adjusted_speed_back) * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-back-3-unarmed")
   else:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   if is_on_floor() and Input.is_action_just_pressed("Jump"):
-    #velocity.y = jump_velocity
-    var v0 = - (GM.player.jump_power * sqrt((1.0e7) / (GM.player.weight()-35)))
-    velocity.y = v0
+    var energy_to_jump = GM.player.energy_to_jump()
+    if GM.player.spend_energy(energy_to_jump):
+      velocity.y = GM.player.v0()
   
   if not is_on_floor():
     velocity.y += gravity
@@ -154,9 +154,13 @@ func _physics_process(delta: float) -> void:
     $Character/Body.play("jump-%s-%s" % [pregnancy_stage, body_animation])
   
   recoil_position.x = recoil_position.x * view_direction
-  if abs(recoil_position.x) < 0.1:
+  #if abs(recoil_position.x) < 0.1:
+    #recoil_position.x = 0.0
+  #if abs(recoil_position.y) < 0.1:
+    #recoil_position.y = 0.0
+  if is_zero_approx(recoil_position.x):
     recoil_position.x = 0.0
-  if abs(recoil_position.y) < 0.1:
+  if is_zero_approx(recoil_position.y):
     recoil_position.y = 0.0
   if abs(recoil_position) > Vector2(0.1, 0.1):
     global_position = global_position + lerp(Vector2.ZERO, recoil_position, weapon_weight_mod)

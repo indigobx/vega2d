@@ -9,5 +9,6 @@ steps = 15
 auto_hide = false
 hide_on_action = "Use"
 who = "Vega"
+who_color = Color(1, 1, 1, 1)
 portrait = "vega-angry"
-what = "Out of ammo! Time to tear ‘em up with claws!"
+what = "Out of ammo! Time to tear ‘em up with [color=red]claws[/color]!"

@@ -9,5 +9,6 @@ steps = 2
 auto_hide = false
 hide_on_action = "Use"
 who = "System Voice"
-portrait = "default"
+who_color = Color(1, 1, 1, 1)
+portrait = "default2"
 what = "Access Denied."

@@ -23,11 +23,17 @@ var selected_weapon: int:
     if _selected_weapon != value:  # Проверяем, изменилось ли значение
       _selected_weapon = value
       _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
-var hp: int
-var max_hp: int
-var energy: float = 5000.0
-var max_energy: float = 2.0e4
+var hp: float
+var max_hp: float
+var hp_restore: float
+var energy: float = 200.0
+var max_energy: float = 1000.0
+var energy_restore: float = 10.0
+var stamina: float = 0.0
+var max_stamina: float = 500.0
+var stamina_restore: float = 2.0
 var jump_power: float = 0.85
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,6 +43,27 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   pass
+
+func _physics_process(delta: float) -> void:
+  if not stamina == max_stamina:
+    var breath_factor = clamp(1.1 - stamina/max_stamina, 0.2, 1.0)
+    var ef = Engine.get_physics_frames() * 0.5 * breath_factor
+    var breath = clamp(abs(sin(ef))*sin(ef), 0.0, 1.5) * 4
+    var restored_stamina = stamina_restore * delta * breath
+    stamina = clamp(stamina+restored_stamina, 0.0, max_stamina)
+  
+  if not hp == max_hp:
+    var ef = Engine.get_physics_frames()
+    var pulse = max(0.2, sin(ef) * cos(3*ef)) * 2 - 0.2
+    var restored_hp = hp_restore * delta * pulse
+    hp = clamp(hp+restored_hp, 0.0, max_hp)
+  
+  if not energy == max_energy:
+    var normalized_energy = energy / max_energy
+    var energy_rate = max((-4/3) * pow(energy - (1/3), 2), 0.2) * 2
+    var restored_energy = energy_restore * delta * energy_rate
+    energy = clamp(energy+restored_energy, 0.0, max_energy)
+  
 
 func load_instance() -> void:
   vega = load("res://scenes/vega.tscn").instantiate()
@@ -62,8 +89,9 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
   hp = 100
   max_hp = hp
-  GM.ui.healthbar.max_hp = max_hp
-  GM.ui.healthbar.hp = hp
+  hp_restore = 10.0
+  GM.ui.healthbar.value_max = max_hp
+  GM.ui.healthbar.value = hp
 
 func put_to_slot(item, slot) -> void:
   slots[slot] = item
@@ -88,6 +116,40 @@ func weight() -> float:
       total_weight += slots[k].weight
   total_weight += ADB.weight_all()
   return total_weight
+
+func v0() -> float:
+  var w = weight() - 35
+  if w <= 0:
+    return -1000.0
+  else:
+    return -(GM.player.jump_power * sqrt((1.0e7) / w))
+
+func energy_to_jump() -> float:
+  var etj = 0.5 * weight() * pow(v0(), 2)
+  return etj * 0.00001
+
+func spend_energy(value) -> bool:
+  if energy > value:
+    energy -= value
+    return true
+  elif (energy + stamina) > value:
+    var from_stamina = value - energy
+    energy = 0.0
+    stamina -= from_stamina
+    return true
+  else:
+    var dialog_props = DialogProperties.new()
+    dialog_props.who = "Operating System v17.4"
+    dialog_props.who_color = "red"
+    dialog_props.what = """[center]
+Not enough [font_size=26][color=blue]energy[/color][/font_size] and [font_size=26][color=green]stamina[/color][/font_size].
+Some subsystems [shake][font_size=30][color=red]locked[/color][/font_size][/shake].
+You have to [font_size=32]rest[/font_size].[/center]"""
+    dialog_props.display_time = 2
+    dialog_props.steps = 60
+    dialog_props.portrait = "os"
+    GM.ui.say(dialog_props)
+    return false
 
 
 # Функция, вызываемая при изменении selected_weapon
