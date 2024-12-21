@@ -1,0 +1,142 @@
+[gd_scene load_steps=16 format=3 uid="uid://c6du4l5p50odn"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/hem_rocket.gd" id="1_wn8p5"]
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="1_wnhud"]
+[ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="3_qq865"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt8e5"]
+atlas = ExtResource("1_wnhud")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvdui"]
+atlas = ExtResource("1_wnhud")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr1qr"]
+atlas = ExtResource("1_wnhud")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7rljm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt8e5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvdui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr1qr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oh4kd"]
+radius = 2.0
+height = 34.0
+
+[sub_resource type="Gradient" id="Gradient_h2qk3"]
+offsets = PackedFloat32Array(0, 0.516393, 0.942623)
+colors = PackedColorArray(1.5, 1.2, 0.34, 1, 0.42, 0.074, 0.021, 0.383, 0.19, 0.19, 0.19, 0.298039)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_68tuu"]
+gradient = SubResource("Gradient_h2qk3")
+width = 128
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_d3h42"]
+_data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vsqnr"]
+curve = SubResource("Curve_d3h42")
+
+[sub_resource type="Curve" id="Curve_88shu"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0, 1.96703), 0.0, -0.237362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g8ngh"]
+curve = SubResource("Curve_88shu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_88ohq"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -30.0
+angle_max = 30.0
+direction = Vector3(-1, 0, 0)
+spread = 5.0
+initial_velocity_min = 120.0
+initial_velocity_max = 240.0
+angular_velocity_min = -60.85
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 15, 0)
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+damping_min = 25.591
+damping_max = 61.29
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_vsqnr")
+scale_over_velocity_max = 200.0
+scale_over_velocity_curve = SubResource("CurveTexture_g8ngh")
+color_ramp = SubResource("GradientTexture1D_68tuu")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_noise_scale = 1.0
+
+[node name="HEMRocket" type="RigidBody2D"]
+mass = 4.0
+gravity_scale = 0.1
+center_of_mass_mode = 1
+center_of_mass = Vector2(1, 0)
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_wn8p5")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, 4.5)
+sprite_frames = SubResource("SpriteFrames_7rljm")
+autoplay = "default"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oh4kd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-19, 0)
+amount = 250
+process_material = SubResource("ParticleProcessMaterial_88ohq")
+texture = ExtResource("3_qq865")
+
+[node name="EngineTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="LaunchTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ArmTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="ExplosionSensor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ExplosionSensor"]
+polygon = PackedVector2Array(14, 0, 14, 81, 35, 76, 60, 58, 82, 38, 94, 18, 101, 0, 94, -18, 82, -38, 60, -58, 35, -76, 14, -81)
+
+[connection signal="area_entered" from="ExplosionSensor" to="." method="_on_explosion_sensor_area_entered"]

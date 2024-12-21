@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://hbslthwa82an"]
 
 [ext_resource type="Script" path="res://scripts/vega.gd" id="1_8ustq"]
-[ext_resource type="SpriteFrames" uid="uid://dx67kj4mt2ikc" path="res://sprites/vega/solo/body-spriteframes.tres" id="2_ux2p2"]
+[ext_resource type="SpriteFrames" uid="uid://ctipgwabsbf6r" path="res://sprites/vega/solo/body-spriteframesv2.tres" id="2_4eltl"]
 [ext_resource type="Texture2D" uid="uid://dd4aao34lro3c" path="res://sprites/vega/solo/arm_far_pistol.png" id="25_tcarr"]
 [ext_resource type="Texture2D" uid="uid://bar1r27tymj3j" path="res://sprites/vega/solo/arm_far_rifle.png" id="26_h6tt2"]
 [ext_resource type="Texture2D" uid="uid://cbw45uy50yl7n" path="res://sprites/vega/solo/arm_far_unarmed.png" id="27_oxg22"]
@@ -99,14 +99,15 @@ fill_to = Vector2(0.5, 0)
 
 [node name="Vega" type="CharacterBody2D"]
 z_index = 10
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_8ustq")
 
 [node name="Character" type="CanvasGroup" parent="."]
 
 [node name="Body" type="AnimatedSprite2D" parent="Character"]
-sprite_frames = ExtResource("2_ux2p2")
-animation = &"walk-forward-3-armed"
-autoplay = "walk-forward-0-unarmed"
+sprite_frames = ExtResource("2_4eltl")
+animation = &"jump_0_armed"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(9, 7)
@@ -157,6 +158,7 @@ position = Vector2(50, -8)
 target_position = Vector2(4096, 0)
 collision_mask = 4
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="Line2D3" type="Line2D" parent="ArmsPivot/Arms/RayCast2D"]
 visible = false
@@ -183,6 +185,7 @@ default_color = Color(1.44392e-06, 0.668997, 0.388098, 1)
 [node name="Cursor" parent="." instance=ExtResource("31_ry0sc")]
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -14.0
 offset_top = -65.0
 offset_right = 26.0
@@ -196,5 +199,38 @@ target_position = Vector2(0, 200)
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 position = Vector2(6, 51)
 texture = SubResource("GradientTexture2D_of27a")
+
+[node name="Damage" type="Node2D" parent="."]
+
+[node name="Head" type="Area2D" parent="Damage"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Damage/Head"]
+polygon = PackedVector2Array(2, -25, 13, -22, 13, -35, -2, -36)
+
+[node name="Belly" type="Area2D" parent="Damage"]
+position = Vector2(3, 39)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Damage/Belly"]
+polygon = PackedVector2Array(0, -46, 1, -25, 7, -18, 18, -19, 18, -35, 9, -47)
+
+[node name="Torso" type="Area2D" parent="Damage"]
+position = Vector2(3, 39)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Damage/Torso"]
+polygon = PackedVector2Array(-3, -68, -1, -63, 4, -62, 9, -48, 0, -46, 1, -25, -11, -24, -12, -32, -8, -56, -8, -69, -5, -73)
+
+[node name="Legs" type="Area2D" parent="Damage"]
+position = Vector2(3, 39)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Damage/Legs"]
+polygon = PackedVector2Array(-10, -24, 1, -25, 7, -18, 18, 2, 11, 5, -22, 6)
 
 [connection signal="frame_changed" from="Character/Body" to="." method="_on_body_frame_changed"]

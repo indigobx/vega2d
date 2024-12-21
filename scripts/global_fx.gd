@@ -4,8 +4,8 @@ var fx_queue = []
 var debris_queue = []
 var decals_queue = []
 @export_range(0, 1000, 1, "or_greater") var max_fx: int = 100
-@export_range(0, 100, 1, "or_greater") var max_debris: int = 20
-@export_range(0, 100, 1, "or_greater") var max_decals: int = 20
+@export_range(0, 100, 1, "or_greater") var max_debris: int = 100
+@export_range(0, 100, 1, "or_greater") var max_decals: int = 100
 
 
 # Called when the node enters the scene tree for the first time.

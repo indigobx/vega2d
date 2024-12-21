@@ -13,7 +13,7 @@ short_name = ".25 Armsco"
 type_name = "armsco_25"
 caliber = "6.3"
 cartridge_weight = 0.015
-damage_base = "10"
+damage_base = 10.0
 
 [node name="Hinomaru_4" type="Node" parent="."]
 script = ExtResource("1_yqu21")
@@ -22,4 +22,15 @@ short_name = "Hi-12.4"
 type_name = "hinomaru_4"
 caliber = "12.44"
 cartridge_weight = 0.07
-damage_base = "20"
+damage_base = 15.0
+
+[node name="HEM_Rocket" type="Node" parent="."]
+script = ExtResource("1_yqu21")
+display_name = "HEM Rocket"
+short_name = "HEM"
+type_name = "hem_rocket"
+caliber = "80"
+cartridge_weight = 5.5
+amount_max = 20
+amount = 10
+damage_base = 100.0

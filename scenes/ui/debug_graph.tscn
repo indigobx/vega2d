@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv0hmg1lfjgxf"]
+
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="1_266sv"]
+[ext_resource type="Script" path="res://scripts/ui/debug_graph.gd" id="1_c6wc6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssf5j"]
+bg_color = Color(1, 1, 1, 0.376471)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_rphr8"]
+default_font = ExtResource("1_266sv")
+default_font_size = 14
+Panel/styles/panel = SubResource("StyleBoxFlat_ssf5j")
+
+[node name="Graph" type="Panel"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 64)
+offset_right = 200.0
+offset_bottom = 64.0
+theme = SubResource("Theme_rphr8")
+script = ExtResource("1_c6wc6")
+
+[node name="Values" type="Label" parent="."]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 18.0
+text = "0.00"

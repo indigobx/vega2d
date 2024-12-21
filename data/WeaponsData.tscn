@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=56 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
@@ -22,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://diaknuswd4kjc" path="res://sprites/weapons/smart-pistol/reload0001.png" id="13_uadll"]
 [ext_resource type="Texture2D" uid="uid://cwj8db84xu5bp" path="res://sprites/weapons/smart-pistol/reload0002.png" id="14_5nsva"]
 [ext_resource type="Texture2D" uid="uid://c28tx0xjfip04" path="res://sprites/weapons/smart-pistol/reload0003.png" id="15_4jqs7"]
+[ext_resource type="PackedScene" uid="uid://c6du4l5p50odn" path="res://scenes/projectiles/hem_rocket.tscn" id="23_7x5e8"]
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="23_7y2wb"]
+[ext_resource type="PackedScene" uid="uid://s5uwu3hyjtau" path="res://scenes/debris/hem_booster.tscn" id="24_8b0p4"]
+[ext_resource type="PackedScene" uid="uid://dphru0roax8nd" path="res://scenes/debris/hem_shell.tscn" id="25_0c8k5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyay5"]
 animations = [{
@@ -230,6 +234,101 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2kam"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flcu4"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_winsh"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghxjk"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n5ag"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnyta"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hhdh"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpglo"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3w3k4"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhlog"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w72wc"]
+atlas = ExtResource("23_7y2wb")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et2kn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2kam")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flcu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_winsh")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghxjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n5ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnyta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hhdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpglo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3w3k4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhlog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w72wc")
+}],
+"loop": false,
+"name": &"reload",
+"speed": 4.0
+}]
+
 [node name="WeaponsData" type="Node" node_paths=PackedStringArray("weapons")]
 script = ExtResource("1_qa4qa")
 weapons = [null]
@@ -279,6 +378,8 @@ sprite_offest = Vector2i(0, 4)
 reload_animation = "reload"
 empty_animation = "empty"
 unjam_animation = "unjam"
+damage_mod = 0.5
+damage_random_delta = 1.5
 hit_mark_scene = ExtResource("8_23448")
 mag_size = 30
 mag = 30
@@ -294,3 +395,22 @@ shots_before_linear_recoil = 8
 recoil_recover_delay = 0.3
 spread_full_auto = 3.0
 spread_burst = 1.0
+
+[node name="RAVEN" type="Node" parent="."]
+script = ExtResource("2_pptmm")
+display_name = "RAVEN"
+short_name = "RAVEN"
+weight = 7.0
+hit_type = "projectile"
+projectile_scene = ExtResource("23_7x5e8")
+casing_scene = ExtResource("24_8b0p4")
+empty_clip_scene = ExtResource("25_0c8k5")
+sprite_frames = SubResource("SpriteFrames_et2kn")
+sprite_offest = Vector2i(-24, 0)
+reload_animation = "reload"
+empty_animation = "empty"
+ammo_type = "hem_rocket"
+reload_time = 2.0
+can_be_chambered = false
+fire_modes = 3
+recoil_directions = 3

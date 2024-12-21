@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://s5uwu3hyjtau"]
+
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="1_5nytx"]
+[ext_resource type="Script" path="res://scripts/debris/hem_booster.gd" id="1_7bjkx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_7bjkx")
+
+[node name="Booster1" type="RigidBody2D" parent="."]
+position = Vector2(21, -2)
+collision_layer = 0
+mass = 0.5
+gravity_scale = 0.5
+linear_velocity = Vector2(350, 50)
+linear_damp = 2.0
+angular_velocity = -2.44346
+angular_damp = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="Booster1"]
+texture = ExtResource("1_5nytx")
+region_enabled = true
+region_rect = Rect2(66, 216, 16, 3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Booster1"]
+position = Vector2(0, -0.5)
+polygon = PackedVector2Array(-7, 2, -3, 2, 8, 0.5, 7, -1, -5, -1, -7, 0)
+
+[node name="Booster2" type="RigidBody2D" parent="."]
+position = Vector2(21, -2)
+collision_layer = 0
+mass = 0.5
+gravity_scale = 0.5
+linear_velocity = Vector2(380, -50)
+linear_damp = 1.0
+angular_velocity = 2.44346
+angular_damp = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="Booster2"]
+texture = ExtResource("1_5nytx")
+region_enabled = true
+region_rect = Rect2(66, 216, 16, 3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Booster2"]
+position = Vector2(0, 4)
+scale = Vector2(1, -1)
+polygon = PackedVector2Array(-7, 2, -3, 2, 8, 0.5, 7, -1, -5, -1, -7, 0)

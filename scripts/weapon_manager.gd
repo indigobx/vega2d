@@ -7,6 +7,12 @@ var _weapon: Weapon
   set(value):
     _on_weapon_change(value)
 
+var _ammo: Ammo
+@export var ammo: Ammo:
+  get:
+    return _ammo
+  set(value):
+    _on_ammo_change(value)
 
 var _fire_mode: String
 @export var fire_mode: String:
@@ -16,8 +22,17 @@ var _fire_mode: String
     _on_mode_change(value)
 
 
+func _on_ammo_change(value) -> void:
+  _ammo = value
+
+
 func _on_weapon_change(value) -> void:
   _weapon = value
+  if value:
+    ammo = ADB.get_ammo(value.ammo_type)
+    GM.player.vega.weapon_offset = weapon.sprite_offest
+  else:
+    ammo = null
   GM.ui.ammobar.update()
   if value:
     if GM.in_safe_area:
@@ -103,6 +118,7 @@ func perform_shot() -> void:
     can_fire = false
     weapon.set_mag(0)
     weapon.is_chambered = false
+    GM.player.weapon_sprite.play(weapon.empty_animation)
     #GM.ui.say(load("res://data/dialogues/vr_level/ammos_out.tres"))
   GM.ui.ammobar.update()
 
@@ -142,16 +158,23 @@ func hitscan() -> void:
   var p0 = ray.global_position
   var p1 = p0 + Vector2(1024, 0).rotated(arms_pivot.global_rotation)
   var ray_r0 = ray.global_rotation
+  var target
   ray.global_rotation += randf_range(-spread, spread)
   ray.force_raycast_update()
   if ray.is_colliding():
-    var target = ray.get_collider()
+    target = ray.get_collider()
     p1 = ray.get_collision_point()
   ray.global_rotation = ray_r0
   hitscan_instance.hit_point = p1
   hitscan_instance.points[0] = p0
   hitscan_instance.points[1] = p1
   GlobalFx.add_fx(hitscan_instance)
+  var damage = ammo.damage_base + weapon.damage_mod +\
+    randf_range(-weapon.damage_random_delta, weapon.damage_random_delta)
+  if randi_range(0, 101) < weapon.crit_chance:
+    damage *= weapon.crit_multiplier
+  if target and target.get_parent().has_method("take_damage"):
+    target.get_parent().take_damage(damage, target)
   hit_mark.global_position = p1
   GlobalFx.add_decal(hit_mark)
   
@@ -212,8 +235,12 @@ func rack_bolt() -> void:
 func eject_shell() -> void:
   var shell_instance = weapon.casing_scene.instantiate()
   shell_instance.global_position = GM.player.weapon_sprite.global_position
-  shell_instance.linear_velocity.x = GM.player.vega.view_direction * randi_range(20, 40)
-  shell_instance.linear_velocity.y = randi_range(-75, -150)
+  #if is_instance_of(shell_instance, RigidBody2D):
+    #shell_instance.linear_velocity.x = GM.player.vega.view_direction * randi_range(20, 40)
+    #shell_instance.linear_velocity.y = randi_range(-75, -150)
+  #else:
+    #shell_instance.scale.x *= GM.player.vega.view_direction
+  shell_instance.scale.x *= GM.player.vega.view_direction
   GlobalFx.add_debris(shell_instance)
 
 

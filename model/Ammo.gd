@@ -11,7 +11,7 @@ class_name Ammo
 @export var amount_max: int
 @export var amount: int
 @export_category("Damage")
-@export var damage_base: String
+@export var damage_base: float
 @export_category("Visual")
 @export var icon_ui: Sprite2D
 @export var icon_small: Sprite2D

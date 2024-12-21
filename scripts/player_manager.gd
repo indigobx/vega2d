@@ -28,10 +28,13 @@ var max_hp: float
 var hp_restore: float
 var energy: float = 200.0
 var max_energy: float = 1000.0
-var energy_restore: float = 10.0
+var energy_restore: float = 20.0
 var stamina: float = 0.0
 var max_stamina: float = 500.0
 var stamina_restore: float = 2.0
+var breath: float
+var pulse: float
+var energy_rate: float
 var jump_power: float = 0.85
 
 
@@ -47,20 +50,20 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
   if not stamina == max_stamina:
     var breath_factor = clamp(1.1 - stamina/max_stamina, 0.2, 1.0)
-    var ef = Engine.get_physics_frames() * 0.5 * breath_factor
-    var breath = clamp(abs(sin(ef))*sin(ef), 0.0, 1.5) * 4
+    var ef = Engine.get_physics_frames() * 0.1 * breath_factor
+    breath = clamp(abs(sin(ef))*sin(ef), 0.0, 1.5) * 16
     var restored_stamina = stamina_restore * delta * breath
     stamina = clamp(stamina+restored_stamina, 0.0, max_stamina)
   
   if not hp == max_hp:
     var ef = Engine.get_physics_frames()
-    var pulse = max(0.2, sin(ef) * cos(3*ef)) * 2 - 0.2
+    pulse = max(0.2, sin(ef) * cos(3*ef)) * 2 - 0.2
     var restored_hp = hp_restore * delta * pulse
     hp = clamp(hp+restored_hp, 0.0, max_hp)
   
   if not energy == max_energy:
     var normalized_energy = energy / max_energy
-    var energy_rate = max((-4/3) * pow(energy - (1/3), 2), 0.2) * 2
+    energy_rate = max((4/3) * pow(normalized_energy - (1/5), 2) * 5, 0.2)
     var restored_energy = energy_restore * delta * energy_rate
     energy = clamp(energy+restored_energy, 0.0, max_energy)
   
@@ -78,9 +81,11 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   near_arm = vega.get_node("ArmsPivot/Arms/Near")
   far_arm = vega.get_node("ArmsPivot/Arms/Far")
   # should move this to sep function
+  put_to_slot(WDB.get_weapon("RAVEN"), 2)
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   put_to_slot(WDB.get_weapon("AR-8"), 4)
   print(ADB)
+  add_ammo("hem_rocket", 4)
   add_ammo("armsco_25", 120)
   add_ammo("hinomaru_4", 32)
   print(ADB)

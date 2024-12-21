@@ -6,7 +6,8 @@ var cartridges = []
 var textures = {
   "default": preload("res://sprites/ui/cartridge-default.png"),
   "ar-8": preload("res://sprites/ui/cartridge-ar-8.png"),
-  "kosei-12": preload("res://sprites/ui/cartridge-kosei-12.png")
+  "kosei-12": preload("res://sprites/ui/cartridge-kosei-12.png"),
+  "raven": preload("res://sprites/ui/cartridge-raven.png")
 }
 var cartridge_chambered: Vector2
 var cartridge_1: Vector2
@@ -36,6 +37,13 @@ func update() -> void:
         cartridge_chambered = Vector2(0, 0)
         ct = textures["kosei-12"]
         frame = Vector2(20, 48)
+      "raven":
+        cartridge_offset_x = "0"
+        cartridge_offset_y = "0"
+        cartridge_1 = Vector2(-1, -4)
+        cartridge_chambered = Vector2(0, 0)
+        ct = textures["raven"]
+        frame = Vector2(13, 40)
       _:
         cartridge_offset_x = "0"
         cartridge_offset_y = "i * 6 + 6"

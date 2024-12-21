@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://grvu0l5la8bi"]
+
+[ext_resource type="Script" path="res://utilites/sprite_sheet_to_sprite_frames.gd" id="1_lg10v"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_lg10v")
+input_folder = "res://sprites/vega/solo"
+output_path = "res://sprites/vega/solo"
+fps_dict = {
+"jump": 12,
+"walk-backward": 6,
+"walk-forward": 12
+}

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4c7e3yhi0x4y"]
+
+[ext_resource type="Script" path="res://scripts/explosions/hem_explosion_logic.gd" id="1_lv5jw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c5rvc"]
+radius = 250.0
+
+[node name="HEMExplosion" type="Node2D"]
+script = ExtResource("1_lv5jw")
+
+[node name="Explosion" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion"]
+shape = SubResource("CircleShape2D_c5rvc")

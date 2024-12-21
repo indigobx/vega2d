@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dphru0roax8nd"]
+
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="1_f3qq8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pspv1"]
+radius = 4.0
+height = 36.0
+
+[node name="HEMShell" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.3
+gravity_scale = 0.7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-34.5, -0.5)
+texture = ExtResource("1_f3qq8")
+region_enabled = true
+region_rect = Rect2(64, 151, 37, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-34.5, -0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pspv1")

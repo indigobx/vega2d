@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=12 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
 [ext_resource type="PackedScene" uid="uid://dnwhr3m7lsdgw" path="res://scenes/ui/ui_bigbar.tscn" id="2_6krfb"]
@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://clvfpvgta6ueb" path="res://scenes/ui/ui_weapon_icon.tscn" id="6_kiuos"]
 [ext_resource type="PackedScene" uid="uid://sn7nyl5e7l2f" path="res://scenes/ui/ui_weapon_icon_empty.tscn" id="6_mjjle"]
 [ext_resource type="PackedScene" uid="uid://c27cxf7arloth" path="res://scenes/ui/ui_ammo_v2.tscn" id="8_n5b8q"]
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="9_4fhkq"]
+[ext_resource type="PackedScene" uid="uid://bv0hmg1lfjgxf" path="res://scenes/ui/debug_graph.tscn" id="10_kciq3"]
+
+[sub_resource type="Theme" id="Theme_thnpw"]
+default_font = ExtResource("9_4fhkq")
+default_font_size = 21
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -22,8 +28,8 @@ script = ExtResource("1_gc44a")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 432.0
+offset_bottom = 188.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -112,3 +118,48 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Debug" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(320, 400)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 400.0
+grow_horizontal = 0
+
+[node name="Text" type="RichTextLabel" parent="Debug"]
+clip_contents = false
+custom_minimum_size = Vector2(320, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_thnpw")
+bbcode_enabled = true
+text = "[right][b]some[/b]
+debug
+[color=red]text[/color]
+[/right]"
+
+[node name="Breath" parent="Debug" instance=ExtResource("10_kciq3")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+graph_color = Color(0.309804, 0.556863, 0.14902, 1)
+
+[node name="Pulse" parent="Debug" instance=ExtResource("10_kciq3")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+graph_color = Color(0.685733, 3.10443e-06, 5.77569e-07, 1)
+
+[node name="EnergyRate" parent="Debug" instance=ExtResource("10_kciq3")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+graph_color = Color(0.202798, 0.401211, 0.770158, 1)

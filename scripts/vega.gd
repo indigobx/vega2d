@@ -44,7 +44,15 @@ var action_forward: String = "Left"
 var action_back: String = "Right"
 var body_animation: String = "unarmed"
 var arms_pivot: Node
+var _weapon_offset: Vector2 = Vector2.ZERO
+var weapon_offset: Vector2:
+  get:
+    return _weapon_offset
+  set(value):
+    _weapon_offset = value
+    _on_weapon_offset_changed(value)
 var ray: Node
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,6 +74,7 @@ func _process(delta: float) -> void:
   else:
     $ArmsPivot/Arms.visible = false
     body_animation = "unarmed"
+
 
 func _physics_process(delta: float) -> void:
   
@@ -118,12 +127,13 @@ func _physics_process(delta: float) -> void:
         GM.weapon.fire()
   if Input.is_action_just_released("Fire"):
     GM.weapon.single_fire_lock = false
-  if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount > 0:
-    $Label.text = "I have to reload!"
-  elif GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount == 0:
-    $Label.text = "Time to tear'em with claws! *BARK*"
-  else:
-    $Label.text = "%.3d kg %s" % [GM.player.weight(), weapon_weight_mod]
+
+  #if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount > 0:
+    #$Label.text = "I have to reload!"
+  #elif GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount == 0:
+    #$Label.text = "Time to tear'em with claws! *BARK*"
+  #else:
+    #$Label.text = "%.3d kg %s" % [GM.player.weight(), weapon_weight_mod]
   
   if Input.is_action_just_pressed("FireMode"):
     GM.weapon.toggle_fire_mode()
@@ -145,13 +155,13 @@ func _physics_process(delta: float) -> void:
 
   # AnimationManager
   if is_on_floor() and velocity.x * view_direction > 0.1 * view_direction:
-    $Character/Body.play("walk-forward-%s-%s" % [pregnancy_stage, body_animation])
+    $Character/Body.play("walk_forward_%s_%s" % [pregnancy_stage, body_animation])
   if is_on_floor() and velocity.x * view_direction < 0.1 * -view_direction:
-    $Character/Body.play("walk-back-%s-%s" % [pregnancy_stage, body_animation])
+    $Character/Body.play("walk_back_%s_%s" % [pregnancy_stage, body_animation])
   if is_on_floor() and abs(velocity) <= Vector2(0.1, 0.1):
-    $Character/Body.play("wait1-%s-%s" % [pregnancy_stage, body_animation])
+    $Character/Body.play("wait_1_%s_%s" % [pregnancy_stage, body_animation])
   if not is_on_floor() and abs(velocity.y) > 0.1:
-    $Character/Body.play("jump-%s-%s" % [pregnancy_stage, body_animation])
+    $Character/Body.play("jump_%s_%s" % [pregnancy_stage, body_animation])
   
   recoil_position.x = recoil_position.x * view_direction
   #if abs(recoil_position.x) < 0.1:
@@ -191,6 +201,9 @@ func sine_move(frame: int, total_frames: int, max_vector: Vector2) -> Vector2:
   var scale = sin(angle)
   return Vector2(scale * max_vector.x, scale * max_vector.y)
 
+
+func _on_weapon_offset_changed(value) -> void:
+  $ArmsPivot/Arms/Weapon.position = Vector2(30, -5) + value
 
 func _on_view_direction_changed(vd) -> void:
   if vd == -1:
