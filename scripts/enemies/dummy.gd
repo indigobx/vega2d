@@ -44,7 +44,7 @@ func take_damage(amount, zone) -> void:
     elif hp_factor > 0.1:
       $Sprite.play("dmg_4")
     elif hp <= 0:
-      die()
+      call_deferred("die")
 
 func die() -> void:
   hp = 0

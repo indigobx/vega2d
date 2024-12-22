@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://xw2ulut63ghb"]
+
+[ext_resource type="Script" path="res://utilites/dither_palette_generator.gd" id="1_kxqbe"]
+[ext_resource type="Image" uid="uid://4kf6i4y0sr23" path="res://palettes/1x/red-bleed-8.png" id="2_mhs6f"]
+
+[node name="DitherPaletteGenerator" type="Node"]
+script = ExtResource("1_kxqbe")
+palette_image = ExtResource("2_mhs6f")
+output_name = "red-8"

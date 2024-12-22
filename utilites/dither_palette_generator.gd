@@ -13,7 +13,9 @@
 extends Node
 
 @export var palette_image:Image
-@export var output_png_path:String = 'res://my_dither_palette.png'
+@export var output_name:String = "palette"
+@export var output_path:String = 'res://utilites/output'
+var output_png_path = output_path + "/" + output_name + ".png"
 @export_range (1, 16) var dither_color_count:int = 4
 @export var create_dither_palette:bool:
     set(value):

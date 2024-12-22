@@ -50,7 +50,7 @@ func show_ui() -> void:
   print(get_tree().get_nodes_in_group("ui"))
   var ui = get_ui()
   ui.visible = true
-  GM.reparent_node(ui, "Game/PlayerManager/Vega/PlayerCamera/Camera/CanvasLayer")
+  GM.reparent_node(ui, "Game/PlayerManager/Vega/Camera/CanvasLayer")
 
 func hide_ui() -> void:
   #var ui = get_tree().root.find_child("UI", true, false)

@@ -41,7 +41,7 @@ height = 34.0
 offsets = PackedFloat32Array(0, 0.516393, 0.942623)
 colors = PackedColorArray(1.5, 1.2, 0.34, 1, 0.42, 0.074, 0.021, 0.383, 0.19, 0.19, 0.19, 0.298039)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_68tuu"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ub3dd"]
 gradient = SubResource("Gradient_h2qk3")
 width = 128
 use_hdr = true
@@ -50,7 +50,7 @@ use_hdr = true
 _data = [Vector2(0, 0.384615), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_vsqnr"]
+[sub_resource type="CurveTexture" id="CurveTexture_scpfq"]
 curve = SubResource("Curve_d3h42")
 
 [sub_resource type="Curve" id="Curve_88shu"]
@@ -59,7 +59,7 @@ max_value = 5.0
 _data = [Vector2(0, 1.96703), 0.0, -0.237362, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_g8ngh"]
+[sub_resource type="CurveTexture" id="CurveTexture_ll11m"]
 curve = SubResource("Curve_88shu")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_88ohq"]
@@ -80,10 +80,10 @@ damping_min = 25.591
 damping_max = 61.29
 scale_min = 0.05
 scale_max = 0.1
-scale_curve = SubResource("CurveTexture_vsqnr")
+scale_curve = SubResource("CurveTexture_scpfq")
 scale_over_velocity_max = 200.0
-scale_over_velocity_curve = SubResource("CurveTexture_g8ngh")
-color_ramp = SubResource("GradientTexture1D_68tuu")
+scale_over_velocity_curve = SubResource("CurveTexture_ll11m")
+color_ramp = SubResource("GradientTexture1D_ub3dd")
 hue_variation_min = -0.05
 hue_variation_max = 0.05
 turbulence_noise_scale = 1.0

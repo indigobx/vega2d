@@ -117,6 +117,7 @@ Unjam={
 2d_physics/layer_1="Walkable"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Can be hit"
+2d_physics/layer_4="Level only"
 
 [rendering]
 
