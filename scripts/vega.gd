@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 var footprint_scene = preload("res://scenes/decals/footprint.tscn")
-var speed_mod: float = 1.0
-var speed_mod_max: float = 20.0
+var env_speed_mod: float = 1.0
+var walk_speed_mod: float = 1.0
+var walk_speed_mod_max: float = 20.0
 var base_speed: float = 240.0
 var base_speed_back: float = -60.0
 var jump_velocity : float = -400.0
@@ -100,11 +101,12 @@ func _physics_process(delta: float) -> void:
 
   var adjusted_speed = adjust_speed(base_speed)
   var adjusted_speed_back = adjust_speed(base_speed_back)
+  var x_speed = (walk_speed_mod + adjusted_speed) * env_speed_mod
   if Input.is_action_pressed(action_forward):
-    velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed) * view_direction, weapon_weight_mod)
+    velocity.x = lerpf(velocity.x, x_speed * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-forward-3-unarmed")
   elif Input.is_action_pressed(action_back):
-    velocity.x = lerpf(velocity.x, -(speed_mod + adjusted_speed_back) * view_direction, weapon_weight_mod)
+    velocity.x = lerpf(velocity.x, -x_speed * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-back-3-unarmed")
   else:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
@@ -208,7 +210,8 @@ func _on_weapon_offset_changed(value) -> void:
 
 func _on_view_direction_changed(vd) -> void:
   if vd == -1:
-    $Character/Body.flip_h = true
+    if not $Character/Body.flip_h:
+      $Character/Body.flip_h = true
     $Collision.scale.x = -1
     $Collision.position.x = -9
     $ArmsPivot.scale.x = -1
@@ -231,7 +234,7 @@ func _on_view_direction_changed(vd) -> void:
 
 func _on_body_frame_changed() -> void:
   var max_frames = $Character/Body.sprite_frames.get_frame_count($Character/Body.animation)
-  speed_mod = speed_mod_max * sin((float($Character/Body.frame) / float(max_frames)) * 2*PI)
+  walk_speed_mod = walk_speed_mod_max * sin((float($Character/Body.frame) / float(max_frames)) * 2*PI)
   # footprints
   if $Character/Body.frame in [3, 7] \
   and abs(velocity.x) > 1.0 \

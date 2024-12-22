@@ -2,7 +2,12 @@ extends RigidBody2D
 
 var explosion_scene = preload("res://scenes/explosions/hem_explosion_logic.tscn")
 var shrapnel_scene = preload("res://scenes/debris/shrapnel.tscn")
-var armed = false
+var armed: bool = false
+var critical_speed_2: float = 1.0 ** 2
+var critical_lon_g_2: float = 2000.0 ** 2
+var critical_ang_g: float = 250.0
+var previous_velocity: Vector2
+var previous_angular_velocity: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,10 +16,12 @@ func _ready() -> void:
   $SelfDestructTimer.start()
   $ExplosionSensor.monitoring = false
   $GPUParticles2D.emitting = false
+  previous_velocity = linear_velocity
+  previous_angular_velocity = angular_velocity
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
   if $LaunchTimer.is_stopped() and not armed:
     armed = true
     $EngineTimer.start()
@@ -28,7 +35,14 @@ func _process(delta: float) -> void:
     $ExplosionSensor.monitoring = true
   if $SelfDestructTimer.is_stopped():
     call_deferred("explode")
-
+  
+  #if $ArmTimer.is_stopped() and armed:
+    #var velocity_delta_2 = (linear_velocity - previous_velocity).length_squared() 
+    #var angular_acceleration = abs(angular_velocity - previous_angular_velocity) / delta
+    #if velocity_delta_2 > critical_lon_g_2:
+      #call_deferred("explode")
+    #if angular_acceleration > critical_ang_g:
+      #call_deferred("explode")
 
 func _on_explosion_sensor_area_entered(area: Area2D) -> void:
   call_deferred("explode")
