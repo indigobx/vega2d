@@ -7,6 +7,7 @@ var ui: Node = null
 var camera: Node = null
 var weapon: Node = null
 var cursor: Vector2
+var shader: Node = null
 var in_safe_area: bool
 
 # Called when the node enters the scene tree for the first time.
@@ -34,7 +35,8 @@ func new_game() -> void:
   player.load_instance()
   player.spawn(spawn_point)
   ui_manager.toggle_ui("ui")
-
+  camera = player.vega.get_node("Camera")
+  shader = player.vega.get_node("Camera/CanvasLayer/PostShader")
 
 
 func reparent_node(node: Node, new_parent: Variant) -> void:

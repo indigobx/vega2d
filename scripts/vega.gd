@@ -10,6 +10,7 @@ var gravity : float = 15.0
 var direction: Vector2
 var direction_angle_threshold_deg: float = 15.0
 var cursor: Vector2
+var camera_shake: Vector2
 var arms_angle: float
 var recoil_angle: float = 0.0
 var mod_angle: float = 0.0
@@ -67,7 +68,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   cursor = get_local_mouse_position()
-  GM.camera.offset = lerp(GM.camera.offset, cursor/3, 0.05)
+  GM.camera.offset = lerp(GM.camera.offset, cursor/3 + camera_shake, 0.05)
   if GM.player.selected_weapon != 0:
     $ArmsPivot/Arms.visible = true
     body_animation = "armed"
@@ -198,8 +199,8 @@ func heavy_weapon() -> float:
 func sine_move(frame: int, total_frames: int, max_vector: Vector2) -> Vector2:
   frame = frame % total_frames
   var angle = float(frame) / float(total_frames) * PI
-  var scale = sin(angle)
-  return Vector2(scale * max_vector.x, scale * max_vector.y)
+  var sin_scale = sin(angle)
+  return Vector2(sin_scale * max_vector.x, sin_scale * max_vector.y)
 
 
 func _on_weapon_offset_changed(value) -> void:
@@ -255,5 +256,12 @@ func _on_body_frame_changed() -> void:
 
 func _on_pregnancy_stage_changed(value) -> int:
   if value == 5:
+    GM.player.hp_restore = 50.0
+    GM.player.stamina_restore = 1.0
     GM.ui.say(load("res://data/dialogues/im_too_heavy.tres"))
-  return clampi(value, 0, 5)
+  else:
+    GM.player.hp_restore = 10.0
+    GM.player.stamina_restore = 10.0
+  var stage = clampi(value, 0, 5)
+  GM.player.max_hp = 200 + 25*stage
+  return stage

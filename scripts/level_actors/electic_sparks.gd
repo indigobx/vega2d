@@ -14,10 +14,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   if timer >= cycle_duration:
-    var bodies = $Area2D.get_overlapping_bodies()
-    for body in bodies:
-      if body.has_method("take_damage"):
-        body.take_damage(randi_range(damage_min, damage_max))
+    var targets = $Area2D.get_overlapping_areas()
+    print(targets)
+    for target in targets:
+      if target.get_parent().has_method("take_damage"):
+        target.get_parent().take_damage(randi_range(damage_min, damage_max), target)
     timer = 0.0
     $Particles.emitting = true
     $Light.light_once("flicker", spark_duration)

@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
   if Input.is_action_just_pressed("Weapon4"):
     selected_slot = 4
   if Input.is_action_just_pressed("Action1"):
+    GM.camera.flicker_palette("1bit", 1.0)
     GM.player.add_ammo("armsco_25", 30)
     GM.player.add_ammo("hinomaru_4", 8)
   if Input.is_action_just_pressed("Action2"):

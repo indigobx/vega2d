@@ -31,12 +31,18 @@ var max_energy: float = 1000.0
 var energy_restore: float = 20.0
 var stamina: float = 0.0
 var max_stamina: float = 500.0
-var stamina_restore: float = 2.0
+var stamina_restore: float = 10.0
 var breath: float
 var pulse: float
 var energy_rate: float
 var jump_power: float = 0.85
-
+var hp_level_table = [
+  {"threshold": 0.05, "color": Color(1.0, 0.1, 0.1), "palette": "red14", "shake": 4},
+  {"threshold": 0.1, "color": Color(1.0, 0.5, 0.5), "palette": "red28", "shake": 2},
+  {"threshold": 0.25, "color": Color(1.0, 0.75, 0.75), "palette": "testvega2", "shake": 1},
+  {"threshold": 0.5, "color": Color(1.0, 0.5, 0.5)},
+  {"threshold": 0.67, "color": Color(1.0, 0.75, 0.75)}
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,7 +57,7 @@ func _physics_process(delta: float) -> void:
   if not stamina == max_stamina:
     var breath_factor = clamp(1.1 - stamina/max_stamina, 0.2, 1.0)
     var ef = Engine.get_physics_frames() * 0.1 * breath_factor
-    breath = clamp(abs(sin(ef))*sin(ef), 0.0, 1.5) * 16
+    breath = clamp(abs(sin(ef))*sin(ef), 0.0, 1.5) * 4
     var restored_stamina = stamina_restore * delta * breath
     stamina = clamp(stamina+restored_stamina, 0.0, max_stamina)
   
@@ -63,19 +69,21 @@ func _physics_process(delta: float) -> void:
   
   if not energy == max_energy:
     var normalized_energy = energy / max_energy
-    energy_rate = max((4/3) * pow(normalized_energy - (1/5), 2) * 5, 0.2)
+    energy_rate = max(1.33 * pow(normalized_energy - 0.2, 2) * 5, 0.2)
     var restored_energy = energy_restore * delta * energy_rate
     energy = clamp(energy+restored_energy, 0.0, max_energy)
+  
+  hp_effect()
   
 
 func load_instance() -> void:
   vega = load("res://scenes/vega.tscn").instantiate()
 
-func spawn(Vector2 = Vector2.ZERO) -> void:
+func spawn(spawn_point = Vector2.ZERO) -> void:
   add_child(vega)
-  vega.global_position = Vector2
+  vega.global_position = spawn_point
   var camera = load("res://scenes/player_camera.tscn").instantiate()
-  GM.camera = camera.get_node("Camera")
+  #GM.camera = camera
   vega.add_child(camera)
   weapon_sprite = vega.get_node("ArmsPivot/Arms/Weapon")
   near_arm = vega.get_node("ArmsPivot/Arms/Near")
@@ -92,7 +100,7 @@ func spawn(Vector2 = Vector2.ZERO) -> void:
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
-  hp = 100
+  hp = 250
   max_hp = hp
   hp_restore = 10.0
   GM.ui.healthbar.value_max = max_hp
@@ -110,7 +118,22 @@ func add_ammo(type, amount) -> void:
   var ammo = ADB.get_ammo(type)
   ammo.add_ammo(amount)
 
-
+func hp_effect() -> void:
+  if hp == max_hp:
+    return
+  var hp_factor = hp / max_hp
+  for entry in hp_level_table:
+    if hp_factor < entry["threshold"]:
+      GM.ui.modulate = entry["color"]
+      if "palette" in entry:
+        GM.camera.set_palette(entry["palette"])
+        GM.camera.enable_post_shader()
+      else:
+        GM.camera.disable_post_shader()
+      if "shake" in entry:
+        vega.camera_shake = Vector2(0, randi_range(-entry["shake"], entry["shake"]))
+      return
+  GM.ui.modulate = Color("white")
 
 func weight() -> float:
   var total_weight = 0.0

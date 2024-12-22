@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var base_damage:float = 50.0
-@export var explosion_radius: float = 250.0
+@export var explosion_radius: float = 175.0
 var exploded = false
 var explosion_scene = preload("res://scenes/fx/hem_explosion.tscn")
 var counter = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dnb646qk2kdwa"]
+[gd_scene load_steps=19 format=4 uid="uid://dnb646qk2kdwa"]
 
 [ext_resource type="Texture2D" uid="uid://hi10ee50shpr" path="res://textures/vr/atlas_01.png" id="1_2ndhv"]
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
@@ -8,6 +8,7 @@
 [ext_resource type="LabelSettings" uid="uid://dd88eotnpfti" path="res://themes/new_label_settings.tres" id="5_80mo8"]
 [ext_resource type="Script" path="res://scripts/light.gd" id="5_djf1f"]
 [ext_resource type="PackedScene" uid="uid://evijmramehtn" path="res://scenes/enemies/dummy.tscn" id="8_5xuep"]
+[ext_resource type="PackedScene" uid="uid://wapjublkg10g" path="res://scenes/level_actors/electic_sparks.tscn" id="9_rmw3k"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qftnf"]
 size = Vector2(2000, 800)
@@ -45,7 +46,8 @@ texture_region_size = Vector2i(128, 128)
 
 [sub_resource type="TileSet" id="TileSet_01lsh"]
 tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 5
+physics_layer_0/collision_layer = 9
+physics_layer_0/collision_mask = 9
 sources/0 = SubResource("TileSetAtlasSource_6xjc6")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0kd7a"]
@@ -261,6 +263,9 @@ position = Vector2(512, 29)
 
 [node name="Dummy" parent="." instance=ExtResource("8_5xuep")]
 position = Vector2(-201, 7)
+
+[node name="ElecticSparks" parent="." instance=ExtResource("9_rmw3k")]
+position = Vector2(-74, 46)
 
 [connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Node2D/Area2D2" to="." method="_on_area_2d_2_body_entered"]

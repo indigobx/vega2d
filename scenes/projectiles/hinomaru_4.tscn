@@ -97,13 +97,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gh24"]
-size = Vector2(6, 2)
+size = Vector2(12, 6)
 
 [node name="Hinomaru4" type="RigidBody2D"]
-collision_layer = 4
-collision_mask = 3
+collision_layer = 8
+collision_mask = 8
 mass = 0.15
 gravity_scale = 0.5
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_pp044")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -119,4 +122,14 @@ shape = SubResource("RectangleShape2D_6gh24")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Damage" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="Collision2" type="CollisionShape2D" parent="Damage"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_6gh24")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Damage" to="." method="_on_damage_area_entered"]
