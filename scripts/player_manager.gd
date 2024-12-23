@@ -1,5 +1,6 @@
 extends Node
 
+var jump_timer: Node = null
 var vega: Node = null
 var near_arm: Node
 var far_arm: Node
@@ -23,10 +24,10 @@ var selected_weapon: int:
     if _selected_weapon != value:  # Проверяем, изменилось ли значение
       _selected_weapon = value
       _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
-var hp: float
-var max_hp: float
-var hp_restore: float
-var energy: float = 200.0
+var hp: float = 250
+var max_hp: float = 250
+var hp_restore: float = 10.0
+var energy: float = 500.0
 var max_energy: float = 1000.0
 var energy_restore: float = 20.0
 var stamina: float = 0.0
@@ -48,6 +49,7 @@ var hp_level_table = [
 func _ready() -> void:
   GM.ui.ammobar.update()
   GM.ui.firemode.update()
+  jump_timer = $JumpHoldTimer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -100,9 +102,6 @@ func spawn(spawn_point = Vector2.ZERO) -> void:
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
-  hp = 250
-  max_hp = hp
-  hp_restore = 10.0
   GM.ui.healthbar.value_max = max_hp
   GM.ui.healthbar.value = hp
 
@@ -156,27 +155,16 @@ func energy_to_jump() -> float:
   var etj = 0.5 * weight() * pow(v0(), 2)
   return etj * 0.00001
 
-func spend_energy(value) -> bool:
+func spend_energy(value, allow_stamina:bool=true) -> bool:
   if energy > value:
     energy -= value
     return true
-  elif (energy + stamina) > value:
+  elif (energy + stamina) > value and allow_stamina:
     var from_stamina = value - energy
     energy = 0.0
     stamina -= from_stamina
     return true
   else:
-    var dialog_props = DialogProperties.new()
-    dialog_props.who = "Operating System v17.4"
-    dialog_props.who_color = "red"
-    dialog_props.what = """[center]
-Not enough [font_size=26][color=blue]energy[/color][/font_size] and [font_size=26][color=green]stamina[/color][/font_size].
-Some subsystems [shake][font_size=30][color=red]locked[/color][/font_size][/shake].
-You have to [font_size=32]rest[/font_size].[/center]"""
-    dialog_props.display_time = 2
-    dialog_props.steps = 60
-    dialog_props.portrait = "os"
-    GM.ui.say(dialog_props)
     return false
 
 

@@ -18,7 +18,11 @@ func _process(delta: float) -> void:
     print(targets)
     for target in targets:
       if target.get_parent().has_method("take_damage"):
-        target.get_parent().take_damage(randi_range(damage_min, damage_max), target)
+        var damage = randi_range(damage_min, damage_max)
+        target.get_parent().take_damage(damage, target)
+        if target.get_parent().name == "Vega":
+          GM.player.energy += damage
+        
     timer = 0.0
     $Particles.emitting = true
     $Light.light_once("flicker", spark_duration)

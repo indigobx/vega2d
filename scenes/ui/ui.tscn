@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=13 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
 [ext_resource type="PackedScene" uid="uid://dnwhr3m7lsdgw" path="res://scenes/ui/ui_bigbar.tscn" id="2_6krfb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cl15ofbyr8062" path="res://scenes/ui/ui_fire_mode.tscn" id="6_6ed00"]
 [ext_resource type="PackedScene" uid="uid://clvfpvgta6ueb" path="res://scenes/ui/ui_weapon_icon.tscn" id="6_kiuos"]
 [ext_resource type="PackedScene" uid="uid://sn7nyl5e7l2f" path="res://scenes/ui/ui_weapon_icon_empty.tscn" id="6_mjjle"]
+[ext_resource type="PackedScene" uid="uid://3rvts54etnsc" path="res://scenes/ui/state_icon.tscn" id="8_8v7no"]
 [ext_resource type="PackedScene" uid="uid://c27cxf7arloth" path="res://scenes/ui/ui_ammo_v2.tscn" id="8_n5b8q"]
 [ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="9_4fhkq"]
 [ext_resource type="PackedScene" uid="uid://bv0hmg1lfjgxf" path="res://scenes/ui/debug_graph.tscn" id="10_kciq3"]
@@ -107,19 +108,34 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SayContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StateIcons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="ChargedJump" parent="MarginContainer/HBoxContainer/VBoxContainer2/StateIcons" instance=ExtResource("8_8v7no")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+header = "Charged Jump"
+max_value = 100.0
+format_string = "%d%%"
+
+[node name="SayContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 use_top_left = true
 
-[node name="UISay" parent="MarginContainer/HBoxContainer/SayContainer" instance=ExtResource("4_1pwlx")]
+[node name="UISay" parent="MarginContainer/HBoxContainer/VBoxContainer2/SayContainer" instance=ExtResource("4_1pwlx")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0

@@ -54,7 +54,8 @@ var weapon_offset: Vector2:
     _weapon_offset = value
     _on_weapon_offset_changed(value)
 var ray: Node
-
+var jump_charged: bool
+var charged_jump_energy: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -111,10 +112,47 @@ func _physics_process(delta: float) -> void:
   else:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
-  if is_on_floor() and Input.is_action_just_pressed("Jump"):
-    var energy_to_jump = GM.player.energy_to_jump()
-    if GM.player.spend_energy(energy_to_jump):
-      velocity.y = GM.player.v0()
+  #if is_on_floor() and Input.is_action_just_pressed("Jump"):
+    #var energy_to_jump = GM.player.energy_to_jump()
+    #if GM.player.spend_energy(energy_to_jump):
+      #velocity.y = GM.player.v0()
+  
+
+  if is_on_floor():
+    # Если кнопка только нажата, начинаем зарядку
+    if Input.is_action_just_pressed("Jump"):
+      charged_jump_energy = 0  # Сбрасываем зарядку прыжка
+      GM.player.jump_timer.start()
+    
+    # Если кнопка удерживается, увеличиваем заряд
+    elif Input.is_action_pressed("Jump") and GM.player.jump_timer.is_stopped():
+      var chargebar = GM.ui.get_node("%ChargedJump")
+      var energy_to_charged_jump = GM.player.energy_to_jump() * 3
+      chargebar.visible = true
+      chargebar.value = (charged_jump_energy / energy_to_charged_jump)*100
+      print(chargebar.value)
+      if charged_jump_energy < energy_to_charged_jump and GM.player.spend_energy(2, false):  # Тратим энергию для зарядки
+        charged_jump_energy += 1  # Увеличиваем заряд энергии
+
+    # Если кнопка отпущена до зарядки максимума, выполняем обычный прыжок
+    elif Input.is_action_just_released("Jump"):
+      GM.player.jump_timer.stop()
+      var chargebar = GM.ui.get_node("%ChargedJump")
+      var energy_to_charged_jump = GM.player.energy_to_jump() * 3
+      chargebar.visible = false
+      chargebar.value = 0
+      if charged_jump_energy >= energy_to_charged_jump:  # Если есть зарядка
+        $Effects/SparksElec.emitting = true
+        velocity.y = GM.player.v0() * 1.414  # Усиленный прыжок
+        charged_jump_energy = 0  # Сбрасываем зарядку после прыжка
+        chargebar.visible = false
+      else:
+        GM.player.energy = min(GM.player.energy+charged_jump_energy, GM.player.max_energy)
+        if GM.player.spend_energy(GM.player.energy_to_jump(), true):
+          velocity.y = GM.player.v0()
+        else:
+          GM.ui.say(preload("res://data/dialogues/not_enough_energy_and_stamina.tres"))
+    
   
   if not is_on_floor():
     velocity.y += gravity
@@ -179,6 +217,15 @@ func _physics_process(delta: float) -> void:
     global_position = global_position + lerp(Vector2.ZERO, recoil_position, weapon_weight_mod)
   
   move_and_slide()
+
+func charge_jump(delta) -> void:
+  pass
+
+func cancel_charged_jump() -> void:
+  GM.player.energy = min(GM.player.energy + charged_jump_energy * 0.5, GM.player.max_energy)
+  GM.ui.get_node("%ChargeBar").visible = false
+  jump_charged = false
+  charged_jump_energy = 0.0
 
 
 func adjust_speed(speed) -> float:

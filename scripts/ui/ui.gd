@@ -88,6 +88,7 @@ func _process(delta: float) -> void:
       GM.player.energy_rate
     ]
     
+    
     $Debug/Text.text = debug_text
     $Debug/Breath.add_point(GM.player.breath)
     $Debug/Pulse.add_point(GM.player.pulse)
