@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogProperties" load_steps=2 format=3 uid="uid://ddfhr0577b0y"]
+
+[ext_resource type="Script" path="res://model/DialogProperties.gd" id="1_eewl1"]
+
+[resource]
+script = ExtResource("1_eewl1")
+display_time = 2
+steps = 60
+auto_hide = true
+hide_on_action = "Use"
+who = "Operating System v17.4"
+who_color = Color(1, 0, 0, 1)
+portrait = "os"
+what = "[center]
+Not enough [font_size=26][color=blue]energy[/color][/font_size] and [font_size=26][color=green]stamina[/color][/font_size].
+Some subsystems [shake][font_size=30][color=red]locked[/color][/font_size][/shake].
+You have to [font_size=32]rest[/font_size].[/center]"

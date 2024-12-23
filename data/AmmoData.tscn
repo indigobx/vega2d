@@ -32,5 +32,4 @@ type_name = "hem_rocket"
 caliber = "80"
 cartridge_weight = 5.5
 amount_max = 20
-amount = 10
 damage_base = 100.0

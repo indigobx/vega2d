@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 var footprint_scene = preload("res://scenes/decals/footprint.tscn")
-var speed_mod: float = 1.0
-var speed_mod_max: float = 20.0
+var env_speed_mod: float = 1.0
+var walk_speed_mod: float = 1.0
+var walk_speed_mod_max: float = 20.0
 var base_speed: float = 240.0
 var base_speed_back: float = -60.0
 var jump_velocity : float = -400.0
@@ -53,7 +54,8 @@ var weapon_offset: Vector2:
     _weapon_offset = value
     _on_weapon_offset_changed(value)
 var ray: Node
-
+var jump_charged: bool
+var charged_jump_energy: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -100,19 +102,57 @@ func _physics_process(delta: float) -> void:
 
   var adjusted_speed = adjust_speed(base_speed)
   var adjusted_speed_back = adjust_speed(base_speed_back)
+  var x_speed = (walk_speed_mod + adjusted_speed) * env_speed_mod
   if Input.is_action_pressed(action_forward):
-    velocity.x = lerpf(velocity.x, (speed_mod + adjusted_speed) * view_direction, weapon_weight_mod)
+    velocity.x = lerpf(velocity.x, x_speed * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-forward-3-unarmed")
   elif Input.is_action_pressed(action_back):
-    velocity.x = lerpf(velocity.x, -(speed_mod + adjusted_speed_back) * view_direction, weapon_weight_mod)
+    velocity.x = lerpf(velocity.x, -x_speed * view_direction, weapon_weight_mod)
     #$Character/Body.play("walk-back-3-unarmed")
   else:
     velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
-  if is_on_floor() and Input.is_action_just_pressed("Jump"):
-    var energy_to_jump = GM.player.energy_to_jump()
-    if GM.player.spend_energy(energy_to_jump):
-      velocity.y = GM.player.v0()
+  #if is_on_floor() and Input.is_action_just_pressed("Jump"):
+    #var energy_to_jump = GM.player.energy_to_jump()
+    #if GM.player.spend_energy(energy_to_jump):
+      #velocity.y = GM.player.v0()
+  
+
+  if is_on_floor():
+    # Если кнопка только нажата, начинаем зарядку
+    if Input.is_action_just_pressed("Jump"):
+      charged_jump_energy = 0  # Сбрасываем зарядку прыжка
+      GM.player.jump_timer.start()
+    
+    # Если кнопка удерживается, увеличиваем заряд
+    elif Input.is_action_pressed("Jump") and GM.player.jump_timer.is_stopped():
+      var chargebar = GM.ui.get_node("%ChargedJump")
+      var energy_to_charged_jump = GM.player.energy_to_jump() * 3
+      chargebar.visible = true
+      chargebar.value = (charged_jump_energy / energy_to_charged_jump)*100
+      print(chargebar.value)
+      if charged_jump_energy < energy_to_charged_jump and GM.player.spend_energy(2, false):  # Тратим энергию для зарядки
+        charged_jump_energy += 1  # Увеличиваем заряд энергии
+
+    # Если кнопка отпущена до зарядки максимума, выполняем обычный прыжок
+    elif Input.is_action_just_released("Jump"):
+      GM.player.jump_timer.stop()
+      var chargebar = GM.ui.get_node("%ChargedJump")
+      var energy_to_charged_jump = GM.player.energy_to_jump() * 3
+      chargebar.visible = false
+      chargebar.value = 0
+      if charged_jump_energy >= energy_to_charged_jump:  # Если есть зарядка
+        $Effects/SparksElec.emitting = true
+        velocity.y = GM.player.v0() * 1.414  # Усиленный прыжок
+        charged_jump_energy = 0  # Сбрасываем зарядку после прыжка
+        chargebar.visible = false
+      else:
+        GM.player.energy = min(GM.player.energy+charged_jump_energy, GM.player.max_energy)
+        if GM.player.spend_energy(GM.player.energy_to_jump(), true):
+          velocity.y = GM.player.v0()
+        else:
+          GM.ui.say(preload("res://data/dialogues/not_enough_energy_and_stamina.tres"))
+    
   
   if not is_on_floor():
     velocity.y += gravity
@@ -178,6 +218,15 @@ func _physics_process(delta: float) -> void:
   
   move_and_slide()
 
+func charge_jump(delta) -> void:
+  pass
+
+func cancel_charged_jump() -> void:
+  GM.player.energy = min(GM.player.energy + charged_jump_energy * 0.5, GM.player.max_energy)
+  GM.ui.get_node("%ChargeBar").visible = false
+  jump_charged = false
+  charged_jump_energy = 0.0
+
 
 func adjust_speed(speed) -> float:
   var a_speed: float
@@ -208,7 +257,8 @@ func _on_weapon_offset_changed(value) -> void:
 
 func _on_view_direction_changed(vd) -> void:
   if vd == -1:
-    $Character/Body.flip_h = true
+    if not $Character/Body.flip_h:
+      $Character/Body.flip_h = true
     $Collision.scale.x = -1
     $Collision.position.x = -9
     $ArmsPivot.scale.x = -1
@@ -231,7 +281,7 @@ func _on_view_direction_changed(vd) -> void:
 
 func _on_body_frame_changed() -> void:
   var max_frames = $Character/Body.sprite_frames.get_frame_count($Character/Body.animation)
-  speed_mod = speed_mod_max * sin((float($Character/Body.frame) / float(max_frames)) * 2*PI)
+  walk_speed_mod = walk_speed_mod_max * sin((float($Character/Body.frame) / float(max_frames)) * 2*PI)
   # footprints
   if $Character/Body.frame in [3, 7] \
   and abs(velocity.x) > 1.0 \

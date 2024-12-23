@@ -17,15 +17,13 @@ func _process(delta: float) -> void:
       $PointLight2D.global_position = vega.global_position + Vector2(32, -96)
     else:
       vega = get_tree().root.get_node_or_null("Game/PlayerManager/Vega")
-
+  
+  $Area2D/Polygon2D.texture.noise.offset.y = sin(Engine.get_frames_drawn() / 10) * 30
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-  if is_instance_valid(body) and body.name == "Vega":
-    var props = load("res://data/dialogues/vr_level/right.tres")
-    GM.ui.say(props)
+  if body and body.name == "Vega":
+    body.env_speed_mod = 0.33
 
-
-func _on_area_2d_2_body_entered(body: Node2D) -> void:
-  if is_instance_valid(body) and body.name == "Vega":
-    var props = load("res://data/dialogues/vr_level/left.tres")
-    GM.ui.say(props)
+func _on_area_2d_body_exited(body: Node2D) -> void:
+  if body and body.name == "Vega":
+    body.env_speed_mod = 1.0
