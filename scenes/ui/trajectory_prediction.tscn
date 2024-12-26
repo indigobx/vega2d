@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqjcmb1jx07mm"]
+
+[ext_resource type="Script" path="res://scripts/ui/trajectory_prediction.gd" id="1_fnqv8"]
+
+[node name="TrajectoryCalc" type="Node2D"]
+script = ExtResource("1_fnqv8")
+projectile_mass = 0.15
+projectile_gravity_scale = 0.5
+initital_impulse = Vector2(25, 0)
+impulse_per_physics_frame = Vector2(5, 0)
+max_calculation_frames = 30
+
+[node name="Trajectory" type="Line2D" parent="."]
+width = 1.0

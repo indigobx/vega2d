@@ -4,6 +4,7 @@ extends Control
 
 
 func _ready() -> void:
+  print("UI Manager Ready")
   main_menu.get_node("HC1/NewGame").connect("pressed", _on_newgame_pressed)
   main_menu.get_node("HC1/Quit").connect("pressed", _on_quit_pressed)
   $UI.add_to_group("ui")

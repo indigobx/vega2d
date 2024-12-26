@@ -21,6 +21,20 @@ var _fire_mode: String
   set(value):
     _on_mode_change(value)
 
+var can_fire: bool
+var single_fire_lock: bool
+var linear_recoil_counter: int = 0
+var angular_recoil_counter: int = 0
+var spread: float = 0.0
+var lock_timer: Node
+var lock_marker: Node
+var locking_target: Node
+var locked_target: Node
+
+func _ready() -> void:
+  print("Weapon Manager Ready")
+  lock_timer = $LockTimer
+  lock_marker = $LockMarker
 
 func _on_ammo_change(value) -> void:
   _ammo = value
@@ -28,19 +42,22 @@ func _on_ammo_change(value) -> void:
 
 func _on_weapon_change(value) -> void:
   _weapon = value
+  reset_target_lock()
   if value:
     ammo = ADB.get_ammo(value.ammo_type)
     GM.player.vega.weapon_offset = weapon.sprite_offest
-  else:
-    ammo = null
-  GM.ui.ammobar.update()
-  if value:
     if GM.in_safe_area:
       fire_mode = "safe"
     else:
       fire_mode = value.get_fire_modes()[1]
     if value.mag > 0:
       can_fire = true
+    if value.can_lock_target:
+      lock_timer.wait_time = value.target_lock_time
+
+  else:
+    ammo = null
+  GM.ui.ammobar.update()    
   GM.ui.firemode.update()
 
 func _on_mode_change(value) -> void:
@@ -48,11 +65,48 @@ func _on_mode_change(value) -> void:
   GM.ui.firemode.mode = value
   GM.ui.firemode.update()
 
-var can_fire: bool
-var single_fire_lock: bool
-var linear_recoil_counter: int = 0
-var angular_recoil_counter: int = 0
-var spread: float = 0.0
+func start_target_lock() -> void:
+  var overlapping_areas = GM.player.vega.lock_area.get_overlapping_areas()
+  print("start ", overlapping_areas)
+  if overlapping_areas:
+    locking_target = overlapping_areas[0]
+    locked_target = null
+    lock_marker.visible = true
+    lock_marker.header = "LOCKING"
+    lock_marker.parent = locking_target
+    lock_marker.modulate = "white"
+    lock_marker.override_counter = true
+    lock_timer.start()
+    process_target_lock()
+  else:
+    reset_target_lock()
+
+func process_target_lock() -> void:
+  if locked_target:
+    return
+  var overlapping_areas = GM.player.vega.lock_area.get_overlapping_areas()
+  if overlapping_areas and overlapping_areas[0] == locking_target:
+    lock_marker.footer = "%.2f" % lock_timer.time_left
+    if lock_timer.is_stopped():
+      locked_target = locking_target
+      locking_target = null
+      success_target_lock()
+  else:
+    reset_target_lock()
+      
+
+func success_target_lock() -> void:
+  lock_marker.visible = true
+  lock_marker.header = "LOCK"
+  lock_marker.modulate = "red"
+  lock_marker.override_counter = false
+  lock_marker.parent = locked_target
+
+func reset_target_lock() -> void:
+  lock_marker.visible = false
+  lock_marker.parent = null
+  locked_target = null
+  locking_target = null
 
 func fire() -> void:
   if not $WeaponTimer.is_stopped():
@@ -146,7 +200,7 @@ func projectile() -> void:
   var projectile_instance = weapon.projectile_scene.instantiate()
   var p0 = ray.global_position
   projectile_instance.global_position = p0
-  projectile_instance.global_rotation = arms_pivot.global_rotation + randf_range(-spread, spread)
+  projectile_instance.global_rotation = arms_pivot.global_rotation + deg_to_rad(randf_range(-spread, spread))
   GlobalFx.add_fx(projectile_instance)
 
 

@@ -40,6 +40,12 @@ class_name Weapon
 @export var crit_multiplier: float = 2.0
 @export var hit_mark_scene: PackedScene
 
+@export_category("Homing")
+@export var can_lock_target: bool = false
+@export var target_lock_time: float = 1.0
+@export var lock_reset_on_fire: bool = true
+@export var lock_reset_on_reload: bool = true
+
 @export_category("Ammo")
 @export var mag_size: int = 1
 @export var mag: int = 1

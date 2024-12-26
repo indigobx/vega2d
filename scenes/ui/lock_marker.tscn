@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://cs7kb3nwimcfj"]
+
+[ext_resource type="Script" path="res://scripts/ui/lock_marker.gd" id="1_bx731"]
+[ext_resource type="Texture2D" uid="uid://dentb4xbtnxqt" path="res://sprites/cursors/lock-b1.png" id="1_q3iom"]
+[ext_resource type="Texture2D" uid="uid://d4b4cd4yayvi1" path="res://sprites/cursors/lock-b2.png" id="2_gua6e"]
+[ext_resource type="Texture2D" uid="uid://c44a8e3euvoo6" path="res://sprites/cursors/lock-b3.png" id="3_edh88"]
+[ext_resource type="LabelSettings" uid="uid://br751o8j8312n" path="res://themes/lock_label_settings.tres" id="4_hh2ws"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qun0k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q3iom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gua6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_edh88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gua6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_r4lyu"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1.1, 0, 0, 0.5, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gjq4w"]
+gradient = SubResource("Gradient_r4lyu")
+width = 8
+use_hdr = true
+
+[node name="LockMarker" type="Node2D"]
+script = ExtResource("1_bx731")
+
+[node name="Icon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qun0k")
+autoplay = "default"
+frame_progress = 0.918221
+
+[node name="Header" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "LOCK"
+label_settings = ExtResource("4_hh2ws")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Footer" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 14.0
+offset_right = 20.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "LOCK"
+label_settings = ExtResource("4_hh2ws")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Line" type="Line2D" parent="."]
+z_index = 10
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+texture = SubResource("GradientTexture1D_gjq4w")
+texture_mode = 1
+
+[node name="Trajectory" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.725819, 0.608838, 0.12579, 1)

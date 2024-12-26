@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://coneyb8xleyod"]
+[gd_scene load_steps=30 format=3 uid="uid://coneyb8xleyod"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/hinomaru_4.gd" id="1_pp044"]
 [ext_resource type="Texture2D" uid="uid://daiiuyuyy2kk3" path="res://sprites/projectiles/smartshell/aim0000.png" id="2_iuau1"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://16ctv0fgloff" path="res://sprites/projectiles/smartshell/fly0006.png" id="18_u6i56"]
 [ext_resource type="Texture2D" uid="uid://dxubioso7y5wb" path="res://sprites/projectiles/smartshell/fly0007.png" id="19_gsdiy"]
 [ext_resource type="Texture2D" uid="uid://c8vneyw3qw8er" path="res://sprites/projectiles/smartshell/fly0008.png" id="20_p5gdw"]
+[ext_resource type="Texture2D" uid="uid://dgr3ygwvraf0e" path="res://sprites/fx/glow_new1_90.png" id="21_4id0a"]
+[ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="21_7scor"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8jc7v"]
 animations = [{
@@ -99,27 +101,74 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gh24"]
 size = Vector2(12, 6)
 
+[sub_resource type="Gradient" id="Gradient_cwaue"]
+offsets = PackedFloat32Array(0, 0.311475, 0.811475, 1)
+colors = PackedColorArray(2.2, 2, 1.5, 1, 1.6, 0.6, 0.1, 0.8, 0.5, 0, 0, 0.2, 43.243, 0.2, 0.2, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4awrl"]
+gradient = SubResource("Gradient_cwaue")
+
+[sub_resource type="Curve" id="Curve_cohvx"]
+min_value = 0.1
+max_value = 0.5
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.310989), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dm8a6"]
+curve = SubResource("Curve_cohvx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b2ai8"]
+lifetime_randomness = 0.25
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-5, 0, 0)
+direction = Vector3(-1, 0, 0)
+spread = 60.0
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, -5, 0)
+scale_curve = SubResource("CurveTexture_dm8a6")
+color_ramp = SubResource("GradientTexture1D_4awrl")
+
 [node name="Hinomaru4" type="RigidBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 mass = 0.15
-gravity_scale = 0.5
-continuous_cd = 1
+gravity_scale = 0.35
+continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_pp044")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8jc7v")
-animation = &"fly"
+animation = &"aim"
 autoplay = "default"
-frame_progress = 0.0336611
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_6gh24")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="EngineTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="InertialTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="AimTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="LifeTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
 one_shot = true
 
 [node name="Damage" type="Area2D" parent="."]
@@ -131,5 +180,51 @@ monitorable = false
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_6gh24")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Particles" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_b2ai8")
+texture = ExtResource("21_4id0a")
+lifetime = 0.5
+randomness = 0.25
+fixed_fps = 0
+local_coords = true
+draw_order = 0
+
+[node name="Particles2" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 32
+lifetime = 2.0
+randomness = 0.25
+lifetime_randomness = 0.25
+texture = ExtResource("21_7scor")
+direction = Vector2(-1, 0)
+spread = 10.0
+gravity = Vector2(0, -5)
+initial_velocity_min = 15.0
+initial_velocity_max = 30.0
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_curve = SubResource("Curve_cohvx")
+color_ramp = SubResource("Gradient_cwaue")
+
+[node name="DebugLine1" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 50, 0)
+width = 1.0
+default_color = Color(0, 0.7, 1, 1)
+
+[node name="DebugLine2" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 50, 0, 40, 5, 40, -5, 50, 0)
+width = 2.0
+default_color = Color(0.992687, 0.38669, 0.792305, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="EngineTimer" to="." method="_on_engine_timer_timeout"]
+[connection signal="timeout" from="InertialTimer" to="." method="_on_inertial_timer_timeout"]
+[connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
 [connection signal="area_entered" from="Damage" to="." method="_on_damage_area_entered"]

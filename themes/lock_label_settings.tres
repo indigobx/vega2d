@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://br751o8j8312n"]
+
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="1_vpsdr"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_vpsdr")
+font_size = 14
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)

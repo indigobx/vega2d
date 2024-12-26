@@ -47,6 +47,7 @@ var hp_level_table = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  print("Player Manager Ready")
   GM.ui.ammobar.update()
   GM.ui.firemode.update()
   jump_timer = $JumpHoldTimer

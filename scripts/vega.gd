@@ -56,6 +56,7 @@ var weapon_offset: Vector2:
 var ray: Node
 var jump_charged: bool
 var charged_jump_energy: float
+var lock_area: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,6 +64,7 @@ func _ready() -> void:
   set_process_input(true)
   ray = $ArmsPivot/Arms/RayCast2D
   arms_pivot = $ArmsPivot
+  lock_area = get_node("Cursor/LockArea")
   _on_view_direction_changed(1)
   pregnancy_stage = 3
 
@@ -168,6 +170,19 @@ func _physics_process(delta: float) -> void:
         GM.weapon.fire()
   if Input.is_action_just_released("Fire"):
     GM.weapon.single_fire_lock = false
+
+
+  if Input.is_action_just_pressed("Special"):
+    GM.weapon.start_target_lock()
+
+  elif Input.is_action_pressed("Special"):
+    GM.weapon.process_target_lock()
+
+  if Input.is_action_just_released("Special"):
+    if not GM.weapon.locked_target:
+      GM.weapon.reset_target_lock()
+
+
 
   #if GM.weapon.weapon and GM.weapon.weapon.mag == 0 and ADB.get_ammo(GM.weapon.weapon.ammo_type).amount > 0:
     #$Label.text = "I have to reload!"
