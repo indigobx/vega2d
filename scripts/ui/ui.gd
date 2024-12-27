@@ -18,6 +18,8 @@ var energybar: Node
 var heatbar: Node
 var ammobar: Node
 var firemode: Node
+var lock_marker: Node
+var actor: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +32,7 @@ func _ready() -> void:
   heatbar = %UIHeat
   ammobar = %UIAmmo
   firemode = %UIFireMode
-
+  lock_marker = %LockMarker
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -66,6 +68,9 @@ func _process(delta: float) -> void:
     dummy_instance.name = "Dummy2"
     GM.level.add_child(dummy_instance)
     #say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
+  if Input.is_action_just_pressed("Use"):
+    if actor:
+      actor.interact()
   
   healthbar.value = GM.player.hp
   healthbar.value_max = GM.player.max_hp
@@ -93,6 +98,7 @@ func _process(delta: float) -> void:
     $Debug/Breath.add_point(GM.player.breath)
     $Debug/Pulse.add_point(GM.player.pulse)
     $Debug/EnergyRate.add_point(GM.player.energy_rate)
+
 
 func say(props:DialogProperties) -> void:
   var ui_say = %UISay

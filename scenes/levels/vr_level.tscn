@@ -1,9 +1,12 @@
-[gd_scene load_steps=17 format=4 uid="uid://dnb646qk2kdwa"]
+[gd_scene load_steps=20 format=4 uid="uid://dnb646qk2kdwa"]
 
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
 [ext_resource type="Texture2D" uid="uid://vjjtnvo7qryi" path="res://textures/vr/atlas_02.png" id="2_eefp3"]
 [ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="3_brqj7"]
+[ext_resource type="Texture2D" uid="uid://to70qtu6o2xl" path="res://sprites/fx/glow/glow4.png" id="4_miuxu"]
+[ext_resource type="Script" path="res://scripts/light.gd" id="5_0njxn"]
 [ext_resource type="PackedScene" uid="uid://evijmramehtn" path="res://scenes/enemies/dummy.tscn" id="8_5xuep"]
+[ext_resource type="PackedScene" uid="uid://xgsddmc6v3b8" path="res://scenes/level_actors/panel.tscn" id="8_ix2rl"]
 [ext_resource type="PackedScene" uid="uid://wapjublkg10g" path="res://scenes/level_actors/electic_sparks.tscn" id="9_rmw3k"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qftnf"]
@@ -118,6 +121,15 @@ gizmo_extents = 64.0
 energy = 0.15
 blend_mode = 1
 
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-163, -68)
+energy = 0.25
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("4_miuxu")
+script = ExtResource("5_0njxn")
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Dummy2" parent="." instance=ExtResource("8_5xuep")]
@@ -151,6 +163,12 @@ texture = SubResource("NoiseTexture2D_7hlrs")
 texture_offset = Vector2(256, 0)
 polygon = PackedVector2Array(-143, 25, -143, 69, -88, 123, 104, 123, 159, 69, 159, 25)
 uv = PackedVector2Array(-143, 25, -143, 69, -88, 123, 104, 123, 159, 69, 159, 25)
+
+[node name="Panel" parent="." node_paths=PackedStringArray("call_node") instance=ExtResource("8_ix2rl")]
+position = Vector2(157, -35)
+call_node = NodePath("../Lights/PointLight2D")
+callback = "light_once"
+callback_parameters = ["constant", 0.5]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

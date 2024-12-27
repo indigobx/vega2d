@@ -34,7 +34,7 @@ var locked_target: Node
 func _ready() -> void:
   print("Weapon Manager Ready")
   lock_timer = $LockTimer
-  lock_marker = $LockMarker
+  lock_marker = GM.ui.lock_marker
 
 func _on_ammo_change(value) -> void:
   _ammo = value

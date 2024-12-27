@@ -11,9 +11,10 @@ var v1
 var stage: int
 var target_position: Vector2
 var stage_timers_base = [
-  0.35, 0.25, 0.5, 0.5, 4
+  0.45, 0.25, 0.5, 0.5, 4
 ]  # 0   1    2    3    4
 var stage_timers: Array = []
+var hit_scene = preload("res://scenes/fx/small_hit_explode.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,7 +48,7 @@ func _physics_process(delta: float) -> void:
         elif up_angle > ascend_angle:
           apply_torque_impulse(3.5 * direction)
         apply_impulse(Vector2(randf_range(4, 6), 0).rotated(global_rotation))
-        linear_velocity.limit_length(200)
+        linear_velocity.limit_length(80)
       1:
         rotate_to_target(0.25)
       2:
@@ -55,8 +56,8 @@ func _physics_process(delta: float) -> void:
         linear_velocity = lerp(linear_velocity, Vector2.ZERO, 0.05)
       3:
         look_at(target_position)
-        apply_impulse(Vector2(randf_range(20, 30), 0).rotated(global_rotation))
-        linear_velocity.limit_length(350)
+        apply_impulse(Vector2(randf_range(10, 20), 0).rotated(global_rotation))
+        linear_velocity.limit_length(90)
       4:
         #angular_velocity = lerpf(angular_velocity, 0, 0.25)
         $Particles.emitting = false
@@ -67,6 +68,7 @@ func _physics_process(delta: float) -> void:
   else:
     particles_fly()
     apply_impulse(Vector2(randf_range(8, 12), 0).rotated(global_rotation))
+    linear_velocity.limit_length(90)
 
 
 func rotate_to_target(power) -> void:
@@ -96,19 +98,19 @@ func particles_aim() -> void:
   $Particles.process_material.initial_velocity_min = 30
   $Particles.process_material.initial_velocity_max = 60
 
-
-func hide_and_remove() -> void:
-  $Sprite.visible = false
-  $Particles.emitting = false
-  if get_node_or_null("Damage"):
-    $Damage.queue_free()
-  $LifeTimer.start()
+func hit_fx() -> void:
+  var hit_instance = hit_scene.instantiate()
+  hit_instance.global_position = global_position
+  hit_instance.global_rotation = global_rotation
+  GlobalFx.add_fx(hit_instance)
 
 func _on_damage_area_entered(area: Area2D) -> void:
   if area and area.get_parent().has_method("take_damage"):
     var damage = ADB.get_ammo("hinomaru_4").damage_base * linear_velocity.length() * 0.001
     area.get_parent().take_damage(damage, area)
-    hide_and_remove()
+    hit_fx()
+    queue_free()
+    #hide_and_remove()
 
 
 
@@ -145,4 +147,5 @@ func _on_inertial_timer_timeout() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-  hide_and_remove()
+  hit_fx()
+  queue_free()

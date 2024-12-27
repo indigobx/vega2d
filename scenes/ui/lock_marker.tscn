@@ -84,5 +84,6 @@ texture = SubResource("GradientTexture1D_gjq4w")
 texture_mode = 1
 
 [node name="Trajectory" type="Line2D" parent="."]
+visible = false
 width = 1.0
 default_color = Color(0.725819, 0.608838, 0.12579, 1)

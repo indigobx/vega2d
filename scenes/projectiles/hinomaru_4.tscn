@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://coneyb8xleyod"]
+[gd_scene load_steps=31 format=3 uid="uid://coneyb8xleyod"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/hinomaru_4.gd" id="1_pp044"]
 [ext_resource type="Texture2D" uid="uid://daiiuyuyy2kk3" path="res://sprites/projectiles/smartshell/aim0000.png" id="2_iuau1"]
@@ -99,7 +99,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gh24"]
-size = Vector2(12, 6)
+size = Vector2(11, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gq74k"]
+size = Vector2(17, 10)
 
 [sub_resource type="Gradient" id="Gradient_cwaue"]
 offsets = PackedFloat32Array(0, 0.311475, 0.811475, 1)
@@ -135,10 +138,10 @@ color_ramp = SubResource("GradientTexture1D_4awrl")
 
 [node name="Hinomaru4" type="RigidBody2D"]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 mass = 0.15
 gravity_scale = 0.35
-continuous_cd = 2
+continuous_cd = 1
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_pp044")
@@ -149,8 +152,9 @@ animation = &"aim"
 autoplay = "default"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(4, 0)
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_6gh24")
+one_way_collision_margin = 4.0
 
 [node name="EngineTimer" type="Timer" parent="."]
 process_callback = 0
@@ -172,13 +176,14 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Damage" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
 monitorable = false
 
 [node name="Collision2" type="CollisionShape2D" parent="Damage"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_6gh24")
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_gq74k")
+one_way_collision_margin = 8.0
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 amount = 32

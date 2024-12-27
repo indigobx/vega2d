@@ -21,16 +21,16 @@ var override_counter: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   if parent:
-    global_position = parent.global_position
+    position = parent.get_global_transform_with_canvas().origin
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   if parent:
-    global_position = parent.global_position
-    var distance = global_position.distance_to(GM.player.vega.global_position)
-    var start_point = to_local(GM.player.vega.global_position)
-    var end_point = to_local(global_position)
+    position = parent.get_global_transform_with_canvas().origin
+    var distance = position.distance_to(GM.player.vega.get_global_transform_with_canvas().origin)
+    var start_point = to_local(GM.player.vega.get_global_transform_with_canvas().origin)
+    var end_point = to_local(position)
     var direction = (end_point - start_point).normalized()
     $Line.points[0] = start_point + direction * 50  # Отступ от начала
     $Line.points[1] = end_point - direction * 20    # Отступ от конца
