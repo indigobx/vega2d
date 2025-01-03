@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://b85wqpynyc6d6"]
+
+[node name="Inventory" type="Control"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 32
+dragger_visibility = 1
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Button" type="Button" parent="HSplitContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="HSplitContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="HSplitContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="HSplitContainer/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HSplitContainer/GridContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="HSplitContainer/GridContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="HSplitContainer/GridContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="HSplitContainer/GridContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2

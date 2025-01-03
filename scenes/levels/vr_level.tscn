@@ -170,6 +170,12 @@ call_node = NodePath("../Lights/PointLight2D")
 callback = "light_once"
 callback_parameters = ["constant", 0.5]
 
+[node name="Panel2" parent="." node_paths=PackedStringArray("call_node") instance=ExtResource("8_ix2rl")]
+position = Vector2(234, -35)
+call_node = NodePath("..")
+callback = "open_panel_menu"
+behaviour = "button"
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

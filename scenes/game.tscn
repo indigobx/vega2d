@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk0xtmrmsyw8c"]
+[gd_scene load_steps=8 format=3 uid="uid://dk0xtmrmsyw8c"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_oms8u"]
 [ext_resource type="Script" path="res://scripts/ui_manager.gd" id="2_inquc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dte87rpq16e83" path="res://scenes/ui/ui.tscn" id="4_0k1vi"]
 [ext_resource type="Script" path="res://scripts/player_manager.gd" id="4_ng4yn"]
 [ext_resource type="Script" path="res://scripts/weapon_manager.gd" id="6_irfv0"]
+[ext_resource type="Script" path="res://scripts/inventory_manager.gd" id="7_707dm"]
 
 [node name="Game" type="Node"]
 process_mode = 1
@@ -34,7 +35,7 @@ layout_mode = 1
 script = ExtResource("4_ng4yn")
 
 [node name="JumpHoldTimer" type="Timer" parent="PlayerManager"]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 
 [node name="WeaponManager" type="Node" parent="."]
@@ -48,5 +49,8 @@ one_shot = true
 
 [node name="LockTimer" type="Timer" parent="WeaponManager"]
 one_shot = true
+
+[node name="InventoryManager" type="Node" parent="."]
+script = ExtResource("7_707dm")
 
 [connection signal="timeout" from="WeaponManager/RecoilTimer" to="WeaponManager" method="_on_recoil_timer_timeout"]

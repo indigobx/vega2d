@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=16 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
+[ext_resource type="PackedScene" uid="uid://bsd2lr6iriv8q" path="res://scenes/ui/ui_cursor.tscn" id="2_1d7qt"]
 [ext_resource type="PackedScene" uid="uid://dnwhr3m7lsdgw" path="res://scenes/ui/ui_bigbar.tscn" id="2_6krfb"]
 [ext_resource type="PackedScene" uid="uid://cvdaainlow6wt" path="res://scenes/ui/ui_heat.tscn" id="2_ryfst"]
 [ext_resource type="PackedScene" uid="uid://crrdtv01vw2vj" path="res://scenes/ui/ui_say.tscn" id="4_1pwlx"]
@@ -12,12 +13,14 @@
 [ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="9_4fhkq"]
 [ext_resource type="PackedScene" uid="uid://bv0hmg1lfjgxf" path="res://scenes/ui/debug_graph.tscn" id="10_kciq3"]
 [ext_resource type="PackedScene" uid="uid://cs7kb3nwimcfj" path="res://scenes/ui/lock_marker.tscn" id="12_37eps"]
+[ext_resource type="PackedScene" uid="uid://r6kaf28trip5" path="res://scenes/menus/interaction.tscn" id="13_bmee4"]
 
 [sub_resource type="Theme" id="Theme_thnpw"]
 default_font = ExtResource("9_4fhkq")
 default_font_size = 21
 
 [node name="UI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,3 +187,12 @@ graph_color = Color(0.202798, 0.401211, 0.770158, 1)
 [node name="LockMarker" parent="." instance=ExtResource("12_37eps")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Interaction" parent="." instance=ExtResource("13_bmee4")]
+visible = false
+layout_mode = 1
+
+[node name="UICursor" parent="." instance=ExtResource("2_1d7qt")]
+unique_name_in_owner = true
+visible = false
+z_index = 4096

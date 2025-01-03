@@ -27,3 +27,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
   if body and body.name == "Vega":
     body.env_speed_mod = 1.0
+
+func open_panel_menu():
+  var panel_menu_scene = load("res://scenes/menus/door_panel.tscn")
+  GM.ui.interaction.interaction_scene = panel_menu_scene
+  GM.ui.interaction.background_color = Color("black", 0.5)
+  GM.ui.interaction.header_label = "Door Panel"
+  GM.ui.interaction.show_menu()
