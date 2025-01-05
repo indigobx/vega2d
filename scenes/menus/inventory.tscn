@@ -23,43 +23,47 @@ grow_vertical = 2
 split_offset = 32
 dragger_visibility = 1
 
-[node name="GridContainer" type="GridContainer" parent="HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="WeaponSlots" type="GridContainer" parent="HSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 2
+columns = 4
 
-[node name="Button" type="Button" parent="HSplitContainer/GridContainer"]
+[node name="Button" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="HSplitContainer/GridContainer"]
+[node name="Button2" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="HSplitContainer/GridContainer"]
+[node name="Button3" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button4" type="Button" parent="HSplitContainer/GridContainer"]
+[node name="Button4" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="GridContainer2" type="GridContainer" parent="HSplitContainer"]
+[node name="InventorySlots" type="GridContainer" parent="HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+columns = 5
 
-[node name="Button" type="Button" parent="HSplitContainer/GridContainer2"]
+[node name="Button" type="Button" parent="HSplitContainer/InventorySlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="HSplitContainer/GridContainer2"]
+[node name="Button2" type="Button" parent="HSplitContainer/InventorySlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="HSplitContainer/GridContainer2"]
+[node name="Button3" type="Button" parent="HSplitContainer/InventorySlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 
-[node name="Button4" type="Button" parent="HSplitContainer/GridContainer2"]
+[node name="Button4" type="Button" parent="HSplitContainer/InventorySlots"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2

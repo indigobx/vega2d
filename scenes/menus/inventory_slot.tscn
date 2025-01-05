@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8xjwxl2c8pda"]
+
+[ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_egks3"]
+[ext_resource type="Script" path="res://scripts/menus/inventory_slot.gd" id="1_nwfiv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2jryt"]
+size = Vector2(40, 40)
+
+[node name="InventorySlot" type="Button"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+theme = ExtResource("1_egks3")
+text = "inventory item"
+icon = SubResource("PlaceholderTexture2D_2jryt")
+icon_alignment = 1
+vertical_icon_alignment = 2
+script = ExtResource("1_nwfiv")

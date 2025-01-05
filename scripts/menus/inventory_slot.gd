@@ -1,7 +1,4 @@
-extends Node
-
-var inventory: Dictionary
-var weapon_slots: Dictionary
+extends Button
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,5 +11,6 @@ func _process(delta: float) -> void:
   pass
 
 
-func add_item(slot) -> void:
-  pass
+func clear() -> void:
+  icon = null
+  text = ""
