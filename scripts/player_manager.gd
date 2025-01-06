@@ -95,16 +95,15 @@ func spawn(spawn_point = Vector2.ZERO) -> void:
   put_to_slot(WDB.get_weapon("RAVEN"), 2)
   put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   put_to_slot(WDB.get_weapon("AR-8"), 4)
-  print(ADB)
   add_ammo("hem_rocket", 4)
   add_ammo("armsco_25", 120)
   add_ammo("hinomaru_4", 32)
-  print(ADB)
   for i in range(1, 5):
     if is_instance_valid(slots[i]):
       GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
   GM.ui.healthbar.value_max = max_hp
   GM.ui.healthbar.value = hp
+
 
 func put_to_slot(item, slot) -> void:
   slots[slot] = item

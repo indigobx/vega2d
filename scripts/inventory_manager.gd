@@ -1,18 +1,16 @@
 extends Node
 
-var inventory: Dictionary
-var weapon_slots: Dictionary
+@export var inventory_slots: Array = []
+@export var weapon_slots: Dictionary = {
+  1: null,
+  2: null,
+  3: null,
+  4: null
+}
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
-
-
-func add_item(slot) -> void:
-  pass
+  for i in range(25):
+    inventory_slots.append(null)
+  print("Inventory initialized:", inventory_slots, "\n")
+  print("Weapon slots initialized:", weapon_slots, "\n")

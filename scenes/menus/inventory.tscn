@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://b85wqpynyc6d6"]
+[gd_scene load_steps=3 format=3 uid="uid://b85wqpynyc6d6"]
+
+[ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_bcugq"]
+[ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_rnkme"]
 
 [node name="Inventory" type="Control"]
 custom_minimum_size = Vector2(600, 400)
@@ -12,6 +15,29 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_bcugq")
+script = ExtResource("1_rnkme")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 26.0
+
+[node name="Button" type="Button" parent="HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = " Equip "
+
+[node name="Button2" type="Button" parent="HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = " Unequip "
+
+[node name="Button3" type="Button" parent="HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = " Dump "
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 1
@@ -27,43 +53,13 @@ dragger_visibility = 1
 layout_mode = 2
 
 [node name="WeaponSlots" type="GridContainer" parent="HSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 4
 
-[node name="Button" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button3" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button4" type="Button" parent="HSplitContainer/VBoxContainer/WeaponSlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
 [node name="InventorySlots" type="GridContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 5
-
-[node name="Button" type="Button" parent="HSplitContainer/InventorySlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button2" type="Button" parent="HSplitContainer/InventorySlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button3" type="Button" parent="HSplitContainer/InventorySlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-
-[node name="Button4" type="Button" parent="HSplitContainer/InventorySlots"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
