@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c6418et01w8w1" path="res://sprites/ui/weapon-empty.png" id="1_nalje"]
 [ext_resource type="Texture2D" uid="uid://dokw5a8hh2v3c" path="res://sprites/ui/weapon-empty-selected.png" id="3_muisv"]
 [ext_resource type="LabelSettings" uid="uid://b43nww3s07fvu" path="res://themes/weapon_icon_label_settings.tres" id="4_aeyf6"]
-[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="5_3faq1"]
+[ext_resource type="FontFile" uid="uid://c7mulr8g8cva8" path="res://fonts/mini_pixel-7.ttf" id="5_3faq1"]
 
 [sub_resource type="Gradient" id="Gradient_lubdp"]
 offsets = PackedFloat32Array(0.438596, 1)

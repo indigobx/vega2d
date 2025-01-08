@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_mmbou")
-shader_parameter/blend_mode_option = 1
+shader_parameter/blend_mode_option = 2

@@ -1,7 +1,12 @@
 extends Control
 
 
-var weapon_icons: Dictionary = {}
+var weapon_icons: Dictionary = {
+  1: null,
+  2: null,
+  3: null,
+  4: null
+}
 var selected_slot: int:
   get:
     return GM.player.selected_weapon
@@ -77,10 +82,7 @@ func _process(delta: float) -> void:
     if Input.is_action_just_pressed("Use"):
       if actor:
         actor.interact()
-    
-    if Input.is_action_just_pressed("Inventory"):
-      interaction.interaction_scene = load("res://scenes/menus/inventory.tscn")
-      interaction.show_menu()
+
   
     healthbar.value = GM.player.hp
     healthbar.value_max = GM.player.max_hp

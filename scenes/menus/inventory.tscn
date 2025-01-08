@@ -1,65 +1,222 @@
-[gd_scene load_steps=3 format=3 uid="uid://b85wqpynyc6d6"]
+[gd_scene load_steps=29 format=3 uid="uid://b85wqpynyc6d6"]
 
 [ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_bcugq"]
 [ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_rnkme"]
+[ext_resource type="Material" uid="uid://mbixubfn3kte" path="res://materials/dither2d.tres" id="3_4wqjh"]
+[ext_resource type="Script" path="res://addons/wyvernbox/inventory_view.gd" id="3_lwdn6"]
+[ext_resource type="Texture2D" uid="uid://bhtkr1qov80ty" path="res://sprites/ui/inv-frame-32.png" id="4_ul5o4"]
+[ext_resource type="PackedScene" uid="uid://co5ok1mm2s7vu" path="res://addons/wyvernbox_prefabs/item_stack_view.tscn" id="5_ijl0k"]
+[ext_resource type="Resource" uid="uid://d1r41g11rl7tj" path="res://data/equipped.tres" id="5_jr7p2"]
+[ext_resource type="StyleBox" uid="uid://cqx3opxr50d2o" path="res://addons/wyvernbox_prefabs/graphics/selected_cell.tres" id="6_qndsh"]
+[ext_resource type="Script" path="res://addons/wyvernbox/crafting/item_like.gd" id="6_qtjda"]
+[ext_resource type="PackedScene" uid="uid://cqa45c6lfsffv" path="res://addons/wyvernbox_prefabs/tooltip.tscn" id="7_0aorr"]
+[ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="7_3mg2g"]
+[ext_resource type="Resource" uid="uid://c7f2fjoh6acby" path="res://data/items/weapons/ar-8.tres" id="7_x3ug3"]
+[ext_resource type="Resource" uid="uid://baqu0qvk550q7" path="res://data/items/weapons/kosei-12.tres" id="8_k74qr"]
+[ext_resource type="Script" path="res://addons/wyvernbox/view_extra/tooltip.gd" id="8_xciq7"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_stats.gd" id="9_k76sy"]
+[ext_resource type="Resource" uid="uid://b37nk1nt4e830" path="res://data/inventory.tres" id="9_wf22u"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_description.gd" id="10_6hor5"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_price.gd" id="11_rgpaa"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_key_hints.gd" id="12_w22ql"]
+[ext_resource type="PackedScene" uid="uid://boij7wcxmvnq7" path="res://addons/wyvernbox_prefabs/grabbed_item_stack_view.tscn" id="13_kopeo"]
+[ext_resource type="Resource" uid="uid://daqq0qxau0bt2" path="res://data/items/weapons/raven.tres" id="13_rfks0"]
+[ext_resource type="Script" path="res://addons/wyvernbox/view_extra/grabbed_item_stack.gd" id="14_7ynqh"]
+
+[sub_resource type="Gradient" id="Gradient_deqo5"]
+colors = PackedColorArray(0.184, 0.16, 0.2, 0.882353, 0.1539, 0.174357, 0.19, 0.882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sul2l"]
+gradient = SubResource("Gradient_deqo5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_8groj"]
+script = ExtResource("7_3mg2g")
+items_to_add = Array[ExtResource("6_qtjda")]([ExtResource("7_x3ug3"), ExtResource("8_k74qr"), ExtResource("13_rfks0")])
+item_repeat_ranges = Array[Vector2]([Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)])
+item_chances = Array[float]([100.0, 100.0, 100.0])
+repeat_post_chance = true
+randomize_locations = false
+delay_between_items = 0.0
+spread_distance = 32.0
+spread_cone_degrees = 360.0
+spread_angle_degrees = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnyc7"]
+bg_color = Color(0, 0, 0, 0.752941)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gg2fx"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.411765, 0.411765, 0.411765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw20t"]
 
 [node name="Inventory" type="Control"]
-custom_minimum_size = Vector2(600, 400)
+process_mode = 3
+z_index = 1024
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("1_bcugq")
 script = ExtResource("1_rnkme")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="."]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 26.0
-
-[node name="Button" type="Button" parent="HFlowContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = " Equip "
-
-[node name="Button2" type="Button" parent="HFlowContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = " Unequip "
-
-[node name="Button3" type="Button" parent="HFlowContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 21
-text = " Dump "
-
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("3_4wqjh")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offset = 32
-dragger_visibility = 1
+texture = SubResource("GradientTexture2D_sul2l")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="WeaponSlots" type="GridContainer" parent="HSplitContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Close"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 4
 
-[node name="InventorySlots" type="GridContainer" parent="HSplitContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EquippedView" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("3_lwdn6")
+inventory = ExtResource("5_jr7p2")
+item_scene = ExtResource("5_ijl0k")
+cell_size = Vector2(96, 96)
+selected_item_style = ExtResource("6_qndsh")
+
+[node name="TestButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
-columns = 5
+
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(520, 328)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2/MarginContainer"]
+custom_minimum_size = Vector2(513, 321)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_ul5o4")
+stretch_mode = 1
+
+[node name="InventoryView" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2/MarginContainer/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 320)
+layout_mode = 2
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 320.0
+script = ExtResource("3_lwdn6")
+inventory = ExtResource("9_wf22u")
+contents = SubResource("Resource_8groj")
+item_scene = ExtResource("5_ijl0k")
+cell_size = Vector2(32, 32)
+selected_item_style = ExtResource("6_qndsh")
+view_filter_color = Color(0.29505, 0.267, 0.3, 0.74902)
+
+[node name="Tooltip" type="PanelContainer" parent="." groups=["tooltip"] instance=ExtResource("7_0aorr")]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 76.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nnyc7")
+script = ExtResource("8_xciq7")
+compare_to_inventory = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView")
+property_scripts = Array[Script]([ExtResource("10_6hor5"), ExtResource("9_k76sy"), ExtResource("11_rgpaa"), ExtResource("12_w22ql")])
+nameplate_panel = SubResource("StyleBoxFlat_gg2fx")
+desc_panel = SubResource("StyleBoxEmpty_gw20t")
+back_panel = SubResource("StyleBoxFlat_nnyc7")
+
+[node name="Item" type="Control" parent="." instance=ExtResource("13_kopeo")]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 72.0
+offset_bottom = 107.0
+focus_mode = 1
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("14_7ynqh")
+unit_size = Vector2(32, 32)
+hide_cursor = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TestButton" to="." method="_on_test_button_pressed"]

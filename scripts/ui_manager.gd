@@ -84,3 +84,10 @@ func toggle_cursor(cursor) -> void:
       GM.ui_cursor.label = "Toggled to invalid cursor\nin UI Manager"
       GM.ui_cursor.label_visible = true
       #GM.interaction_cursor.visible = false
+
+func get_current_cursor() -> String:
+  if GM.ui_cursor.visible:
+    return "ui"
+  if GM.combat_cursor.visible:
+    return "combat"
+  return "other"

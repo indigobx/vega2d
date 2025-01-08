@@ -9,6 +9,7 @@ var level: Node = null
 var player: Node = null
 var ui_manager: Node = null
 var ui: Node = null
+var inventory_manager: Node = null
 var inventory: Node = null
 var camera: Node = null
 var weapon: Node = null
@@ -28,7 +29,8 @@ func _ready() -> void:
   ui_manager = get_tree().root.get_node("Game/UIManager")
   ui_manager.toggle_ui("main_menu")
   ui = get_ui()
-  inventory = get_tree().root.get_node("Game/InventoryManager")
+  inventory = get_tree().root.get_node("Game/InventoryManager/Inventory")
+  inventory_manager = get_tree().root.get_node("Game/InventoryManager")
   weapon = get_tree().root.get_node("Game/WeaponManager")
   gravity = ProjectSettings.get_setting("physics/2d/default_gravity_vector") \
     * ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -52,6 +54,8 @@ func new_game() -> void:
   ui_manager.toggle_ui("ui")
   camera = player.vega.get_node("Camera")
   shader = player.vega.get_node("Camera/CanvasLayer/PostShader")
+  reparent_node(inventory, ui)
+  print(inventory.get_path())
   update_cursors_nodes()
 
 

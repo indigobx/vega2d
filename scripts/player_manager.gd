@@ -92,9 +92,9 @@ func spawn(spawn_point = Vector2.ZERO) -> void:
   near_arm = vega.get_node("ArmsPivot/Arms/Near")
   far_arm = vega.get_node("ArmsPivot/Arms/Far")
   # should move this to sep function
-  put_to_slot(WDB.get_weapon("RAVEN"), 2)
-  put_to_slot(WDB.get_weapon("SmartPistol"), 3)
-  put_to_slot(WDB.get_weapon("AR-8"), 4)
+  #put_to_slot(WDB.get_weapon("RAVEN"), 2)
+  #put_to_slot(WDB.get_weapon("SmartPistol"), 3)
+  #put_to_slot(WDB.get_weapon("AR-8"), 4)
   add_ammo("hem_rocket", 4)
   add_ammo("armsco_25", 120)
   add_ammo("hinomaru_4", 32)
@@ -108,6 +108,13 @@ func spawn(spawn_point = Vector2.ZERO) -> void:
 func put_to_slot(item, slot) -> void:
   slots[slot] = item
   GM.ui.weapon_icons[slot].weapon_short_name = item.short_name
+
+func clear_slot(slot) -> void:
+  if selected_weapon == slot:
+    selected_weapon = 0
+  slots[slot] = null
+  GM.ui.weapon_icons[slot].weapon_short_name = ""
+  GM.ui.weapon_icons[slot].ammo = -1
 
 func clear_slots() -> void:
   for i in range(1, 9):

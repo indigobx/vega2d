@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://c7f2fjoh6acby"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/item_type.gd" id="1_kvo5m"]
+[ext_resource type="Texture2D" uid="uid://t0u5fn17b0f2" path="res://sprites/weapons/ar-8/still.png" id="2_4ilp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jd4t"]
+atlas = ExtResource("2_4ilp5")
+region = Rect2(5, 25, 52, 19)
+
+[resource]
+script = ExtResource("1_kvo5m")
+name = "AR-8"
+description = "US Army standard assault rifle"
+tags = Array[StringName]([])
+texture = SubResource("AtlasTexture_3jd4t")
+texture_scale = 1.0
+max_stack_count = 1
+in_inventory_width = 3
+in_inventory_height = 1
+slot_flags = 196613
+default_properties_string = "{
+\"wdb\": \"ar-8\"
+}"
+default_properties = {
+"wdb": "ar-8"
+}

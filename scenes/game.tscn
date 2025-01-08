@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk0xtmrmsyw8c"]
+[gd_scene load_steps=9 format=3 uid="uid://dk0xtmrmsyw8c"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_oms8u"]
 [ext_resource type="Script" path="res://scripts/ui_manager.gd" id="2_inquc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/player_manager.gd" id="4_ng4yn"]
 [ext_resource type="Script" path="res://scripts/weapon_manager.gd" id="6_irfv0"]
 [ext_resource type="Script" path="res://scripts/inventory_manager.gd" id="7_707dm"]
+[ext_resource type="PackedScene" uid="uid://b85wqpynyc6d6" path="res://scenes/menus/inventory.tscn" id="8_rlcxg"]
 
 [node name="Game" type="Node"]
 process_mode = 1
@@ -51,6 +52,11 @@ one_shot = true
 one_shot = true
 
 [node name="InventoryManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("7_707dm")
+
+[node name="Inventory" parent="InventoryManager" instance=ExtResource("8_rlcxg")]
+visible = false
+z_index = 0
 
 [connection signal="timeout" from="WeaponManager/RecoilTimer" to="WeaponManager" method="_on_recoil_timer_timeout"]
