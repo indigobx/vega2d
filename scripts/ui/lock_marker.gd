@@ -25,10 +25,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if parent:
     position = parent.get_global_transform_with_canvas().origin
-    var distance = position.distance_to(GM.player.vega.get_global_transform_with_canvas().origin)
+    var distance = position.distance_to(
+        GM.player.vega.get_global_transform_with_canvas().origin
+      ) / GM.camera.zoom.x
     var start_point = to_local(GM.player.vega.get_global_transform_with_canvas().origin)
     var end_point = to_local(position)
     var direction = (end_point - start_point).normalized()

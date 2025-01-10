@@ -7,20 +7,27 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
 func _on_interact_area_area_entered(area: Area2D) -> void:
-  if area and area.get_parent().has_method("interact"):
-    $TextAbove.visible = true
-    $TextAbove.text = "Press [b][E][/b] to interact"
-    GM.ui.actor = area.get_parent()
+  var actor = area.get_parent()
+  if area and actor.has_method("interact"):
+    if "hint_text" in actor:
+      $TextAbove.visible = true
+      $TextAbove.text = actor.hint_text
+    if actor.has_method("mouse_over"):
+      actor.mouse_over()
+    GM.ui.actor = actor
   else:
     $TextAbove.visible = false
     GM.ui.actor = null
 
 
 func _on_interact_area_area_exited(area: Area2D) -> void:
+  var actor = area.get_parent()
+  if actor.has_method("mouse_out"):
+      actor.mouse_out()
   $TextAbove.visible = false
   GM.ui.actor = null

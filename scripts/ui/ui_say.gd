@@ -28,7 +28,7 @@ func apply_properties(props: DialogProperties) -> void:
   portrait = props.portrait
   what = props.what
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 func say():

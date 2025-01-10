@@ -19,6 +19,11 @@ var interaction_cursor: Node
 var ui_cursor: Node
 var shader: Node = null
 var in_safe_area: bool
+#var mouse_cursors = {
+  #Input.CURSOR_CROSS: preload("res://sprites/cursors/cross.png"),
+  #Input.CURSOR_ARROW: preload("res://sprites/cursors/cursor_arrow.png")
+#}
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,7 +42,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
@@ -55,7 +60,6 @@ func new_game() -> void:
   camera = player.vega.get_node("Camera")
   shader = player.vega.get_node("Camera/CanvasLayer/PostShader")
   reparent_node(inventory, ui)
-  print(inventory.get_path())
   update_cursors_nodes()
 
 

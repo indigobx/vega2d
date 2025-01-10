@@ -7,15 +7,16 @@ var weapon_icons: Dictionary = {
   3: null,
   4: null
 }
+var _selected_slot: int = 0
 var selected_slot: int:
   get:
-    return GM.player.selected_weapon
+    return _selected_slot
   set(value):
     # Если выбран тот же самый слот, переключаем на слот 0
-    if value == GM.player.selected_weapon:
+    if value == _selected_slot:
       value = 0
-    if GM.player.selected_weapon != value:  # Избегаем лишней работы, если слот не меняется
-      GM.player.selected_weapon = value
+    if _selected_slot != value:  # Избегаем лишней работы, если слот не меняется
+      _selected_slot = value
       _on_slot_select(value)
 var healthbar: Node
 var staminabar: Node
@@ -43,8 +44,9 @@ func _ready() -> void:
   interaction = $Interaction
   ui_cursor = %UICursor
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   # If game is running
   if not get_tree().paused:
     if Input.is_action_just_pressed("Weapon1"):
@@ -57,8 +59,8 @@ func _process(delta: float) -> void:
       selected_slot = 4
     if Input.is_action_just_pressed("Action1"):
       GM.camera.flicker_palette("1bit", 1.0)
-      GM.player.add_ammo("armsco_25", 30)
-      GM.player.add_ammo("hinomaru_4", 8)
+      #GM.player.add_ammo("armsco_25", 30)
+      #GM.player.add_ammo("hinomaru_4", 8)
     if Input.is_action_just_pressed("Action2"):
       GM.player.vega.pregnancy_stage = max(0, GM.player.vega.pregnancy_stage - 1)
       #GM.player.hp = max(0, GM.player.hp + 10)
@@ -122,7 +124,19 @@ func say(props:DialogProperties) -> void:
   ui_say.apply_properties(props)
   ui_say.say()
 
+func update_weapon_icons() -> void:
+  for i in range(1, 5):
+    if GM.inventory.slots[i]:
+      weapon_icons[i].icon = GM.inventory.slots[i].icon_small
+      weapon_icons[i].weapon_short_name = GM.inventory.slots[i].short_name
+      weapon_icons[i].ammo = GM.inventory.count_ammo_of_type(GM.inventory.slots[i].mag_type)
+    else:
+      weapon_icons[i].empty()
 
 func _on_slot_select(slot: int) -> void:
   for k in weapon_icons:
     weapon_icons[k].selected = (k == slot)
+    if slot != 0:
+      GM.weapon.weapon = GM.inventory.slots[slot]
+    else:
+      GM.weapon.weapon = null

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://dkmsg3qrstrlr"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/item_type.gd" id="1_0w8uf"]
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="2_62e6j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bced"]
+atlas = ExtResource("2_62e6j")
+region = Rect2(0, 151, 36, 9)
+
+[resource]
+script = ExtResource("1_0w8uf")
+name = "HEM Rocket"
+description = "Rocket for RAVEN rocket launcher"
+tags = Array[StringName]([])
+texture = SubResource("AtlasTexture_0bced")
+texture_scale = 1.0
+max_stack_count = 1
+in_inventory_width = 2
+in_inventory_height = 1
+slot_flags = 34
+default_properties_string = "{
+\"mag_type\": \"hem_rocket\",
+\"stats\": {
+\"damage\": 100
+},
+\"weight\": 5.5
+}"
+default_properties = {
+"mag_type": "hem_rocket",
+"stats": {
+"damage": 100
+},
+"weight": 5.5
+}

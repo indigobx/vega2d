@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://dsqfi6bwmnpjw"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/item_type.gd" id="1_1pnnw"]
+[ext_resource type="Texture2D" uid="uid://bnab3p0rximbs" path="res://sprites/weapons/ar-8/mag.png" id="2_q7n8b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnlsj"]
+atlas = ExtResource("2_q7n8b")
+region = Rect2(2, 1, 11, 14)
+
+[resource]
+script = ExtResource("1_1pnnw")
+name = "AR-8 Mag"
+description = "30-rds .25 Armsco mag for AR-8"
+tags = Array[StringName]([])
+texture = SubResource("AtlasTexture_rnlsj")
+texture_scale = 1.0
+max_stack_count = 30
+in_inventory_width = 1
+in_inventory_height = 1
+slot_flags = 33
+default_properties_string = "{
+\"mag_type\": \"ar-8_mag\",
+\"stats\": {
+\"damage\": 10
+},
+\"weight\": 0.015
+}"
+default_properties = {
+"mag_type": "ar-8_mag",
+"stats": {
+"damage": 10
+},
+"weight": 0.015
+}

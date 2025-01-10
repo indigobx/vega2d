@@ -17,7 +17,13 @@ var _ammo: int
       $Ammo.text = "%s" % value
     else:
       $Ammo.text = ""
-
+var _icon: Texture2D
+@export var icon: Texture2D:
+  get():
+    return _icon
+  set(value):
+    _icon = value
+    $Icon.texture = value
 
 # Приватная переменная для хранения состояния
 var _selected: bool = false
@@ -37,20 +43,22 @@ var _selected: bool = false
       $IconFrame.play("default")
 
 
+func empty() -> void:
+  weapon_short_name = ""
+  icon = null
+  ammo = -1
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   selected = _selected
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  if weapon_short_name:
-    var ammo_type = WDB.get_weapon(weapon_short_name).ammo_type
-    if ADB.get_ammo(ammo_type):
-      ammo = ADB.get_ammo(ammo_type).amount
-    else:
-      ammo = -1
-    #if ammo_type in GM.player.ammo:
-      #ammo = GM.player.ammo[ammo_type]
+func _process(_delta: float) -> void:
+  pass
+  #if weapon_short_name:
+    #var ammo_type = WDB.get_weapon(weapon_short_name).ammo_type
+    #if ADB.get_ammo(ammo_type):
+      #ammo = ADB.get_ammo(ammo_type).amount
     #else:
       #ammo = -1

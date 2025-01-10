@@ -333,7 +333,7 @@ animations = [{
 script = ExtResource("1_qa4qa")
 weapons = [null]
 
-[node name="SmartPistol" type="Node" parent="."]
+[node name="Kosei-12" type="Node" parent="."]
 script = ExtResource("2_pptmm")
 display_name = "光星12型燕"
 short_name = "Kosei-12"
@@ -348,7 +348,8 @@ empty_animation = "empty"
 unjam_animation = "unjam"
 damage_random_delta = 2.0
 mag_size = 8
-mag = 8
+mag = 0
+mag_type = "kosei-12_mag"
 ammo_type = "hinomaru_4"
 reload_time = 0.8
 can_be_chambered = false
@@ -382,7 +383,8 @@ damage_mod = 0.5
 damage_random_delta = 1.5
 hit_mark_scene = ExtResource("8_23448")
 mag_size = 30
-mag = 30
+mag = 0
+mag_type = "ar-8_mag"
 ammo_type = "armsco_25"
 fire_modes = 15
 rate_single = 8.0
@@ -409,6 +411,8 @@ sprite_frames = SubResource("SpriteFrames_et2kn")
 sprite_offest = Vector2i(-24, 0)
 reload_animation = "reload"
 empty_animation = "empty"
+mag = 0
+mag_type = "hem_rocket"
 ammo_type = "hem_rocket"
 reload_time = 2.0
 can_be_chambered = false

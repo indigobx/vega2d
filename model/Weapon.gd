@@ -49,6 +49,7 @@ class_name Weapon
 @export_category("Ammo")
 @export var mag_size: int = 1
 @export var mag: int = 1
+@export var mag_type: String = ""
 @export var ammo_type: String = ""
 @export_range(0, 50, 1, "or_greater") var cartridge_by_shot: int = 1
 @export_range(0.0, 10.0, 0.1, "or_greater", "suffix:s") var reload_time: float = 1.0

@@ -7,6 +7,7 @@ var walk_speed_mod_max: float = 20.0
 var base_speed: float = 240.0
 var base_speed_back: float = -60.0
 var jump_velocity : float = -400.0
+var charged_jump_power: float = 2.0
 var gravity : float = 15.0
 var direction: Vector2
 var direction_angle_threshold_deg: float = 15.0
@@ -57,6 +58,8 @@ var ray: Node
 var jump_charged: bool
 var charged_jump_energy: float
 var lock_area: Node
+var init_weight: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -69,11 +72,16 @@ func _ready() -> void:
   pregnancy_stage = 3
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+  if not init_weight:
+    GM.inventory.open()
+    GM.inventory.close()
+    weight_total = GM.player.weight()
   cursor = get_local_mouse_position()
   GM.camera.offset = lerp(GM.camera.offset, cursor/3 + camera_shake, 0.05)
-  if GM.player.selected_weapon != 0:
+  if GM.ui.selected_slot != 0:
     $ArmsPivot/Arms.visible = true
     body_animation = "armed"
   else:
@@ -81,7 +89,7 @@ func _process(delta: float) -> void:
     body_animation = "unarmed"
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
   
   $Line2D.points[1] = cursor
   $Cursor.position = cursor
@@ -145,7 +153,7 @@ func _physics_process(delta: float) -> void:
       chargebar.value = 0
       if charged_jump_energy >= energy_to_charged_jump:  # Если есть зарядка
         $Effects/SparksElec.emitting = true
-        velocity.y = GM.player.v0() * 1.414  # Усиленный прыжок
+        velocity.y = GM.player.v0() * charged_jump_power  # Усиленный прыжок
         charged_jump_energy = 0  # Сбрасываем зарядку после прыжка
         chargebar.visible = false
       else:
@@ -165,7 +173,7 @@ func _physics_process(delta: float) -> void:
     #velocity.x = lerpf(velocity.x, 0.0, 0.5)
   
   if Input.is_action_pressed("Fire"):
-    if GM.player.selected_weapon != 0:
+    if GM.ui.selected_slot != 0:
       if not GM.weapon.single_fire_lock:
         GM.weapon.fire()
   if Input.is_action_just_released("Fire"):
@@ -233,7 +241,7 @@ func _physics_process(delta: float) -> void:
   
   move_and_slide()
 
-func charge_jump(delta) -> void:
+func charge_jump(_delta) -> void:
   pass
 
 func cancel_charged_jump() -> void:

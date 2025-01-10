@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
   if target_position:
     #$DebugLine1.points[1] = to_local(target_position)
     var up_angle = abs(GM.angle_from_up_degrees(global_rotation_degrees))
@@ -146,6 +146,6 @@ func _on_inertial_timer_timeout() -> void:
     
 
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
   hit_fx()
   queue_free()

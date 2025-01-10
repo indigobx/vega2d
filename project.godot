@@ -27,6 +27,11 @@ ADB="*res://data/AmmoData.tscn"
 
 enabled=PackedStringArray("res://addons/wyvernbox/editor/plugin.cfg")
 
+[global_group]
+
+vega=""
+characters=""
+
 [input]
 
 Left={

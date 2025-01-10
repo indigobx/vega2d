@@ -19,8 +19,12 @@ in_inventory_width = 4
 in_inventory_height = 2
 slot_flags = 196614
 default_properties_string = "{
-\"wdb\": \"raven\"
+\"back_color\": \"blue\",
+\"wdb\": \"raven\",
+\"weight\": 7.0
 }"
 default_properties = {
-"wdb": "raven"
+"back_color": "blue",
+"wdb": "raven",
+"weight": 7.0
 }

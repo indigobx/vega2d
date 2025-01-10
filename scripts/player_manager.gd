@@ -5,25 +5,6 @@ var vega: Node = null
 var near_arm: Node
 var far_arm: Node
 var weapon_sprite: Node
-var slots: Dictionary = {
-  0: null,
-  1: null,
-  2: null,
-  3: null,
-  4: null,
-  5: null,
-  6: null,
-  7: null,
-  8: null
-}
-var _selected_weapon: int = 0  # Приватная переменная для хранения текущего выбранного оружия
-var selected_weapon: int:
-  get:
-    return _selected_weapon
-  set(value):
-    if _selected_weapon != value:  # Проверяем, изменилось ли значение
-      _selected_weapon = value
-      _on_selected_weapon_changed(value)  # Вызываем функцию при изменении
 var hp: float = 250
 var max_hp: float = 250
 var hp_restore: float = 10.0
@@ -38,12 +19,13 @@ var pulse: float
 var energy_rate: float
 var jump_power: float = 0.85
 var hp_level_table = [
-  {"threshold": 0.05, "color": Color(1.0, 0.1, 0.1), "palette": "red14", "shake": 4},
-  {"threshold": 0.1, "color": Color(1.0, 0.5, 0.5), "palette": "red28", "shake": 2},
-  {"threshold": 0.25, "color": Color(1.0, 0.75, 0.75), "palette": "testvega2", "shake": 1},
+  {"threshold": 0.05, "color": Color(1.0, 0.1, 0.1), "palette": "red14", "shake": 6},
+  {"threshold": 0.1, "color": Color(1.0, 0.5, 0.5), "palette": "red28", "shake": 4},
+  {"threshold": 0.25, "color": Color(1.0, 0.75, 0.75), "palette": "testvega2", "shake": 2},
   {"threshold": 0.5, "color": Color(1.0, 0.5, 0.5)},
   {"threshold": 0.67, "color": Color(1.0, 0.75, 0.75)}
 ]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,7 +35,7 @@ func _ready() -> void:
   jump_timer = $JumpHoldTimer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 func _physics_process(delta: float) -> void:
@@ -95,34 +77,17 @@ func spawn(spawn_point = Vector2.ZERO) -> void:
   #put_to_slot(WDB.get_weapon("RAVEN"), 2)
   #put_to_slot(WDB.get_weapon("SmartPistol"), 3)
   #put_to_slot(WDB.get_weapon("AR-8"), 4)
-  add_ammo("hem_rocket", 4)
-  add_ammo("armsco_25", 120)
-  add_ammo("hinomaru_4", 32)
-  for i in range(1, 5):
-    if is_instance_valid(slots[i]):
-      GM.ui.weapon_icons[i].get_node("Icon").texture = slots[i].icon_small
+  #add_ammo("hem_rocket", 4)
+  #add_ammo("armsco_25", 120)
+  #add_ammo("hinomaru_4", 32)
   GM.ui.healthbar.value_max = max_hp
   GM.ui.healthbar.value = hp
 
 
-func put_to_slot(item, slot) -> void:
-  slots[slot] = item
-  GM.ui.weapon_icons[slot].weapon_short_name = item.short_name
 
-func clear_slot(slot) -> void:
-  if selected_weapon == slot:
-    selected_weapon = 0
-  slots[slot] = null
-  GM.ui.weapon_icons[slot].weapon_short_name = ""
-  GM.ui.weapon_icons[slot].ammo = -1
-
-func clear_slots() -> void:
-  for i in range(1, 9):
-    slots[i] = null
-
-func add_ammo(type, amount) -> void:
-  var ammo = ADB.get_ammo(type)
-  ammo.add_ammo(amount)
+#func add_ammo(type, amount) -> void:
+  #var ammo = ADB.get_ammo(type)
+  #ammo.add_ammo(amount)
 
 func hp_effect() -> void:
   if hp == max_hp:
@@ -141,15 +106,21 @@ func hp_effect() -> void:
       return
   GM.ui.modulate = Color("white")
 
+
+func vega_weight() -> float:
+  var current_weight = 0.0
+  if vega:
+    current_weight += vega.weight_base
+    current_weight += vega.pregnancy_weight_mod[vega.pregnancy_stage]
+  return current_weight
+
+
 func weight() -> float:
   var total_weight = 0.0
-  total_weight += vega.weight_base
-  total_weight += vega.pregnancy_weight_mod[vega.pregnancy_stage]
-  for k in slots:
-    if slots[k] and slots[k].weight:
-      total_weight += slots[k].weight
-  total_weight += ADB.weight_all()
+  total_weight += vega_weight()
+  total_weight += GM.inventory.weight()
   return total_weight
+
 
 func v0() -> float:
   var w = weight() - 35
@@ -177,13 +148,4 @@ func spend_energy(value, allow_stamina:bool=true) -> bool:
 
 # Функция, вызываемая при изменении selected_weapon
 func _on_selected_weapon_changed(value: int) -> void:
-  if is_instance_valid(slots[value]):
-    weapon_sprite.sprite_frames = slots[value].sprite_frames
-    near_arm.play("near_%s" % slots[value].size)
-    far_arm.play("far_%s" % slots[value].size)
-    GM.weapon.weapon = slots[value]
-  else:
-    weapon_sprite.sprite_frames = SpriteFrames.new()
-    near_arm.play("near_unarmed")
-    far_arm.play("far_unarmed")
-    GM.weapon.weapon = null
+  pass

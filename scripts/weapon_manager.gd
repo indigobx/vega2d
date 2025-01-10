@@ -44,6 +44,13 @@ func _on_weapon_change(value) -> void:
   _weapon = value
   reset_target_lock()
   if value:
+    if is_instance_valid(value):
+      GM.player.weapon_sprite.sprite_frames = value.sprite_frames
+      GM.player.near_arm.play("near_%s" % value.size)
+      GM.player.far_arm.play("far_%s" % value.size)
+    #else:
+      #
+      #weapon = null
     ammo = ADB.get_ammo(value.ammo_type)
     GM.player.vega.weapon_offset = weapon.sprite_offest
     if GM.in_safe_area:
@@ -57,6 +64,9 @@ func _on_weapon_change(value) -> void:
 
   else:
     ammo = null
+    GM.player.weapon_sprite.sprite_frames = SpriteFrames.new()
+    GM.player.near_arm.play("near_unarmed")
+    GM.player.far_arm.play("far_unarmed")
   GM.ui.ammobar.update()    
   GM.ui.firemode.update()
 
@@ -176,6 +186,7 @@ func perform_shot() -> void:
     #GM.ui.say(load("res://data/dialogues/vr_level/ammos_out.tres"))
   GM.ui.ammobar.update()
 
+
 func recoil() -> void:
   linear_recoil_counter += 1
   angular_recoil_counter += 1
@@ -237,7 +248,7 @@ func reload() -> void:
   if not $WeaponTimer.is_stopped():
     return
   if weapon and ADB.get_ammo(weapon.ammo_type):
-    if ADB.get_ammo(weapon.ammo_type).amount > 0:
+    if count_ammo(weapon.mag_type) > 0:
       GM.player.weapon_sprite.play(weapon.reload_animation)
       if weapon.empty_clip_scene:
         var clip_instance = weapon.empty_clip_scene.instantiate()
@@ -248,17 +259,17 @@ func reload() -> void:
         GlobalFx.add_debris(clip_instance)
       $WeaponTimer.start(weapon.reload_time)
       await $WeaponTimer.timeout
-      var ammo_to_reload = min(weapon.mag_size, ADB.get_ammo(weapon.ammo_type).amount)
+      var ammo_to_reload = min(weapon.mag_size, count_ammo(weapon.mag_type))
       if weapon.is_chambered:
         ammo_to_reload += 1
       weapon.set_mag(ammo_to_reload)
-      ADB.get_ammo(weapon.ammo_type).use_ammo(ammo_to_reload)
+      consume_ammo(weapon.mag_type, ammo_to_reload)
       if weapon.is_chambered or not weapon.can_be_chambered:
         GM.player.weapon_sprite.play(weapon.static_animation)
         can_fire = true
       else:
         rack_bolt()
-    elif ADB.get_ammo(weapon.ammo_type).amount <= 0 and weapon.mag <= 0:
+    elif count_ammo(weapon.mag_type) <= 0 and weapon.mag <= 0:
       if weapon.empty_clip_scene and GM.player.weapon_sprite.animation != weapon.empty_animation:
         GM.player.weapon_sprite.play(weapon.empty_animation)
         var clip_instance = weapon.empty_clip_scene.instantiate()
@@ -268,7 +279,9 @@ func reload() -> void:
         clip_instance.angular_velocity = randf_range(-15, 15)
         GlobalFx.add_debris(clip_instance)
       can_fire = false
-    
+  GM.ui.update_weapon_icons()
+
+
 func unjam() -> void:
   GM.player.weapon_sprite.play(weapon.unjam_animation)
   $WeaponTimer.start(weapon.reload_time/2)
@@ -307,6 +320,18 @@ func toggle_fire_mode() -> void:
       fire_mode = modes[next_index]
     else:
       fire_mode = modes[0]
+
+
+func consume_ammo(mag_type: String, amount: int) -> void:
+  var mag_resource = "res://data/items/mags/%s.tres" % mag_type
+  GM.inventory.backpack.consume_items({
+    load(mag_resource): amount
+  })
+
+
+func count_ammo(mag_type: String):
+  var count = GM.inventory.count_ammo_of_type(mag_type)
+  return count
 
 
 func start_recoil_timer() -> void:

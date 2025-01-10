@@ -10,7 +10,7 @@ func _ready() -> void:
   $UI.add_to_group("ui")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 

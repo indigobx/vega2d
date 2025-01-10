@@ -19,8 +19,18 @@ in_inventory_width = 3
 in_inventory_height = 1
 slot_flags = 196613
 default_properties_string = "{
-\"wdb\": \"ar-8\"
+\"back_color\": \"green\",
+\"stats\": {
+\"damage+\": 2
+},
+\"wdb\": \"ar-8\",
+\"weight\": 3.0
 }"
 default_properties = {
-"wdb": "ar-8"
+"back_color": "green",
+"stats": {
+"damage+": 2
+},
+"wdb": "ar-8",
+"weight": 3.0
 }

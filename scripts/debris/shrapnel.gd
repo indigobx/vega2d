@@ -33,7 +33,7 @@ func _ready() -> void:
   $Timer.start(2.5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if $Timer.is_stopped() or abs(linear_velocity.length_squared()) < 1.0:
     disable()
     freeze = true

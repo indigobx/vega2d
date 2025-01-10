@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://addons/wyvernbox/view_extra/item_stack_view.gd" id="3"]
 
 [sub_resource type="Gradient" id="Gradient_wd551"]
-offsets = PackedFloat32Array(0.38983, 1)
-colors = PackedColorArray(0.395988, 0.410969, 0.570313, 0, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0.707792, 1)
+colors = PackedColorArray(0.395988, 0.410969, 0.570313, 0, 1, 1, 1, 0.313726)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kjert"]
 gradient = SubResource("Gradient_wd551")
@@ -74,10 +74,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -16.0
-offset_right = 1.0
-offset_bottom = 7.0
+offset_left = -5.0
+offset_top = -25.0
+offset_right = -3.0
+offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.498039)
