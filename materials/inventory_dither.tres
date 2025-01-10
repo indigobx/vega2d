@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bebw0fj13ajuy"]
+
+[ext_resource type="Shader" path="res://shaders/color_dither_post_2d.gdshader" id="1_kx7v4"]
+[ext_resource type="Texture2D" uid="uid://dbkwmc7msdaam" path="res://palettes/dither/purple-dim.png" id="2_yygno"]
+
+[resource]
+shader = ExtResource("1_kx7v4")
+shader_parameter/dither_pixel_size = 1.0
+shader_parameter/dither_pixel_offset = Vector2(0, 0)
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_strength = 1.0
+shader_parameter/dither_palette = ExtResource("2_yygno")

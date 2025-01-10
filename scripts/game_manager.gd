@@ -9,11 +9,21 @@ var level: Node = null
 var player: Node = null
 var ui_manager: Node = null
 var ui: Node = null
+var inventory_manager: Node = null
+var inventory: Node = null
 var camera: Node = null
 var weapon: Node = null
 var cursor: Vector2
+var combat_cursor: Node
+var interaction_cursor: Node
+var ui_cursor: Node
 var shader: Node = null
 var in_safe_area: bool
+#var mouse_cursors = {
+  #Input.CURSOR_CROSS: preload("res://sprites/cursors/cross.png"),
+  #Input.CURSOR_ARROW: preload("res://sprites/cursors/cursor_arrow.png")
+#}
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,13 +34,15 @@ func _ready() -> void:
   ui_manager = get_tree().root.get_node("Game/UIManager")
   ui_manager.toggle_ui("main_menu")
   ui = get_ui()
+  inventory = get_tree().root.get_node("Game/InventoryManager/Inventory")
+  inventory_manager = get_tree().root.get_node("Game/InventoryManager")
   weapon = get_tree().root.get_node("Game/WeaponManager")
   gravity = ProjectSettings.get_setting("physics/2d/default_gravity_vector") \
     * ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
@@ -47,6 +59,8 @@ func new_game() -> void:
   ui_manager.toggle_ui("ui")
   camera = player.vega.get_node("Camera")
   shader = player.vega.get_node("Camera/CanvasLayer/PostShader")
+  reparent_node(inventory, ui)
+  update_cursors_nodes()
 
 
 func reparent_node(node: Node, new_parent: Variant) -> void:
@@ -79,12 +93,19 @@ func reparent_node(node: Node, new_parent: Variant) -> void:
     node.global_position = global_pos
 
 
-func get_ui():
+func get_ui() -> Variant:
   var ui_group = get_tree().get_nodes_in_group("ui")
   if ui_group:
     return ui_group[0]
   else:
     return get_tree().root.find_child("UI", true, false)
+
+
+func update_cursors_nodes() -> void:
+  combat_cursor = player.vega.get_node_or_null("Cursor")
+  #interaction_cursor = ui.get_node_or_null("UICursorSprite")
+  ui_cursor = ui.get_node_or_null("UICursor")
+  print(combat_cursor, ui_cursor)
 
 
 
@@ -143,3 +164,10 @@ func angle_from_up_degrees(angle_deg: float) -> float:
   if new_angle_deg > 180:
     new_angle_deg -= 360
   return new_angle_deg
+
+
+func pause() -> void:
+  get_tree().paused = true
+
+func unpause() -> void:
+  get_tree().paused = false

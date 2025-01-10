@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
       _flicker(delta)  # Код случайного мерцания
 
 # Режим мигания
-func _blink(delta: float) -> void:
+func _blink(_delta: float) -> void:
   var total_cycle_time = blink_on_time + blink_off_time
   var cycle_position = fmod(time_passed, total_cycle_time)
   if cycle_position < blink_on_time:
@@ -36,12 +36,12 @@ func _blink(delta: float) -> void:
     energy = min_energy  # Выключено
 
 # Режим плавного мерцания (синусоида)
-func _sine_blink(delta: float) -> void:
+func _sine_blink(_delta: float) -> void:
   var sine_value = sin(2 * PI * (time_passed / blink_on_time))
   energy = lerp(min_energy, max_energy, 0.5 * (1 + sine_value))  # Интерполяция между min и max
 
 # Режим случайного мерцания
-func _flicker(delta: float) -> void:
+func _flicker(_delta: float) -> void:
   if time_passed >= flicker_duty_duration:
     time_passed = 0.0  # Сброс таймера
     flicker_active = randf() < flicker_duty_rate  # Случайно включаем или выключаем

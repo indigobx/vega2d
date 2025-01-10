@@ -10,7 +10,7 @@ func _ready() -> void:
   $UI.add_to_group("ui")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
@@ -61,3 +61,33 @@ func hide_ui() -> void:
 func say(props:DialogProperties) -> void:
   var ui = get_ui()
   ui.say(props)
+
+func toggle_cursor(cursor) -> void:
+  match cursor:
+    "combat", 0:
+      GM.combat_cursor.visible = true
+      GM.ui_cursor.visible = false
+      #GM.interaction_cursor.visible = false
+    "ui", 1:
+      GM.combat_cursor.visible = false
+      GM.ui_cursor.visible = true
+      GM.ui_cursor.label_visible = false
+      #GM.interaction_cursor.visible = false
+    "interaction", 2:
+      GM.combat_cursor.visible = false
+      GM.ui_cursor.visible = false
+      #GM.interaction_cursor.visible = true
+    _:
+      GM.combat_cursor.visible = false
+      GM.ui_cursor.visible = true
+      GM.ui_cursor.play("warn")
+      GM.ui_cursor.label = "Toggled to invalid cursor\nin UI Manager"
+      GM.ui_cursor.label_visible = true
+      #GM.interaction_cursor.visible = false
+
+func get_current_cursor() -> String:
+  if GM.ui_cursor.visible:
+    return "ui"
+  if GM.combat_cursor.visible:
+    return "combat"
+  return "other"

@@ -8,6 +8,6 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   var time = $Timer.time_left / $Timer.wait_time
   modulate = Color("white", time)

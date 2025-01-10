@@ -1,0 +1,240 @@
+[gd_scene load_steps=31 format=3 uid="uid://bsd2lr6iriv8q"]
+
+[ext_resource type="Texture2D" uid="uid://bx83sk87s2rwx" path="res://sprites/cursors/cursor_arrow.png" id="1_6l5pe"]
+[ext_resource type="Script" path="res://scripts/ui/ui_cursor.gd" id="2_7jsp5"]
+[ext_resource type="FontFile" uid="uid://qml68kt46c7d" path="res://fonts/mini_pixel-7.ttf" id="2_u3tmt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olree"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xpc5"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6744"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xuei"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gdd1"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n04ra"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkjgv"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o7x3"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p406v"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udsxk"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8u1h"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejgnm"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_budnq"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ira46"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn7bb"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hovk1"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3yn5"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu1gk"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjc7e"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f57kq"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdy23"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr087"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k37s"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw4lu"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdwkb"]
+atlas = ExtResource("1_6l5pe")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vm65e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olree")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xpc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6744")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xuei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gdd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n04ra")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkjgv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o7x3")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p406v")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_udsxk")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_f8u1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejgnm")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_f8u1h")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_udsxk")
+}],
+"loop": true,
+"name": &"no",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_budnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ira46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn7bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hovk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3yn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu1gk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjc7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f57kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdy23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr087")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k37s")
+}],
+"loop": true,
+"name": &"red",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw4lu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdwkb")
+}],
+"loop": true,
+"name": &"warn",
+"speed": 8.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pvf88"]
+font = ExtResource("2_u3tmt")
+font_size = 14
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.6)
+
+[node name="UICursorSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_vm65e")
+autoplay = "default"
+centered = false
+script = ExtResource("2_7jsp5")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 44.0
+offset_bottom = 32.0
+text = "Tooltip"
+label_settings = SubResource("LabelSettings_pvf88")

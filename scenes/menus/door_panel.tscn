@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dumida04u732o"]
+
+[ext_resource type="Script" path="res://scripts/menus/door_panel.gd" id="1_h1m5k"]
+[ext_resource type="Texture2D" uid="uid://d00aj5hwmbff8" path="res://sprites/ui/menus/door-panel-atlas.png" id="1_tcuop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qg0j"]
+atlas = ExtResource("1_tcuop")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp0du"]
+atlas = ExtResource("1_tcuop")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fyb3"]
+atlas = ExtResource("1_tcuop")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox6kl"]
+atlas = ExtResource("1_tcuop")
+region = Rect2(0, 256, 256, 256)
+
+[node name="DoorPanel" type="Control"]
+process_mode = 3
+z_index = 1024
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_h1m5k")
+
+[node name="Button" type="TextureButton" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+keep_pressed_outside = true
+texture_normal = SubResource("AtlasTexture_1qg0j")
+texture_pressed = SubResource("AtlasTexture_kp0du")
+texture_hover = SubResource("AtlasTexture_4fyb3")
+texture_disabled = SubResource("AtlasTexture_ox6kl")
+texture_focused = SubResource("AtlasTexture_kp0du")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

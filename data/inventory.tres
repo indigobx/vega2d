@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GridInventory" load_steps=2 format=3 uid="uid://b37nk1nt4e830"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/inventories/grid_inventory.gd" id="1_1hoyb"]
+
+[resource]
+script = ExtResource("1_1hoyb")
+height = 10
+width = 16

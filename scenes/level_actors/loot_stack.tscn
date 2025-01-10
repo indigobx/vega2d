@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://k3xjtfgh64ji"]
+
+[ext_resource type="Script" path="res://scripts/level_actors/loot_stack.gd" id="1_leaad"]
+[ext_resource type="LabelSettings" uid="uid://br751o8j8312n" path="res://themes/lock_label_settings.tres" id="2_cruao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vp5c"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3p4ab"]
+
+[sub_resource type="Gradient" id="Gradient_pur4r"]
+offsets = PackedFloat32Array(0, 0.37013, 1)
+colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0.25098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o1cbh"]
+gradient = SubResource("Gradient_pur4r")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_511o1"]
+colors = PackedColorArray(2, 2, 2, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vu1ow"]
+gradient = SubResource("Gradient_511o1")
+width = 8
+height = 80
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.75)
+fill_to = Vector2(0.5, 0.25)
+
+[node name="LootStack" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_leaad")
+pickup_radius = 8
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_8vp5c")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="PickupShape" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_3p4ab")
+
+[node name="Hover" type="Node2D" parent="."]
+visible = false
+
+[node name="HoverGlow" type="Sprite2D" parent="Hover"]
+texture = SubResource("GradientTexture2D_o1cbh")
+
+[node name="Line2D" type="Line2D" parent="Hover"]
+points = PackedVector2Array(8, -8, 16, -16, 32, -16)
+width = 1.0
+default_color = Color(1, 1, 1, 0.75)
+
+[node name="Label" type="Label" parent="Hover/Line2D"]
+unique_name_in_owner = true
+z_index = 256
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -37.0
+offset_right = 63.0
+offset_bottom = -14.0
+grow_vertical = 0
+pivot_offset = Vector2(0, 20)
+text = "Item Label"
+label_settings = ExtResource("2_cruao")
+vertical_alignment = 2
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Glow" type="Sprite2D" parent="FX"]
+texture = SubResource("GradientTexture2D_vu1ow")
+offset = Vector2(0, -40)
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="Visual"]

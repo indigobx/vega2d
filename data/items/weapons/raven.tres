@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://daqq0qxau0bt2"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/item_type.gd" id="1_uq630"]
+[ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="2_5wand"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umfdw"]
+atlas = ExtResource("2_5wand")
+region = Rect2(128, 72, 64, 40)
+
+[resource]
+script = ExtResource("1_uq630")
+name = "RAVEN"
+description = "Rapid Anti-Vehicle ENgagement rocket launcher"
+tags = Array[StringName]([])
+texture = SubResource("AtlasTexture_umfdw")
+texture_scale = 1.0
+max_stack_count = 1
+in_inventory_width = 4
+in_inventory_height = 2
+slot_flags = 196614
+default_properties_string = "{
+\"back_color\": \"blue\",
+\"wdb\": \"raven\",
+\"weight\": 7.0
+}"
+default_properties = {
+"back_color": "blue",
+"wdb": "raven",
+"weight": 7.0
+}

@@ -35,7 +35,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
@@ -49,7 +49,7 @@ func _on_value_max_changed(v) -> void:
 
 func _on_kind_changed(v) -> void:
   var modulate_color = "gainsboro"
-  match kind:
+  match v:
     "hp":
       modulate_color = "#c79ea2"
     "stamina":
@@ -57,7 +57,7 @@ func _on_kind_changed(v) -> void:
     "energy":
       modulate_color = "#9eacc7"
   $HC/Bar.tint_progress = modulate_color
-  $HC/Icon.texture = textures[kind]
+  $HC/Icon.texture = textures[v]
 
 func fmt_k(number: float, rounded: bool) -> String:
   # Определяем суффиксы

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if heat <= heat_max:
     var sprite_idx = clamp(
       int(round(float(frames - 1) * (heat - heat_min) / (heat_max - heat_min))),

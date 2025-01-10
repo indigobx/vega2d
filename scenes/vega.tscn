@@ -106,7 +106,7 @@ colors = PackedColorArray(1.1, 2, 2.5, 1, 1.5, 1.5, 1.5, 1, 1.45, 1.45, 0.8, 1, 
 offsets = PackedFloat32Array(0.00666667, 0.52, 1)
 colors = PackedColorArray(1.1, 2, 2.5, 1, 0.42, 0.729333, 1, 1, 0.55, 0.79, 1, 1)
 
-[node name="Vega" type="CharacterBody2D"]
+[node name="Vega" type="CharacterBody2D" groups=["characters", "vega"]]
 z_index = 10
 collision_layer = 5
 collision_mask = 5

@@ -7,17 +7,17 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   pass
 
 
-func load_level(name: String) -> void:
+func load_level(level_name: String) -> void:
   # Убедимся, что текущий уровень (если есть) удалён
   if get_child_count() > 0:
     for child in get_children():
       child.queue_free()
   # Путь к файлу уровня
-  var path = "res://scenes/levels/%s.tscn" % name
+  var path = "res://scenes/levels/%s.tscn" % level_name
   var level_scene = load(path)
   if level_scene == null:
     print("Failed to load level:", path)
@@ -26,4 +26,4 @@ func load_level(name: String) -> void:
   var level_instance = level_scene.instantiate()
   add_child(level_instance)
 
-  print("Level loaded successfully:", name)
+  print("Level loaded successfully:", level_name)

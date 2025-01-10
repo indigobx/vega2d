@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=4 format=3 uid="uid://baqu0qvk550q7"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/item_type.gd" id="1_5yv1o"]
+[ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="2_yf1sb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x68h8"]
+atlas = ExtResource("2_yf1sb")
+region = Rect2(26, 22, 29, 16)
+
+[resource]
+script = ExtResource("1_5yv1o")
+name = "Kosei-12"
+description = "Japanese smart pistol"
+tags = Array[StringName]([])
+texture = SubResource("AtlasTexture_x68h8")
+texture_scale = 1.0
+max_stack_count = 1
+in_inventory_width = 2
+in_inventory_height = 1
+slot_flags = 196613
+default_properties_string = "{
+\"back_color\": \"purple\",
+\"wdb\": \"kosei-12\",
+\"weight\": 1.4
+}"
+default_properties = {
+"back_color": "purple",
+"wdb": "kosei-12",
+"weight": 1.4
+}

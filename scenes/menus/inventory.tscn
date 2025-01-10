@@ -1,0 +1,315 @@
+[gd_scene load_steps=27 format=3 uid="uid://b85wqpynyc6d6"]
+
+[ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_bcugq"]
+[ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_rnkme"]
+[ext_resource type="Script" path="res://addons/wyvernbox/inventory_view.gd" id="3_lwdn6"]
+[ext_resource type="Material" uid="uid://bebw0fj13ajuy" path="res://materials/inventory_dither.tres" id="3_pdjnk"]
+[ext_resource type="Texture2D" uid="uid://bhtkr1qov80ty" path="res://sprites/ui/inv-frame-32.png" id="4_ul5o4"]
+[ext_resource type="PackedScene" uid="uid://co5ok1mm2s7vu" path="res://addons/wyvernbox_prefabs/item_stack_view.tscn" id="5_ijl0k"]
+[ext_resource type="Resource" uid="uid://d1r41g11rl7tj" path="res://data/equipped.tres" id="5_jr7p2"]
+[ext_resource type="StyleBox" uid="uid://cqx3opxr50d2o" path="res://addons/wyvernbox_prefabs/graphics/selected_cell.tres" id="6_qndsh"]
+[ext_resource type="PackedScene" uid="uid://cqa45c6lfsffv" path="res://addons/wyvernbox_prefabs/tooltip.tscn" id="7_0aorr"]
+[ext_resource type="PackedScene" uid="uid://b7jlucsddt6dg" path="res://addons/wyvernbox_prefabs/inventory_cell.tscn" id="8_3gvfn"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_stats.gd" id="9_k76sy"]
+[ext_resource type="Resource" uid="uid://b37nk1nt4e830" path="res://data/inventory.tres" id="9_wf22u"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_description.gd" id="10_6hor5"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_price.gd" id="11_rgpaa"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_key_hints.gd" id="12_w22ql"]
+[ext_resource type="PackedScene" uid="uid://boij7wcxmvnq7" path="res://addons/wyvernbox_prefabs/grabbed_item_stack_view.tscn" id="13_kopeo"]
+
+[sub_resource type="Gradient" id="Gradient_deqo5"]
+colors = PackedColorArray(0.184, 0.16, 0.2, 0.882353, 0.1539, 0.174357, 0.19, 0.882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sul2l"]
+gradient = SubResource("Gradient_deqo5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_4u8o6"]
+
+[sub_resource type="GradientTexture2D" id="1"]
+gradient = SubResource("Gradient_4u8o6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(4.85, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdha8"]
+bg_color = Color(0.416739, 0.320842, 0.565959, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hdoa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcyio"]
+bg_color = Color(0.336, 0.512, 0.6, 1)
+corner_detail = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnyc7"]
+bg_color = Color(0, 0, 0, 0.752941)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gg2fx"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.411765, 0.411765, 0.411765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw20t"]
+
+[node name="Inventory" type="Control"]
+process_mode = 3
+z_index = 1024
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bcugq")
+script = ExtResource("1_rnkme")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("3_pdjnk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_sul2l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Close"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EquippedView" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_lwdn6")
+inventory = ExtResource("5_jr7p2")
+item_scene = ExtResource("5_ijl0k")
+cell_size = Vector2(96, 96)
+selected_item_style = ExtResource("6_qndsh")
+
+[node name="Cells" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView"]
+layout_mode = 0
+mouse_filter = 2
+columns = 8
+
+[node name="Cell" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView/Cells" instance=ExtResource("8_3gvfn")]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 0
+texture = SubResource("1")
+
+[node name="Cell2" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView/Cells" instance=ExtResource("8_3gvfn")]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 0
+texture = SubResource("1")
+
+[node name="Cell3" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView/Cells" instance=ExtResource("8_3gvfn")]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 0
+texture = SubResource("1")
+
+[node name="Cell4" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView/Cells" instance=ExtResource("8_3gvfn")]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 0
+texture = SubResource("1")
+
+[node name="TestButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(520, 328)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2/MarginContainer"]
+custom_minimum_size = Vector2(513, 321)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_ul5o4")
+stretch_mode = 1
+
+[node name="InventoryView" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel2/MarginContainer/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 320)
+layout_mode = 2
+anchors_preset = 0
+offset_right = 512.0
+offset_bottom = 320.0
+script = ExtResource("3_lwdn6")
+inventory = ExtResource("9_wf22u")
+item_scene = ExtResource("5_ijl0k")
+cell_size = Vector2(32, 32)
+selected_item_style = ExtResource("6_qndsh")
+view_filter_color = Color(0.29505, 0.267, 0.3, 0.74902)
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(520, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TotalWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "5000.0 kg"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalWeight" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_bdha8")
+max_value = 200.0
+show_percentage = false
+
+[node name="InvWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel/MarginContainer/TotalWeight"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 52.0
+offset_bottom = 8.0
+grow_vertical = 2
+text = "5000.0 kg"
+vertical_alignment = 1
+
+[node name="VegaWeight" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_3hdoa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qcyio")
+max_value = 200.0
+show_percentage = false
+
+[node name="VegaWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Panel/MarginContainer/VegaWeight"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 52.0
+offset_bottom = 8.0
+grow_vertical = 2
+text = "5000.0 kg"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Tooltip" parent="." instance=ExtResource("7_0aorr")]
+visible = false
+layout_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nnyc7")
+compare_to_inventory = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer/EquippedView")
+property_scripts = Array[Script]([ExtResource("10_6hor5"), ExtResource("9_k76sy"), ExtResource("11_rgpaa"), ExtResource("12_w22ql")])
+nameplate_panel = SubResource("StyleBoxFlat_gg2fx")
+desc_panel = SubResource("StyleBoxEmpty_gw20t")
+back_panel = SubResource("StyleBoxFlat_nnyc7")
+
+[node name="Item" parent="." instance=ExtResource("13_kopeo")]
+visible = false
+unit_size = Vector2(32, 32)
+hide_cursor = true
+double_click_time_msec = 200
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TestButton" to="." method="_on_test_button_pressed"]

@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
   if $LaunchTimer.is_stopped() and not armed:
     armed = true
     $EngineTimer.start()
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
     #if angular_acceleration > critical_ang_g:
       #call_deferred("explode")
 
-func _on_explosion_sensor_area_entered(area: Area2D) -> void:
+func _on_explosion_sensor_area_entered(_area: Area2D) -> void:
   call_deferred("explode")
 
 

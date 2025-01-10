@@ -1,10 +1,24 @@
-[gd_scene load_steps=17 format=4 uid="uid://dnb646qk2kdwa"]
+[gd_scene load_steps=37 format=4 uid="uid://dnb646qk2kdwa"]
 
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
-[ext_resource type="Texture2D" uid="uid://vjjtnvo7qryi" path="res://textures/vr/atlas_02.png" id="2_eefp3"]
+[ext_resource type="Texture2D" uid="uid://dvauaxt64f6r1" path="res://textures/vr/atlas_02.png" id="2_eefp3"]
 [ext_resource type="Shader" path="res://shaders/hologram.gdshader" id="3_brqj7"]
+[ext_resource type="Texture2D" uid="uid://cskejlqpe4ym6" path="res://sprites/fx/glow/glow3.png" id="4_5j0mn"]
+[ext_resource type="Script" path="res://scripts/light.gd" id="5_0njxn"]
 [ext_resource type="PackedScene" uid="uid://evijmramehtn" path="res://scenes/enemies/dummy.tscn" id="8_5xuep"]
+[ext_resource type="PackedScene" uid="uid://xgsddmc6v3b8" path="res://scenes/level_actors/panel.tscn" id="8_ix2rl"]
+[ext_resource type="PackedScene" uid="uid://qgjet46dpr66" path="res://scenes/level_actors/item_dropper.tscn" id="9_jk6hu"]
 [ext_resource type="PackedScene" uid="uid://wapjublkg10g" path="res://scenes/level_actors/electic_sparks.tscn" id="9_rmw3k"]
+[ext_resource type="Script" path="res://addons/wyvernbox/ground/ground_items_manager.gd" id="9_vjyy8"]
+[ext_resource type="Script" path="res://addons/wyvernbox/crafting/item_like.gd" id="10_f50kr"]
+[ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="11_6s3w3"]
+[ext_resource type="Resource" uid="uid://dsqfi6bwmnpjw" path="res://data/items/mags/ar-8_mag.tres" id="11_mqpkl"]
+[ext_resource type="Resource" uid="uid://c7f2fjoh6acby" path="res://data/items/weapons/ar-8.tres" id="11_ws6c2"]
+[ext_resource type="Resource" uid="uid://dkmsg3qrstrlr" path="res://data/items/mags/hem_rocket.tres" id="12_hnxh4"]
+[ext_resource type="Resource" uid="uid://baqu0qvk550q7" path="res://data/items/weapons/kosei-12.tres" id="12_t0s2g"]
+[ext_resource type="Resource" uid="uid://daqq0qxau0bt2" path="res://data/items/weapons/raven.tres" id="13_beoqx"]
+[ext_resource type="Resource" uid="uid://h75gl5dxj1ba" path="res://data/items/mags/kosei-12_mag.tres" id="13_cwsm6"]
+[ext_resource type="PackedScene" uid="uid://k3xjtfgh64ji" path="res://scenes/level_actors/loot_stack.tscn" id="15_r014l"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qftnf"]
 size = Vector2(2000, 800)
@@ -91,6 +105,54 @@ seamless = true
 color_ramp = SubResource("Gradient_ogn4a")
 noise = SubResource("FastNoiseLite_u31gv")
 
+[sub_resource type="Resource" id="Resource_n84b6"]
+script = ExtResource("11_6s3w3")
+items_to_add = Array[ExtResource("10_f50kr")]([ExtResource("11_mqpkl"), ExtResource("12_hnxh4"), ExtResource("13_cwsm6")])
+item_repeat_ranges = Array[Vector2]([Vector2(30, 30), Vector2(1, 1), Vector2(8, 8)])
+item_chances = Array[float]([100.0, 100.0, 100.0])
+repeat_post_chance = true
+randomize_locations = true
+delay_between_items = 0.0
+spread_distance = 96.0
+spread_cone_degrees = 360.0
+spread_angle_degrees = 360.0
+
+[sub_resource type="Gradient" id="Gradient_7v313"]
+offsets = PackedFloat32Array(0.662338, 0.831169, 1)
+colors = PackedColorArray(0.681, 1, 0.42, 0, 0.7, 1, 0.7, 1, 0.681, 1, 0.42, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rknmw"]
+gradient = SubResource("Gradient_7v313")
+width = 48
+height = 48
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Resource" id="Resource_fl511"]
+script = ExtResource("11_6s3w3")
+items_to_add = Array[ExtResource("10_f50kr")]([ExtResource("11_ws6c2"), ExtResource("12_t0s2g"), ExtResource("13_beoqx")])
+item_repeat_ranges = Array[Vector2]([Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)])
+item_chances = Array[float]([100.0, 100.0, 100.0])
+repeat_post_chance = true
+randomize_locations = true
+delay_between_items = 0.0
+spread_distance = 96.0
+spread_cone_degrees = 360.0
+spread_angle_degrees = 360.0
+
+[sub_resource type="Gradient" id="Gradient_n628o"]
+offsets = PackedFloat32Array(0.662338, 0.831169, 0.987013)
+colors = PackedColorArray(1, 0.652, 0.42, 0, 1, 0.638333, 0.38, 1, 1, 0.700333, 0.42, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8h7pg"]
+gradient = SubResource("Gradient_n628o")
+width = 48
+height = 48
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="VRLevel" type="Node2D"]
 script = ExtResource("1_ia8aj")
 
@@ -115,10 +177,21 @@ gizmo_extents = 64.0
 [node name="Lights" type="CanvasGroup" parent="."]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
-energy = 0.15
+energy = 0.25
 blend_mode = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-51, -212)
+enabled = false
+color = Color(1, 0.3, 0.3, 1)
+energy = 0.25
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.498039)
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("4_5j0mn")
+texture_scale = 3.0
+script = ExtResource("5_0njxn")
 
 [node name="Dummy2" parent="." instance=ExtResource("8_5xuep")]
 position = Vector2(-1078, -183)
@@ -151,6 +224,51 @@ texture = SubResource("NoiseTexture2D_7hlrs")
 texture_offset = Vector2(256, 0)
 polygon = PackedVector2Array(-143, 25, -143, 69, -88, 123, 104, 123, 159, 69, 159, 25)
 uv = PackedVector2Array(-143, 25, -143, 69, -88, 123, 104, 123, 159, 69, 159, 25)
+
+[node name="Panel" parent="." node_paths=PackedStringArray("call_node") instance=ExtResource("8_ix2rl")]
+position = Vector2(-267, -35)
+call_node = NodePath("..")
+callback = "drop_weapon"
+behaviour = "button"
+hint_text = "Press [b][E][/b] to drop weapons
+"
+
+[node name="Panel2" parent="." node_paths=PackedStringArray("call_node") instance=ExtResource("8_ix2rl")]
+position = Vector2(234, -35)
+call_node = NodePath("..")
+callback = "open_panel_menu"
+behaviour = "button"
+
+[node name="Panel3" parent="." node_paths=PackedStringArray("call_node") instance=ExtResource("8_ix2rl")]
+position = Vector2(156, -35)
+call_node = NodePath("..")
+callback = "drop_ammo"
+behaviour = "button"
+hint_text = "Press [b][E][/b] to drop ammo
+"
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="AmmoDropper" parent="Loot" instance=ExtResource("9_jk6hu")]
+z_index = 256
+position = Vector2(70, -206)
+ground_item_manager = NodePath("../../GroundItemManager")
+collide_with_group = &"vega"
+loot_table = SubResource("Resource_n84b6")
+texture = SubResource("GradientTexture2D_rknmw")
+
+[node name="WeaponDropper" parent="Loot" instance=ExtResource("9_jk6hu")]
+z_index = 256
+position = Vector2(-175, -206)
+ground_item_manager = NodePath("../../GroundItemManager")
+collide_with_group = &"vega"
+loot_table = SubResource("Resource_fl511")
+one_shot = true
+texture = SubResource("GradientTexture2D_8h7pg")
+
+[node name="GroundItemManager" type="Node" parent="."]
+script = ExtResource("9_vjyy8")
+item_scene = ExtResource("15_r014l")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

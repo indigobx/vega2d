@@ -5,7 +5,7 @@ extends Line2D
 func _ready() -> void:
   texture = texture.duplicate(true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if texture.gradient.get_offset(1) < 1:
     texture.gradient.set_offset(1, texture.gradient.get_offset(1) + 0.1)
     width += 2
