@@ -9,16 +9,14 @@ extends Control
   4: null
 }
 
+
 func _ready() -> void:
   print("Inventory UI Ready")
   update()
 
 
-func _process(_delta: float) -> void:
-  pass
-
-
 func open() -> void:
+  print("of")
   GM.ui_manager.toggle_cursor("ui")
   GM.pause()
   visible = true
@@ -26,6 +24,7 @@ func open() -> void:
 
 
 func close() -> void:
+  print("cf")
   update()
   GM.ui_manager.toggle_cursor("combat")
   GM.unpause()
@@ -86,3 +85,7 @@ func count_ammo_of_type(mag_type: String) -> int:
       if mag_type == stack.extra_properties["mag_type"]:
         count += stack.count
   return count
+
+
+func _on_sort_pressed() -> void:
+  backpack.sort()

@@ -23,10 +23,16 @@ default_properties_string = "{
 \"stats\": {
 \"damage\": 10
 },
-\"weight\": 0.015
+\"weight\": 0.015,
+\"price\": {
+\"res://data/items/money/credits.tres\": 0.0003
+}
 }"
 default_properties = {
 "mag_type": "ar-8_mag",
+"price": {
+"res://data/items/money/credits.tres": 0.0003
+},
 "stats": {
 "damage": 10
 },

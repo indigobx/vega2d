@@ -79,6 +79,7 @@ func _process(_delta: float) -> void:
     GM.inventory.open()
     GM.inventory.close()
     weight_total = GM.player.weight()
+    init_weight = true
   cursor = get_local_mouse_position()
   GM.camera.offset = lerp(GM.camera.offset, cursor/3 + camera_shake, 0.05)
   if GM.ui.selected_slot != 0:

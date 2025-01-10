@@ -21,10 +21,16 @@ slot_flags = 196614
 default_properties_string = "{
 \"back_color\": \"blue\",
 \"wdb\": \"raven\",
-\"weight\": 7.0
+\"weight\": 7.0,
+\"price\": {
+\"res://data/items/money/credits.tres\": 19.05
+}
 }"
 default_properties = {
 "back_color": "blue",
+"price": {
+"res://data/items/money/credits.tres": 19.05
+},
 "wdb": "raven",
 "weight": 7.0
 }
