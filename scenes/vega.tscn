@@ -117,8 +117,7 @@ script = ExtResource("1_8ustq")
 
 [node name="Body" type="AnimatedSprite2D" parent="Character"]
 sprite_frames = ExtResource("2_4eltl")
-animation = &"wait_1_3_armed"
-frame_progress = 0.26685
+animation = &"wait_1_4_armed"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(9, 7)
@@ -156,6 +155,9 @@ autoplay = "near_rifle"
 position = Vector2(30, -5)
 sprite_frames = SubResource("SpriteFrames_o88tb")
 autoplay = "default"
+
+[node name="MuzzleFlashOrigin" type="Marker2D" parent="ArmsPivot/Arms/Weapon"]
+position = Vector2(20, -3)
 
 [node name="Near" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
 z_index = 1

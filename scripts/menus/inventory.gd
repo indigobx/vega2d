@@ -16,7 +16,6 @@ func _ready() -> void:
 
 
 func open() -> void:
-  print("of")
   GM.ui_manager.toggle_cursor("ui")
   GM.pause()
   visible = true
@@ -24,7 +23,6 @@ func open() -> void:
 
 
 func close() -> void:
-  print("cf")
   update()
   GM.ui_manager.toggle_cursor("combat")
   GM.unpause()

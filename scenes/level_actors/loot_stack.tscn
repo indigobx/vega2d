@@ -19,7 +19,8 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_511o1"]
-colors = PackedColorArray(2, 2, 2, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.0714286, 1)
+colors = PackedColorArray(2, 2, 2, 1, 1, 1, 1, 0.621, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vu1ow"]
 gradient = SubResource("Gradient_511o1")
@@ -31,8 +32,10 @@ fill_from = Vector2(0.5, 0.75)
 fill_to = Vector2(0.5, 0.25)
 
 [node name="LootStack" type="RigidBody2D"]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 8
+mass = 0.1
+gravity_scale = 0.75
 script = ExtResource("1_leaad")
 pickup_radius = 8
 

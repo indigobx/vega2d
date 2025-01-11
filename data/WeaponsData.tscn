@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=58 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
 [ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
 [ext_resource type="PackedScene" uid="uid://wkmehxwhcnvo" path="res://scenes/debris/mag_kosei_12.tscn" id="4_e3m4c"]
+[ext_resource type="PackedScene" uid="uid://c70qjqo3745f0" path="res://scenes/fx/kosei_12_flash.tscn" id="5_hxiqj"]
 [ext_resource type="PackedScene" uid="uid://drlhojh81crgp" path="res://scenes/weapons/hitscan_bullet.tscn" id="5_i8wfq"]
 [ext_resource type="PackedScene" uid="uid://cvknp4nmilu0x" path="res://scenes/debris/casing_carbine.tscn" id="6_dc0eq"]
 [ext_resource type="Texture2D" uid="uid://bdk4l871uidg3" path="res://sprites/ui/weapon-ar-8.png" id="6_rq1mq"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://diaknuswd4kjc" path="res://sprites/weapons/smart-pistol/reload0001.png" id="13_uadll"]
 [ext_resource type="Texture2D" uid="uid://cwj8db84xu5bp" path="res://sprites/weapons/smart-pistol/reload0002.png" id="14_5nsva"]
 [ext_resource type="Texture2D" uid="uid://c28tx0xjfip04" path="res://sprites/weapons/smart-pistol/reload0003.png" id="15_4jqs7"]
+[ext_resource type="PackedScene" uid="uid://byfpij2ssb442" path="res://scenes/fx/ar_8_flash.tscn" id="19_2qnua"]
 [ext_resource type="PackedScene" uid="uid://c6du4l5p50odn" path="res://scenes/projectiles/hem_rocket.tscn" id="23_7x5e8"]
 [ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="23_7y2wb"]
 [ext_resource type="PackedScene" uid="uid://s5uwu3hyjtau" path="res://scenes/debris/hem_booster.tscn" id="24_8b0p4"]
@@ -341,6 +343,7 @@ weight = 1.4
 hit_type = "projectile"
 projectile_scene = ExtResource("3_4vmhs")
 empty_clip_scene = ExtResource("4_e3m4c")
+muzzle_flash_scene = ExtResource("5_hxiqj")
 icon_small = ExtResource("3_6xtlh")
 sprite_frames = SubResource("SpriteFrames_qyay5")
 reload_animation = "reload"
@@ -373,6 +376,7 @@ hit_type = "hitscan"
 hitscan_scene = ExtResource("5_i8wfq")
 casing_scene = ExtResource("6_dc0eq")
 empty_clip_scene = ExtResource("7_xpoaa")
+muzzle_flash_scene = ExtResource("19_2qnua")
 icon_small = ExtResource("6_rq1mq")
 sprite_frames = SubResource("SpriteFrames_ebjir")
 sprite_offest = Vector2i(0, 4)

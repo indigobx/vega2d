@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b85wqpynyc6d6"]
+[gd_scene load_steps=34 format=3 uid="uid://b85wqpynyc6d6"]
 
 [ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_bcugq"]
 [ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_rnkme"]
@@ -13,9 +13,15 @@
 [ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_stats.gd" id="9_k76sy"]
 [ext_resource type="Resource" uid="uid://b37nk1nt4e830" path="res://data/inventory.tres" id="9_wf22u"]
 [ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_description.gd" id="10_6hor5"]
+[ext_resource type="Script" path="res://addons/wyvernbox/crafting/item_like.gd" id="11_bdphu"]
 [ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_price.gd" id="11_rgpaa"]
+[ext_resource type="Resource" uid="uid://c7f2fjoh6acby" path="res://data/items/weapons/ar-8.tres" id="12_uf4tf"]
 [ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_key_hints.gd" id="12_w22ql"]
+[ext_resource type="Resource" uid="uid://dsqfi6bwmnpjw" path="res://data/items/mags/ar-8_mag.tres" id="13_j7u8d"]
 [ext_resource type="PackedScene" uid="uid://boij7wcxmvnq7" path="res://addons/wyvernbox_prefabs/grabbed_item_stack_view.tscn" id="13_kopeo"]
+[ext_resource type="Resource" uid="uid://baqu0qvk550q7" path="res://data/items/weapons/kosei-12.tres" id="14_nrmb7"]
+[ext_resource type="Resource" uid="uid://h75gl5dxj1ba" path="res://data/items/mags/kosei-12_mag.tres" id="15_4s1qo"]
+[ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="16_qwwe5"]
 
 [sub_resource type="Gradient" id="Gradient_deqo5"]
 colors = PackedColorArray(0.184, 0.16, 0.2, 0.882353, 0.1539, 0.174357, 0.19, 0.882353)
@@ -31,6 +37,18 @@ gradient = SubResource("Gradient_4u8o6")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(4.85, 0.5)
+
+[sub_resource type="Resource" id="Resource_cyq7i"]
+script = ExtResource("16_qwwe5")
+items_to_add = Array[ExtResource("11_bdphu")]([ExtResource("12_uf4tf"), ExtResource("14_nrmb7"), ExtResource("13_j7u8d"), ExtResource("15_4s1qo")])
+item_repeat_ranges = Array[Vector2]([Vector2(1, 1), Vector2(1, 1), Vector2(60, 60), Vector2(60, 60)])
+item_chances = Array[float]([100.0, 100.0, 100.0, 100.0])
+repeat_post_chance = true
+randomize_locations = false
+delay_between_items = 0.0
+spread_distance = 32.0
+spread_cone_degrees = 360.0
+spread_angle_degrees = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdha8"]
 bg_color = Color(0.416739, 0.320842, 0.565959, 1)
@@ -215,6 +233,7 @@ offset_right = 512.0
 offset_bottom = 320.0
 script = ExtResource("3_lwdn6")
 inventory = ExtResource("9_wf22u")
+contents = SubResource("Resource_cyq7i")
 item_scene = ExtResource("5_ijl0k")
 cell_size = Vector2(32, 32)
 selected_item_style = ExtResource("6_qndsh")

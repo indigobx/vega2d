@@ -28,6 +28,8 @@ var lock_marker: Node
 var actor: Node
 var interaction: Node
 var ui_cursor: Node
+var interaction_mode: bool = true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +51,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
   # If game is running
   if not get_tree().paused:
+    if selected_slot == 0:
+      interaction_mode = true
+    else:
+      interaction_mode = false
     if Input.is_action_just_pressed("Weapon1"):
       selected_slot = 1
     if Input.is_action_just_pressed("Weapon2"):
@@ -68,20 +74,20 @@ func _process(_delta: float) -> void:
       GM.player.vega.pregnancy_stage = min(5, GM.player.vega.pregnancy_stage + 1)
       #GM.player.hp = min(100, GM.player.hp - 10)
     if Input.is_action_just_pressed("Action4"):
+      var dummies = {}
       var es = GM.level.find_children("Dummy*", "", true, false)
       for e in es:
+        dummies[e.name] = e.global_position
         e.queue_free()
       var dummy_scene = preload("res://scenes/enemies/dummy.tscn")
-      var dummy_instance = dummy_scene.instantiate()
-      dummy_instance.global_position = Vector2(-200, 0)
-      dummy_instance.name = "Dummy1"
-      GM.level.add_child(dummy_instance)
-      dummy_instance = dummy_scene.instantiate()
-      dummy_instance.global_position = Vector2(500, 20)
-      dummy_instance.name = "Dummy2"
-      GM.level.add_child(dummy_instance)
+      for d in dummies:
+        var dummy_instance = dummy_scene.instantiate()
+        dummy_instance.global_position = dummies[d] + Vector2(0, -10)
+        dummy_instance.name = d
+        GM.level.add_child(dummy_instance)
+
       #say(load("res://data/dialogues/vr_level/what_am_i_doing.tres"))
-    if Input.is_action_just_pressed("Use"):
+    if interaction_mode and Input.is_action_just_pressed("Use"):
       if actor:
         actor.interact()
 

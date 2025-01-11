@@ -20,11 +20,11 @@ in_inventory_height = 1
 slot_flags = 196613
 default_properties_string = "{
 \"back_color\": \"purple\",
-\"wdb\": \"kosei-12\",
-\"weight\": 1.4,
 \"price\": {
 \"res://data/items/money/credits.tres\": 1.9
-}
+},
+\"wdb\": \"kosei-12\",
+\"weight\": 1.4
 }"
 default_properties = {
 "back_color": "purple",
