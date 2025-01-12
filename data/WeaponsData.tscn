@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c5rxijn3w2jg"]
+[gd_scene load_steps=58 format=3 uid="uid://c5rxijn3w2jg"]
 
 [ext_resource type="Script" path="res://model/WeaponsData.gd" id="1_qa4qa"]
 [ext_resource type="Script" path="res://model/Weapon.gd" id="2_pptmm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dibj1xpoabybh" path="res://sprites/ui/weapon-smart-pistol.png" id="3_6xtlh"]
 [ext_resource type="Texture2D" uid="uid://b08fkddrfn4xl" path="res://sprites/weapons/smart-pistol/still.png" id="3_hb8t3"]
 [ext_resource type="PackedScene" uid="uid://wkmehxwhcnvo" path="res://scenes/debris/mag_kosei_12.tscn" id="4_e3m4c"]
+[ext_resource type="PackedScene" uid="uid://c70qjqo3745f0" path="res://scenes/fx/kosei_12_flash.tscn" id="5_hxiqj"]
 [ext_resource type="PackedScene" uid="uid://drlhojh81crgp" path="res://scenes/weapons/hitscan_bullet.tscn" id="5_i8wfq"]
 [ext_resource type="PackedScene" uid="uid://cvknp4nmilu0x" path="res://scenes/debris/casing_carbine.tscn" id="6_dc0eq"]
 [ext_resource type="Texture2D" uid="uid://bdk4l871uidg3" path="res://sprites/ui/weapon-ar-8.png" id="6_rq1mq"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://diaknuswd4kjc" path="res://sprites/weapons/smart-pistol/reload0001.png" id="13_uadll"]
 [ext_resource type="Texture2D" uid="uid://cwj8db84xu5bp" path="res://sprites/weapons/smart-pistol/reload0002.png" id="14_5nsva"]
 [ext_resource type="Texture2D" uid="uid://c28tx0xjfip04" path="res://sprites/weapons/smart-pistol/reload0003.png" id="15_4jqs7"]
+[ext_resource type="PackedScene" uid="uid://byfpij2ssb442" path="res://scenes/fx/ar_8_flash.tscn" id="19_2qnua"]
 [ext_resource type="PackedScene" uid="uid://c6du4l5p50odn" path="res://scenes/projectiles/hem_rocket.tscn" id="23_7x5e8"]
 [ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="23_7y2wb"]
 [ext_resource type="PackedScene" uid="uid://s5uwu3hyjtau" path="res://scenes/debris/hem_booster.tscn" id="24_8b0p4"]
@@ -341,6 +343,7 @@ weight = 1.4
 hit_type = "projectile"
 projectile_scene = ExtResource("3_4vmhs")
 empty_clip_scene = ExtResource("4_e3m4c")
+muzzle_flash_scene = ExtResource("5_hxiqj")
 icon_small = ExtResource("3_6xtlh")
 sprite_frames = SubResource("SpriteFrames_qyay5")
 reload_animation = "reload"
@@ -348,7 +351,7 @@ empty_animation = "empty"
 unjam_animation = "unjam"
 damage_random_delta = 2.0
 mag_size = 8
-mag = 0
+mag = 8
 mag_type = "kosei-12_mag"
 ammo_type = "hinomaru_4"
 reload_time = 0.8
@@ -363,6 +366,10 @@ recoil_recover_delay = 0.5
 spread_single = 1.0
 spread_full_auto = 10.0
 spread_burst = 5.0
+heat_by_cartridge = 10.0
+cooling_delay = 1.0
+cool_per_second = 10.0
+failure_chance = 25
 
 [node name="AR-8" type="Node" parent="."]
 script = ExtResource("2_pptmm")
@@ -373,9 +380,10 @@ hit_type = "hitscan"
 hitscan_scene = ExtResource("5_i8wfq")
 casing_scene = ExtResource("6_dc0eq")
 empty_clip_scene = ExtResource("7_xpoaa")
+muzzle_flash_scene = ExtResource("19_2qnua")
+raycast_offset = Vector2i(0, -2)
 icon_small = ExtResource("6_rq1mq")
 sprite_frames = SubResource("SpriteFrames_ebjir")
-sprite_offest = Vector2i(0, 4)
 reload_animation = "reload"
 empty_animation = "empty"
 unjam_animation = "unjam"
@@ -383,7 +391,7 @@ damage_mod = 0.5
 damage_random_delta = 1.5
 hit_mark_scene = ExtResource("8_23448")
 mag_size = 30
-mag = 0
+mag = 30
 mag_type = "ar-8_mag"
 ammo_type = "armsco_25"
 fire_modes = 15
@@ -397,6 +405,11 @@ shots_before_linear_recoil = 8
 recoil_recover_delay = 0.3
 spread_full_auto = 3.0
 spread_burst = 1.0
+heat_by_cartridge = 3.0
+cool_per_second = 7.0
+hot_threshold = 100.0
+failure_threshold = 120.0
+failure_chance = 10
 
 [node name="RAVEN" type="Node" parent="."]
 script = ExtResource("2_pptmm")
@@ -411,10 +424,12 @@ sprite_frames = SubResource("SpriteFrames_et2kn")
 sprite_offest = Vector2i(-24, 0)
 reload_animation = "reload"
 empty_animation = "empty"
-mag = 0
 mag_type = "hem_rocket"
 ammo_type = "hem_rocket"
 reload_time = 2.0
 can_be_chambered = false
 fire_modes = 3
 recoil_directions = 3
+heat_by_cartridge = 30.0
+cool_per_second = 3.0
+failure_chance = 50

@@ -14,5 +14,5 @@ max_stack_count = 10000
 in_inventory_width = 1
 in_inventory_height = 1
 slot_flags = 64
-default_properties_string = ""
+default_properties_string = "{}"
 default_properties = {}

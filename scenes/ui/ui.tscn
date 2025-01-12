@@ -31,22 +31,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_gc44a")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 432.0
-offset_bottom = 188.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="BarContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BarContainer"]
 layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="UIHealthBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_6krfb")]
+[node name="UIHealthBar" parent="VBoxContainer/BarContainer/HBoxContainer" instance=ExtResource("2_6krfb")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 24
@@ -54,7 +59,7 @@ value = 10.0
 value_max = 100.0
 kind = "hp"
 
-[node name="UIStaminaBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_6krfb")]
+[node name="UIStaminaBar" parent="VBoxContainer/BarContainer/HBoxContainer" instance=ExtResource("2_6krfb")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 24
@@ -62,7 +67,7 @@ value = 10.0
 value_max = 100.0
 kind = "stamina"
 
-[node name="UIEnergyBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_6krfb")]
+[node name="UIEnergyBar" parent="VBoxContainer/BarContainer/HBoxContainer" instance=ExtResource("2_6krfb")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 24
@@ -70,81 +75,65 @@ value = 10.0
 value_max = 100.0
 kind = "energy"
 
-[node name="IC" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="IC" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 4
 
-[node name="UIHeat" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("2_ryfst")]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/IC"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UIHeat" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer" instance=ExtResource("2_ryfst")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="UIAmmo" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("8_n5b8q")]
+[node name="UIAmmo" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer" instance=ExtResource("8_n5b8q")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="UIFireMode" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer" instance=ExtResource("6_6ed00")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="UIFireMode" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_6ed00")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/IC"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Weapon0" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer2" instance=ExtResource("6_mjjle")]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/IC"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(4, 0)
-layout_mode = 2
-
-[node name="Weapon0" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_mjjle")]
-unique_name_in_owner = true
-layout_mode = 2
+size_flags_horizontal = 8
 selected = true
 
-[node name="Weapon1" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_kiuos")]
+[node name="Weapon1" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer2" instance=ExtResource("6_kiuos")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Weapon2" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer2" instance=ExtResource("6_kiuos")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Weapon2" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_kiuos")]
+[node name="Weapon3" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer2" instance=ExtResource("6_kiuos")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Weapon3" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_kiuos")]
+[node name="Weapon4" parent="VBoxContainer/MarginContainer2/IC/HBoxContainer2" instance=ExtResource("6_kiuos")]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Weapon4" parent="MarginContainer/HBoxContainer/VBoxContainer/IC" instance=ExtResource("6_kiuos")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="StateIcons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="ChargedJump" parent="MarginContainer/HBoxContainer/VBoxContainer2/StateIcons" instance=ExtResource("8_8v7no")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-header = "Charged Jump"
-max_value = 100.0
-format_string = "%d%%"
-
-[node name="SayContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-use_top_left = true
-
-[node name="UISay" parent="MarginContainer/HBoxContainer/VBoxContainer2/SayContainer" instance=ExtResource("4_1pwlx")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_horizontal = 8
 
 [node name="Debug" type="VBoxContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(320, 400)
 layout_mode = 1
 anchors_preset = 1
@@ -196,3 +185,42 @@ layout_mode = 1
 unique_name_in_owner = true
 visible = false
 z_index = 4096
+
+[node name="SayContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="UISay" parent="SayContainer" instance=ExtResource("4_1pwlx")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StateIcons" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 72.0
+offset_top = 47.0
+offset_right = 72.0
+offset_bottom = 143.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ChargedJump" parent="StateIcons" instance=ExtResource("8_8v7no")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+header = "Charged Jump"
+max_value = 100.0
+format_string = "%d%%"

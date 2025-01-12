@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://dnb646qk2kdwa"]
+[gd_scene load_steps=35 format=4 uid="uid://dnb646qk2kdwa"]
 
 [ext_resource type="Script" path="res://scripts/levels/vr_level.gd" id="1_ia8aj"]
 [ext_resource type="Texture2D" uid="uid://dvauaxt64f6r1" path="res://textures/vr/atlas_02.png" id="2_eefp3"]
@@ -13,9 +13,7 @@
 [ext_resource type="Script" path="res://addons/wyvernbox/crafting/item_like.gd" id="10_f50kr"]
 [ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="11_6s3w3"]
 [ext_resource type="Resource" uid="uid://dsqfi6bwmnpjw" path="res://data/items/mags/ar-8_mag.tres" id="11_mqpkl"]
-[ext_resource type="Resource" uid="uid://c7f2fjoh6acby" path="res://data/items/weapons/ar-8.tres" id="11_ws6c2"]
 [ext_resource type="Resource" uid="uid://dkmsg3qrstrlr" path="res://data/items/mags/hem_rocket.tres" id="12_hnxh4"]
-[ext_resource type="Resource" uid="uid://baqu0qvk550q7" path="res://data/items/weapons/kosei-12.tres" id="12_t0s2g"]
 [ext_resource type="Resource" uid="uid://daqq0qxau0bt2" path="res://data/items/weapons/raven.tres" id="13_beoqx"]
 [ext_resource type="Resource" uid="uid://h75gl5dxj1ba" path="res://data/items/mags/kosei-12_mag.tres" id="13_cwsm6"]
 [ext_resource type="PackedScene" uid="uid://k3xjtfgh64ji" path="res://scenes/level_actors/loot_stack.tscn" id="15_r014l"]
@@ -131,9 +129,9 @@ fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Resource" id="Resource_fl511"]
 script = ExtResource("11_6s3w3")
-items_to_add = Array[ExtResource("10_f50kr")]([ExtResource("11_ws6c2"), ExtResource("12_t0s2g"), ExtResource("13_beoqx")])
-item_repeat_ranges = Array[Vector2]([Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)])
-item_chances = Array[float]([100.0, 100.0, 100.0])
+items_to_add = Array[ExtResource("10_f50kr")]([ExtResource("13_beoqx")])
+item_repeat_ranges = Array[Vector2]([Vector2(1, 1)])
+item_chances = Array[float]([100.0])
 repeat_post_chance = true
 randomize_locations = true
 delay_between_items = 0.0
@@ -157,8 +155,9 @@ fill_to = Vector2(1, 0.5)
 script = ExtResource("1_ia8aj")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(450, -521)
-scale = Vector2(1.635, 1.745)
+z_index = -10
+position = Vector2(450, -635)
+scale = Vector2(1.635, 1.46)
 mesh = SubResource("PlaneMesh_qftnf")
 texture = SubResource("GradientTexture1D_de6ro")
 

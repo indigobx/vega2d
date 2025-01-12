@@ -39,9 +39,8 @@ func _ready() -> void:
   $PickupArea/PickupShape.shape.radius = pickup_radius
 
 func _process(_delta: float) -> void:
-  if $Hover.visible and not is_zero_approx(global_rotation):
-    $FX.global_rotation = 0.0
-    $Hover.global_rotation = 0.0
+  $FX.global_rotation = 0.0
+  $Hover.global_rotation = 0.0
 
 func interact() -> void:
   var pickup = GM.inventory.backpack.try_add_item(item_stack)

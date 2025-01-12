@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://hbslthwa82an"]
+[gd_scene load_steps=26 format=3 uid="uid://hbslthwa82an"]
 
 [ext_resource type="Script" path="res://scripts/vega.gd" id="1_8ustq"]
 [ext_resource type="SpriteFrames" uid="uid://ctipgwabsbf6r" path="res://sprites/vega/solo/body-spriteframesv2.tres" id="2_4eltl"]
+[ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="9_7aygr"]
 [ext_resource type="Script" path="res://scripts/vega_damage.gd" id="11_6epjv"]
 [ext_resource type="Texture2D" uid="uid://dd4aao34lro3c" path="res://sprites/vega/solo/arm_far_pistol.png" id="25_tcarr"]
 [ext_resource type="Texture2D" uid="uid://bar1r27tymj3j" path="res://sprites/vega/solo/arm_far_rifle.png" id="26_h6tt2"]
@@ -87,6 +88,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_jcysr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c37br"]
+curve = SubResource("Curve_jcysr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ud6pr"]
+particle_flag_disable_z = true
+angle_min = -90.0
+angle_max = 90.0
+direction = Vector3(0.5, -1, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 24, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 0.499998
+scale_min = 0.05
+scale_max = 0.1
+color = Color(1, 1, 1, 0.259)
+alpha_curve = SubResource("CurveTexture_c37br")
+
 [sub_resource type="Gradient" id="Gradient_e2lny"]
 colors = PackedColorArray(0, 0, 0, 0.713726, 0.35, 0.35, 0.35, 0)
 
@@ -117,8 +140,7 @@ script = ExtResource("1_8ustq")
 
 [node name="Body" type="AnimatedSprite2D" parent="Character"]
 sprite_frames = ExtResource("2_4eltl")
-animation = &"wait_1_3_armed"
-frame_progress = 0.26685
+animation = &"wait_1_4_armed"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(9, 7)
@@ -156,6 +178,17 @@ autoplay = "near_rifle"
 position = Vector2(30, -5)
 sprite_frames = SubResource("SpriteFrames_o88tb")
 autoplay = "default"
+
+[node name="MuzzleFlashOrigin" type="Marker2D" parent="ArmsPivot/Arms/Weapon"]
+position = Vector2(20, -3)
+
+[node name="HeatParticles" type="GPUParticles2D" parent="ArmsPivot/Arms/Weapon"]
+position = Vector2(20, -8)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_ud6pr")
+texture = ExtResource("9_7aygr")
+randomness = 0.5
 
 [node name="Near" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
 z_index = 1

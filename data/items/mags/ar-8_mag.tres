@@ -20,13 +20,13 @@ in_inventory_height = 1
 slot_flags = 33
 default_properties_string = "{
 \"mag_type\": \"ar-8_mag\",
+\"price\": {
+\"res://data/items/money/credits.tres\": 0.0003
+},
 \"stats\": {
 \"damage\": 10
 },
-\"weight\": 0.015,
-\"price\": {
-\"res://data/items/money/credits.tres\": 0.0003
-}
+\"weight\": 0.015
 }"
 default_properties = {
 "mag_type": "ar-8_mag",

@@ -12,14 +12,18 @@ func _process(_delta: float) -> void:
 
 
 func _on_interact_area_area_entered(area: Area2D) -> void:
-  var actor = area.get_parent()
-  if area and actor.has_method("interact"):
-    if "hint_text" in actor:
-      $TextAbove.visible = true
-      $TextAbove.text = actor.hint_text
-    if actor.has_method("mouse_over"):
-      actor.mouse_over()
-    GM.ui.actor = actor
+  if GM.ui.interaction_mode:
+    var actor = area.get_parent()
+    if area and actor.has_method("interact"):
+      if "hint_text" in actor:
+        $TextAbove.visible = true
+        $TextAbove.text = actor.hint_text
+      if actor.has_method("mouse_over"):
+        actor.mouse_over()
+      GM.ui.actor = actor
+    else:
+      $TextAbove.visible = false
+      GM.ui.actor = null
   else:
     $TextAbove.visible = false
     GM.ui.actor = null

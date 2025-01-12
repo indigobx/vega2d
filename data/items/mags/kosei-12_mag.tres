@@ -19,13 +19,13 @@ in_inventory_height = 1
 slot_flags = 33
 default_properties_string = "{
 \"mag_type\": \"kosei-12_mag\",
+\"price\": {
+\"res://data/items/money/credits.tres\": 0.93
+},
 \"stats\": {
 \"damage\": 15
 },
-\"weight\": 0.07,
-\"price\": {
-\"res://data/items/money/credits.tres\": 0.93
-}
+\"weight\": 0.07
 }"
 default_properties = {
 "mag_type": "kosei-12_mag",

@@ -59,7 +59,8 @@ var jump_charged: bool
 var charged_jump_energy: float
 var lock_area: Node
 var init_weight: bool = false
-
+var muzzle_flash_origin: Node
+var heat_particles: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,9 +68,11 @@ func _ready() -> void:
   set_process_input(true)
   ray = $ArmsPivot/Arms/RayCast2D
   arms_pivot = $ArmsPivot
+  muzzle_flash_origin = $ArmsPivot/Arms/Weapon/MuzzleFlashOrigin
+  heat_particles = $ArmsPivot/Arms/Weapon/HeatParticles
   lock_area = get_node("Cursor/LockArea")
   _on_view_direction_changed(1)
-  pregnancy_stage = 3
+  pregnancy_stage = 0
 
 
 
@@ -219,14 +222,18 @@ func _physics_process(_delta: float) -> void:
     $ShadowSprite.modulate = Color(0, 0, 0, clamp(shadow_factor-0.5, 0.0, 1.0))
 
   # AnimationManager
-  if is_on_floor() and velocity.x * view_direction > 0.1 * view_direction:
+  if is_on_floor() and not is_zero_approx(velocity.x) \
+  and velocity.x * view_direction > 0.1 * view_direction:
     $Character/Body.play("walk_forward_%s_%s" % [pregnancy_stage, body_animation])
-  if is_on_floor() and velocity.x * view_direction < 0.1 * -view_direction:
+  if is_on_floor() and not is_zero_approx(velocity.x)\
+  and velocity.x * view_direction < 0.1 * -view_direction:
     $Character/Body.play("walk_back_%s_%s" % [pregnancy_stage, body_animation])
-  if is_on_floor() and abs(velocity) <= Vector2(0.1, 0.1):
+  if is_on_floor() and is_zero_approx(velocity.x) \
+  and $Character/Body.animation != "wait_1_%s_%s" % [pregnancy_stage, body_animation]:
     $Character/Body.play("wait_1_%s_%s" % [pregnancy_stage, body_animation])
   if not is_on_floor() and abs(velocity.y) > 0.1:
     $Character/Body.play("jump_%s_%s" % [pregnancy_stage, body_animation])
+
   
   recoil_position.x = recoil_position.x * view_direction
   #if abs(recoil_position.x) < 0.1:

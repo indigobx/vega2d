@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://qgjet46dpr66"]
+[gd_scene load_steps=12 format=3 uid="uid://qgjet46dpr66"]
 
 [ext_resource type="Script" path="res://scripts/level_actors/item_dropper.gd" id="1_62tkl"]
 [ext_resource type="Script" path="res://addons/wyvernbox/crafting/item_like.gd" id="2_31c0g"]
+[ext_resource type="Resource" uid="uid://c7f2fjoh6acby" path="res://data/items/weapons/ar-8.tres" id="3_32tig"]
 [ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="3_kjtep"]
+[ext_resource type="Resource" uid="uid://dsqfi6bwmnpjw" path="res://data/items/mags/ar-8_mag.tres" id="4_qpxoq"]
+[ext_resource type="Resource" uid="uid://baqu0qvk550q7" path="res://data/items/weapons/kosei-12.tres" id="5_nmurq"]
+[ext_resource type="Resource" uid="uid://h75gl5dxj1ba" path="res://data/items/mags/kosei-12_mag.tres" id="6_yv1v5"]
 
 [sub_resource type="Resource" id="Resource_1xsik"]
 script = ExtResource("3_kjtep")
-items_to_add = Array[ExtResource("2_31c0g")]([])
-item_repeat_ranges = Array[Vector2]([])
-item_chances = Array[float]([])
+items_to_add = Array[ExtResource("2_31c0g")]([ExtResource("3_32tig"), ExtResource("5_nmurq"), ExtResource("4_qpxoq"), ExtResource("6_yv1v5")])
+item_repeat_ranges = Array[Vector2]([Vector2(1, 1), Vector2(1, 1), Vector2(60, 60), Vector2(60, 60)])
+item_chances = Array[float]([100.0, 100.0, 100.0, 100.0])
 repeat_post_chance = true
 randomize_locations = true
 delay_between_items = 0.0

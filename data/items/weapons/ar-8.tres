@@ -20,14 +20,14 @@ in_inventory_height = 1
 slot_flags = 196613
 default_properties_string = "{
 \"back_color\": \"green\",
+\"price\": {
+\"res://data/items/money/credits.tres\": 0.616
+},
 \"stats\": {
 \"damage+\": 2
 },
 \"wdb\": \"ar-8\",
-\"weight\": 3.0,
-\"price\": {
-\"res://data/items/money/credits.tres\": 
-0.616}
+\"weight\": 3.0
 }"
 default_properties = {
 "back_color": "green",

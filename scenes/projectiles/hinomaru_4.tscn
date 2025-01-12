@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://coneyb8xleyod"]
+[gd_scene load_steps=33 format=3 uid="uid://coneyb8xleyod"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/hinomaru_4.gd" id="1_pp044"]
 [ext_resource type="Texture2D" uid="uid://daiiuyuyy2kk3" path="res://sprites/projectiles/smartshell/aim0000.png" id="2_iuau1"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://c8vneyw3qw8er" path="res://sprites/projectiles/smartshell/fly0008.png" id="20_p5gdw"]
 [ext_resource type="Texture2D" uid="uid://dgr3ygwvraf0e" path="res://sprites/fx/glow_new1_90.png" id="21_4id0a"]
 [ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="21_7scor"]
+[ext_resource type="Texture2D" uid="uid://ckc7xarqoh16j" path="res://sprites/fx/glow_new1.png" id="23_0tf5j"]
+[ext_resource type="Script" path="res://scripts/light.gd" id="24_h5isr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8jc7v"]
 animations = [{
@@ -226,6 +228,18 @@ visible = false
 points = PackedVector2Array(0, 0, 50, 0, 40, 5, 40, -5, 50, 0)
 width = 2.0
 default_color = Color(0.992687, 0.38669, 0.792305, 1)
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(1, 2)
+color = Color(1, 0.426, 0.16, 1)
+texture = ExtResource("23_0tf5j")
+offset = Vector2(-112, 0)
+texture_scale = 2.5
+script = ExtResource("24_h5isr")
+blink_on_time = 0.05
+blink_off_time = 0.05
+flicker_duty_duration = 0.05
+min_energy = 0.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="EngineTimer" to="." method="_on_engine_timer_timeout"]

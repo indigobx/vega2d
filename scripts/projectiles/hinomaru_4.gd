@@ -33,6 +33,8 @@ func _ready() -> void:
     stage = 4
   apply_impulse(v1)
   $Sprite.play("fly")
+  $Light.enabled = true
+  $Light.kind = "sine"
   particles_fly()
 
 
@@ -118,6 +120,8 @@ func _on_engine_timer_timeout() -> void:
   $InertialTimer.start(stage_timers[1])
   stage = 1
   $Sprite.play("aim")
+  $Light.enabled = true
+  $Light.kind = "flicker"
   particles_aim()
 
 
@@ -125,6 +129,8 @@ func _on_aim_timer_timeout() -> void:
   $InertialTimer.start(stage_timers[3])
   stage = 3
   particles_fly()
+  $Light.enabled = true
+  $Light.kind = "sine"
   $Sprite.play("fly")
 
 
@@ -136,11 +142,14 @@ func _on_inertial_timer_timeout() -> void:
   if stage == 1:
     $AimTimer.start(stage_timers[2])
     $Sprite.play("aim")
+    $Light.enabled = true
+    $Light.kind = "flicker"
     particles_fly()
     stage = 2
   else:
     $LifeTimer.start(stage_timers[4])
     $Sprite.play("default")
+    $Light.enabled = false
     $Particles.emitting = false
     stage = 4
     

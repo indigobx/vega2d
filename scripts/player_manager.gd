@@ -26,7 +26,6 @@ var hp_level_table = [
   {"threshold": 0.67, "color": Color(1.0, 0.75, 0.75)}
 ]
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   print("Player Manager Ready")
@@ -144,8 +143,3 @@ func spend_energy(value, allow_stamina:bool=true) -> bool:
     return true
   else:
     return false
-
-
-# Функция, вызываемая при изменении selected_weapon
-func _on_selected_weapon_changed(value: int) -> void:
-  pass

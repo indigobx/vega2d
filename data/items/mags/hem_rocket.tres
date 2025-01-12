@@ -20,13 +20,13 @@ in_inventory_height = 1
 slot_flags = 34
 default_properties_string = "{
 \"mag_type\": \"hem_rocket\",
+\"price\": {
+\"res://data/items/money/credits.tres\": 4.76
+},
 \"stats\": {
 \"damage\": 100
 },
-\"weight\": 5.5,
-\"price\": {
-\"res://data/items/money/credits.tres\": 4.76
-}
+\"weight\": 5.5
 }"
 default_properties = {
 "mag_type": "hem_rocket",
