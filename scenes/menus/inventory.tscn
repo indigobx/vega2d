@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://b85wqpynyc6d6"]
+[gd_scene load_steps=35 format=3 uid="uid://b85wqpynyc6d6"]
 
 [ext_resource type="Theme" uid="uid://d2v11d4sbhr0a" path="res://themes/invenotry_theme.tres" id="1_bcugq"]
 [ext_resource type="Script" path="res://scripts/menus/inventory.gd" id="1_rnkme"]
 [ext_resource type="Script" path="res://addons/wyvernbox/inventory_view.gd" id="3_lwdn6"]
 [ext_resource type="Material" uid="uid://bebw0fj13ajuy" path="res://materials/inventory_dither.tres" id="3_pdjnk"]
+[ext_resource type="Texture2D" uid="uid://bupaux7n0egqh" path="res://sprites/ui/menus/close-normal.png" id="4_nl65v"]
 [ext_resource type="Texture2D" uid="uid://bhtkr1qov80ty" path="res://sprites/ui/inv-frame-32.png" id="4_ul5o4"]
 [ext_resource type="PackedScene" uid="uid://co5ok1mm2s7vu" path="res://addons/wyvernbox_prefabs/item_stack_view.tscn" id="5_ijl0k"]
 [ext_resource type="Resource" uid="uid://d1r41g11rl7tj" path="res://data/equipped.tres" id="5_jr7p2"]
@@ -126,6 +127,7 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Close"
+icon = ExtResource("4_nl65v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -140,13 +142,16 @@ custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel"]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="EquippedView" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Panel/MarginContainer"]
 unique_name_in_owner = true

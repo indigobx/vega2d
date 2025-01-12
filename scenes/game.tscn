@@ -51,6 +51,10 @@ one_shot = true
 [node name="LockTimer" type="Timer" parent="WeaponManager"]
 one_shot = true
 
+[node name="CoolingTimer" type="Timer" parent="WeaponManager"]
+process_callback = 0
+one_shot = true
+
 [node name="InventoryManager" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("7_707dm")

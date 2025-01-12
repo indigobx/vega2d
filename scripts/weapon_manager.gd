@@ -36,6 +36,18 @@ func _ready() -> void:
   lock_timer = $LockTimer
   lock_marker = GM.ui.lock_marker
 
+
+func _physics_process(delta: float) -> void:
+  if weapon:
+    cool(delta)
+    if weapon.heat > weapon.hot_threshold/2:
+      var ratio = weapon.heat / weapon.failure_threshold
+      GM.player.vega.heat_particles.emitting = true
+      GM.player.vega.heat_particles.amount_ratio = ratio
+      print(ratio)
+    else:
+      GM.player.vega.heat_particles.emitting = false
+
 func _on_ammo_change(value) -> void:
   _ammo = value
 
@@ -63,6 +75,8 @@ func _on_weapon_change(value) -> void:
       can_fire = true
     if value.can_lock_target:
       lock_timer.wait_time = value.target_lock_time
+    GM.ui.heatbar.heat = weapon.heat
+    GM.ui.heatbar.heat_max = weapon.hot_threshold
 
   else:
     ammo = null
@@ -167,6 +181,11 @@ func fire_burst() -> void:
 
 
 func perform_shot() -> void:
+  if weapon.heat > weapon.failure_threshold:
+    var chance = randi_range(0, 100) + max(0, weapon.heat - weapon.failure_threshold)
+    if chance > 100 - weapon.failure_chance:
+      rack_bolt()
+      return
   weapon.set_mag(weapon.mag - min(weapon.cartridge_by_shot, weapon.mag))
   if weapon.can_be_chambered:
     weapon.is_chambered = true
@@ -178,6 +197,7 @@ func perform_shot() -> void:
     _:
       return
   emit_flash()
+  heat()
   if weapon.get_recoil_types():
     recoil()
   if weapon.casing_scene:
@@ -188,16 +208,25 @@ func perform_shot() -> void:
     weapon.is_chambered = false
     #GM.player.weapon_sprite.play(weapon.empty_animation)
     #GM.ui.say(load("res://data/dialogues/vr_level/ammos_out.tres"))
+  $CoolingTimer.start(weapon.cooling_delay)
   GM.ui.ammobar.update()
 
 func heat() -> void:
   if weapon.heat_by_cartridge > 0:
     weapon.heat += weapon.heat_by_cartridge
-  if weapon.overheat_animation and weapon.heat > weapon.hot_threshold:
-    GM.player.weapon_sprite.play(weapon.overheat_animation)
+    GM.ui.heatbar.heat = weapon.heat
+  if weapon.heat > weapon.hot_threshold:
+    if weapon.overheat_animation:
+      GM.player.weapon_sprite.play(weapon.overheat_animation)
 
-func cool() -> void:
-  pass
+
+func cool(delta) -> void:
+  if not is_zero_approx(weapon.heat) and weapon.heat > 0:
+    if $CoolingTimer.is_stopped():
+      weapon.heat -= weapon.cool_per_second * delta
+      if weapon.heat < 0:
+        weapon.heat = 0.0
+      GM.ui.heatbar.heat = weapon.heat
 
 func emit_flash() -> void:
   if weapon.muzzle_flash_scene:
