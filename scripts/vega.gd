@@ -61,6 +61,7 @@ var lock_area: Node
 var init_weight: bool = false
 var muzzle_flash_origin: Node
 var heat_particles: Node
+var shot_player: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,6 +71,8 @@ func _ready() -> void:
   arms_pivot = $ArmsPivot
   muzzle_flash_origin = $ArmsPivot/Arms/Weapon/MuzzleFlashOrigin
   heat_particles = $ArmsPivot/Arms/Weapon/HeatParticles
+  shot_player = $ArmsPivot/Arms/Weapon/WeaponAudio
+  GM.audio.shot_player = shot_player
   lock_area = get_node("Cursor/LockArea")
   _on_view_direction_changed(1)
   pregnancy_stage = 0

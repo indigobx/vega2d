@@ -1,0 +1,34 @@
+[gd_scene load_steps=10 format=3 uid="uid://3io6oufksq86"]
+
+[ext_resource type="Script" path="res://model/AudioBankWeapon.gd" id="1_1ro13"]
+[ext_resource type="AudioStream" uid="uid://pgmpygcw658l" path="res://sounds/kosei-12-1.ogg" id="2_3plau"]
+[ext_resource type="AudioStream" uid="uid://bxdnuesuapp1r" path="res://sounds/kosei-12-2.ogg" id="3_u8wn0"]
+[ext_resource type="AudioStream" uid="uid://bkegddfibdhjp" path="res://sounds/kosei-12-3.ogg" id="4_jo8je"]
+[ext_resource type="AudioStream" uid="uid://bvy0hsul6vee3" path="res://sounds/ar-8-1.ogg" id="5_6pl0i"]
+[ext_resource type="AudioStream" uid="uid://8yp8a282ip3s" path="res://sounds/ar-8-2.ogg" id="6_wcj4f"]
+[ext_resource type="AudioStream" uid="uid://dbnk4jbg20s1k" path="res://sounds/ar-8-3.ogg" id="7_wyir3"]
+[ext_resource type="AudioStream" uid="uid://dfdc11fy0ww4u" path="res://sounds/ar-8-4.ogg" id="8_0i4ds"]
+[ext_resource type="AudioStream" uid="uid://dalkcacyewpln" path="res://sounds/raven-1.ogg" id="9_8th5l"]
+
+[node name="AudioData" type="Node"]
+
+[node name="Kosei-12" type="Node" parent="."]
+script = ExtResource("1_1ro13")
+weapon_short_name = "kosei-12"
+single_sounds = [ExtResource("2_3plau"), ExtResource("3_u8wn0"), ExtResource("4_jo8je")]
+random_pitch = true
+pitch_scale_min = 0.95
+pitch_scale_max = 1.05
+
+[node name="AR-8" type="Node" parent="."]
+script = ExtResource("1_1ro13")
+weapon_short_name = "ar-8"
+single_sounds = [ExtResource("5_6pl0i"), ExtResource("6_wcj4f"), ExtResource("7_wyir3"), ExtResource("8_0i4ds")]
+
+[node name="RAVEN" type="Node" parent="."]
+script = ExtResource("1_1ro13")
+weapon_short_name = "raven"
+single_sounds = [ExtResource("9_8th5l")]
+random_pitch = true
+pitch_scale_min = 0.9
+pitch_scale_max = 1.1

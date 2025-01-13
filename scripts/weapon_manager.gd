@@ -64,6 +64,7 @@ func _on_weapon_change(value) -> void:
       #
       #weapon = null
     ammo = ADB.get_ammo(value.ammo_type)
+    GM.audio.update_current_weapon_bank()
     if weapon.mag == 0:
       GM.player.weapon_sprite.play(weapon.empty_animation)
     GM.player.vega.weapon_offset = weapon.sprite_offest
@@ -197,6 +198,7 @@ func perform_shot() -> void:
     _:
       return
   emit_flash()
+  GM.audio.single_shot()
   heat()
   if weapon.get_recoil_types():
     recoil()

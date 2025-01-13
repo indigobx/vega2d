@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://coneyb8xleyod"]
+[gd_scene load_steps=34 format=3 uid="uid://coneyb8xleyod"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/hinomaru_4.gd" id="1_pp044"]
 [ext_resource type="Texture2D" uid="uid://daiiuyuyy2kk3" path="res://sprites/projectiles/smartshell/aim0000.png" id="2_iuau1"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="21_7scor"]
 [ext_resource type="Texture2D" uid="uid://ckc7xarqoh16j" path="res://sprites/fx/glow_new1.png" id="23_0tf5j"]
 [ext_resource type="Script" path="res://scripts/light.gd" id="24_h5isr"]
+[ext_resource type="AudioStream" uid="uid://d0wr7w8qwjrx3" path="res://sounds/smart-aim.ogg" id="25_fhmyi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8jc7v"]
 animations = [{
@@ -240,6 +241,13 @@ blink_on_time = 0.05
 blink_off_time = 0.05
 flicker_duty_duration = 0.05
 min_energy = 0.5
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_fhmyi")
+max_distance = 1300.0
+attenuation = 1.18921
+max_polyphony = 2
+panning_strength = 1.1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="EngineTimer" to="." method="_on_engine_timer_timeout"]
