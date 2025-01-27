@@ -64,6 +64,7 @@ func load_instance() -> void:
   vega = load("res://scenes/vega.tscn").instantiate()
 
 func spawn(spawn_point = Vector2.ZERO) -> void:
+  GM.audio.play_music("ambient")
   add_child(vega)
   vega.global_position = spawn_point
   var camera = load("res://scenes/player_camera.tscn").instantiate()

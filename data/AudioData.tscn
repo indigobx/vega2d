@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://3io6oufksq86"]
+[gd_scene load_steps=16 format=3 uid="uid://3io6oufksq86"]
 
 [ext_resource type="Script" path="res://model/AudioBankWeapon.gd" id="1_1ro13"]
 [ext_resource type="AudioStream" uid="uid://pgmpygcw658l" path="res://sounds/kosei-12-1.ogg" id="2_3plau"]
 [ext_resource type="AudioStream" uid="uid://bxdnuesuapp1r" path="res://sounds/kosei-12-2.ogg" id="3_u8wn0"]
 [ext_resource type="AudioStream" uid="uid://bkegddfibdhjp" path="res://sounds/kosei-12-3.ogg" id="4_jo8je"]
 [ext_resource type="AudioStream" uid="uid://bvy0hsul6vee3" path="res://sounds/ar-8-1.ogg" id="5_6pl0i"]
+[ext_resource type="AudioStream" uid="uid://bqkaangvqbb60" path="res://sounds/kosei_12_reload.ogg" id="5_227sc"]
 [ext_resource type="AudioStream" uid="uid://8yp8a282ip3s" path="res://sounds/ar-8-2.ogg" id="6_wcj4f"]
 [ext_resource type="AudioStream" uid="uid://dbnk4jbg20s1k" path="res://sounds/ar-8-3.ogg" id="7_wyir3"]
 [ext_resource type="AudioStream" uid="uid://dfdc11fy0ww4u" path="res://sounds/ar-8-4.ogg" id="8_0i4ds"]
 [ext_resource type="AudioStream" uid="uid://dalkcacyewpln" path="res://sounds/raven-1.ogg" id="9_8th5l"]
+[ext_resource type="AudioStream" uid="uid://dbgrpw80af5l3" path="res://sounds/metal_hit_01.ogg" id="9_2826v"]
+[ext_resource type="AudioStream" uid="uid://bnd3bvg3fka35" path="res://sounds/ar_8_reload.ogg" id="9_rok1s"]
+[ext_resource type="AudioStream" uid="uid://7xd3pjgh3kea" path="res://sounds/metal_hit_02.ogg" id="10_yl8y5"]
+[ext_resource type="AudioStream" uid="uid://deemo2bkyvaok" path="res://sounds/metal_hit_03.ogg" id="11_rm1cm"]
+[ext_resource type="AudioStream" uid="uid://bm3do7bwknoso" path="res://sounds/metal_hit_04.ogg" id="12_5mm8h"]
 
 [node name="AudioData" type="Node"]
 
@@ -16,6 +22,7 @@
 script = ExtResource("1_1ro13")
 weapon_short_name = "kosei-12"
 single_sounds = [ExtResource("2_3plau"), ExtResource("3_u8wn0"), ExtResource("4_jo8je")]
+reload_sounds = [ExtResource("5_227sc")]
 random_pitch = true
 pitch_scale_min = 0.95
 pitch_scale_max = 1.05
@@ -24,6 +31,8 @@ pitch_scale_max = 1.05
 script = ExtResource("1_1ro13")
 weapon_short_name = "ar-8"
 single_sounds = [ExtResource("5_6pl0i"), ExtResource("6_wcj4f"), ExtResource("7_wyir3"), ExtResource("8_0i4ds")]
+reload_sounds = [ExtResource("9_rok1s")]
+hitscan_hit_sounds = [ExtResource("9_2826v"), ExtResource("10_yl8y5"), ExtResource("11_rm1cm"), ExtResource("12_5mm8h")]
 
 [node name="RAVEN" type="Node" parent="."]
 script = ExtResource("1_1ro13")

@@ -44,7 +44,6 @@ func _physics_process(delta: float) -> void:
       var ratio = weapon.heat / weapon.failure_threshold
       GM.player.vega.heat_particles.emitting = true
       GM.player.vega.heat_particles.amount_ratio = ratio
-      print(ratio)
     else:
       GM.player.vega.heat_particles.emitting = false
 
@@ -94,8 +93,8 @@ func _on_mode_change(value) -> void:
 
 func start_target_lock() -> void:
   var overlapping_areas = GM.player.vega.lock_area.get_overlapping_areas()
-  print("start ", overlapping_areas)
   if overlapping_areas:
+    GM.audio.play_ui("beep")
     locking_target = overlapping_areas[0]
     locked_target = null
     lock_marker.visible = true
@@ -113,16 +112,19 @@ func process_target_lock() -> void:
     return
   var overlapping_areas = GM.player.vega.lock_area.get_overlapping_areas()
   if overlapping_areas and overlapping_areas[0] == locking_target:
+    GM.audio.play_ui("blip")
     lock_marker.footer = "%.2f" % lock_timer.time_left
     if lock_timer.is_stopped():
       locked_target = locking_target
       locking_target = null
       success_target_lock()
   else:
+    GM.audio.play_ui("buzz")
     reset_target_lock()
       
 
 func success_target_lock() -> void:
+  GM.audio.play_ui("double_beep")
   lock_marker.visible = true
   lock_marker.header = "LOCK"
   lock_marker.modulate = "red"
@@ -198,7 +200,7 @@ func perform_shot() -> void:
     _:
       return
   emit_flash()
-  GM.audio.single_shot()
+  GM.audio.play_weapon("single")
   heat()
   if weapon.get_recoil_types():
     recoil()
@@ -292,6 +294,7 @@ func hitscan() -> void:
   if target and target.get_parent().has_method("take_damage"):
     target.get_parent().take_damage(damage, target)
   hit_mark.global_position = p1
+  GM.audio.add_sfx(GM.audio.get_random_track("hitscan"), p1)
   GlobalFx.add_decal(hit_mark)
   
 
@@ -300,6 +303,7 @@ func reload() -> void:
     return
   if weapon and ADB.get_ammo(weapon.ammo_type):
     if count_ammo(weapon.mag_type) > 0:
+      GM.audio.play_weapon("reload")
       GM.player.weapon_sprite.play(weapon.reload_animation)
       if weapon.empty_clip_scene:
         var clip_instance = weapon.empty_clip_scene.instantiate()

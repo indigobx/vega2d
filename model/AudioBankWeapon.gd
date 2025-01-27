@@ -8,6 +8,7 @@ class_name AudioBankWeapon
 @export var burst_sounds: Array = []
 @export var reload_sounds: Array = []
 @export var failure_sounds: Array = []
+@export var hitscan_hit_sounds: Array = []
 @export_category("Playback")
 @export var volume_db: float = 0.0
 @export var random_pitch: bool = false

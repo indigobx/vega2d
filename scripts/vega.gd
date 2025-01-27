@@ -147,7 +147,6 @@ func _physics_process(_delta: float) -> void:
       var energy_to_charged_jump = GM.player.energy_to_jump() * 3
       chargebar.visible = true
       chargebar.value = (charged_jump_energy / energy_to_charged_jump)*100
-      print(chargebar.value)
       if charged_jump_energy < energy_to_charged_jump and GM.player.spend_energy(2, false):  # Тратим энергию для зарядки
         charged_jump_energy += 1  # Увеличиваем заряд энергии
 
@@ -321,8 +320,14 @@ func _on_body_frame_changed() -> void:
   and abs(velocity.x) > 1.0 \
   and is_on_floor():
     var footprint = footprint_scene.instantiate()
+    var step_sound = GM.audio.get_random_sound("step_basic")
     footprint.global_position = global_position + Vector2(13*view_direction, 52)
     GlobalFx.add_decal(footprint)
+    GM.audio.add_sfx(step_sound, global_position, {
+      "volume_db": -5.0,
+      "pitch_scale": 0.8,
+      "pitch_random": 0.2
+    })
   
   # arms pivot movement
   if $Character/Body.animation.ends_with("-armed") and \

@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamPlaylist" load_steps=5 format=3 uid="uid://bp1xsu0u7txg6"]
+
+[ext_resource type="AudioStream" uid="uid://cxuhdk1coujh3" path="res://music/Vega - M1.mp3" id="1_xpnmx"]
+[ext_resource type="AudioStream" uid="uid://dbonnv63srkhw" path="res://music/Vega - M2.mp3" id="2_yk5yp"]
+[ext_resource type="AudioStream" uid="uid://bctqwocos28l3" path="res://music/Vega - M3.mp3" id="3_ny8k5"]
+[ext_resource type="AudioStream" uid="uid://bkeo883nb4qm" path="res://music/Vega - M4.mp3" id="4_uy3ng"]
+
+[resource]
+fade_time = 1.0
+stream_count = 4
+stream_0 = ExtResource("1_xpnmx")
+stream_1 = ExtResource("2_yk5yp")
+stream_2 = ExtResource("3_ny8k5")
+stream_3 = ExtResource("4_uy3ng")

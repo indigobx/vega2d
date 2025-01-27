@@ -11,6 +11,8 @@ z_index = 4
 collision_layer = 0
 mass = 0.05
 gravity_scale = 0.5
+contact_monitor = true
+max_contacts_reported = 1
 angular_velocity = 0.261799
 angular_damp = 1.0
 script = ExtResource("1_arf5n")
@@ -21,3 +23,5 @@ texture = ExtResource("1_p7hpf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_btbwu")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

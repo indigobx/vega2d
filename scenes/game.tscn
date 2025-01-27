@@ -66,8 +66,14 @@ visible = false
 z_index = 0
 
 [node name="AudioManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("9_drglg")
 
 [node name="AudioData" parent="AudioManager" instance=ExtResource("10_ih7kd")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+
+[node name="UIPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
+max_polyphony = 8
 
 [connection signal="timeout" from="WeaponManager/RecoilTimer" to="WeaponManager" method="_on_recoil_timer_timeout"]
