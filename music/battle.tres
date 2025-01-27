@@ -1,0 +1,12 @@
+[gd_resource type="AudioStreamPlaylist" load_steps=4 format=3 uid="uid://dxv50dpytxkpo"]
+
+[ext_resource type="AudioStream" uid="uid://d32uuyvdevvfj" path="res://music/Vega - B1.mp3" id="1_06rxx"]
+[ext_resource type="AudioStream" uid="uid://bb6cjerqnqsf7" path="res://music/Vega - B2.mp3" id="2_umxyj"]
+[ext_resource type="AudioStream" uid="uid://b17v5nuilwujr" path="res://music/Vega - B3.mp3" id="3_gtawy"]
+
+[resource]
+shuffle = true
+stream_count = 3
+stream_0 = ExtResource("1_06rxx")
+stream_1 = ExtResource("2_umxyj")
+stream_2 = ExtResource("3_gtawy")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6du4l5p50odn"]
+[gd_scene load_steps=17 format=3 uid="uid://c6du4l5p50odn"]
 
 [ext_resource type="Script" path="res://scripts/projectiles/hem_rocket.gd" id="1_wn8p5"]
 [ext_resource type="Texture2D" uid="uid://dku3f00ixw4jw" path="res://sprites/weapons/raven/sheet.png" id="1_wnhud"]
 [ext_resource type="Texture2D" uid="uid://p1scinttkp7i" path="res://materials/fog1-animated-tex.tres" id="3_qq865"]
+[ext_resource type="AudioStream" uid="uid://dlj02wvwmh0gr" path="res://sounds/rocket-fly.ogg" id="4_gc0le"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tt8e5"]
 atlas = ExtResource("1_wnhud")
@@ -138,5 +139,11 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ExplosionSensor"]
 polygon = PackedVector2Array(14, 0, 14, 81, 35, 76, 60, 58, 82, 38, 94, 18, 101, 0, 94, -18, 82, -38, 60, -58, 35, -76, 14, -81)
+
+[node name="EnginePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gc0le")
+autoplay = true
+attenuation = 1.23114
+parameters/looping = true
 
 [connection signal="area_entered" from="ExplosionSensor" to="." method="_on_explosion_sensor_area_entered"]

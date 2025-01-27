@@ -11,6 +11,7 @@ var ui_manager: Node = null
 var ui: Node = null
 var inventory_manager: Node = null
 var inventory: Node = null
+var audio: Node = null
 var camera: Node = null
 var weapon: Node = null
 var cursor: Vector2
@@ -37,8 +38,10 @@ func _ready() -> void:
   inventory = get_tree().root.get_node("Game/InventoryManager/Inventory")
   inventory_manager = get_tree().root.get_node("Game/InventoryManager")
   weapon = get_tree().root.get_node("Game/WeaponManager")
+  audio = get_tree().root.get_node("Game/AudioManager")
   gravity = ProjectSettings.get_setting("physics/2d/default_gravity_vector") \
     * ProjectSettings.get_setting("physics/2d/default_gravity")
+  audio.play_music("main")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

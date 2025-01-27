@@ -16,6 +16,7 @@ func _ready() -> void:
   $SelfDestructTimer.start()
   $ExplosionSensor.monitoring = false
   $GPUParticles2D.emitting = false
+  $EnginePlayer.play()
   previous_velocity = linear_velocity
   previous_angular_velocity = angular_velocity
 
@@ -52,6 +53,7 @@ func explode() -> void:
   var explosion = explosion_scene.instantiate()
   explosion.global_position = global_position
   GM.level.add_child(explosion)
+  GM.audio.add_sfx(preload("res://sounds/explosion-1.ogg"), global_position)
   var shrapnel_count = 20
   var shrapnel_cone = 45
   var shrapnel_angle = 45

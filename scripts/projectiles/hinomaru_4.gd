@@ -15,6 +15,10 @@ var stage_timers_base = [
 ]  # 0   1    2    3    4
 var stage_timers: Array = []
 var hit_scene = preload("res://scenes/fx/small_hit_explode.tscn")
+var streams = {
+  "aim": preload("res://sounds/smartshell-1.ogg"),
+  "thrust": preload("res://sounds/smart-aim.ogg")
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +33,7 @@ func _ready() -> void:
     stage = 0
   else:
     v1 = Vector2(randf_range(12, 17), 0).rotated(global_rotation)
+    $EngineTimer.start(stage_timers[0] + stage_timers[3])
     $LifeTimer.start(stage_timers[4])
     stage = 4
   apply_impulse(v1)
@@ -45,6 +50,9 @@ func _physics_process(_delta: float) -> void:
     var up_angle = abs(GM.angle_from_up_degrees(global_rotation_degrees))
     match stage:
       0:
+        if not $Audio.playing:
+          $Audio.set_stream(streams["thrust"])
+          $Audio.play()
         if up_angle < ascend_angle:
           apply_torque_impulse(-3.5 * direction)
         elif up_angle > ascend_angle:
@@ -52,15 +60,28 @@ func _physics_process(_delta: float) -> void:
         apply_impulse(Vector2(randf_range(4, 6), 0).rotated(global_rotation))
         linear_velocity.limit_length(80)
       1:
+        if not $Audio.playing:
+          $Audio.stop()
+          $Audio.set_stream(streams["aim"])
+          $Audio.play()
         rotate_to_target(0.25)
       2:
+        if not $Audio.playing:
+          $Audio.stop()
+          $Audio.set_stream(streams["aim"])
+          $Audio.play()
         look_at(target_position)
         linear_velocity = lerp(linear_velocity, Vector2.ZERO, 0.05)
       3:
+        if not $Audio.playing:
+          $Audio.stop()
+          $Audio.set_stream(streams["thrust"])
+          $Audio.play()
         look_at(target_position)
         apply_impulse(Vector2(randf_range(10, 20), 0).rotated(global_rotation))
         linear_velocity.limit_length(90)
       4:
+        $Audio.stop()
         #angular_velocity = lerpf(angular_velocity, 0, 0.25)
         $Particles.emitting = false
         look_at(target_position)
@@ -68,9 +89,17 @@ func _physics_process(_delta: float) -> void:
         $Particles.emitting = false
         pass
   else:
-    particles_fly()
-    apply_impulse(Vector2(randf_range(8, 12), 0).rotated(global_rotation))
-    linear_velocity.limit_length(90)
+    if not $EngineTimer.is_stopped():
+      if not $Audio.playing:
+        $Audio.set_stream(streams["thrust"])
+        $Audio.play()
+      particles_fly()
+      apply_impulse(Vector2(randf_range(8, 12), 0).rotated(global_rotation))
+      linear_velocity.limit_length(90)
+    else:
+      $Particles.emitting = false
+      if $Audio.playing:
+        $Audio.stop()
 
 
 func rotate_to_target(power) -> void:
@@ -117,12 +146,13 @@ func _on_damage_area_entered(area: Area2D) -> void:
 
 
 func _on_engine_timer_timeout() -> void:
-  $InertialTimer.start(stage_timers[1])
-  stage = 1
-  $Sprite.play("aim")
-  $Light.enabled = true
-  $Light.kind = "flicker"
-  particles_aim()
+  if target_position:
+    $InertialTimer.start(stage_timers[1])
+    stage = 1
+    $Sprite.play("aim")
+    $Light.enabled = true
+    $Light.kind = "flicker"
+    particles_aim()
 
 
 func _on_aim_timer_timeout() -> void:

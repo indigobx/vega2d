@@ -142,6 +142,10 @@ script = ExtResource("1_8ustq")
 sprite_frames = ExtResource("2_4eltl")
 animation = &"wait_1_4_armed"
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Character"]
+position = Vector2(0, -33)
+current = true
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(9, 7)
 shape = SubResource("CapsuleShape2D_0ld80")
@@ -189,6 +193,11 @@ amount = 16
 process_material = SubResource("ParticleProcessMaterial_ud6pr")
 texture = ExtResource("9_7aygr")
 randomness = 0.5
+
+[node name="WeaponAudio" type="AudioStreamPlayer2D" parent="ArmsPivot/Arms/Weapon"]
+position = Vector2(12, -3)
+max_polyphony = 16
+area_mask = 9
 
 [node name="Near" type="AnimatedSprite2D" parent="ArmsPivot/Arms"]
 z_index = 1

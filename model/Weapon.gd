@@ -93,6 +93,8 @@ class_name Weapon
 @export_category("Mods")
 @export var mods: PackedStringArray
 
+@export_category("Audio")
+@export var audio_bank: PackedScene
 
 func set_mag(cs):
   if cs > 0:
