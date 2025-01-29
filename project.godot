@@ -23,6 +23,10 @@ GM="*res://scripts/game_manager.gd"
 WDB="*res://data/WeaponsData.tscn"
 ADB="*res://data/AmmoData.tscn"
 
+[display]
+
+window/size/always_on_top=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/wyvernbox/editor/plugin.cfg")
@@ -183,6 +187,5 @@ inventory_filter={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.233925, 0.233926, 0.233925, 1)
 viewport/hdr_2d=true

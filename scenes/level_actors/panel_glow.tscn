@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhiwrqgn1h7el"]
+
+[ext_resource type="Script" path="res://scripts/level_actors/panel_glow.gd" id="1_7d7ug"]
+[ext_resource type="Texture2D" uid="uid://12j17dnjjba8" path="res://sprites/objects/panel.png" id="2_2rqb0"]
+[ext_resource type="Script" path="res://model/GlowSprite2D.gd" id="2_vvp5i"]
+[ext_resource type="Texture2D" uid="uid://b1mr0dbeecj0i" path="res://sprites/objects/panel-emit.png" id="4_ed0e3"]
+[ext_resource type="Script" path="res://model/GlowTexture.gd" id="5_pyjt2"]
+
+[sub_resource type="Resource" id="Resource_6ee2m"]
+script = ExtResource("5_pyjt2")
+albedo_texture = ExtResource("2_2rqb0")
+emission_texture = ExtResource("4_ed0e3")
+emission_power = 25.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gat2s"]
+size = Vector2(20, 37)
+
+[node name="PanelGlow" type="Node2D"]
+script = ExtResource("1_7d7ug")
+
+[node name="GlowSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2rqb0")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("2_vvp5i")
+glow_texture = SubResource("Resource_6ee2m")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_gat2s")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true

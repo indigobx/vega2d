@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk0xtmrmsyw8c"]
+[gd_scene load_steps=12 format=3 uid="uid://dk0xtmrmsyw8c"]
 
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_oms8u"]
 [ext_resource type="Script" path="res://scripts/ui_manager.gd" id="2_inquc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b85wqpynyc6d6" path="res://scenes/menus/inventory.tscn" id="8_rlcxg"]
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="9_drglg"]
 [ext_resource type="PackedScene" uid="uid://3io6oufksq86" path="res://data/AudioData.tscn" id="10_ih7kd"]
+[ext_resource type="Environment" uid="uid://crrkoquyy6cnd" path="res://themes/forward_plus_environment.tres" id="11_rinps"]
 
 [node name="Game" type="Node"]
 process_mode = 1
@@ -75,5 +76,8 @@ script = ExtResource("9_drglg")
 
 [node name="UIPlayer" type="AudioStreamPlayer2D" parent="AudioManager"]
 max_polyphony = 8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("11_rinps")
 
 [connection signal="timeout" from="WeaponManager/RecoilTimer" to="WeaponManager" method="_on_recoil_timer_timeout"]

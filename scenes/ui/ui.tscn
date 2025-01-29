@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dte87rpq16e83"]
+[gd_scene load_steps=17 format=3 uid="uid://dte87rpq16e83"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_gc44a"]
 [ext_resource type="PackedScene" uid="uid://bsd2lr6iriv8q" path="res://scenes/ui/ui_cursor.tscn" id="2_1d7qt"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c27cxf7arloth" path="res://scenes/ui/ui_ammo_v2.tscn" id="8_n5b8q"]
 [ext_resource type="FontFile" uid="uid://c7mulr8g8cva8" path="res://fonts/mini_pixel-7.ttf" id="9_4fhkq"]
 [ext_resource type="PackedScene" uid="uid://bv0hmg1lfjgxf" path="res://scenes/ui/debug_graph.tscn" id="10_kciq3"]
+[ext_resource type="LabelSettings" uid="uid://dd88eotnpfti" path="res://themes/new_label_settings.tres" id="10_q1wl0"]
 [ext_resource type="PackedScene" uid="uid://cs7kb3nwimcfj" path="res://scenes/ui/lock_marker.tscn" id="12_37eps"]
 [ext_resource type="PackedScene" uid="uid://r6kaf28trip5" path="res://scenes/menus/interaction.tscn" id="13_bmee4"]
 
@@ -133,17 +134,20 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="Debug" type="VBoxContainer" parent="."]
-visible = false
 custom_minimum_size = Vector2(320, 400)
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -320.0
-offset_bottom = 400.0
+offset_top = -404.0
 grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Text" type="RichTextLabel" parent="Debug"]
+visible = false
 clip_contents = false
 custom_minimum_size = Vector2(320, 200)
 layout_mode = 2
@@ -156,22 +160,30 @@ debug
 [/right]"
 
 [node name="Breath" parent="Debug" instance=ExtResource("10_kciq3")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 graph_color = Color(0.309804, 0.556863, 0.14902, 1)
 
 [node name="Pulse" parent="Debug" instance=ExtResource("10_kciq3")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 graph_color = Color(0.685733, 3.10443e-06, 5.77569e-07, 1)
 
 [node name="EnergyRate" parent="Debug" instance=ExtResource("10_kciq3")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 graph_color = Color(0.202798, 0.401211, 0.770158, 1)
+
+[node name="Meters" type="Label" parent="Debug"]
+layout_mode = 2
+size_flags_vertical = 10
+label_settings = ExtResource("10_q1wl0")
 
 [node name="LockMarker" parent="." instance=ExtResource("12_37eps")]
 unique_name_in_owner = true

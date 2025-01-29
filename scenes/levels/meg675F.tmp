@@ -1,0 +1,229 @@
+[gd_scene load_steps=23 format=4 uid="uid://dqp34ygq71lqg"]
+
+[ext_resource type="Script" path="res://scripts/levels/megabuilding_upper_floors.gd" id="1_5dxii"]
+[ext_resource type="Texture2D" uid="uid://v6s7p008oasr" path="res://textures/megabuilding/walls_01.png" id="1_msgbk"]
+[ext_resource type="Texture2D" uid="uid://b7vh0el24ylk2" path="res://textures/megabuilding/blocks_01.png" id="2_ljy3p"]
+[ext_resource type="Texture2D" uid="uid://wxpsu5qfncc2" path="res://textures/megabuilding/floor_01.png" id="2_yqo38"]
+[ext_resource type="Texture2D" uid="uid://dku12855m6lr2" path="res://textures/megabuilding/floor_02.png" id="3_a85cb"]
+[ext_resource type="Texture2D" uid="uid://43h2dej4mumt" path="res://textures/megabuilding/signs_01.png" id="4_5h81g"]
+[ext_resource type="PackedScene" uid="uid://c114sgdar6gr" path="res://scripts/level_actors/side_door.tscn" id="4_iig17"]
+[ext_resource type="PackedScene" uid="uid://xgsddmc6v3b8" path="res://scenes/level_actors/panel.tscn" id="5_3d2x4"]
+[ext_resource type="Texture2D" uid="uid://bvamg0tq5jk0g" path="res://sprites/fx/glow/glow2.png" id="8_6rixh"]
+[ext_resource type="Script" path="res://model/GlowTexture.gd" id="9_7squ7"]
+[ext_resource type="Texture2D" uid="uid://0jb5eyvxdkg1" path="res://sprites/objects/testpanel.png" id="9_f7jw3"]
+[ext_resource type="Texture2D" uid="uid://b3clitt6pgb0d" path="res://sprites/objects/testpanel-emit.png" id="10_ot20x"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tumex"]
+texture = ExtResource("1_msgbk")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xtt2v"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_tumex")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8gvxj"]
+texture = ExtResource("2_ljy3p")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_nnlu4"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 5
+sources/0 = SubResource("TileSetAtlasSource_8gvxj")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uptk4"]
+texture = ExtResource("2_yqo38")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1hw6"]
+texture = ExtResource("3_a85cb")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 0, 64, 0, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_fxo45"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 9
+physics_layer_0/collision_mask = 9
+sources/1 = SubResource("TileSetAtlasSource_uptk4")
+sources/2 = SubResource("TileSetAtlasSource_x1hw6")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jxdc8"]
+texture = ExtResource("4_5h81g")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2xf78"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_jxdc8")
+
+[sub_resource type="Texture2D" id="Texture2D_8ma8q"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("9_7squ7")
+albedo_texture = ExtResource("9_f7jw3")
+emission_texture = ExtResource("10_ot20x")
+emission_power = 5.0
+
+[node name="MegabuildingUpperFloors" type="Node2D"]
+script = ExtResource("1_5dxii")
+
+[node name="Walls" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAP//AAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAABAAEAAAD//wAAAAAAAAMAAAAAAP//AAABAAAAAAD/////AAAAAAIAAAD9/wAAAAACAAEAAAD+/wAAAAABAAEAAAD+////AAACAAAAAAD9////AAAAAAAAAAACAAAAAAACAAEAAAADAAAAAAACAAEAAAACAP//AAACAAAAAAADAP//AAABAAAAAAAEAP//AAACAAAAAAAFAP//AAAAAAAAAAAEAAAAAAAAAAEAAAAFAAAAAAACAAEAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAEAAAAHAP//AAAEAAAAAAAIAP//AAAFAAAAAAAHAAAAAAAEAAEAAAAIAAAAAAAFAAEAAAAJAAAAAAADAAMAAAAKAAAAAAAEAAMAAAAJAP//AAADAAIAAAAKAP//AAAEAAIAAAAMAP//AAAEAAIAAAAMAAAAAAAEAAMAAAALAAAAAAADAAMAAAALAP//AAADAAIAAAANAP//AAAAAAAAAAAOAP//AAAAAAAAAAAPAP//AAAAAAAAAAANAAAAAAAAAAEAAAAOAAAAAAACAAEAAAAPAAAAAAABAAEAAAD6////AAAAAAIAAAD6/wAAAAAAAAMAAAD8////AAABAAAAAAD8/wAAAAABAAEAAAD2////AAAAAAIAAAD2/wAAAAAAAAMAAAD7////AAACAAAAAAD7/wAAAAACAAEAAAD5/wAAAAABAAEAAAD3/wAAAAABAAEAAAD1/wAAAAABAAEAAADz////AAADAAAAAADz/wAAAAADAAEAAAD1////AAABAAAAAAD5////AAABAAAAAAD0////AAAAAAAAAAD4////AAAAAAAAAAD3////AAACAAAAAAD4/wAAAAACAAEAAAD0/wAAAAAAAAEAAADy/wAAAAAAAAEAAADy////AAACAAAAAAA=")
+tile_set = SubResource("TileSet_xtt2v")
+
+[node name="BlockWalls" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADy//7/AAAAAAAAAADz//7/AAAAAAAAAAD0//7/AAAAAAAAAAD1//7/AAAAAAAAAAD2//7/AAAAAAAAAAD3//7/AAAAAAAAAAD4//7/AAAAAAAAAAD5//7/AAAAAAAAAAD6//7/AAAAAAAAAAD7//7/AAAAAAAAAAD8//7/AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAKAP7/AAAAAAAAAAALAP7/AAAAAAAAAAAMAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAAPAAEAAAABAAAAAAAOAAEAAAABAAAAAAANAAEAAAABAAAAAAAMAAEAAAABAAAAAAALAAEAAAABAAAAAAAKAAEAAAABAAAAAAAJAAEAAAABAAAAAAAIAAEAAAABAAAAAAAHAAEAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAEAAEAAAABAAAAAAADAAEAAAABAAAAAAACAAEAAAABAAAAAAABAAEAAAABAAAAAAAAAAEAAAABAAAAAAD//wEAAAABAAAAAAD+/wEAAAABAAAAAAD9/wEAAAABAAAAAAD8/wEAAAABAAAAAAD7/wEAAAABAAAAAAD6/wEAAAABAAAAAAD5/wEAAAABAAAAAAD4/wEAAAABAAAAAAD3/wEAAAABAAAAAAD2/wEAAAABAAAAAAD1/wEAAAABAAAAAAD0/wEAAAABAAAAAADz/wEAAAABAAAAAADy/wEAAAABAAAAAAAPAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD7/wIAAAAAAAAAAAD6/wIAAAAAAAAAAAD5/wIAAAAAAAAAAAD4/wIAAAAAAAAAAAD3/wIAAAAAAAAAAAD2/wIAAAAAAAAAAAD1/wIAAAAAAAAAAAD0/wIAAAAAAAAAAADz/wIAAAAAAAAAAADy/wIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_nnlu4")
+
+[node name="Floors" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAEAAAD//wAAAQACAAEAAAABAAAAAQADAAEAAAD+/wAAAQAAAAIAAAD9/wAAAQABAAIAAAACAAAAAQACAAIAAAADAAAAAQADAAAAAAAEAAAAAQABAAAAAAAFAAAAAQAAAAAAAAAGAAAAAgAAAAAAAAAHAAAAAgABAAAAAAAIAAAAAgACAAAAAAAJAAAAAgAAAAEAAAAKAAAAAgABAAAAAAALAAAAAgACAAAAAAD8/wAAAQADAAEAAAD7/wAAAQAAAAMAAAD6/wAAAQAAAAMAAAD5/wAAAQAAAAEAAAD4/wAAAQAAAAAAAAD3/wAAAQABAAAAAAD2/wAAAQADAAAAAAD1/wAAAQABAAEAAAD0/wAAAQADAAEAAADz/wAAAQACAAAAAADy/wAAAQAAAAAAAAAMAAAAAgABAAIAAAANAAAAAgAAAAIAAAAOAAAAAgABAAEAAAAPAAAAAgAAAAIAAAA=")
+tile_set = SubResource("TileSet_fxo45")
+
+[node name="Decals" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAARAP3/AAAHAAAAAAD9//3/AAAGAAAAAADp//3/AAAFAAAAAADZ//3/AAAEAAAAAADp////AAADAAIAAADx//3/AAACAAIAAADO//3/AAABAAIAAAAQAP//AAAAAAIAAADR//3/AAAAAAEAAADK//3/AAAEAAEAAAA=")
+tile_set = SubResource("TileSet_2xf78")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="SideDoor" parent="Doors" instance=ExtResource("4_iig17")]
+position = Vector2(640, 0)
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Panel" parent="Buttons" node_paths=PackedStringArray("call_node") instance=ExtResource("5_3d2x4")]
+position = Vector2(582, -31)
+call_node = NodePath("../../Doors/SideDoor")
+callback = "toggle"
+behaviour = "button"
+active_color = "green"
+hint_text = "Open Apartemnts 3107"
+
+[node name="Sprite2D2" type="Sprite2D" parent="Buttons"]
+position = Vector2(162, -72)
+texture = SubResource("Texture2D_8ma8q")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(16, -37)
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
+energy = 0.8
+blend_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(1275, -115)
+color = Color(0.925171, 0.878712, 0.921934, 1)
+energy = 1.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("8_6rixh")
+texture_scale = 4.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(1523, -108)
+color = Color(0.868859, 0.717148, 0.912877, 1)
+energy = 1.25
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture = ExtResource("8_6rixh")
+texture_scale = 4.0

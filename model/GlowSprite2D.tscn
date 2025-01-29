@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlqs322be5weh"]
+
+[ext_resource type="Script" path="res://model/GlowSprite2D.gd" id="1_rq8ut"]
+
+[node name="GlowSprite2D" type="Sprite2D"]
+script = ExtResource("1_rq8ut")

@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 
 func new_game() -> void:
   ui_manager.hide_main_menu()
-  level.load_level("vr_level")
+  level.load_level("megabuilding_upper_floors")
   var spawn_point = level.get_child(0).get_node_or_null("SpawnPoint")
   if spawn_point:
     spawn_point = spawn_point.global_position

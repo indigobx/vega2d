@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://xgsddmc6v3b8"]
+[gd_scene load_steps=11 format=3 uid="uid://xgsddmc6v3b8"]
 
 [ext_resource type="Texture2D" uid="uid://12j17dnjjba8" path="res://sprites/objects/panel.png" id="1_j3e24"]
 [ext_resource type="Script" path="res://scripts/level_actors/panel.gd" id="1_opj0j"]
+[ext_resource type="Texture2D" uid="uid://bqu6wcfdoomgx" path="res://sprites/fx/glow/glow.png" id="3_ocrj4"]
+[ext_resource type="Script" path="res://scripts/light.gd" id="4_87bbb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_muffa"]
 atlas = ExtResource("1_j3e24")
@@ -62,7 +64,6 @@ script = ExtResource("1_opj0j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3ojgc")
-animation = &"white"
 autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -72,3 +73,12 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_gat2s")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Light" type="PointLight2D" parent="."]
+enabled = false
+texture = ExtResource("3_ocrj4")
+script = ExtResource("4_87bbb")

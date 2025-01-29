@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GlowTexture" load_steps=4 format=3 uid="uid://c2wpstudxwseo"]
+
+[ext_resource type="Script" path="res://model/GlowTexture.gd" id="1_m31ek"]
+[ext_resource type="Texture2D" uid="uid://12j17dnjjba8" path="res://sprites/objects/panel.png" id="1_nbxre"]
+[ext_resource type="Texture2D" uid="uid://b1mr0dbeecj0i" path="res://sprites/objects/panel-emit.png" id="2_bpsdw"]
+
+[resource]
+script = ExtResource("1_m31ek")
+albedo_texture = ExtResource("1_nbxre")
+emission_texture = ExtResource("2_bpsdw")
+emission_min = 0.0
+emission_max = 5.0

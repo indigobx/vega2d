@@ -118,6 +118,16 @@ func _process(_delta: float) -> void:
       $Debug/Breath.add_point(GM.player.breath)
       $Debug/Pulse.add_point(GM.player.pulse)
       $Debug/EnergyRate.add_point(GM.player.energy_rate)
+      
+      var meters_text = \
+      "%d fps %.3f mb mem %s %.2f exp" % [
+        Engine.get_frames_per_second(),
+        OS.get_static_memory_usage() / 1024**2,
+        ProjectSettings.get_setting("rendering/renderer/rendering_method"),
+        get_tree().root.get_node("Game/WorldEnvironment").environment.tonemap_exposure
+      ]
+      $Debug/Meters.text = meters_text
+      
   # If game is paused
   if get_tree().paused:
     ui_cursor.position = get_local_mouse_position()

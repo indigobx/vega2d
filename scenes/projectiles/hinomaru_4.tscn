@@ -141,7 +141,7 @@ color_ramp = SubResource("GradientTexture1D_4awrl")
 
 [node name="Hinomaru4" type="RigidBody2D"]
 collision_layer = 8
-collision_mask = 8
+collision_mask = 12
 mass = 0.15
 gravity_scale = 0.35
 continuous_cd = 1
